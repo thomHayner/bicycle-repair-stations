@@ -26,6 +26,8 @@ interface Props {
   fallbackStatus?: "loading" | "none";
   /** 1 000 — passed from MapPage so the "no stations within X" message uses the same constant. */
   fallbackRadiusMi?: number;
+  /** True while the primary Overpass or fallback query is in-flight. */
+  isQuerying?: boolean;
 }
 
 export function StationListView({
@@ -40,6 +42,7 @@ export function StationListView({
   onExpandedChange,
   fallbackStatus,
   fallbackRadiusMi = 1000,
+  isQuerying = false,
 }: Props) {
   const [activeFilters, setActiveFilters] = useState<Set<FilterKey>>(new Set());
 
@@ -99,7 +102,17 @@ export function StationListView({
         aria-expanded={expanded}
         aria-label={expanded ? "Collapse station list" : "Expand station list"}
       >
-        <span className="text-sm font-semibold text-slate-800 dark:text-slate-100">{headerLabel}</span>
+        <span className="flex items-center gap-1.5 text-sm font-semibold text-slate-800 dark:text-slate-100">
+          {isQuerying && (
+            <span
+              className="inline-block w-3 h-3 rounded-full border-2 border-green-600 border-t-transparent animate-spin shrink-0"
+              aria-hidden="true"
+            />
+          )}
+          <span className={isQuerying ? "animate-pulse" : undefined}>
+            {isQuerying && total === 0 ? "Searching nearby\u2026" : headerLabel}
+          </span>
+        </span>
         <svg
           className={`w-4 h-4 text-slate-500 dark:text-slate-400 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
           fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"

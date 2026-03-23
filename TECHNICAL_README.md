@@ -262,7 +262,6 @@ src/
 │   └── units.ts             # Unit types and preset distance options
 ├── pages/
 │   ├── AboutPage.tsx
-│   ├── DiagnosePage.tsx
 │   ├── GuidesPage.tsx
 │   ├── MapPage.tsx          # Root page — always mounted
 │   └── SettingsPage.tsx

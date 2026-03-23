@@ -33,7 +33,7 @@ export default function MapPage() {
   const [selectedDist, setSelectedDist] = useState(1);
   const displayMiles = unit === "mi" ? selectedDist : selectedDist / KM_PER_MILE;
 
-  const [activeLayer, setActiveLayer] = useState<LayerId>("default");
+  const [activeLayer, setActiveLayer] = useState<LayerId>("cycling");
   const [errorDismissed, setErrorDismissed] = useState(false);
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
   const [listExpanded, setListExpanded] = useState(false);
@@ -247,6 +247,7 @@ export default function MapPage() {
         onExpandedChange={setListExpanded}
         fallbackStatus={fallbackListStatus}
         fallbackRadiusMi={FALLBACK_RADIUS_MI}
+        isQuerying={overpass.status === "loading" || fallback.status === "loading"}
       />
 
       <AdBanner />

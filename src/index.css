@@ -123,3 +123,11 @@ button, a {
 .leaflet-control-attribution {
   font-size: 10px !important;
 }
+
+/* ── Dark-mode tile inversion ─────────────────────────────────────────────── */
+/* Inverts light-mode tiles into a dark equivalent in one CSS step.            */
+/* Only the tile pane is filtered — markers, popups, and UI are unaffected.    */
+/* Satellite tiles are excluded (parent lacks .map-dark-tiles class).          */
+.map-dark-tiles .leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}

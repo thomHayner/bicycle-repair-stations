@@ -44,61 +44,61 @@ function MapEventHandler({ onMoveEnd, onWidthChange, onMapInteraction }: MapEven
   return null;
 }
 
-// Renders the correct tile layer(s) for the selected base map,
-// switching between light and dark variants based on the resolved theme.
+// Renders the tile layer for the selected base map.
+// Dark mode inversion is handled globally via CSS (.map-dark-tiles on the container),
+// so this component is theme-agnostic — one path per layer, no dark branching.
 // Must be a child of MapContainer so it has access to react-leaflet context.
 function ActiveTileLayer({ layer }: { layer: LayerId }) {
-  const { resolvedTheme } = useSettings();
-  const dark = resolvedTheme === "dark";
-
   switch (layer) {
     case "satellite":
-      // Satellite imagery is inherently neutral — same tile for both themes
+      // ESRI World Imagery base + CARTO Voyager labels overlay — both free, no key.
+      // Not inverted in dark mode (satellite stays natural).
       return (
-        <TileLayer
-          url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-          attribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
-          maxZoom={20}
-        />
-      );
-
-    case "terrain":
-      // Light: Stadia Stamen Terrain  |  Dark: Stadia Alidade Smooth Dark
-      return dark ? (
-        <TileLayer
-          key="terrain-dark"
-          url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          maxZoom={20}
-        />
-      ) : (
-        <TileLayer
-          key="terrain-light"
-          url="https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://stamen.com">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          maxZoom={18}
-        />
-      );
-
-    case "pedestrian":
-      // Light: CyclOSM (cycling infrastructure rendered natively — no overlay needed)
-      // Dark:  CARTO Dark Matter
-      //      + Stadia StamenTerrainLines (subtle elevation context)
-      //      + Waymarked Trails cycling routes
-      //      + Waymarked Trails MTB routes
-      return dark ? (
         <>
           <TileLayer
-            key="cycling-base-dark"
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            subdomains="abcd"
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+            attribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
             maxZoom={20}
           />
           <TileLayer
-            url="https://tiles.stadiamaps.com/tiles/stamen_terrain_lines/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
-            opacity={0.3}
+            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
+            subdomains="abcd"
+            maxZoom={20}
+          />
+        </>
+      );
+
+    // case "terrain":
+    //   // CARTO Dark Matter — free, no key.
+    //   return (
+    //     <TileLayer
+    //       url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+    //       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    //       subdomains="abcd"
+    //       maxZoom={20}
+    //     />
+    //   );
+
+    case "standard":
+      // CARTO Voyager — free, no key. Clean English-label OSM rendering.
+      return (
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          subdomains="abcd"
+          maxZoom={20}
+        />
+      );
+
+    default: // "cycling"
+      // CARTO Positron base + WaymarkedTrails cycling & MTB overlays — all free, no key.
+      return (
+        <>
+          <TileLayer
+            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            subdomains="abcd"
             maxZoom={20}
           />
           <TileLayer
@@ -114,33 +114,6 @@ function ActiveTileLayer({ layer }: { layer: LayerId }) {
             maxZoom={20}
           />
         </>
-      ) : (
-        <TileLayer
-          key="cycling-base-light"
-          url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
-          attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases">CyclOSM</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          subdomains="abc"
-          maxZoom={20}
-        />
-      );
-
-    default: // "default"
-      // Light: CartoDB Voyager  |  Dark: Stadia Alidade Smooth Dark
-      return dark ? (
-        <TileLayer
-          key="default-dark"
-          url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          maxZoom={20}
-        />
-      ) : (
-        <TileLayer
-          key="default-light"
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          subdomains="abcd"
-          maxZoom={20}
-        />
       );
   }
 }
@@ -160,6 +133,14 @@ interface Props {
 }
 
 export function MapView({ userPosition, stations, onMoveEnd, mapRef, isQuerying, selectedStationId, onStationDeselect, onMapInteraction, onVisibleWidthChange, activeLayer, listExpanded }: Props) {
+  const { resolvedTheme } = useSettings();
+  const dark = resolvedTheme === "dark";
+  // Background shown behind tiles while they load.
+  // Satellite is never inverted, so its background stays at Leaflet's default (#ddd).
+  // All other layers in dark mode: CSS filter inverts light tiles → near-black result.
+  // #141414 ≈ the value you get from inverting a typical light-gray tile background.
+  const tileBg = dark && activeLayer !== "satellite" ? "#141414" : undefined;
+
   const initialCenter = userPosition
     ? ([userPosition.lat, userPosition.lng] as [number, number])
     : ([51.505, -0.09] as [number, number]);
@@ -176,7 +157,11 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, isQuerying,
   }, [userPosition, mapRef]);
 
   return (
-    <div id="map-container" className="fixed inset-0" style={{ bottom: 50 }}>
+    <div
+      id="map-container"
+      className={`fixed inset-0${dark && activeLayer !== "satellite" ? " map-dark-tiles" : ""}`}
+      style={{ bottom: 50, backgroundColor: tileBg }}
+    >
 
       {/* Zoom controls — sit above collapsed list handle; overlap is fine when list is open */}
       <div
@@ -226,7 +211,7 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, isQuerying,
         zoom={14}
         minZoom={11}
         maxZoom={20}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", background: tileBg }}
         zoomControl={false}
         preferCanvas={true}
         scrollWheelZoom={true}
