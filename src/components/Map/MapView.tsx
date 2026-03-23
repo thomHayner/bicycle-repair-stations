@@ -81,44 +81,65 @@ function ActiveTileLayer({ layer }: { layer: LayerId }) {
       );
 
     case "pedestrian":
-      // Light: CartoDB Voyager base  |  Dark: CartoDB Dark Matter base
-      // Both get the Waymarked Trails cycling overlay on top
-      return (
+      // Light: CyclOSM (cycling infrastructure rendered natively — no overlay needed)
+      // Dark:  CARTO Dark Matter
+      //      + Stadia StamenTerrainLines (subtle elevation context)
+      //      + Waymarked Trails cycling routes
+      //      + Waymarked Trails MTB routes
+      return dark ? (
         <>
           <TileLayer
-            key={dark ? "cycling-base-dark" : "cycling-base-light"}
-            url={
-              dark
-                ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-                : "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-            }
+            key="cycling-base-dark"
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
             subdomains="abcd"
             maxZoom={20}
           />
           <TileLayer
+            url="https://tiles.stadiamaps.com/tiles/stamen_terrain_lines/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
+            opacity={0.3}
+            maxZoom={20}
+          />
+          <TileLayer
             url="https://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://cycling.waymarkedtrails.org">Waymarked Trails</a>'
-            opacity={dark ? 0.85 : 0.7}
+            opacity={0.85}
+            maxZoom={20}
+          />
+          <TileLayer
+            url="https://tile.waymarkedtrails.org/mtb/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://mtb.waymarkedtrails.org">Waymarked Trails MTB</a>'
+            opacity={0.6}
             maxZoom={20}
           />
         </>
+      ) : (
+        <TileLayer
+          key="cycling-base-light"
+          url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+          attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases">CyclOSM</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          subdomains="abc"
+          maxZoom={20}
+        />
       );
 
     default: // "default"
-      // Light: CartoDB Voyager  |  Dark: CartoDB Dark Matter
-      return (
+      // Light: CartoDB Voyager  |  Dark: Stadia Alidade Smooth Dark
+      return dark ? (
         <TileLayer
-          key={dark ? "default-dark" : "default-light"}
-          url={
-            dark
-              ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-              : "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-          }
+          key="default-dark"
+          url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          maxZoom={20}
+        />
+      ) : (
+        <TileLayer
+          key="default-light"
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           subdomains="abcd"
           maxZoom={20}
-          opacity={dark ? 0.85 : 1}
         />
       );
   }
