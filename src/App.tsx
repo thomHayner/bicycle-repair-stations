@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { SettingsProvider } from "./context/SettingsContext";
+import { Analytics } from '@vercel/analytics/react';
 
 const MapPage      = lazy(() => import("./pages/MapPage"));
 const GuidesPage   = lazy(() => import("./pages/GuidesPage"));
@@ -10,6 +11,7 @@ const AboutPage    = lazy(() => import("./pages/AboutPage"));
 export default function App() {
   return (
     <SettingsProvider>
+      <Analytics />
       {/* MapPage is always mounted — navigating to overlay pages never unmounts the map */}
       <MapPage />
       <Suspense fallback={null}>
