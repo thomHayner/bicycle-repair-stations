@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useSettings, type Theme } from "../../context/SettingsContext";
+import { useSettings } from "../../context/useSettings";
+import type { Theme } from "../../context/SettingsContext";
 import type { Unit } from "../../lib/units";
 
 interface Props {

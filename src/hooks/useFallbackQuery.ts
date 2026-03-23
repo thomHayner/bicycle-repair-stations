@@ -34,6 +34,7 @@ export function useFallbackQuery(
     if (!enabled || lat === null || lng === null) {
       abortRef.current?.abort();
       abortRef.current = null;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: reset to idle when disabled
       setState({ status: "idle" });
       return;
     }

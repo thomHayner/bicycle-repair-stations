@@ -12,6 +12,7 @@ export function useGeolocation(): GeolocationState {
 
   useEffect(() => {
     if (!navigator.geolocation) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: set denied on unavailable API
       setState({ status: "denied", lat: ENV.FALLBACK_LAT, lng: ENV.FALLBACK_LNG });
       return;
     }

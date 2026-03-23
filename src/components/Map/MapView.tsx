@@ -6,7 +6,7 @@ import { UserMarker } from "./UserMarker";
 import { StationMarker } from "./StationMarker";
 import { visibleWidthMiles } from "../../lib/distance";
 import type { LayerId } from "../../lib/layers";
-import { useSettings } from "../../context/SettingsContext";
+import { useSettings } from "../../context/useSettings";
 
 const TOO_WIDE_MILES = 75;
 

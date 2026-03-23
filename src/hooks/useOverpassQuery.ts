@@ -29,6 +29,7 @@ export function useOverpassQuery(
     // Check whether the existing cache covers this location
     const cached = readCache();
     if (cached && isCovered(lat, lng, cached)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: hydrate from cache hit
       setState({ status: "success", stations: cached.stations });
       return;
     }

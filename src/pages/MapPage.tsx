@@ -12,7 +12,7 @@ import { StationListView } from "../components/StationListView";
 import { haversineDistanceMiles } from "../lib/distance";
 import { type Unit, KM_PER_MILE, MI_OPTIONS, KM_OPTIONS } from "../lib/units";
 import { type LayerId } from "../lib/layers";
-import { useSettings } from "../context/SettingsContext";
+import { useSettings } from "../context/useSettings";
 import type { OverpassNode } from "../types/overpass";
 
 const MapView = lazy(() =>
@@ -53,6 +53,7 @@ export default function MapPage() {
   useEffect(() => {
     if (geo.status === "resolved" && !givenLocation) {
       const { lat, lng } = geo;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: latch location once on first geo resolve
       setGivenLocation({ lat, lng });
     }
   }, [geo, givenLocation]);
@@ -82,6 +83,7 @@ export default function MapPage() {
       const distInUnit = unit === "mi"
         ? fallback.farthestMi
         : fallback.farthestMi * KM_PER_MILE;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: sync dist filter when fallback resolves
       setSelectedDist(Math.round(distInUnit * 10) / 10);
     } else if (fallback.status === "none" || fallback.status === "idle") {
       fallbackFarthestMiRef.current = null;
