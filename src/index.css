@@ -1,0 +1,125 @@
+@import "leaflet/dist/leaflet.css";
+@import "tailwindcss";
+
+/* Enable class-based dark mode for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
+/* Suppress browser visited-link colour on the Get Directions button.
+   The SVG turn icon uses fill="currentColor" so it inherits this fix too.
+   !important is required to beat both the UA a:visited rule and Leaflet's
+   !important color on .leaflet-popup-content. */
+.btn-get-directions,
+.btn-get-directions:visited          { color: white !important; }
+.dark .btn-get-directions,
+.dark .btn-get-directions:visited    { color: black !important; }
+
+/* ── Semantic color tokens ────────────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --color-surface:         #ffffff;
+  --color-surface-muted:   #f8fafc;
+  --color-surface-search:  #eff6ff;   /* sky-50 — calming light blue */
+  --color-surface-glass:   rgba(255, 255, 255, 0.95);
+
+  /* Borders */
+  --color-border:          #e2e8f0;   /* slate-200 */
+  --color-border-subtle:   #f1f5f9;   /* slate-100 */
+  --color-border-search:   #bae6fd;   /* sky-200 */
+
+  /* Text */
+  --color-text-primary:    #0f172a;
+  --color-text-secondary:  #475569;
+  --color-text-muted:      #94a3b8;
+
+  /* Primary green */
+  --color-primary:         #16a34a;
+  --color-primary-light:   #f0fdf4;
+  --color-primary-text:    #166534;
+
+  /* Park Tool brand blue — WCAG AA 5.21:1 on white */
+  --color-park-tool:       #0066b2;
+  --color-park-tool-muted: #e0f0ff;
+}
+
+.dark {
+  /* Surfaces — near-black, very slight blue tint */
+  --color-surface:         #080c14;
+  --color-surface-muted:   #0d1220;
+  --color-surface-search:  #0d1830;
+  --color-surface-glass:   rgba(8, 12, 20, 0.95);
+
+  /* Borders */
+  --color-border:          #1e2a3a;
+  --color-border-subtle:   #151f30;
+  --color-border-search:   #1e3a5f;
+
+  /* Text */
+  --color-text-primary:    #f1f5f9;
+  --color-text-secondary:  #94a3b8;
+  --color-text-muted:      #94a3b8;   /* slate-400 — 7.6:1 on dark surface ✅ */
+
+  /* Primary green — slightly brighter for dark backgrounds */
+  --color-primary:         #22c55e;
+  --color-primary-light:   #052e16;
+  --color-primary-text:    #4ade80;
+
+  /* Park Tool blue stays the same */
+  --color-park-tool:       #3b9ede;
+  --color-park-tool-muted: #0d2a44;
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent overscroll bounce on iOS which fights with the map */
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+/* Prevent tap highlight flash on mobile */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Leaflet popup tweaks — nicer on mobile ──────────────────────────────── */
+.leaflet-popup-content-wrapper {
+  border-radius: 14px !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18) !important;
+  /* top/bottom: 14px | right: 44px reserves space so title never slides under the X | left: 16px */
+  padding: 4px 16px 16px 16px!important;
+  min-width: 0 !important;
+  background-color: var(--color-surface) !important;
+  color: var(--color-text-primary) !important;
+}
+.leaflet-popup-content {
+  margin: 0 !important;
+  color: var(--color-text-primary) !important;
+}
+.leaflet-popup-tip {
+  background-color: var(--color-surface) !important;
+}
+.leaflet-popup-close-button {
+  /* Align vertically with the title: 14px top padding + ~1px optical offset */
+  top: 16px !important;
+  right: 4px !important;
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 18px !important;
+  line-height: 28px !important;
+  color: var(--color-text-secondary) !important;
+}
+
+/* Attribution is too big on mobile by default */
+.leaflet-control-attribution {
+  font-size: 10px !important;
+}

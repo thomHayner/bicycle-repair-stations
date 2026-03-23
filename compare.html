@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Map Style Comparison</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f172a; }
+    h1 { text-align: center; color: #f8fafc; padding: 16px 0 4px; font-size: 15px; letter-spacing: .04em; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; height: calc(100vh - 52px); }
+    .panel { display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.5); }
+    .label {
+      background: #1e293b;
+      color: #f8fafc;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .label span { font-weight: 400; color: #94a3b8; font-size: 11px; }
+    .map { flex: 1; }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .badge-rec { background: #22c55e; color: #052e16; }
+    .badge-alt { background: #64748b; color: #f8fafc; }
+  </style>
+</head>
+<body>
+  <h1>CartoDB Tile Styles — Side by Side</h1>
+  <div class="grid">
+    <div class="panel">
+      <div class="label">
+        Voyager
+        <span>Colourful, Google Maps-like</span>
+        <span class="badge badge-rec">Recommended</span>
+      </div>
+      <div id="voyager" class="map"></div>
+    </div>
+    <div class="panel">
+      <div class="label">
+        Positron
+        <span>Minimal, light grey</span>
+        <span class="badge badge-alt">Alternative</span>
+      </div>
+      <div id="positron" class="map"></div>
+    </div>
+  </div>
+
+  <script>
+    const CENTER = [51.505, -0.12];
+    const ZOOM = 14;
+
+    // Sync map views
+    function syncMaps(a, b) {
+      a.on('move', () => b.setView(a.getCenter(), a.getZoom(), { animate: false }));
+      b.on('move', () => a.setView(b.getCenter(), b.getZoom(), { animate: false }));
+    }
+
+    // Fake station markers
+    const stations = [
+      [51.509, -0.128], [51.503, -0.115], [51.512, -0.108],
+      [51.500, -0.132], [51.507, -0.099],
+    ];
+    const stationIcon = L.divIcon({
+      className: '',
+      html: `<div style="width:32px;height:32px;background:#16a34a;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.35)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </div>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+    });
+    const userIcon = L.divIcon({
+      className: '',
+      html: `<div style="width:18px;height:18px;background:#3b82f6;border-radius:50%;border:3px solid white;box-shadow:0 0 0 3px rgba(59,130,246,.35)"></div>`,
+      iconSize: [18, 18],
+      iconAnchor: [9, 9],
+    });
+
+    function addMarkers(map) {
+      L.marker(CENTER, { icon: userIcon }).addTo(map);
+      stations.forEach(pos => L.marker(pos, { icon: stationIcon }).addTo(map));
+    }
+
+    const voyager = L.map('voyager', { zoomControl: false, attributionControl: true }).setView(CENTER, ZOOM);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 20,
+    }).addTo(voyager);
+    addMarkers(voyager);
+
+    const positron = L.map('positron', { zoomControl: false, attributionControl: true }).setView(CENTER, ZOOM);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 20,
+    }).addTo(positron);
+    addMarkers(positron);
+
+    syncMaps(voyager, positron);
+  </script>
+</body>
+</html>
