@@ -12,7 +12,6 @@ interface Props {
 const NAV_ITEMS = [
   { label: "Find Stations",   emoji: "🗺️", path: "/" },
   { label: "Repair Guides",   emoji: "🔧", path: "/guides" },
-  { label: "Issue Diagnoser", emoji: "🩺", path: "/diagnose" },
 ] as const;
 
 const INFO_ITEMS = [

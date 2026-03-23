@@ -4,7 +4,6 @@ import { SettingsProvider } from "./context/SettingsContext";
 
 const MapPage      = lazy(() => import("./pages/MapPage"));
 const GuidesPage   = lazy(() => import("./pages/GuidesPage"));
-const DiagnosePage = lazy(() => import("./pages/DiagnosePage"));
 const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const AboutPage    = lazy(() => import("./pages/AboutPage"));
 
@@ -16,7 +15,6 @@ export default function App() {
       <Suspense fallback={null}>
         <Routes>
           <Route path="/guides"   element={<GuidesPage />} />
-          <Route path="/diagnose" element={<DiagnosePage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/about"    element={<AboutPage />} />
         </Routes>
