@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import type { Map as LeafletMap, LatLng } from "leaflet";
 import { useGeolocation } from "../hooks/useGeolocation";
-import { useOverpassQuery } from "../hooks/useOverpassQuery";
-import { useFallbackQuery, FALLBACK_RADIUS_MI } from "../hooks/useFallbackQuery";
+import { useStationQuery, FALLBACK_RADIUS_MI } from "../hooks/useStationQuery";
 import { Toolbar } from "../components/Toolbar/Toolbar";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ErrorToast } from "../components/ErrorToast";
@@ -58,37 +57,29 @@ export default function MapPage() {
     }
   }, [geo, givenLocation]);
 
-  // Overpass only fires when givenLocation changes — never on map pan
-  const overpass = useOverpassQuery(
-    givenLocation?.lat ?? null,
-    givenLocation?.lng ?? null
-  );
-
-  const allStations = overpass.status === "success" ? overpass.stations : [];
-
-  // Fallback: when the primary query returns nothing, search up to 1 000 miles
-  const fallbackEnabled = overpass.status === "success" && allStations.length === 0;
-  const fallback = useFallbackQuery(
+  // Fires when givenLocation changes — never on map pan
+  const query = useStationQuery(
     givenLocation?.lat ?? null,
     givenLocation?.lng ?? null,
-    fallbackEnabled,
   );
 
-  // When fallback succeeds, set selectedDist to the farthest station's distance.
+  const allStations = query.status === "success" ? query.stations : [];
+
+  // When wide-area result arrives, set selectedDist to the farthest station's distance.
   // Keep a ref so handleUnitChange can convert it without snapping to a preset.
   const fallbackFarthestMiRef = useRef<number | null>(null);
   useEffect(() => {
-    if (fallback.status === "success") {
-      fallbackFarthestMiRef.current = fallback.farthestMi;
+    if (query.status === "success-wide") {
+      fallbackFarthestMiRef.current = query.farthestMi;
       const distInUnit = unit === "mi"
-        ? fallback.farthestMi
-        : fallback.farthestMi * KM_PER_MILE;
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: sync dist filter when fallback resolves
+        ? query.farthestMi
+        : query.farthestMi * KM_PER_MILE;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: sync dist filter when wide result resolves
       setSelectedDist(Math.round(distInUnit * 10) / 10);
-    } else if (fallback.status === "none" || fallback.status === "idle") {
+    } else if (query.status === "none" || query.status === "idle") {
       fallbackFarthestMiRef.current = null;
     }
-  }, [fallback]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Map pan updates the filter anchor (used only when no givenLocation)
   const handleMoveEnd = (center: LatLng) => {
@@ -151,7 +142,9 @@ export default function MapPage() {
     setSelectedDist((prev) => (suggested > prev ? suggested : prev));
   };
 
-  const isInitialLoading = geo.status === "idle" || geo.status === "loading";
+  const isFetchingStations = query.status === "loading" || query.status === "escalating";
+
+  const showOverlay = geo.status === "idle" || geo.status === "loading";
 
   const showSearchHere =
     givenLocation !== null &&
@@ -174,37 +167,54 @@ export default function MapPage() {
       )
     : allStations;
 
-  // In fallback mode, swap in the 5 nearest stations (pre-filtered by the hook)
+  // In wide-area mode, swap in the 5 nearest stations (pre-filtered by the hook)
   const displayStations =
-    fallbackEnabled && fallback.status === "success"
-      ? fallback.stations
-      : filteredStations;
+    query.status === "success-wide" ? query.stations : filteredStations;
 
   const fallbackListStatus =
-    fallbackEnabled && fallback.status === "loading" ? "loading"
-    : fallbackEnabled && fallback.status === "none"    ? "none"
+    query.status === "escalating" ? "loading"
+    : query.status === "none"     ? "none"
     : undefined;
 
-  const showError = overpass.status === "error" && !errorDismissed;
+  const showError = query.status === "error" && !errorDismissed;
 
   return (
     <>
-      <LoadingOverlay visible={isInitialLoading} />
+      <LoadingOverlay visible={showOverlay} />
 
-      {showSearchHere && (
+      {(isFetchingStations || showSearchHere) && (
         <div
           className="fixed left-0 right-0 z-[999] flex justify-center pointer-events-none transition-[top] duration-200"
           style={{ top: locationDenied ? 112 : 80 }}
         >
-          <button
-            onClick={handleSearchHere}
-            className="pointer-events-auto flex items-center gap-2 bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm shadow-lg border border-slate-100 dark:border-[#1e2a3a] rounded-full px-4 py-2 text-sm font-semibold text-slate-800 dark:text-slate-100 active:bg-slate-50 dark:active:bg-slate-800/50 transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-            Search this area
-          </button>
+          {/* Grid container = pill shell; both variants overlap at col/row 1 so pill never resizes */}
+          <div className="grid bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm shadow-lg border border-slate-100 dark:border-[#1e2a3a] rounded-full text-sm font-semibold text-slate-800 dark:text-slate-100">
+
+            {/* Loading variant: [spinner] [text] [invisible 15px spacer] */}
+            <div
+              className={`col-start-1 row-start-1 flex items-center gap-2 px-4 py-2 pointer-events-none transition-opacity duration-150 ${showSearchHere ? "opacity-0" : "opacity-100"}`}
+              aria-hidden={showSearchHere}
+            >
+              <span className="inline-block w-3 h-3 border-2 border-green-600 border-t-transparent rounded-full animate-spin shrink-0" />
+              Loading stations…
+              <span className="w-[15px] h-[15px] shrink-0 invisible" aria-hidden="true" />
+            </div>
+
+            {/* Search variant: [spinner-reserved] [text] [search icon] */}
+            <button
+              onClick={handleSearchHere}
+              tabIndex={showSearchHere ? 0 : -1}
+              aria-hidden={!showSearchHere}
+              className={`col-start-1 row-start-1 flex items-center gap-2 px-4 py-2 rounded-full active:bg-slate-50 dark:active:bg-slate-800/50 transition-opacity duration-150 ${showSearchHere ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+            >
+              <span className={`inline-block w-3 h-3 border-2 border-green-600 border-t-transparent rounded-full shrink-0 ${isFetchingStations ? "animate-spin" : "invisible"}`} />
+              Search this area
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="shrink-0">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </button>
+
+          </div>
         </div>
       )}
 
@@ -226,7 +236,6 @@ export default function MapPage() {
             stations={displayStations}
             onMoveEnd={handleMoveEnd}
             mapRef={mapRef}
-            isQuerying={overpass.status === "loading" || fallback.status === "loading"}
             selectedStationId={selectedStationId}
             onStationDeselect={() => setSelectedStationId(null)}
             onMapInteraction={() => setListExpanded(false)}
@@ -249,14 +258,14 @@ export default function MapPage() {
         onExpandedChange={setListExpanded}
         fallbackStatus={fallbackListStatus}
         fallbackRadiusMi={FALLBACK_RADIUS_MI}
-        isQuerying={overpass.status === "loading" || fallback.status === "loading"}
+        isFetchingStations={isFetchingStations}
       />
 
       <AdBanner />
 
-      {showError && overpass.status === "error" && (
+      {showError && query.status === "error" && (
         <ErrorToast
-          message={overpass.message}
+          message={query.message}
           onDismiss={() => setErrorDismissed(true)}
         />
       )}

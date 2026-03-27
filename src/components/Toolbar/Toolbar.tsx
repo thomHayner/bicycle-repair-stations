@@ -26,51 +26,51 @@ async function geocode(query: string): Promise<{ lat: number; lng: number } | nu
 
 export function Toolbar({ onLocationFound, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
   const [query, setQuery] = useState("");
-  const [searching, setSearching] = useState(false);
-  const [notFound, setNotFound] = useState(false);
+  const [isGeocoding, setIsGeocoding] = useState(false);
+  const [locationNotFound, setLocationNotFound] = useState(false);
   const [layerPickerOpen, setLayerPickerOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleRecenter = () => {
     if (!userPosition) return;
-    onLocationFound(userPosition, 18);
+    onLocationFound(userPosition, 16);
   };
 
   const handleSearch = async (e?: React.FormEvent) => {
     e?.preventDefault();
     const q = query.trim();
-    if (searching) return;
+    if (isGeocoding) return;
     if (!q) {
       const center = mapRef.current?.getCenter();
-      if (center) onLocationFound({ lat: center.lat, lng: center.lng }, 18);
+      if (center) onLocationFound({ lat: center.lat, lng: center.lng }, 16);
       return;
     }
-    setNotFound(false);
-    setSearching(true);
+    setLocationNotFound(false);
+    setIsGeocoding(true);
     try {
       const pos = await geocode(q);
       if (pos) {
         onLocationFound(pos);
         inputRef.current?.blur();
       } else {
-        setNotFound(true);
+        setLocationNotFound(true);
       }
     } catch {
-      setNotFound(true);
+      setLocationNotFound(true);
     } finally {
-      setSearching(false);
+      setIsGeocoding(false);
     }
   };
 
-  const bannerHeight = notFound || locationDenied ? 32 : 0;
+  const bannerHeight = locationNotFound || locationDenied ? 32 : 0;
   const fabTop = 12 + 56 + bannerHeight + 8;
 
   return (
     <>
       <header
         className="fixed top-3 left-3 right-3 z-[1000] bg-white/95 dark:bg-[#080c14]/95 backdrop-blur-sm shadow-lg rounded-2xl overflow-hidden"
-        style={{ height: locationDenied || notFound ? "auto" : 56 }}
+        style={{ height: locationDenied || locationNotFound ? "auto" : 56 }}
       >
         <div className="flex items-center px-3 gap-2" style={{ height: 56 }}>
           {/* Hamburger */}
@@ -104,7 +104,7 @@ export function Toolbar({ onLocationFound, mapRef, userPosition, locationDenied,
           <form onSubmit={handleSearch} className="flex-1 flex items-center">
             <div className={[
               "flex items-center w-full rounded-full border transition-colors",
-              notFound
+              locationNotFound
                 ? "border-red-400 bg-red-50 dark:bg-red-950/30 dark:border-red-800"
                 : "border-sky-200 bg-sky-50 dark:border-[#1e3a5f] dark:bg-[#0d1830] focus-within:border-green-400 focus-within:bg-white dark:focus-within:border-sky-600 dark:focus-within:bg-[#0d1830]",
             ].join(" ")}>
@@ -112,14 +112,14 @@ export function Toolbar({ onLocationFound, mapRef, userPosition, locationDenied,
                 ref={inputRef}
                 type="search"
                 value={query}
-                onChange={(e) => { setQuery(e.target.value); setNotFound(false); }}
+                onChange={(e) => { setQuery(e.target.value); setLocationNotFound(false); }}
                 placeholder="Search location…"
                 aria-label="Search location"
                 className="flex-1 bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 px-4 py-2 min-h-[44px] outline-none min-w-0"
               />
 
               {/* Spinner while geocoding */}
-              {searching ? (
+              {isGeocoding ? (
                 <span className="min-w-[44px] min-h-[44px] flex items-center justify-center shrink-0">
                   <span className="w-4 h-4 border-2 border-green-600 border-t-transparent rounded-full animate-spin inline-block" />
                 </span>
@@ -138,13 +138,13 @@ export function Toolbar({ onLocationFound, mapRef, userPosition, locationDenied,
           </form>
         </div>
 
-        {notFound && (
+        {locationNotFound && (
           <div className="bg-red-50 dark:bg-red-950/40 border-t border-red-200 dark:border-red-900 px-4 py-1.5 text-xs text-red-700 dark:text-red-400 text-center">
             Location not found — try a different search term.
           </div>
         )}
 
-        {locationDenied && !notFound && (
+        {locationDenied && !locationNotFound && (
           <div className="bg-amber-50 dark:bg-amber-950/30 border-t border-amber-200 dark:border-amber-900 px-4 py-1.5 text-xs text-amber-800 dark:text-amber-400 text-center">
             Location access denied — search above or enable location to find stations near you.
           </div>

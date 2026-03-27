@@ -95,13 +95,13 @@ export default function AboutPage() {
           <Accordion title="Privacy Policy">
             <p className="pt-3"><strong className="text-slate-600 dark:text-slate-300">Last updated: March 2026</strong></p>
             <p><strong className="text-slate-600 dark:text-slate-300">Data we collect</strong><br/>
-            BicycleRepairStations.com does not collect, store, or transmit any personal information. No accounts are required and no analytics or tracking cookies are used.</p>
+            BicycleRepairStations.com does not collect, store, or transmit any personal information. No accounts are required, no cookies are used, and no personal data is collected.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Location</strong><br/>
             If you grant location permission, your coordinates are used only to centre the map and find nearby stations. Your location is never sent to our servers — it is processed entirely in your browser and discarded when you close the app.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Local storage</strong><br/>
             Your preference settings (distance unit, colour theme) are stored in your browser's local storage so they persist between visits. This data never leaves your device.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Third-party services</strong><br/>
-            Tile images are loaded from CARTO, ESRI, Stadia Maps, and OpenStreetMap servers. These providers may log your IP address as part of normal web server operation. Station data is fetched from the Overpass API. Location searches use the Nominatim geocoding service. Please refer to each provider's own privacy policy for details.</p>
+            Tile images are loaded from CARTO, ESRI, Stadia Maps, and OpenStreetMap servers. These providers may log your IP address as part of normal web server operation. Station data is fetched from the Overpass API. Location searches use the Nominatim geocoding service. Anonymous, cookieless page-view and performance data is collected by Vercel Analytics and Vercel Speed Insights — no personal information is linked to this data. Please refer to each provider's own privacy policy for details.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Children</strong><br/>
             This service is not directed at children under 13. We do not knowingly collect data from children.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Contact</strong><br/>

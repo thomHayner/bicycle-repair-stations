@@ -1,8 +1,9 @@
 interface Props {
   visible: boolean;
+  message?: string;
 }
 
-export function LoadingOverlay({ visible }: Props) {
+export function LoadingOverlay({ visible, message = "Finding your location\u2026" }: Props) {
   return (
     <div
       className={[
@@ -26,7 +27,7 @@ export function LoadingOverlay({ visible }: Props) {
       {/* Spinner */}
       <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
         <span className="w-4 h-4 border-2 border-green-600 border-t-transparent rounded-full animate-spin inline-block" />
-        Finding your location…
+        {message}
       </div>
     </div>
   );

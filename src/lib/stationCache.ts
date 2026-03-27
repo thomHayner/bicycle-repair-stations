@@ -30,6 +30,8 @@ export interface StationCache {
   radiusKm: number;
   stations: OverpassNode[];
   fetchedAt: number;
+  /** True when this entry holds a wide-area fallback result (no stations found nearby). */
+  isWideFallback?: boolean;
 }
 
 export function readCache(): StationCache | null {

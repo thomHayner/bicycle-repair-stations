@@ -123,7 +123,6 @@ interface Props {
   stations: OverpassNode[];
   onMoveEnd: (center: LatLng) => void;
   mapRef: React.MutableRefObject<LeafletMap | null>;
-  isQuerying: boolean;
   selectedStationId: number | null;
   onStationDeselect: () => void;
   onMapInteraction: () => void;
@@ -132,7 +131,7 @@ interface Props {
   listExpanded: boolean;
 }
 
-export function MapView({ userPosition, stations, onMoveEnd, mapRef, isQuerying, selectedStationId, onStationDeselect, onMapInteraction, onVisibleWidthChange, activeLayer, listExpanded }: Props) {
+export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, onVisibleWidthChange, activeLayer, listExpanded }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -151,7 +150,7 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, isQuerying,
   const didFlyRef = useRef(false);
   useEffect(() => {
     if (userPosition && mapRef.current && !didFlyRef.current) {
-      mapRef.current.flyTo([userPosition.lat, userPosition.lng], 15, { duration: 1.2 });
+      mapRef.current.flyTo([userPosition.lat, userPosition.lng], 18, { duration: 1.2 });
       didFlyRef.current = true;
     }
   }, [userPosition, mapRef]);
@@ -191,12 +190,6 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, isQuerying,
         </button>
       </div>
 
-      {isQuerying && !tooZoomedOut && (
-        <div className="absolute top-24 left-1/2 -translate-x-1/2 z-[900] bg-white/90 dark:bg-[#0d1220]/90 rounded-full px-4 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-200 shadow-md flex items-center gap-2 pointer-events-none">
-          <span className="inline-block w-3 h-3 border-2 border-green-600 border-t-transparent rounded-full animate-spin" />
-          Loading stations…
-        </div>
-      )}
       {tooZoomedOut && (
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[900] bg-white/95 dark:bg-[#0d1220]/95 rounded-full px-5 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-lg flex items-center gap-2 pointer-events-none whitespace-nowrap">
           <svg className="w-4 h-4 text-green-600 dark:text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -208,8 +201,8 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, isQuerying,
       )}
       <MapContainer
         center={initialCenter}
-        zoom={14}
-        minZoom={11}
+        zoom={16}
+        minZoom={8}
         maxZoom={20}
         style={{ width: "100%", height: "100%", background: tileBg }}
         zoomControl={false}
