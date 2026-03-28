@@ -40,6 +40,30 @@ export const userIcon = L.divIcon({
   iconAnchor: [10, 10],
 });
 
+// Teardrop pin for an explicitly searched location (typed search or "Search this area")
+export const searchLocationIcon = L.divIcon({
+  className: "",
+  html: `
+    <div style="
+      width: 28px; height: 36px;
+      position: relative;
+      display: flex; align-items: flex-start; justify-content: center;
+    ">
+      <!-- Teardrop pin body -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36" style="position:absolute;top:0;left:0;">
+        <path d="M14 0 C6.268 0 0 6.268 0 14 C0 24.5 14 36 14 36 C14 36 28 24.5 28 14 C28 6.268 21.732 0 14 0 Z"
+          fill="#0f172a" stroke="white" stroke-width="2"/>
+        <!-- Magnifying glass inside -->
+        <circle cx="13" cy="13" r="4.5" stroke="white" stroke-width="1.8" fill="none"/>
+        <line x1="16.5" y1="16.5" x2="19.5" y2="19.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+  `,
+  iconSize: [28, 36],
+  iconAnchor: [14, 36],
+  popupAnchor: [0, -38],
+});
+
 // Wrench icon for repair stations
 export const stationIcon = L.divIcon({
   className: "",

@@ -24,6 +24,8 @@ export default function MapPage() {
 
   // Location the user explicitly provided (geo or search) — drives Overpass fetches
   const [givenLocation, setGivenLocation] = useState<{ lat: number; lng: number } | null>(null);
+  // Set only on explicit user actions (typed search / "Search this area") — drives the search pin marker
+  const [searchedLocation, setSearchedLocation] = useState<{ lat: number; lng: number } | null>(null);
   // Last known map centre — fallback filter anchor when no givenLocation
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number } | null>(null);
 
@@ -38,22 +40,24 @@ export default function MapPage() {
   const [listExpanded, setListExpanded] = useState(false);
 
   const userPosition =
-    geo.status === "resolved" || geo.status === "denied"
-      ? {
-          lat: geo.lat,
-          lng: geo.lng,
-          accuracy: geo.status === "resolved" ? geo.accuracy : undefined,
-        }
+    geo.status === "resolved"
+      ? { lat: geo.lat, lng: geo.lng, accuracy: geo.accuracy }
       : null;
 
   const locationDenied = geo.status === "denied";
 
-  // Set givenLocation once geolocation resolves (only once — not on every watchPosition tick)
+  // Set givenLocation once geolocation resolves or is denied (only once — not on every watchPosition tick)
   useEffect(() => {
-    if (geo.status === "resolved" && !givenLocation) {
+    if ((geo.status === "resolved" || geo.status === "denied") && !givenLocation) {
       const { lat, lng } = geo;
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: latch location once on first geo resolve
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: latch location once on first geo resolve/deny
       setGivenLocation({ lat, lng });
+      if (geo.status === "denied") {
+        // No GPS — show the search pin at the fallback so user sees where we're searching
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern
+        setSearchedLocation({ lat, lng });
+      }
+      // When resolved: searchedLocation stays null — the blue dot already marks the spot
     }
   }, [geo, givenLocation]);
 
@@ -81,6 +85,43 @@ export default function MapPage() {
     }
   }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Auto-radius: on each new givenLocation, find the smallest radius with ≥ 5 stations
+  // and zoom the map to fit that radius. Runs once per givenLocation value.
+  const autoRadiusLocationRef = useRef<{ lat: number; lng: number } | null>(null);
+  useEffect(() => {
+    if (query.status !== "success" || !givenLocation || allStations.length === 0) return;
+
+    const prev = autoRadiusLocationRef.current;
+    if (prev && prev.lat === givenLocation.lat && prev.lng === givenLocation.lng) return;
+    autoRadiusLocationRef.current = givenLocation;
+
+    const options = unit === "mi" ? MI_OPTIONS : KM_OPTIONS;
+    const found = options.find((dist) => {
+      const distMiles = unit === "km" ? dist / KM_PER_MILE : dist;
+      return (
+        allStations.filter(
+          (s) => haversineDistanceMiles(s.lat, s.lon, givenLocation.lat, givenLocation.lng) <= distMiles
+        ).length >= 5
+      );
+    });
+    const newDist = found ?? options[options.length - 1];
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: auto-select radius once per location
+    setSelectedDist(newDist);
+
+    // Zoom map to show the chosen radius as a bounding box
+    const distMiles = unit === "km" ? newDist / KM_PER_MILE : newDist;
+    const DEG_PER_MILE = 1 / 69;
+    const latDelta = distMiles * DEG_PER_MILE;
+    const lngDelta = latDelta / Math.cos((givenLocation.lat * Math.PI) / 180);
+    mapRef.current?.fitBounds(
+      [
+        [givenLocation.lat - latDelta, givenLocation.lng - lngDelta],
+        [givenLocation.lat + latDelta, givenLocation.lng + lngDelta],
+      ],
+      { padding: [40, 40], maxZoom: 16 }
+    );
+  }, [query.status, allStations, givenLocation, unit, mapRef]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Map pan updates the filter anchor (used only when no givenLocation)
   const handleMoveEnd = (center: LatLng) => {
     setMapCenter({ lat: center.lat, lng: center.lng });
@@ -89,9 +130,24 @@ export default function MapPage() {
 
   const handleLocationFound = (pos: { lat: number; lng: number }, zoom = 13) => {
     setGivenLocation(pos);
+    const nearUser =
+      userPosition !== null &&
+      haversineDistanceMiles(pos.lat, pos.lng, userPosition.lat, userPosition.lng) < 1;
+    setSearchedLocation(nearUser ? null : pos);
     setErrorDismissed(false);
     if (mapRef.current) {
       mapRef.current.flyTo([pos.lat, pos.lng], zoom, { duration: 1.2 });
+    }
+  };
+
+  // Recenter to GPS position — clears the search pin since the blue dot already marks the spot
+  const handleRecenter = () => {
+    if (!userPosition) return;
+    setGivenLocation(userPosition);
+    setSearchedLocation(null);
+    setErrorDismissed(false);
+    if (mapRef.current) {
+      mapRef.current.flyTo([userPosition.lat, userPosition.lng], 16, { duration: 1.2 });
     }
   };
 
@@ -152,7 +208,12 @@ export default function MapPage() {
     haversineDistanceMiles(mapCenter.lat, mapCenter.lng, givenLocation.lat, givenLocation.lng) > 18;
 
   const handleSearchHere = () => {
-    if (mapCenter) setGivenLocation(mapCenter);
+    if (!mapCenter) return;
+    setGivenLocation(mapCenter);
+    const nearUser =
+      userPosition !== null &&
+      haversineDistanceMiles(mapCenter.lat, mapCenter.lng, userPosition.lat, userPosition.lng) < 1;
+    setSearchedLocation(nearUser ? null : mapCenter);
   };
 
   // Filter centre: explicit location (geo/search) → map centre → null
@@ -220,6 +281,7 @@ export default function MapPage() {
 
       <Toolbar
         onLocationFound={handleLocationFound}
+        onRecenter={handleRecenter}
         mapRef={mapRef}
         userPosition={userPosition}
         locationDenied={locationDenied}
@@ -240,6 +302,7 @@ export default function MapPage() {
             onStationDeselect={() => setSelectedStationId(null)}
             onMapInteraction={() => setListExpanded(false)}
             onVisibleWidthChange={handleVisibleWidthChange}
+            searchedLocation={searchedLocation}
             activeLayer={activeLayer}
             listExpanded={listExpanded}
           />

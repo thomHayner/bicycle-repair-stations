@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 import type { Map as LeafletMap, LatLng } from "leaflet";
 import type { OverpassNode } from "../../types/overpass";
 import { UserMarker } from "./UserMarker";
+import { SearchLocationMarker } from "./SearchLocationMarker";
 import { StationMarker } from "./StationMarker";
 import { visibleWidthMiles } from "../../lib/distance";
 import type { LayerId } from "../../lib/layers";
@@ -127,11 +128,12 @@ interface Props {
   onStationDeselect: () => void;
   onMapInteraction: () => void;
   onVisibleWidthChange: (miles: number) => void;
+  searchedLocation: { lat: number; lng: number } | null;
   activeLayer: LayerId;
   listExpanded: boolean;
 }
 
-export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, onVisibleWidthChange, activeLayer, listExpanded }: Props) {
+export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, onVisibleWidthChange, searchedLocation, activeLayer, listExpanded }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -150,7 +152,7 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedSta
   const didFlyRef = useRef(false);
   useEffect(() => {
     if (userPosition && mapRef.current && !didFlyRef.current) {
-      mapRef.current.flyTo([userPosition.lat, userPosition.lng], 18, { duration: 1.2 });
+      mapRef.current.flyTo([userPosition.lat, userPosition.lng], 16, { duration: 1.2 });
       didFlyRef.current = true;
     }
   }, [userPosition, mapRef]);
@@ -224,6 +226,9 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedSta
         />
         {userPosition && (
           <UserMarker lat={userPosition.lat} lng={userPosition.lng} accuracy={userPosition.accuracy} />
+        )}
+        {searchedLocation && (
+          <SearchLocationMarker lat={searchedLocation.lat} lng={searchedLocation.lng} />
         )}
         {stations.map((station) => (
           <StationMarker

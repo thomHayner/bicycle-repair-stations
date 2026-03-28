@@ -6,6 +6,7 @@ import type { Unit } from "../../lib/units";
 
 interface Props {
   onLocationFound: (pos: { lat: number; lng: number }, zoom?: number) => void;
+  onRecenter: () => void;
   mapRef: React.MutableRefObject<LeafletMap | null>;
   userPosition: { lat: number; lng: number } | null;
   locationDenied: boolean;
@@ -24,7 +25,7 @@ async function geocode(query: string): Promise<{ lat: number; lng: number } | nu
   return { lat: Number(results[0].lat), lng: Number(results[0].lon) };
 }
 
-export function Toolbar({ onLocationFound, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
+export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
   const [query, setQuery] = useState("");
   const [isGeocoding, setIsGeocoding] = useState(false);
   const [locationNotFound, setLocationNotFound] = useState(false);
@@ -34,7 +35,7 @@ export function Toolbar({ onLocationFound, mapRef, userPosition, locationDenied,
 
   const handleRecenter = () => {
     if (!userPosition) return;
-    onLocationFound(userPosition, 16);
+    onRecenter();
   };
 
   const handleSearch = async (e?: React.FormEvent) => {
