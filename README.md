@@ -146,8 +146,7 @@ src/
 │   │   └── UserMarker.tsx
 │   ├── Menu/MenuDrawer.tsx          # Slide-in navigation + theme/unit toggles
 │   └── Toolbar/
-│       ├── Toolbar.tsx              # Search bar, locate FAB, layer FAB, geocoding
-│       └── RadiusFilter.tsx         # Distance preset pills
+│       └── Toolbar.tsx              # Search bar, locate FAB, layer FAB, geocoding
 ├── context/
 │   ├── SettingsContext.tsx          # Theme + unit provider (wraps app at root)
 │   ├── settingsCtx.ts               # Context object definition (avoids fast-refresh issues)
@@ -520,8 +519,7 @@ src/
 │   │   └── UserMarker.tsx
 │   ├── Menu/MenuDrawer.tsx          # Slide-in navigation + theme/unit toggles
 │   └── Toolbar/
-│       ├── Toolbar.tsx              # Search bar, locate FAB, layer FAB, geocoding
-│       └── RadiusFilter.tsx         # Distance preset pills
+│       └── Toolbar.tsx              # Search bar, locate FAB, layer FAB, geocoding
 ├── context/
 │   ├── SettingsContext.tsx          # Theme + unit provider (wraps app at root)
 │   ├── settingsCtx.ts               # Context object definition (prevents fast-refresh issues)
