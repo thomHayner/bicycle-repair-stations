@@ -205,7 +205,7 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedSta
         center={initialCenter}
         zoom={16}
         minZoom={10}
-        maxZoom={20}
+        maxZoom={18}
         style={{ width: "100%", height: "100%", background: tileBg }}
         zoomControl={false}
         preferCanvas={true}
