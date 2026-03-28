@@ -204,7 +204,7 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedSta
       <MapContainer
         center={initialCenter}
         zoom={16}
-        minZoom={8}
+        minZoom={10}
         maxZoom={20}
         style={{ width: "100%", height: "100%", background: tileBg }}
         zoomControl={false}
