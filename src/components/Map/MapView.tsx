@@ -15,9 +15,10 @@ interface MapEventHandlerProps {
   onMoveEnd: (center: LatLng) => void;
   onWidthChange: (miles: number) => void;
   onMapInteraction: () => void;
+  onZoomChange: (zoom: number) => void;
 }
 
-function MapEventHandler({ onMoveEnd, onWidthChange, onMapInteraction }: MapEventHandlerProps) {
+function MapEventHandler({ onMoveEnd, onWidthChange, onMapInteraction, onZoomChange }: MapEventHandlerProps) {
   const map = useMapEvents({
     click()    { onMapInteraction(); },
     dragstart(){ map.closePopup(); onMapInteraction(); },
@@ -26,6 +27,7 @@ function MapEventHandler({ onMoveEnd, onWidthChange, onMapInteraction }: MapEven
       reportWidth(e.target);
     },
     zoomend(e) {
+      onZoomChange(e.target.getZoom());
       reportWidth(e.target);
     },
   });
@@ -148,6 +150,7 @@ export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapR
     : ([51.505, -0.09] as [number, number]);
 
   const [tooZoomedOut, setTooZoomedOut] = useState(false);
+  const [zoom, setZoom] = useState(16);
 
   // Fly to user position once it resolves
   const didFlyRef = useRef(false);
@@ -224,6 +227,7 @@ export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapR
             onVisibleWidthChange(miles);
           }}
           onMapInteraction={onMapInteraction}
+          onZoomChange={setZoom}
         />
         {userPosition && (
           <UserMarker lat={userPosition.lat} lng={userPosition.lng} accuracy={userPosition.accuracy} />
@@ -238,6 +242,7 @@ export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapR
             isSelected={station.id === selectedStationId}
             onDeselect={onStationDeselect}
             userDistances={userDistances}
+            zoom={zoom}
           />
         ))}
       </MapContainer>

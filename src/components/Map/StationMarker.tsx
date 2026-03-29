@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
 import type { Marker as LeafletMarker } from "leaflet";
-import { stationIcon } from "../../lib/leafletConfig";
+import { stationIcon, stationDotIcon } from "../../lib/leafletConfig";
 import { StationPopup } from "./StationPopup";
 import type { OverpassNode } from "../../types/overpass";
 
@@ -10,9 +10,10 @@ interface Props {
   isSelected: boolean;
   onDeselect: () => void;
   userDistances: Map<number, number> | null;
+  zoom: number;
 }
 
-export function StationMarker({ station, isSelected, onDeselect, userDistances }: Props) {
+export function StationMarker({ station, isSelected, onDeselect, userDistances, zoom }: Props) {
   const markerRef = useRef<LeafletMarker | null>(null);
   const map = useMap();
 
@@ -31,12 +32,13 @@ export function StationMarker({ station, isSelected, onDeselect, userDistances }
   }, [isSelected, map]);
 
   const distMi = userDistances?.get(station.id) ?? null;
+  const icon = zoom >= 14 ? stationIcon : stationDotIcon;
 
   return (
     <Marker
       ref={markerRef}
       position={[station.lat, station.lon]}
-      icon={stationIcon}
+      icon={icon}
       eventHandlers={{
         popupclose: onDeselect,
         // Centre the map on the marker at the current zoom (no zoom change).
