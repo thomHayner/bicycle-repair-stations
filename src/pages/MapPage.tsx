@@ -232,6 +232,11 @@ export default function MapPage() {
   const displayStations =
     query.status === "success-wide" ? query.stations : filteredStations;
 
+  // GPS distance from user to each displayed station — computed once, shared by list and popups
+  const userDistances = userPosition
+    ? new Map(displayStations.map((s) => [s.id, haversineDistanceMiles(userPosition.lat, userPosition.lng, s.lat, s.lon)]))
+    : null;
+
   const fallbackListStatus =
     query.status === "escalating" ? "loading"
     : query.status === "none"     ? "none"
@@ -295,6 +300,7 @@ export default function MapPage() {
         <Suspense fallback={null}>
           <MapView
             userPosition={userPosition}
+            userDistances={userDistances}
             stations={displayStations}
             onMoveEnd={handleMoveEnd}
             mapRef={mapRef}
@@ -312,6 +318,7 @@ export default function MapPage() {
       <StationListView
         stations={displayStations}
         filterCenter={filterCenter}
+        userDistances={userDistances}
         unit={unit}
         onUnitChange={handleUnitChange}
         selectedDist={selectedDist}

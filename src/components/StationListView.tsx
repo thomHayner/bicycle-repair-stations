@@ -15,6 +15,7 @@ type FilterKey = (typeof AMENITY_FILTERS)[number]["key"];
 interface Props {
   stations: OverpassNode[];
   filterCenter: { lat: number; lng: number } | null;
+  userDistances: Map<number, number> | null;
   unit: Unit;
   onUnitChange: (unit: Unit) => void;
   selectedDist: number;
@@ -33,6 +34,7 @@ interface Props {
 export function StationListView({
   stations,
   filterCenter,
+  userDistances,
   unit,
   onUnitChange,
   selectedDist,
@@ -220,9 +222,7 @@ export function StationListView({
           )}
 
           {filtered.map((station, i) => {
-            const distMi = filterCenter
-              ? haversineDistanceMiles(filterCenter.lat, filterCenter.lng, station.lat, station.lon)
-              : null;
+            const distMi = userDistances?.get(station.id) ?? null;
             const distDisplay = distMi == null ? null : unit === "km" ? distMi * KM_PER_MILE : distMi;
 
             const name = station.tags.name ?? "Bicycle Repair Station";

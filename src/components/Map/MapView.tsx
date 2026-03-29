@@ -121,6 +121,7 @@ function ActiveTileLayer({ layer }: { layer: LayerId }) {
 
 interface Props {
   userPosition: { lat: number; lng: number; accuracy?: number } | null;
+  userDistances: Map<number, number> | null;
   stations: OverpassNode[];
   onMoveEnd: (center: LatLng) => void;
   mapRef: React.MutableRefObject<LeafletMap | null>;
@@ -133,7 +134,7 @@ interface Props {
   listExpanded: boolean;
 }
 
-export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, onVisibleWidthChange, searchedLocation, activeLayer, listExpanded }: Props) {
+export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, onVisibleWidthChange, searchedLocation, activeLayer, listExpanded }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -236,6 +237,7 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedSta
             station={station}
             isSelected={station.id === selectedStationId}
             onDeselect={onStationDeselect}
+            userDistances={userDistances}
           />
         ))}
       </MapContainer>

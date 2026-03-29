@@ -9,9 +9,10 @@ interface Props {
   station: OverpassNode;
   isSelected: boolean;
   onDeselect: () => void;
+  userDistances: Map<number, number> | null;
 }
 
-export function StationMarker({ station, isSelected, onDeselect }: Props) {
+export function StationMarker({ station, isSelected, onDeselect, userDistances }: Props) {
   const markerRef = useRef<LeafletMarker | null>(null);
   const map = useMap();
 
@@ -28,6 +29,8 @@ export function StationMarker({ station, isSelected, onDeselect }: Props) {
       map.off("moveend", handleMoveEnd);
     };
   }, [isSelected, map]);
+
+  const distMi = userDistances?.get(station.id) ?? null;
 
   return (
     <Marker
@@ -51,7 +54,7 @@ export function StationMarker({ station, isSelected, onDeselect }: Props) {
         closeOnEscapeKey={true}
         closeOnClick={true}
       >
-        <StationPopup station={station} />
+        <StationPopup station={station} distMi={distMi} />
       </Popup>
     </Marker>
   );

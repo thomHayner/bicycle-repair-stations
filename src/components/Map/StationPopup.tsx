@@ -1,11 +1,15 @@
 import type { OverpassNode } from "../../types/overpass";
 import { getDirectionsUrl } from "../../lib/directions";
+import { KM_PER_MILE } from "../../lib/units";
+import { useSettings } from "../../context/useSettings";
 
 interface Props {
   station: OverpassNode;
+  distMi: number | null;
 }
 
-export function StationPopup({ station }: Props) {
+export function StationPopup({ station, distMi }: Props) {
+  const { unit } = useSettings();
   const { tags } = station;
   const name = tags.name ?? "Bicycle Repair Station";
   const hasTools = tags["service:bicycle:tools"] === "yes";
@@ -56,6 +60,15 @@ export function StationPopup({ station }: Props) {
           <span>{tags.opening_hours}</span>
         </p>
       )}
+
+      {distMi != null && (() => {
+        const distDisplay = unit === "km" ? distMi * KM_PER_MILE : distMi;
+        return (
+          <p className="text-[12px] text-slate-500 dark:text-slate-400 text-center mb-2">
+            {distDisplay < 0.1 ? "<0.1" : distDisplay.toFixed(1)} {unit} away
+          </p>
+        );
+      })()}
 
       <a
         href={getDirectionsUrl(station.lat, station.lon)}
