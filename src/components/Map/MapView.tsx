@@ -15,9 +15,10 @@ interface MapEventHandlerProps {
   onMoveEnd: (center: LatLng) => void;
   onWidthChange: (miles: number) => void;
   onMapInteraction: () => void;
+  onZoomChange: (zoom: number) => void;
 }
 
-function MapEventHandler({ onMoveEnd, onWidthChange, onMapInteraction }: MapEventHandlerProps) {
+function MapEventHandler({ onMoveEnd, onWidthChange, onMapInteraction, onZoomChange }: MapEventHandlerProps) {
   const map = useMapEvents({
     click()    { onMapInteraction(); },
     dragstart(){ map.closePopup(); onMapInteraction(); },
@@ -26,6 +27,7 @@ function MapEventHandler({ onMoveEnd, onWidthChange, onMapInteraction }: MapEven
       reportWidth(e.target);
     },
     zoomend(e) {
+      onZoomChange(e.target.getZoom());
       reportWidth(e.target);
     },
   });
@@ -121,19 +123,19 @@ function ActiveTileLayer({ layer }: { layer: LayerId }) {
 
 interface Props {
   userPosition: { lat: number; lng: number; accuracy?: number } | null;
+  userDistances: Map<number, number> | null;
   stations: OverpassNode[];
   onMoveEnd: (center: LatLng) => void;
   mapRef: React.MutableRefObject<LeafletMap | null>;
   selectedStationId: number | null;
   onStationDeselect: () => void;
   onMapInteraction: () => void;
-  onVisibleWidthChange: (miles: number) => void;
   searchedLocation: { lat: number; lng: number } | null;
   activeLayer: LayerId;
   listExpanded: boolean;
 }
 
-export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, onVisibleWidthChange, searchedLocation, activeLayer, listExpanded }: Props) {
+export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -147,6 +149,7 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedSta
     : ([51.505, -0.09] as [number, number]);
 
   const [tooZoomedOut, setTooZoomedOut] = useState(false);
+  const [zoom, setZoom] = useState(16);
 
   // Fly to user position once it resolves
   const didFlyRef = useRef(false);
@@ -220,9 +223,9 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedSta
           onMoveEnd={onMoveEnd}
           onWidthChange={(miles) => {
             setTooZoomedOut(miles > TOO_WIDE_MILES);
-            onVisibleWidthChange(miles);
           }}
           onMapInteraction={onMapInteraction}
+          onZoomChange={setZoom}
         />
         {userPosition && (
           <UserMarker lat={userPosition.lat} lng={userPosition.lng} accuracy={userPosition.accuracy} />
@@ -236,6 +239,8 @@ export function MapView({ userPosition, stations, onMoveEnd, mapRef, selectedSta
             station={station}
             isSelected={station.id === selectedStationId}
             onDeselect={onStationDeselect}
+            userDistances={userDistances}
+            zoom={zoom}
           />
         ))}
       </MapContainer>

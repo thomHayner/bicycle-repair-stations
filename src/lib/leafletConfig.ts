@@ -64,6 +64,19 @@ export const searchLocationIcon = L.divIcon({
   popupAnchor: [0, -38],
 });
 
+// Small dot for repair stations at low zoom levels (zoom < 14)
+export const stationDotIcon = L.divIcon({
+  className: "station-dot-icon",
+  html: `<div style="
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #16a34a; border: 1.5px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  "></div>`,
+  iconSize: [8, 8],
+  iconAnchor: [4, 4],
+  popupAnchor: [0, -6],
+});
+
 // Wrench icon for repair stations
 export const stationIcon = L.divIcon({
   className: "",

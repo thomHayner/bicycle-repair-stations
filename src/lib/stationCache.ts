@@ -2,25 +2,20 @@ import type { OverpassNode } from "../types/overpass";
 import { haversineDistanceMiles } from "./distance";
 
 /**
- * Fetch radius in km. Large enough that the user can display up to 25 miles
- * (40 km) from their location and still have a ~25 km buffer before a
- * re-fetch is needed.
- *
- * Area ≈ π × 40² ≈ 5 000 sq miles — comfortably covers the "1 000 sq mile"
- * spirit while ensuring no edge-of-display gaps.
+ * Fetch radius in km — exactly 25 miles (25 × 1.60934).
+ * Matches the maximum selectable display radius so we cache exactly what
+ * the user can request to see.
  */
-export const FETCH_RADIUS_KM = 65;
-
-/** Max displayable distance in km (25 miles ≈ 40.2 km). */
-const MAX_DISPLAY_KM = 40.3;
+export const FETCH_RADIUS_KM = 40.2335; // 25 miles
 
 /**
  * How far the user can move from the last fetch centre before we need to
- * re-fetch.  Anything closer is fully covered by the existing data.
+ * re-fetch. Fixed at 5 miles — independent of the display radius.
  */
-const REFETCH_THRESHOLD_KM = FETCH_RADIUS_KM - MAX_DISPLAY_KM; // ≈ 24.7 km
+const REFETCH_THRESHOLD_KM = 8.047; // 5 miles
 
-const STORAGE_KEY = "brs_v2";
+// Bumped v2 → v3 to invalidate stale 65-km caches from the previous build.
+const STORAGE_KEY = "brs_v3";
 
 /** Cache TTL: 24 hours in milliseconds */
 const CACHE_TTL_MS = 86_400_000;
@@ -30,8 +25,6 @@ export interface StationCache {
   radiusKm: number;
   stations: OverpassNode[];
   fetchedAt: number;
-  /** True when this entry holds a wide-area fallback result (no stations found nearby). */
-  isWideFallback?: boolean;
 }
 
 export function readCache(): StationCache | null {
@@ -56,8 +49,8 @@ export function writeCache(data: StationCache): void {
 }
 
 /**
- * Returns true if all stations within MAX_DISPLAY_KM of (lat, lng) are
- * guaranteed to be present in the cache.
+ * Returns true if (lat, lng) is within REFETCH_THRESHOLD_KM of the cache
+ * centre, meaning the cached data fully covers the 25-mile display radius.
  */
 export function isCovered(lat: number, lng: number, cache: StationCache): boolean {
   const distKm =

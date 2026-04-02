@@ -15,6 +15,7 @@ type FilterKey = (typeof AMENITY_FILTERS)[number]["key"];
 interface Props {
   stations: OverpassNode[];
   filterCenter: { lat: number; lng: number } | null;
+  userDistances: Map<number, number> | null;
   unit: Unit;
   onUnitChange: (unit: Unit) => void;
   selectedDist: number;
@@ -22,17 +23,14 @@ interface Props {
   onStationSelect: (station: OverpassNode) => void;
   expanded: boolean;
   onExpandedChange: (expanded: boolean) => void;
-  /** Set while the wide-area fallback search is running or has found nothing. */
-  fallbackStatus?: "loading" | "none";
-  /** 1 000 — passed from MapPage so the "no stations within X" message uses the same constant. */
-  fallbackRadiusMi?: number;
-  /** True while the primary Overpass or fallback query is in-flight. */
+  /** True while the Overpass query is in-flight. */
   isFetchingStations?: boolean;
 }
 
 export function StationListView({
   stations,
   filterCenter,
+  userDistances,
   unit,
   onUnitChange,
   selectedDist,
@@ -40,8 +38,6 @@ export function StationListView({
   onStationSelect,
   expanded,
   onExpandedChange,
-  fallbackStatus,
-  fallbackRadiusMi = 1000,
   isFetchingStations = false,
 }: Props) {
   const [activeFilters, setActiveFilters] = useState<Set<FilterKey>>(new Set());
@@ -77,17 +73,9 @@ export function StationListView({
   const hasActiveFilters = activeFilters.size > 0;
   const options = unit === "mi" ? MI_OPTIONS : KM_OPTIONS;
 
-  const fallbackRadiusDisplay = unit === "mi"
-    ? `${fallbackRadiusMi.toLocaleString()} mi`
-    : `${Math.round(fallbackRadiusMi * KM_PER_MILE).toLocaleString()} km`;
-
   const headerLabel =
-    fallbackStatus === "loading"
-      ? "Searching wider area\u2026"
-      : fallbackStatus === "none"
-      ? `No stations within ${fallbackRadiusDisplay}`
-      : total === 0
-      ? `No stations within ${selectedDist} ${unit}`
+    total === 0
+      ? "No stations found in this area"
       : hasActiveFilters
       ? `${shown} of ${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`
       : `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`;
@@ -201,28 +189,14 @@ export function StationListView({
         <div className="border-t border-slate-100 dark:border-[#1e2a3a]">
           {filtered.length === 0 && (
             <div className="px-4 py-5 text-sm text-slate-500 dark:text-slate-400 text-center">
-              {fallbackStatus === "loading" ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
-                  </svg>
-                  Looking for nearest stations…
-                </span>
-              ) : fallbackStatus === "none" ? (
-                `No bicycle repair stations found within ${fallbackRadiusDisplay}.`
-              ) : total === 0 ? (
-                "No stations in this area."
-              ) : (
-                "No stations match the selected filters."
-              )}
+              {total === 0
+                ? "No stations in this area."
+                : "No stations match the selected filters."}
             </div>
           )}
 
           {filtered.map((station, i) => {
-            const distMi = filterCenter
-              ? haversineDistanceMiles(filterCenter.lat, filterCenter.lng, station.lat, station.lon)
-              : null;
+            const distMi = userDistances?.get(station.id) ?? null;
             const distDisplay = distMi == null ? null : unit === "km" ? distMi * KM_PER_MILE : distMi;
 
             const name = station.tags.name ?? "Bicycle Repair Station";
