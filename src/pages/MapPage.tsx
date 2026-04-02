@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, lazy, Suspense } from "react";
+import { useEffect, useMemo, useRef, useState, lazy, Suspense } from "react";
 import type { Map as LeafletMap, LatLng } from "leaflet";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useStationQuery } from "../hooks/useStationQuery";
@@ -199,9 +199,13 @@ export default function MapPage() {
   const displayStations = filteredStations;
 
   // GPS distance from user to each displayed station — computed once, shared by list and popups
-  const userDistances = userPosition
-    ? new Map(displayStations.map((s) => [s.id, haversineDistanceMiles(userPosition.lat, userPosition.lng, s.lat, s.lon)]))
-    : null;
+  const userDistances = useMemo(
+    () =>
+      userPosition
+        ? new Map(displayStations.map((s) => [s.id, haversineDistanceMiles(userPosition.lat, userPosition.lng, s.lat, s.lon)]))
+        : null,
+    [userPosition?.lat, userPosition?.lng, displayStations]
+  );
 
   const showError = query.status === "error" && !errorDismissed;
 
