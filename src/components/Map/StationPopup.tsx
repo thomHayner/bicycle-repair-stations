@@ -64,7 +64,7 @@ export function StationPopup({ station, distMi }: Props) {
       {distMi != null && (() => {
         const distDisplay = unit === "km" ? distMi * KM_PER_MILE : distMi;
         return (
-          <p className="text-[12px] text-slate-500 dark:text-slate-400 text-center mb-2">
+          <p className="text-[12px] text-slate-500 dark:text-slate-400 mb-2">
             {distDisplay < 0.1 ? "<0.1" : distDisplay.toFixed(1)} {unit} away
           </p>
         );

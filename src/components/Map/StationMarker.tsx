@@ -9,13 +9,24 @@ interface Props {
   station: OverpassNode;
   isSelected: boolean;
   isInRadius: boolean;
+  onSelect: (station: OverpassNode) => void;
   onDeselect: () => void;
   userDistances: Map<number, number> | null;
 }
 
-export function StationMarker({ station, isSelected, isInRadius, onDeselect, userDistances }: Props) {
+export function StationMarker({ station, isSelected, isInRadius, onSelect, onDeselect, userDistances }: Props) {
   const markerRef = useRef<LeafletMarker | null>(null);
   const map = useMap();
+
+  // Disable Leaflet's auto-popup on marker click. The popup stays bound
+  // (so programmatic openPopup() works), but clicking won't auto-open it.
+  // We open it ourselves after the flyTo animation via the isSelected effect.
+  useEffect(() => {
+    const marker = markerRef.current;
+    if (marker) {
+      marker.off('click', (marker as any)._openPopup, marker);
+    }
+  }, []);
 
   useEffect(() => {
     if (!isSelected || !markerRef.current) return;
@@ -42,11 +53,11 @@ export function StationMarker({ station, isSelected, isInRadius, onDeselect, use
       position={[station.lat, station.lon]}
       icon={icon}
       eventHandlers={{
-        popupclose: onDeselect,
-        // Centre the map on the marker at the current zoom (no zoom change).
-        // autoPan is disabled below so only one smooth movement fires.
-        click: () =>
-          map.flyTo([station.lat, station.lon], map.getZoom(), { duration: 0.8 }),
+        // Don't deselect if the marker was just absorbed into a cluster
+        popupclose: () => {
+          if ((markerRef.current as any)?._map) onDeselect();
+        },
+        click: () => onSelect(station),
       }}
     >
       <Popup

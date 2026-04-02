@@ -144,7 +144,7 @@ export default function MapPage() {
     setSelectedStationId(station.id);
     setListExpanded(false);
     if (mapRef.current) {
-      mapRef.current.flyTo([station.lat, station.lon], 16, { duration: 0.8 });
+      mapRef.current.flyTo([station.lat, station.lon], 17, { duration: 0.8 });
     }
   };
 
@@ -277,6 +277,7 @@ export default function MapPage() {
             onMoveEnd={handleMoveEnd}
             mapRef={mapRef}
             selectedStationId={selectedStationId}
+            onStationSelect={handleStationSelect}
             onStationDeselect={() => setSelectedStationId(null)}
             onMapInteraction={() => setListExpanded(false)}
             searchedLocation={searchedLocation}

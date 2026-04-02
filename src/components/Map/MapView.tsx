@@ -110,6 +110,7 @@ interface Props {
   onMoveEnd: (center: LatLng) => void;
   mapRef: React.MutableRefObject<LeafletMap | null>;
   selectedStationId: number | null;
+  onStationSelect: (station: OverpassNode) => void;
   onStationDeselect: () => void;
   onMapInteraction: () => void;
   searchedLocation: { lat: number; lng: number } | null;
@@ -117,7 +118,7 @@ interface Props {
   listExpanded: boolean;
 }
 
-export function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded }: Props) {
+export function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, mapRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -202,6 +203,7 @@ export function MapView({ userPosition, userDistances, stations, filteredStation
         {/* In-radius stations — prominent clusters with counts */}
         <MarkerClusterGroup
           maxClusterRadius={60}
+          disableClusteringAtZoom={17}
           iconCreateFunction={createClusterIcon}
           zoomToBoundsOnClick={true}
           showCoverageOnHover={false}
@@ -215,6 +217,7 @@ export function MapView({ userPosition, userDistances, stations, filteredStation
               station={station}
               isSelected={station.id === selectedStationId}
               isInRadius={true}
+              onSelect={onStationSelect}
               onDeselect={onStationDeselect}
               userDistances={userDistances}
             />
@@ -223,6 +226,7 @@ export function MapView({ userPosition, userDistances, stations, filteredStation
         {/* Out-of-radius cached stations — small muted clusters, no count */}
         <MarkerClusterGroup
           maxClusterRadius={60}
+          disableClusteringAtZoom={17}
           iconCreateFunction={createMutedClusterIcon}
           zoomToBoundsOnClick={true}
           showCoverageOnHover={false}
@@ -236,6 +240,7 @@ export function MapView({ userPosition, userDistances, stations, filteredStation
               station={station}
               isSelected={station.id === selectedStationId}
               isInRadius={false}
+              onSelect={onStationSelect}
               onDeselect={onStationDeselect}
               userDistances={userDistances}
             />
