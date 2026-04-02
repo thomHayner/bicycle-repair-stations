@@ -130,13 +130,12 @@ interface Props {
   selectedStationId: number | null;
   onStationDeselect: () => void;
   onMapInteraction: () => void;
-  onVisibleWidthChange: (miles: number) => void;
   searchedLocation: { lat: number; lng: number } | null;
   activeLayer: LayerId;
   listExpanded: boolean;
 }
 
-export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, onVisibleWidthChange, searchedLocation, activeLayer, listExpanded }: Props) {
+export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -224,7 +223,6 @@ export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapR
           onMoveEnd={onMoveEnd}
           onWidthChange={(miles) => {
             setTooZoomedOut(miles > TOO_WIDE_MILES);
-            onVisibleWidthChange(miles);
           }}
           onMapInteraction={onMapInteraction}
           onZoomChange={setZoom}

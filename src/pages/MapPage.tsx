@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import type { Map as LeafletMap, LatLng } from "leaflet";
 import { useGeolocation } from "../hooks/useGeolocation";
-import { useStationQuery, FALLBACK_RADIUS_MI } from "../hooks/useStationQuery";
+import { useStationQuery } from "../hooks/useStationQuery";
 import { Toolbar } from "../components/Toolbar/Toolbar";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ErrorToast } from "../components/ErrorToast";
@@ -31,7 +31,7 @@ export default function MapPage() {
 
   // Distance filter — unit comes from global settings; selectedDist is local session state
   const { unit, setUnit } = useSettings();
-  const [selectedDist, setSelectedDist] = useState(1);
+  const [selectedDist, setSelectedDist] = useState(() => unit === "km" ? 5 : 2);
   const displayMiles = unit === "mi" ? selectedDist : selectedDist / KM_PER_MILE;
 
   const [activeLayer, setActiveLayer] = useState<LayerId>("cycling");
@@ -69,41 +69,30 @@ export default function MapPage() {
 
   const allStations = query.status === "success" ? query.stations : [];
 
-  // When wide-area result arrives, set selectedDist to the farthest station's distance.
-  // Keep a ref so handleUnitChange can convert it without snapping to a preset.
-  const fallbackFarthestMiRef = useRef<number | null>(null);
-  useEffect(() => {
-    if (query.status === "success-wide") {
-      fallbackFarthestMiRef.current = query.farthestMi;
-      const distInUnit = unit === "mi"
-        ? query.farthestMi
-        : query.farthestMi * KM_PER_MILE;
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: sync dist filter when wide result resolves
-      setSelectedDist(Math.round(distInUnit * 10) / 10);
-    } else if (query.status === "none" || query.status === "idle") {
-      fallbackFarthestMiRef.current = null;
-    }
-  }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Auto-radius: on each new givenLocation, find the smallest radius with ≥ 5 stations
-  // and zoom the map to fit that radius. Runs once per givenLocation value.
+  // Auto-step-up: on each new givenLocation (with data loaded), find the smallest
+  // radius ≥ 2 mi (5 km) that has at least 1 station, set it, and fitBounds.
+  // Runs once per unique givenLocation; manual pill changes are never overridden.
   const autoRadiusLocationRef = useRef<{ lat: number; lng: number } | null>(null);
   useEffect(() => {
-    if (query.status !== "success" || !givenLocation || allStations.length === 0) return;
+    if (query.status !== "success") return;
+    if (!givenLocation || allStations.length === 0) return;
 
     const prev = autoRadiusLocationRef.current;
     if (prev && prev.lat === givenLocation.lat && prev.lng === givenLocation.lng) return;
     autoRadiusLocationRef.current = givenLocation;
 
+    // Candidates start at the 2-mi / 5-km default — never auto-select below that
     const options = unit === "mi" ? MI_OPTIONS : KM_OPTIONS;
-    const found = options.find((dist) => {
+    const defaultDist = unit === "mi" ? 2 : 5;
+    const candidates = [...options].filter((d) => d >= defaultDist);
+
+    const found = candidates.find((dist) => {
       const distMiles = unit === "km" ? dist / KM_PER_MILE : dist;
-      return (
-        allStations.filter(
-          (s) => haversineDistanceMiles(s.lat, s.lon, givenLocation.lat, givenLocation.lng) <= distMiles
-        ).length >= 5
+      return allStations.some(
+        (s) => haversineDistanceMiles(s.lat, s.lon, givenLocation.lat, givenLocation.lng) <= distMiles
       );
     });
+
     const newDist = found ?? options[options.length - 1];
     // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: auto-select radius once per location
     setSelectedDist(newDist);
@@ -120,7 +109,7 @@ export default function MapPage() {
       ],
       { padding: [40, 40], maxZoom: 16 }
     );
-  }, [query.status, allStations, givenLocation, unit, mapRef]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [query.status, allStations, givenLocation, unit]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Map pan updates the filter anchor (used only when no givenLocation)
   const handleMoveEnd = (center: LatLng) => {
@@ -164,41 +153,20 @@ export default function MapPage() {
     setSelectedDist(dist);
   };
 
-  // Unit toggle — in normal mode snap to nearest preset; in fallback mode keep exact distance
+  // Unit toggle — snap selectedDist to the nearest preset in the new unit
   const handleUnitChange = (newUnit: Unit) => {
     if (newUnit === unit) return;
     setUnit(newUnit);
-    if (fallbackFarthestMiRef.current !== null) {
-      // Fallback mode: convert the farthest station distance exactly (no preset snapping)
-      const dist = newUnit === "km"
-        ? fallbackFarthestMiRef.current * KM_PER_MILE
-        : fallbackFarthestMiRef.current;
-      setSelectedDist(Math.round(dist * 10) / 10);
-    } else {
-      const currentMiles = unit === "mi" ? selectedDist : selectedDist / KM_PER_MILE;
-      const converted = newUnit === "km" ? currentMiles * KM_PER_MILE : currentMiles;
-      const options = newUnit === "km" ? KM_OPTIONS : MI_OPTIONS;
-      const closest = [...options].reduce((a, b) =>
-        Math.abs(b - converted) < Math.abs(a - converted) ? b : a
-      );
-      setSelectedDist(closest);
-    }
+    const currentMiles = unit === "mi" ? selectedDist : selectedDist / KM_PER_MILE;
+    const converted = newUnit === "km" ? currentMiles * KM_PER_MILE : currentMiles;
+    const options = newUnit === "km" ? KM_OPTIONS : MI_OPTIONS;
+    const closest = [...options].reduce((a, b) =>
+      Math.abs(b - converted) < Math.abs(a - converted) ? b : a
+    );
+    setSelectedDist(closest);
   };
 
-  // Auto-increase the displayed distance as the user zooms out.
-  // Picks the largest option that fits within the visible radius.
-  // Never auto-decreases — only a manual pill selection can reduce it.
-  const handleVisibleWidthChange = (widthMiles: number) => {
-    const visibleRadius = widthMiles / 2;
-    const options = unit === "mi" ? MI_OPTIONS : KM_OPTIONS;
-    const radiusInUnit = unit === "km" ? visibleRadius * KM_PER_MILE : visibleRadius;
-    const suitable = [...options].filter((d) => d <= radiusInUnit);
-    if (suitable.length === 0) return;
-    const suggested = suitable[suitable.length - 1]; // largest that still fits
-    setSelectedDist((prev) => (suggested > prev ? suggested : prev));
-  };
-
-  const isFetchingStations = query.status === "loading" || query.status === "escalating";
+  const isFetchingStations = query.status === "loading";
 
   const showOverlay = geo.status === "idle" || geo.status === "loading";
 
@@ -228,19 +196,12 @@ export default function MapPage() {
       )
     : allStations;
 
-  // In wide-area mode, swap in the 5 nearest stations (pre-filtered by the hook)
-  const displayStations =
-    query.status === "success-wide" ? query.stations : filteredStations;
+  const displayStations = filteredStations;
 
   // GPS distance from user to each displayed station — computed once, shared by list and popups
   const userDistances = userPosition
     ? new Map(displayStations.map((s) => [s.id, haversineDistanceMiles(userPosition.lat, userPosition.lng, s.lat, s.lon)]))
     : null;
-
-  const fallbackListStatus =
-    query.status === "escalating" ? "loading"
-    : query.status === "none"     ? "none"
-    : undefined;
 
   const showError = query.status === "error" && !errorDismissed;
 
@@ -307,7 +268,6 @@ export default function MapPage() {
             selectedStationId={selectedStationId}
             onStationDeselect={() => setSelectedStationId(null)}
             onMapInteraction={() => setListExpanded(false)}
-            onVisibleWidthChange={handleVisibleWidthChange}
             searchedLocation={searchedLocation}
             activeLayer={activeLayer}
             listExpanded={listExpanded}
@@ -326,8 +286,6 @@ export default function MapPage() {
         onStationSelect={handleStationSelect}
         expanded={listExpanded}
         onExpandedChange={setListExpanded}
-        fallbackStatus={fallbackListStatus}
-        fallbackRadiusMi={FALLBACK_RADIUS_MI}
         isFetchingStations={isFetchingStations}
       />
 
