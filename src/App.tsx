@@ -6,7 +6,6 @@ import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const MapPage      = lazy(() => import("./pages/MapPage"));
 const GuidesPage   = lazy(() => import("./pages/GuidesPage"));
-const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 const AboutPage    = lazy(() => import("./pages/AboutPage"));
 
 export default function App() {
@@ -20,7 +19,6 @@ export default function App() {
       <Suspense fallback={null}>
         <Routes>
           <Route path="/guides"   element={<GuidesPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
           <Route path="/about"    element={<AboutPage />} />
         </Routes>
       </Suspense>
