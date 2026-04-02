@@ -198,13 +198,19 @@ export default function MapPage() {
 
   const displayStations = filteredStations;
 
-  // GPS distance from user to each displayed station — computed once, shared by list and popups
+  // Set of station IDs within the selected radius — used by MapView for icon selection
+  const filteredStationIds = useMemo(
+    () => new Set(filteredStations.map((s) => s.id)),
+    [filteredStations]
+  );
+
+  // GPS distance from user to each station — computed once, shared by list and popups
   const userDistances = useMemo(
     () =>
       userPosition
-        ? new Map(displayStations.map((s) => [s.id, haversineDistanceMiles(userPosition.lat, userPosition.lng, s.lat, s.lon)]))
+        ? new Map(allStations.map((s) => [s.id, haversineDistanceMiles(userPosition.lat, userPosition.lng, s.lat, s.lon)]))
         : null,
-    [userPosition?.lat, userPosition?.lng, displayStations]
+    [userPosition?.lat, userPosition?.lng, allStations]
   );
 
   const showError = query.status === "error" && !errorDismissed;
@@ -266,7 +272,8 @@ export default function MapPage() {
           <MapView
             userPosition={userPosition}
             userDistances={userDistances}
-            stations={displayStations}
+            stations={allStations}
+            filteredStationIds={filteredStationIds}
             onMoveEnd={handleMoveEnd}
             mapRef={mapRef}
             selectedStationId={selectedStationId}

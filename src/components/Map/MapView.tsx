@@ -1,48 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 import type { Map as LeafletMap, LatLng } from "leaflet";
 import type { OverpassNode } from "../../types/overpass";
 import { UserMarker } from "./UserMarker";
 import { SearchLocationMarker } from "./SearchLocationMarker";
 import { StationMarker } from "./StationMarker";
-import { visibleWidthMiles } from "../../lib/distance";
+import { createClusterIcon, createMutedClusterIcon } from "../../lib/leafletConfig";
+
 import type { LayerId } from "../../lib/layers";
 import { useSettings } from "../../context/useSettings";
 
-const TOO_WIDE_MILES = 75;
-
 interface MapEventHandlerProps {
   onMoveEnd: (center: LatLng) => void;
-  onWidthChange: (miles: number) => void;
   onMapInteraction: () => void;
-  onZoomChange: (zoom: number) => void;
 }
 
-function MapEventHandler({ onMoveEnd, onWidthChange, onMapInteraction, onZoomChange }: MapEventHandlerProps) {
-  const map = useMapEvents({
+function MapEventHandler({ onMoveEnd, onMapInteraction }: MapEventHandlerProps) {
+  useMapEvents({
     click()    { onMapInteraction(); },
-    dragstart(){ map.closePopup(); onMapInteraction(); },
+    dragstart(e){ e.target.closePopup(); onMapInteraction(); },
     moveend(e) {
       onMoveEnd(e.target.getCenter());
-      reportWidth(e.target);
-    },
-    zoomend(e) {
-      onZoomChange(e.target.getZoom());
-      reportWidth(e.target);
     },
   });
-
-  function reportWidth(m: LeafletMap) {
-    const b = m.getBounds();
-    const c = m.getCenter();
-    onWidthChange(visibleWidthMiles(b.getWest(), b.getEast(), c.lat));
-  }
-
-  // Report on first render too
-  useEffect(() => {
-    reportWidth(map);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return null;
 }
@@ -125,6 +106,7 @@ interface Props {
   userPosition: { lat: number; lng: number; accuracy?: number } | null;
   userDistances: Map<number, number> | null;
   stations: OverpassNode[];
+  filteredStationIds: Set<number>;
   onMoveEnd: (center: LatLng) => void;
   mapRef: React.MutableRefObject<LeafletMap | null>;
   selectedStationId: number | null;
@@ -135,7 +117,7 @@ interface Props {
   listExpanded: boolean;
 }
 
-export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded }: Props) {
+export function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, mapRef, selectedStationId, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -147,9 +129,6 @@ export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapR
   const initialCenter = userPosition
     ? ([userPosition.lat, userPosition.lng] as [number, number])
     : ([51.505, -0.09] as [number, number]);
-
-  const [tooZoomedOut, setTooZoomedOut] = useState(false);
-  const [zoom, setZoom] = useState(16);
 
   // Fly to user position once it resolves
   const didFlyRef = useRef(false);
@@ -195,15 +174,6 @@ export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapR
         </button>
       </div>
 
-      {tooZoomedOut && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[900] bg-white/95 dark:bg-[#0d1220]/95 rounded-full px-5 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-lg flex items-center gap-2 pointer-events-none whitespace-nowrap">
-          <svg className="w-4 h-4 text-green-600 dark:text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-          </svg>
-          Zoom in to see repair stations
-        </div>
-      )}
       <MapContainer
         center={initialCenter}
         zoom={16}
@@ -221,11 +191,7 @@ export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapR
         <ActiveTileLayer layer={activeLayer} />
         <MapEventHandler
           onMoveEnd={onMoveEnd}
-          onWidthChange={(miles) => {
-            setTooZoomedOut(miles > TOO_WIDE_MILES);
-          }}
           onMapInteraction={onMapInteraction}
-          onZoomChange={setZoom}
         />
         {userPosition && (
           <UserMarker lat={userPosition.lat} lng={userPosition.lng} accuracy={userPosition.accuracy} />
@@ -233,16 +199,48 @@ export function MapView({ userPosition, userDistances, stations, onMoveEnd, mapR
         {searchedLocation && (
           <SearchLocationMarker lat={searchedLocation.lat} lng={searchedLocation.lng} />
         )}
-        {stations.map((station) => (
-          <StationMarker
-            key={station.id}
-            station={station}
-            isSelected={station.id === selectedStationId}
-            onDeselect={onStationDeselect}
-            userDistances={userDistances}
-            zoom={zoom}
-          />
-        ))}
+        {/* In-radius stations — prominent clusters with counts */}
+        <MarkerClusterGroup
+          maxClusterRadius={60}
+          iconCreateFunction={createClusterIcon}
+          zoomToBoundsOnClick={true}
+          showCoverageOnHover={false}
+          spiderfyOnMaxZoom={true}
+          animate={true}
+          chunkedLoading={true}
+        >
+          {stations.filter((s) => filteredStationIds.has(s.id)).map((station) => (
+            <StationMarker
+              key={station.id}
+              station={station}
+              isSelected={station.id === selectedStationId}
+              isInRadius={true}
+              onDeselect={onStationDeselect}
+              userDistances={userDistances}
+            />
+          ))}
+        </MarkerClusterGroup>
+        {/* Out-of-radius cached stations — small muted clusters, no count */}
+        <MarkerClusterGroup
+          maxClusterRadius={60}
+          iconCreateFunction={createMutedClusterIcon}
+          zoomToBoundsOnClick={true}
+          showCoverageOnHover={false}
+          spiderfyOnMaxZoom={true}
+          animate={true}
+          chunkedLoading={true}
+        >
+          {stations.filter((s) => !filteredStationIds.has(s.id)).map((station) => (
+            <StationMarker
+              key={station.id}
+              station={station}
+              isSelected={station.id === selectedStationId}
+              isInRadius={false}
+              onDeselect={onStationDeselect}
+              userDistances={userDistances}
+            />
+          ))}
+        </MarkerClusterGroup>
       </MapContainer>
     </div>
   );

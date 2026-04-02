@@ -64,7 +64,7 @@ export const searchLocationIcon = L.divIcon({
   popupAnchor: [0, -38],
 });
 
-// Small dot for repair stations at low zoom levels (zoom < 14)
+// Small dot for cached repair stations outside the selected radius
 export const stationDotIcon = L.divIcon({
   className: "station-dot-icon",
   html: `<div style="
@@ -76,6 +76,40 @@ export const stationDotIcon = L.divIcon({
   iconAnchor: [4, 4],
   popupAnchor: [0, -6],
 });
+
+/**
+ * Creates a sized cluster icon for a group of stations.
+ * Size scales with count: small (<10), medium (10-24), large (25+).
+ */
+export function createClusterIcon(cluster: { getChildCount(): number }): L.DivIcon {
+  const count = cluster.getChildCount();
+  let size: number;
+  if (count < 10)      size = 36;
+  else if (count < 25) size = 44;
+  else                 size = 52;
+
+  const innerSize = size - 10;
+
+  return L.divIcon({
+    html: `<div style="width:${innerSize}px;height:${innerSize}px;font-size:${count >= 100 ? 11 : 13}px;line-height:${innerSize}px;">${count}</div>`,
+    className: "station-cluster",
+    iconSize: L.point(size, size),
+    iconAnchor: L.point(size / 2, size / 2),
+  });
+}
+
+/**
+ * Creates a small muted cluster icon for out-of-radius stations.
+ * Fixed 20px size, no count — just signals "more stations in this area."
+ */
+export function createMutedClusterIcon(): L.DivIcon {
+  return L.divIcon({
+    html: `<div></div>`,
+    className: "station-cluster-muted",
+    iconSize: L.point(20, 20),
+    iconAnchor: L.point(10, 10),
+  });
+}
 
 // Wrench icon for repair stations
 export const stationIcon = L.divIcon({
