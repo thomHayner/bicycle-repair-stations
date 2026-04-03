@@ -116,9 +116,10 @@ interface Props {
   searchedLocation: { lat: number; lng: number } | null;
   activeLayer: LayerId;
   listExpanded: boolean;
+  onInitialFlyComplete?: () => void;
 }
 
-export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, mapRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded }: Props) {
+export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, mapRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded, onInitialFlyComplete }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -131,14 +132,30 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
     ? ([userPosition.lat, userPosition.lng] as [number, number])
     : ([51.505, -0.09] as [number, number]);
 
-  // Fly to user position once it resolves
+  // Fly to user position once it resolves; signal completion so the splash screen can dismiss
   const didFlyRef = useRef(false);
   useEffect(() => {
-    if (userPosition && mapRef.current && !didFlyRef.current) {
-      mapRef.current.flyTo([userPosition.lat, userPosition.lng], 16, { duration: 1.2 });
-      didFlyRef.current = true;
+    if (!userPosition || !mapRef.current || didFlyRef.current) return;
+    didFlyRef.current = true;
+
+    const map = mapRef.current;
+    const target: [number, number] = [userPosition.lat, userPosition.lng];
+    const targetZoom = 16;
+    const currentCenter = map.getCenter();
+
+    const alreadyThere =
+      Math.abs(currentCenter.lat - target[0]) < 0.0001 &&
+      Math.abs(currentCenter.lng - target[1]) < 0.0001 &&
+      map.getZoom() === targetZoom;
+
+    if (alreadyThere) {
+      onInitialFlyComplete?.();
+      return;
     }
-  }, [userPosition, mapRef]);
+
+    map.once("moveend", () => onInitialFlyComplete?.());
+    map.flyTo(target, targetZoom, { duration: 1.2 });
+  }, [userPosition, mapRef, onInitialFlyComplete]);
 
   return (
     <div

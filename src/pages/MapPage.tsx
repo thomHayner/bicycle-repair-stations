@@ -38,6 +38,7 @@ export default function MapPage() {
   const [errorDismissed, setErrorDismissed] = useState(false);
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
   const [listExpanded, setListExpanded] = useState(false);
+  const [initialFlyComplete, setInitialFlyComplete] = useState(false);
 
   const geoLat = geo.status === "resolved" ? geo.lat : null;
   const geoLng = geo.status === "resolved" ? geo.lng : null;
@@ -153,6 +154,8 @@ export default function MapPage() {
 
   const handleStationDeselect = useCallback(() => setSelectedStationId(null), []);
 
+  const handleInitialFlyComplete = useCallback(() => setInitialFlyComplete(true), []);
+
   const handleMapInteraction = useCallback(() => setListExpanded(false), []);
 
   // Distance pill selected manually by the user
@@ -175,7 +178,10 @@ export default function MapPage() {
 
   const isFetchingStations = query.status === "loading";
 
-  const showOverlay = geo.status === "idle" || geo.status === "loading";
+  const showOverlay =
+    geo.status === "idle" ||
+    geo.status === "loading" ||
+    (geo.status === "resolved" && !initialFlyComplete);
 
   const showSearchHere =
     givenLocation !== null &&
@@ -294,6 +300,7 @@ export default function MapPage() {
             searchedLocation={searchedLocation}
             activeLayer={activeLayer}
             listExpanded={listExpanded}
+            onInitialFlyComplete={handleInitialFlyComplete}
           />
         </Suspense>
       </ErrorBoundary>
