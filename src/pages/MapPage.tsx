@@ -239,7 +239,7 @@ export default function MapPage() {
     <>
       <LoadingOverlay visible={showOverlay} />
 
-      {(isFetchingStations || showSearchHere) && selectedStationId === null && (
+      {(isFetchingStations || (showSearchHere && selectedStationId === null)) && (
         <div
           className="fixed left-0 right-0 z-[999] flex justify-center pointer-events-none transition-[top] duration-200"
           style={{ top: locationDenied ? 112 : 80 }}
