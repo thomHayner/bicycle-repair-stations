@@ -26,11 +26,11 @@ export const userIcon = L.divIcon({
         width: 40px; height: 40px; border-radius: 50%;
         background: rgba(37,99,235,0.2);
         position: absolute; top: -13px; left: -13px;
-        animation: pulse 2s ease-out infinite;
+        animation: location-ping 2s ease-out infinite;
       "></div>
     </div>
     <style>
-      @keyframes pulse {
+      @keyframes location-ping {
         0% { transform: scale(0.5); opacity: 1; }
         100% { transform: scale(2); opacity: 0; }
       }
