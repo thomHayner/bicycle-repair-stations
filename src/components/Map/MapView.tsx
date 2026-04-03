@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import type { Map as LeafletMap, LatLng } from "leaflet";
@@ -118,7 +118,7 @@ interface Props {
   listExpanded: boolean;
 }
 
-export function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, mapRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded }: Props) {
+export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, mapRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -249,4 +249,4 @@ export function MapView({ userPosition, userDistances, stations, filteredStation
       </MapContainer>
     </div>
   );
-}
+});

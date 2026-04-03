@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
 import type { Marker as LeafletMarker } from "leaflet";
 import { stationIcon, stationDotIcon } from "../../lib/leafletConfig";
@@ -14,7 +14,7 @@ interface Props {
   userDistances: Map<number, number> | null;
 }
 
-export function StationMarker({ station, isSelected, isInRadius, onSelect, onDeselect, userDistances }: Props) {
+export const StationMarker = memo(function StationMarker({ station, isSelected, isInRadius, onSelect, onDeselect, userDistances }: Props) {
   const markerRef = useRef<LeafletMarker | null>(null);
   const map = useMap();
 
@@ -49,19 +49,21 @@ export function StationMarker({ station, isSelected, isInRadius, onSelect, onDes
   const distMi = userDistances?.get(station.id) ?? null;
   const icon = isInRadius ? stationIcon : stationDotIcon;
 
+  const eventHandlers = useMemo(() => ({
+    // Don't deselect if the marker was just absorbed into a cluster
+    popupclose: () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Leaflet internal: _map is null when marker is clustered
+      if ((markerRef.current as any)?._map) onDeselect();
+    },
+    click: () => onSelect(station),
+  }), [onDeselect, onSelect, station]);
+
   return (
     <Marker
       ref={markerRef}
       position={[station.lat, station.lon]}
       icon={icon}
-      eventHandlers={{
-        // Don't deselect if the marker was just absorbed into a cluster
-        popupclose: () => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Leaflet internal: _map is null when marker is clustered
-          if ((markerRef.current as any)?._map) onDeselect();
-        },
-        click: () => onSelect(station),
-      }}
+      eventHandlers={eventHandlers}
     >
       <Popup
         maxWidth={280}
@@ -76,4 +78,4 @@ export function StationMarker({ station, isSelected, isInRadius, onSelect, onDes
       </Popup>
     </Marker>
   );
-}
+});

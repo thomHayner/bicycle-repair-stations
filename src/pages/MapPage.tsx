@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, lazy, Suspense } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, lazy, Suspense } from "react";
 import type { Map as LeafletMap, LatLng } from "leaflet";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useStationQuery } from "../hooks/useStationQuery";
@@ -39,10 +39,13 @@ export default function MapPage() {
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
   const [listExpanded, setListExpanded] = useState(false);
 
-  const userPosition =
-    geo.status === "resolved"
-      ? { lat: geo.lat, lng: geo.lng, accuracy: geo.accuracy }
-      : null;
+  const geoLat = geo.status === "resolved" ? geo.lat : null;
+  const geoLng = geo.status === "resolved" ? geo.lng : null;
+  const geoAcc = geo.status === "resolved" ? geo.accuracy : null;
+  const userPosition = useMemo(
+    () => (geoLat !== null && geoLng !== null ? { lat: geoLat, lng: geoLng, accuracy: geoAcc ?? undefined } : null),
+    [geoLat, geoLng, geoAcc]
+  );
 
   const locationDenied = geo.status === "denied";
 
@@ -112,10 +115,10 @@ export default function MapPage() {
   }, [query.status, allStations, givenLocation, unit]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Map pan updates the filter anchor (used only when no givenLocation)
-  const handleMoveEnd = (center: LatLng) => {
+  const handleMoveEnd = useCallback((center: LatLng) => {
     setMapCenter({ lat: center.lat, lng: center.lng });
     setErrorDismissed(false);
-  };
+  }, []);
 
   const handleLocationFound = (pos: { lat: number; lng: number }, zoom = 13) => {
     setGivenLocation(pos);
@@ -140,13 +143,17 @@ export default function MapPage() {
     }
   };
 
-  const handleStationSelect = (station: OverpassNode) => {
+  const handleStationSelect = useCallback((station: OverpassNode) => {
     setSelectedStationId(station.id);
     setListExpanded(false);
     if (mapRef.current) {
       mapRef.current.flyTo([station.lat, station.lon], 17, { duration: 0.8 });
     }
-  };
+  }, [mapRef]);
+
+  const handleStationDeselect = useCallback(() => setSelectedStationId(null), []);
+
+  const handleMapInteraction = useCallback(() => setListExpanded(false), []);
 
   // Distance pill selected manually by the user
   const handleDistChange = (dist: number) => {
@@ -188,13 +195,17 @@ export default function MapPage() {
   const filterCenter = givenLocation ?? mapCenter;
 
   // Normal filtered view
-  const filteredStations = filterCenter
-    ? allStations.filter(
-        (s) =>
-          haversineDistanceMiles(s.lat, s.lon, filterCenter.lat, filterCenter.lng) <=
-          displayMiles
-      )
-    : allStations;
+  const filteredStations = useMemo(
+    () =>
+      filterCenter
+        ? allStations.filter(
+            (s) =>
+              haversineDistanceMiles(s.lat, s.lon, filterCenter.lat, filterCenter.lng) <=
+              displayMiles
+          )
+        : allStations,
+    [allStations, filterCenter?.lat, filterCenter?.lng, displayMiles]
+  );
 
   const displayStations = filteredStations;
 
@@ -278,8 +289,8 @@ export default function MapPage() {
             mapRef={mapRef}
             selectedStationId={selectedStationId}
             onStationSelect={handleStationSelect}
-            onStationDeselect={() => setSelectedStationId(null)}
-            onMapInteraction={() => setListExpanded(false)}
+            onStationDeselect={handleStationDeselect}
+            onMapInteraction={handleMapInteraction}
             searchedLocation={searchedLocation}
             activeLayer={activeLayer}
             listExpanded={listExpanded}
