@@ -70,9 +70,10 @@ export default function MapPage() {
     givenLocation?.lng ?? null,
   );
 
+  const queryStations = query.status === "success" ? query.stations : undefined;
   const allStations = useMemo(
-    () => (query.status === "success" ? query.stations : []),
-    [query.status, query.stations]
+    () => queryStations ?? [],
+    [queryStations]
   );
 
   // Auto-step-up: on each new givenLocation (with data loaded), find the smallest
