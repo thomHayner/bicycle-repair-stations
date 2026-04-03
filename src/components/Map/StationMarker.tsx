@@ -47,13 +47,16 @@ export const StationMarker = memo(function StationMarker({ station, isSelected, 
         if (!popup) return;
         const popupEl = popup.getElement();
         if (!popupEl) return;
-        const topBarPx = 80; // toolbar height in px
-        const padPx = 12;    // breathing room
         const popupRect = popupEl.getBoundingClientRect();
         const mapRect = map.getContainer().getBoundingClientRect();
+        const header = document.querySelector('header');
+        const toolbarBottom = header
+          ? header.getBoundingClientRect().bottom - mapRect.top
+          : 80; // fallback
+        const padPx = 12;
         const popupTopInMap = popupRect.top - mapRect.top;
-        if (popupTopInMap < topBarPx + padPx) {
-          map.panBy([0, popupTopInMap - (topBarPx + padPx)], { animate: true, duration: 0.3 });
+        if (popupTopInMap < toolbarBottom + padPx) {
+          map.panBy([0, popupTopInMap - (toolbarBottom + padPx)], { animate: true, duration: 0.3 });
         }
       });
     };
