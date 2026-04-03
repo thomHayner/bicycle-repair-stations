@@ -210,7 +210,7 @@ export default function MapPage() {
       userPosition
         ? new Map(allStations.map((s) => [s.id, haversineDistanceMiles(userPosition.lat, userPosition.lng, s.lat, s.lon)]))
         : null,
-    [userPosition?.lat, userPosition?.lng, allStations]
+    [userPosition, allStations]
   );
 
   const showError = query.status === "error" && !errorDismissed;

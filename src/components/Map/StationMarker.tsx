@@ -24,6 +24,7 @@ export function StationMarker({ station, isSelected, isInRadius, onSelect, onDes
   useEffect(() => {
     const marker = markerRef.current;
     if (marker) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Leaflet internal: no typed API to unbind auto-popup
       marker.off('click', (marker as any)._openPopup, marker);
     }
   }, []);
@@ -35,6 +36,7 @@ export function StationMarker({ station, isSelected, isInRadius, onSelect, onDes
     // Open the popup once the flyTo animation has settled.
     // Guard: if the marker is absorbed into a cluster it won't be on the map.
     const handleMoveEnd = () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Leaflet internal: _map is null when marker is clustered
       if ((marker as any)._map) marker.openPopup();
     };
     map.once("moveend", handleMoveEnd);
@@ -55,6 +57,7 @@ export function StationMarker({ station, isSelected, isInRadius, onSelect, onDes
       eventHandlers={{
         // Don't deselect if the marker was just absorbed into a cluster
         popupclose: () => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Leaflet internal: _map is null when marker is clustered
           if ((markerRef.current as any)?._map) onDeselect();
         },
         click: () => onSelect(station),
