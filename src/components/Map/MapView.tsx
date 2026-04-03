@@ -206,6 +206,7 @@ export function MapView({ userPosition, userDistances, stations, filteredStation
           disableClusteringAtZoom={16}
           iconCreateFunction={createClusterIcon}
           zoomToBoundsOnClick={true}
+          spiderfyOnMaxZoom={false}
           showCoverageOnHover={false}
           animate={true}
           chunkedLoading={true}
@@ -228,6 +229,7 @@ export function MapView({ userPosition, userDistances, stations, filteredStation
           disableClusteringAtZoom={16}
           iconCreateFunction={createMutedClusterIcon}
           zoomToBoundsOnClick={true}
+          spiderfyOnMaxZoom={false}
           showCoverageOnHover={false}
           animate={true}
           chunkedLoading={true}
