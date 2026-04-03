@@ -58,7 +58,6 @@ export default function MapPage() {
       setGivenLocation({ lat, lng });
       if (geo.status === "denied") {
         // No GPS — show the search pin at the fallback so user sees where we're searching
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern
         setSearchedLocation({ lat, lng });
       }
       // When resolved: searchedLocation stays null — the blue dot already marks the spot
@@ -71,7 +70,11 @@ export default function MapPage() {
     givenLocation?.lng ?? null,
   );
 
-  const allStations = query.status === "success" ? query.stations : [];
+  const queryStations = query.status === "success" ? query.stations : undefined;
+  const allStations = useMemo(
+    () => queryStations ?? [],
+    [queryStations]
+  );
 
   // Auto-step-up: on each new givenLocation (with data loaded), find the smallest
   // radius ≥ 2 mi (5 km) that has at least 1 station, set it, and fitBounds.
@@ -113,7 +116,7 @@ export default function MapPage() {
       ],
       { padding: [40, 40], maxZoom: 16 }
     );
-  }, [query.status, allStations, givenLocation, unit]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [query.status, allStations, givenLocation, unit]);
 
   // Map pan updates the filter anchor (used only when no givenLocation)
   const handleMoveEnd = useCallback((center: LatLng) => {
@@ -210,7 +213,7 @@ export default function MapPage() {
               displayMiles
           )
         : allStations,
-    [allStations, filterCenter?.lat, filterCenter?.lng, displayMiles]
+    [allStations, filterCenter, displayMiles]
   );
 
   const displayStations = filteredStations;
@@ -236,7 +239,7 @@ export default function MapPage() {
     <>
       <LoadingOverlay visible={showOverlay} />
 
-      {(isFetchingStations || showSearchHere) && (
+      {(isFetchingStations || (showSearchHere && selectedStationId === null)) && (
         <div
           className="fixed left-0 right-0 z-[999] flex justify-center pointer-events-none transition-[top] duration-200"
           style={{ top: locationDenied ? 112 : 80 }}

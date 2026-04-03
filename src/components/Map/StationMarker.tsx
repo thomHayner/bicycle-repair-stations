@@ -37,7 +37,28 @@ export const StationMarker = memo(function StationMarker({ station, isSelected, 
     // Guard: if the marker is absorbed into a cluster it won't be on the map.
     const handleMoveEnd = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Leaflet internal: _map is null when marker is clustered
-      if ((marker as any)._map) marker.openPopup();
+      if (!(marker as any)._map) return;
+      marker.openPopup();
+
+      // Ensure the popup doesn't overlap the toolbar. Check the popup's top
+      // edge in pixel space and pan the map down if it's too close.
+      requestAnimationFrame(() => {
+        const popup = marker.getPopup();
+        if (!popup) return;
+        const popupEl = popup.getElement();
+        if (!popupEl) return;
+        const popupRect = popupEl.getBoundingClientRect();
+        const mapRect = map.getContainer().getBoundingClientRect();
+        const header = document.querySelector('header');
+        const toolbarBottom = header
+          ? header.getBoundingClientRect().bottom - mapRect.top
+          : 80; // fallback
+        const padPx = 12;
+        const popupTopInMap = popupRect.top - mapRect.top;
+        if (popupTopInMap < toolbarBottom + padPx) {
+          map.panBy([0, popupTopInMap - (toolbarBottom + padPx)], { animate: true, duration: 0.3 });
+        }
+      });
     };
     map.once("moveend", handleMoveEnd);
 
