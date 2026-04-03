@@ -91,20 +91,11 @@ export function StationListView({
         aria-label={expanded ? "Collapse station list" : "Expand station list"}
       >
         <span className="flex items-center gap-1.5 text-sm font-semibold text-slate-800 dark:text-slate-100">
-          {/* this is the spinning circle */}
-          {/* {isFetchingStations && (
-            <span
-              className="inline-block w-3 h-3 rounded-full border-2 border-green-600 border-t-transparent animate-spin shrink-0"
-              aria-hidden="true"
-            />
-          )} */}
-          {/* this is the pulsing text */}
-          <span className={isFetchingStations ? "animate-pulse" : undefined}>
+                    <span className={isFetchingStations ? "animate-pulse" : undefined}>
             {isFetchingStations && total === 0 ? "Searching nearby\u2026" : headerLabel}
           </span>
         </span>
-        {/* not sure what this is, it says its a rotate-180, maybe the grow/shrink? */}
-        <svg
+                <svg
           className={`w-4 h-4 text-slate-500 dark:text-slate-400 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
           fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"
           aria-hidden="true"
