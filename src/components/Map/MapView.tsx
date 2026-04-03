@@ -203,11 +203,10 @@ export function MapView({ userPosition, userDistances, stations, filteredStation
         {/* In-radius stations — prominent clusters with counts */}
         <MarkerClusterGroup
           maxClusterRadius={60}
-          disableClusteringAtZoom={17}
+          disableClusteringAtZoom={16}
           iconCreateFunction={createClusterIcon}
           zoomToBoundsOnClick={true}
           showCoverageOnHover={false}
-          spiderfyOnMaxZoom={true}
           animate={true}
           chunkedLoading={true}
         >
@@ -226,11 +225,10 @@ export function MapView({ userPosition, userDistances, stations, filteredStation
         {/* Out-of-radius cached stations — small muted clusters, no count */}
         <MarkerClusterGroup
           maxClusterRadius={60}
-          disableClusteringAtZoom={17}
+          disableClusteringAtZoom={16}
           iconCreateFunction={createMutedClusterIcon}
           zoomToBoundsOnClick={true}
           showCoverageOnHover={false}
-          spiderfyOnMaxZoom={true}
           animate={true}
           chunkedLoading={true}
         >
