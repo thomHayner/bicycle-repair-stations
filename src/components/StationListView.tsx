@@ -75,7 +75,7 @@ export function StationListView({
 
   const headerLabel =
     total === 0
-      ? "No stations found in this area"
+      ? "No stations found"
       : hasActiveFilters
       ? `${shown} of ${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`
       : `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`;
@@ -187,11 +187,11 @@ export function StationListView({
 
         {/* Station list */}
         <div className="border-t border-slate-100 dark:border-[#1e2a3a]">
-          {filtered.length === 0 && (
+          {filtered.length === 0 && !isFetchingStations && (
             <div className="px-4 py-5 text-sm text-slate-500 dark:text-slate-400 text-center">
               {total === 0
-                ? "No stations in this area."
-                : "No stations match the selected filters."}
+                ? "No stations in this area"
+                : "No stations match the selected filters"}
             </div>
           )}
 
