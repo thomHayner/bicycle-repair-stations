@@ -50,14 +50,6 @@ export default function MapPage() {
   // --- "Search this area" viewport-overlap tracking ---
   const lastSearchBoundsRef = useRef<LatLngBounds | null>(null);
   const [mapMovedSinceSearch, setMapMovedSinceSearch] = useState(false);
-  const moveDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const clearMoveDebounce = useCallback(() => {
-    if (moveDebounceRef.current) {
-      clearTimeout(moveDebounceRef.current);
-      moveDebounceRef.current = null;
-    }
-  }, []);
 
   // Called by MapEventHandler when a programmatic flyTo/fitBounds settles —
   // snapshot the viewport as the new search baseline.
@@ -65,23 +57,18 @@ export default function MapPage() {
     lastSearchBoundsRef.current = mapRef.current?.getBounds() ?? null;
   }, []);
 
-  // Called by MapEventHandler on user-initiated moveend — debounced overlap check
+  // Called by MapEventHandler on user drag (every frame) and user moveend —
+  // shows the button in real time as the user pans past the overlap threshold.
+  // Cheap to call often: getBounds() is cached, the math is trivial, and
+  // React short-circuits duplicate setState(true) calls.
   const handleUserMove = useCallback(() => {
-    clearMoveDebounce();
-    moveDebounceRef.current = setTimeout(() => {
-      const last = lastSearchBoundsRef.current;
-      const current = mapRef.current?.getBounds();
-      if (!last || !current) return;
-      if (boundsOverlapRatio(last, current) < 0.5) {
-        setMapMovedSinceSearch(true);
-      }
-    }, 300);
-  }, [clearMoveDebounce]);
-
-  // Cleanup debounce on unmount
-  useEffect(() => {
-    return () => { clearMoveDebounce(); };
-  }, [clearMoveDebounce]);
+    const last = lastSearchBoundsRef.current;
+    const current = mapRef.current?.getBounds();
+    if (!last || !current) return;
+    if (boundsOverlapRatio(last, current) < 0.7) {
+      setMapMovedSinceSearch(true);
+    }
+  }, []);
 
   // Location the user explicitly provided (geo or search) — drives Overpass fetches
   const [givenLocation, setGivenLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -186,7 +173,6 @@ export default function MapPage() {
   }, []);
 
   const handleLocationFound = (pos: { lat: number; lng: number }, zoom = 13) => {
-    clearMoveDebounce();
     setMapMovedSinceSearch(false);
     setGivenLocation(pos);
     const nearUser =
@@ -200,7 +186,6 @@ export default function MapPage() {
   // Recenter to GPS position — clears the search pin since the blue dot already marks the spot
   const handleRecenter = () => {
     if (!userPosition) return;
-    clearMoveDebounce();
     setMapMovedSinceSearch(false);
     setGivenLocation(userPosition);
     setSearchedLocation(null);
@@ -266,7 +251,6 @@ export default function MapPage() {
 
   const handleSearchHere = () => {
     if (!mapCenter) return;
-    clearMoveDebounce();
     setMapMovedSinceSearch(false);
     setGivenLocation(mapCenter);
     const nearUser =

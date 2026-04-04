@@ -23,6 +23,7 @@ function MapEventHandler({ onMoveEnd, onUserMove, onProgrammaticMoveEnd, onMapIn
   useMapEvents({
     click()    { onMapInteraction(); },
     dragstart(e){ e.target.closePopup(); onMapInteraction(); },
+    drag()     { onUserMove(); },   // fires every frame during user pan — shows button mid-drag
     moveend(e) {
       onMoveEnd(e.target.getCenter());
       if (programmaticMoveRef.current > 0) {
@@ -30,7 +31,7 @@ function MapEventHandler({ onMoveEnd, onUserMove, onProgrammaticMoveEnd, onMapIn
         // Programmatic move just settled — snapshot bounds as the new search baseline
         onProgrammaticMoveEnd();
       } else {
-        onUserMove();
+        onUserMove();             // also check on release (catches zoom buttons, scroll wheel, etc.)
       }
     },
   });
