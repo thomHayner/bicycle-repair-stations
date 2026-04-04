@@ -44,8 +44,33 @@ export function useStationQuery(
 
   const abortRef = useRef<AbortController | null>(null);
 
+  // --- Synchronous staleness detection (React "adjust state during render") ---
+  // Detects coordinate changes DURING render so we can set "loading" before the
+  // browser paints, eliminating the stale frame that flashes old data.
+  const lastCoordsRef = useRef<{ lat: number; lng: number } | null>(null);
+  if (lat !== null && lng !== null) {
+    const prev = lastCoordsRef.current;
+    const coordsChanged = !prev || prev.lat !== lat || prev.lng !== lng;
+    if (coordsChanged) {
+      const cached = readCache();
+      if (cached && isCovered(lat, lng, cached)) {
+        // Cache covers new coords — serve immediately, no stale frame
+        lastCoordsRef.current = { lat, lng };
+        if (state.status !== "success" || state.stations !== cached.stations) {
+          setState({ status: "success", stations: cached.stations });
+        }
+      } else if (state.status !== "loading" && state.status !== "idle") {
+        // Coords changed, no cache coverage — force loading BEFORE paint
+        setState({ status: "loading" });
+      }
+    }
+  }
+
   useEffect(() => {
     if (lat === null || lng === null) return;
+
+    // Update ref so render-time check knows these coords are handled
+    lastCoordsRef.current = { lat, lng };
 
     // Cache hit — serve immediately
     const cached = readCache();

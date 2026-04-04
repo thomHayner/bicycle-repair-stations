@@ -319,7 +319,7 @@ export default function MapPage() {
         onStationSelect={handleStationSelect}
         expanded={listExpanded}
         onExpandedChange={setListExpanded}
-        isFetchingStations={isFetchingStations}
+        queryStatus={query.status}
       />
 
       <AdBanner />

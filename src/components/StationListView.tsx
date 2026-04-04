@@ -4,6 +4,47 @@ import { haversineDistanceMiles } from "../lib/distance";
 import { getDirectionsUrl } from "../lib/directions";
 import { type Unit, KM_PER_MILE, MI_OPTIONS, KM_OPTIONS } from "../lib/units";
 
+export type QueryStatus = "idle" | "loading" | "success" | "none" | "error";
+
+interface HeaderState {
+  text: string;
+  pulse: boolean;
+  emptyPanelText: string | null;
+}
+
+/** Single source of truth for all header / empty-state display text. */
+function getHeaderState(
+  queryStatus: QueryStatus,
+  total: number,
+  shown: number,
+  hasActiveFilters: boolean,
+  selectedDist: number,
+  unit: string,
+): HeaderState {
+  // Searching — query idle or in-flight with no prior results
+  if ((queryStatus === "idle" || queryStatus === "loading") && total === 0)
+    return { text: "Searching nearby\u2026", pulse: true, emptyPanelText: null };
+
+  // Refreshing — re-fetching but we still have previous results on screen
+  if (queryStatus === "loading" && total > 0)
+    return { text: `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`, pulse: true, emptyPanelText: null };
+
+  // Query finished with zero results
+  if (total === 0)
+    return { text: "No stations found", pulse: false, emptyPanelText: "No stations in this area." };
+
+  // Has stations, amenity filters active
+  if (hasActiveFilters)
+    return {
+      text: `${shown} of ${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`,
+      pulse: false,
+      emptyPanelText: shown === 0 ? "No stations match the selected filters." : null,
+    };
+
+  // Has stations, no filters
+  return { text: `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`, pulse: false, emptyPanelText: null };
+}
+
 const AMENITY_FILTERS = [
   { key: "pump",   label: "💨 Pump",   tag: "service:bicycle:pump",   active: "bg-sky-700 dark:bg-sky-400 border-sky-700 dark:border-sky-400 text-white dark:text-black",    inactive: "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300" },
   { key: "tools",  label: "🔧 Tools",  tag: "service:bicycle:tools",  active: "bg-green-700 dark:bg-green-400 border-green-700 dark:border-green-400 text-white dark:text-black",  inactive: "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300" },
@@ -23,8 +64,8 @@ interface Props {
   onStationSelect: (station: OverpassNode) => void;
   expanded: boolean;
   onExpandedChange: (expanded: boolean) => void;
-  /** True while the Overpass query is in-flight. */
-  isFetchingStations?: boolean;
+  /** Current query lifecycle status — drives header text deterministically. */
+  queryStatus: QueryStatus;
 }
 
 export function StationListView({
@@ -38,7 +79,7 @@ export function StationListView({
   onStationSelect,
   expanded,
   onExpandedChange,
-  isFetchingStations = false,
+  queryStatus,
 }: Props) {
   const [activeFilters, setActiveFilters] = useState<Set<FilterKey>>(new Set());
 
@@ -73,12 +114,11 @@ export function StationListView({
   const hasActiveFilters = activeFilters.size > 0;
   const options = unit === "mi" ? MI_OPTIONS : KM_OPTIONS;
 
-  const headerLabel =
-    total === 0
-      ? "No stations found"
-      : hasActiveFilters
-      ? `${shown} of ${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`
-      : `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`;
+  const isFetchingStations = queryStatus === "loading";
+  const { text: headerText, pulse: headerPulse, emptyPanelText } = getHeaderState(
+    queryStatus, total, shown, hasActiveFilters, selectedDist, unit,
+  );
+  const headerKey = headerPulse ? "loading" : headerText;
 
   return (
     <div className="fixed bottom-[65px] left-3 right-3 z-[900] rounded-2xl shadow-lg bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm overflow-hidden">
@@ -91,8 +131,8 @@ export function StationListView({
         aria-label={expanded ? "Collapse station list" : "Expand station list"}
       >
         <span className="flex items-center gap-1.5 text-sm font-semibold text-slate-800 dark:text-slate-100">
-                    <span className={isFetchingStations ? "animate-pulse" : undefined}>
-            {isFetchingStations && total === 0 ? "Searching nearby\u2026" : headerLabel}
+          <span key={headerKey} className={headerPulse ? "animate-pulse" : undefined}>
+            {headerText}
           </span>
         </span>
                 <svg
@@ -106,8 +146,8 @@ export function StationListView({
 
       {/* Expanded panel */}
       <div
-        className={`overflow-y-auto transition-[max-height] duration-300 ease-in-out ${
-          expanded ? "max-h-[50vh]" : "max-h-0"
+        className={`transition-[max-height] duration-300 ease-in-out ${
+          expanded ? "max-h-[50vh] overflow-y-auto" : "max-h-0 overflow-hidden"
         }`}
       >
         {/* Distance row */}
@@ -178,11 +218,9 @@ export function StationListView({
 
         {/* Station list */}
         <div className="border-t border-slate-100 dark:border-[#1e2a3a]">
-          {filtered.length === 0 && !isFetchingStations && (
+          {emptyPanelText && (
             <div className="px-4 py-5 text-sm text-slate-500 dark:text-slate-400 text-center">
-              {total === 0
-                ? "No stations in this area"
-                : "No stations match the selected filters"}
+              {emptyPanelText}
             </div>
           )}
 
