@@ -1,5 +1,5 @@
-import { memo, useEffect, useRef } from "react";
-import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import { memo, useCallback, useEffect, useRef } from "react";
+import { MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import type { Map as LeafletMap, LatLng } from "leaflet";
 import type { OverpassNode } from "../../types/overpass";
@@ -22,6 +22,60 @@ function MapEventHandler({ onMoveEnd, onMapInteraction }: MapEventHandlerProps) 
     dragstart(e){ e.target.closePopup(); onMapInteraction(); },
     moveend(e) {
       onMoveEnd(e.target.getCenter());
+    },
+  });
+
+  return null;
+}
+
+/**
+ * Detects double-tap on touch devices and zooms the map.
+ * Leaflet's built-in doubleClickZoom can miss touch double-taps when
+ * `touch-action: manipulation` is set, because some browsers set
+ * click.detail=2 without firing a native dblclick event.
+ */
+function DoubleTapZoom() {
+  const map = useMap();
+  const lastTapRef = useRef(0);
+  const lastTapPosRef = useRef<{ x: number; y: number } | null>(null);
+
+  // Touch: detect double-tap from touchend events
+  const handleTouchEnd = useCallback((e: TouchEvent) => {
+    if (e.touches.length > 0) return; // ignore multi-touch (pinch)
+
+    const now = Date.now();
+    const touch = e.changedTouches[0];
+    const pos = { x: touch.clientX, y: touch.clientY };
+    const lastPos = lastTapPosRef.current;
+
+    if (
+      now - lastTapRef.current < 300 &&
+      lastPos &&
+      Math.abs(pos.x - lastPos.x) < 40 &&
+      Math.abs(pos.y - lastPos.y) < 40
+    ) {
+      e.preventDefault();
+      const containerPoint = map.mouseEventToContainerPoint(touch as unknown as MouseEvent);
+      const latlng = map.containerPointToLatLng(containerPoint);
+      map.setZoomAround(latlng, map.getZoom() + 1);
+      lastTapRef.current = 0;
+      lastTapPosRef.current = null;
+    } else {
+      lastTapRef.current = now;
+      lastTapPosRef.current = pos;
+    }
+  }, [map]);
+
+  useEffect(() => {
+    const container = map.getContainer();
+    container.addEventListener("touchend", handleTouchEnd, { passive: false });
+    return () => container.removeEventListener("touchend", handleTouchEnd);
+  }, [map, handleTouchEnd]);
+
+  // Mouse: handle native dblclick for desktop
+  useMapEvents({
+    dblclick(e) {
+      map.setZoomAround(e.latlng, map.getZoom() + 1);
     },
   });
 
@@ -202,10 +256,11 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
         preferCanvas={true}
         scrollWheelZoom={true}
         touchZoom={true}
-        doubleClickZoom={true}
+        doubleClickZoom={false}
         ref={mapRef}
         attributionControl={true}
       >
+        <DoubleTapZoom />
         <ActiveTileLayer layer={activeLayer} />
         <MapEventHandler
           onMoveEnd={onMoveEnd}

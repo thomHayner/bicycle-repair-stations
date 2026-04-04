@@ -86,11 +86,6 @@ html, body, #root {
   touch-action: manipulation;
 }
 
-/* Let Leaflet own all touch gestures (pan, pinch, double-tap zoom) */
-.leaflet-container {
-  touch-action: none;
-}
-
 /* Prevent tap highlight flash on mobile */
 button, a {
   -webkit-tap-highlight-color: transparent;
