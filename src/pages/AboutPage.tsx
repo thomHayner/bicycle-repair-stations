@@ -82,11 +82,29 @@ export default function AboutPage() {
         <div className="flex flex-col gap-2">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Contribute</p>
           <div className="bg-white dark:bg-[#0d1220] rounded-2xl border border-slate-100 dark:border-[#1e2a3a] divide-y divide-slate-100 dark:divide-[#1e2a3a] shadow-sm">
+            <button
+              type="button"
+              onClick={() => navigate("/report-bug")}
+              className="w-full flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50"
+            >
+              <span>Report a bug</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 dark:text-slate-400"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+
             <a href="https://www.openstreetmap.org/edit" target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50">
               <span>Add a missing station on OSM</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 dark:text-slate-400"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
+
+            <button
+              type="button"
+              onClick={() => navigate("/donate")}
+              className="w-full flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50"
+            >
+              <span>Support with a donation</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 dark:text-slate-400"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
           </div>
         </div>
 

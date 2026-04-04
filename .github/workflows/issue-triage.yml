@@ -1,0 +1,49 @@
+name: Issue Triage
+
+on:
+  issues:
+    types: [opened, reopened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  label-bug-issues:
+    name: Label bug issue metadata
+    if: contains(github.event.issue.labels.*.name, 'bug')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+            const body = (context.payload.issue.body || '').toLowerCase();
+
+            const desiredLabels = [
+              { name: 'needs-triage', color: 'fbca04', description: 'Bug report needs maintainer triage' },
+              { name: 'platform:ios', color: '0e8a16', description: 'Likely iOS-specific behavior' },
+              { name: 'platform:android', color: '1d76db', description: 'Likely Android-specific behavior' },
+              { name: 'platform:desktop', color: '5319e7', description: 'Likely desktop-browser behavior' },
+            ];
+
+            for (const label of desiredLabels) {
+              try {
+                await github.rest.issues.createLabel({ owner, repo, ...label });
+              } catch (error) {
+                if (error.status !== 422) throw error;
+              }
+            }
+
+            const labelsToAdd = ['needs-triage'];
+            if (/iphone|ipad|ios|safari/.test(body)) labelsToAdd.push('platform:ios');
+            if (/android|chrome mobile|samsung/.test(body)) labelsToAdd.push('platform:android');
+            if (/windows|macos|linux|firefox|edge|desktop/.test(body)) labelsToAdd.push('platform:desktop');
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number,
+              labels: [...new Set(labelsToAdd)],
+            });

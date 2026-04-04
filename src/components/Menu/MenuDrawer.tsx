@@ -17,6 +17,7 @@ const NAV_ITEMS = [
 
 const INFO_ITEMS = [
   { label: "About",  emoji: "ℹ️", path: "/about"  },
+  { label: "Report a bug", emoji: "🐞", path: "/report-bug" },
   { label: "Donate", emoji: "💚", path: "/donate" },
 ] as const;
 

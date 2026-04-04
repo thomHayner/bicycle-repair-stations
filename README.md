@@ -37,6 +37,7 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 - **Always-mounted map** — navigating to other pages never unmounts or reloads the map
 - **Repair Guides** — curated Park Tool YouTube videos in 7 categories (Flat Tyre, Brakes, Gears, Chain, Wheels, Headset, Bottom Bracket)
 - **About** — credits, contribute link, Privacy Policy, and Terms of Service with accordion expand/collapse
+- **Report a bug** — in-app form that opens GitHub issues for maintainer triage
 - **Menu drawer** — slide-in navigation with theme toggle (Light / Dark / System) and unit toggle
 
 ### PWA & Accessibility
@@ -120,8 +121,27 @@ All variables are optional — sensible defaults are built in.
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `VITE_OVERPASS_ENDPOINT` | `https://overpass-api.de/api/interpreter` | Primary Overpass API URL. Override with a mirror if rate-limited. |
-| `VITE_FALLBACK_LAT` | `51.505` | Map center latitude when geolocation is unavailable |
-| `VITE_FALLBACK_LNG` | `-0.09` | Map center longitude when geolocation is unavailable |
+
+Server-side variables for bug issue creation (`/api/report-bug`):
+
+| Variable | Description |
+|----------|-------------|
+| `GITHUB_ISSUES_TOKEN` | Fine-grained GitHub token with Issues: Read and Write for this repo |
+| `GITHUB_REPO_OWNER` | Repository owner |
+| `GITHUB_REPO_NAME` | Repository name |
+| `APP_ORIGINS` | Optional comma-separated origin allow-list for API requests |
+| `APP_ORIGIN` | Optional legacy single-origin setting |
+
+These must be configured in your hosting provider's encrypted environment settings and never exposed as `VITE_*` variables.
+
+---
+
+## Bug Reporting
+
+- Users can submit bug reports from the in-app **Report a bug** page.
+- Submissions create public GitHub issues via `/api/report-bug`.
+- Reports should not include personal or sensitive information because issues are public.
+- Minimal triage automation runs in `.github/workflows/issue-triage.yml` and adds `needs-triage` plus platform hint labels when possible.
 
 ---
 
@@ -757,8 +777,6 @@ All tile requests are made directly from the user's browser. No API keys. No pro
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `VITE_OVERPASS_ENDPOINT` | `https://overpass-api.de/api/interpreter` | Primary Overpass endpoint URL |
-| `VITE_FALLBACK_LAT` | `51.505` | Map center latitude when geolocation is unavailable |
-| `VITE_FALLBACK_LNG` | `-0.09` | Map center longitude when geolocation is unavailable |
 
 ---
 

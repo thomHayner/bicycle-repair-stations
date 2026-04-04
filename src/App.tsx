@@ -8,6 +8,7 @@ const MapPage      = lazy(() => import("./pages/MapPage"));
 const GuidesPage   = lazy(() => import("./pages/GuidesPage"));
 const AboutPage    = lazy(() => import("./pages/AboutPage"));
 const DonatePage   = lazy(() => import("./pages/DonatePage"));
+const ReportBugPage = lazy(() => import("./pages/ReportBugPage"));
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/guides"   element={<GuidesPage />} />
           <Route path="/about"    element={<AboutPage />} />
           <Route path="/donate"   element={<DonatePage />} />
+          <Route path="/report-bug" element={<ReportBugPage />} />
           <Route path="*"         element={null} />
         </Routes>
       </Suspense>
