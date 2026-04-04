@@ -22,7 +22,14 @@ interface MapEventHandlerProps {
 function MapEventHandler({ onMoveEnd, onUserMove, onProgrammaticMoveEnd, onMapInteraction, programmaticMoveRef }: MapEventHandlerProps) {
   useMapEvents({
     click()    { onMapInteraction(); },
-    dragstart(e){ e.target.closePopup(); onMapInteraction(); },
+    dragstart(e){
+      e.target.closePopup();
+      onMapInteraction();
+      // A user drag proves no programmatic animation is in flight.
+      // Reset the counter to 0 in case a leaked increment is left over
+      // (e.g. fitBounds interrupted flyTo, swallowing a moveend).
+      programmaticMoveRef.current = 0;
+    },
     drag()     { onUserMove(); },   // fires every frame during user pan — shows button mid-drag
     moveend(e) {
       onMoveEnd(e.target.getCenter());

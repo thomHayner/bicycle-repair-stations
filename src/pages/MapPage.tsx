@@ -18,7 +18,13 @@ const MapView = lazy(() =>
   import("../components/Map/MapView").then((m) => ({ default: m.MapView }))
 );
 
-/** Fraction of bounds `a` still visible within bounds `b` (0–1). */
+/**
+ * Overlap between two bounds relative to the *smaller* of the two.
+ * This keeps the threshold zoom-independent: "has ~30% of what I can
+ * currently see scrolled away from the search area?" produces the same
+ * physical-screen panning distance whether the user zoomed in or out
+ * after the last search.
+ */
 function boundsOverlapRatio(a: LatLngBounds, b: LatLngBounds): number {
   const intWest  = Math.max(a.getWest(),  b.getWest());
   const intEast  = Math.min(a.getEast(),  b.getEast());
@@ -27,7 +33,9 @@ function boundsOverlapRatio(a: LatLngBounds, b: LatLngBounds): number {
   if (intEast <= intWest || intNorth <= intSouth) return 0;
   const intArea = (intEast - intWest) * (intNorth - intSouth);
   const aArea   = (a.getEast() - a.getWest()) * (a.getNorth() - a.getSouth());
-  return aArea > 0 ? intArea / aArea : 0;
+  const bArea   = (b.getEast() - b.getWest()) * (b.getNorth() - b.getSouth());
+  const denom   = Math.min(aArea, bArea);
+  return denom > 0 ? intArea / denom : 0;
 }
 
 export default function MapPage() {
