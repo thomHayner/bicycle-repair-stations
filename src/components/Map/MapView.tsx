@@ -13,15 +13,33 @@ import { useSettings } from "../../context/useSettings";
 
 interface MapEventHandlerProps {
   onMoveEnd: (center: LatLng) => void;
+  onUserMove: () => void;
+  onProgrammaticMoveEnd: () => void;
   onMapInteraction: () => void;
+  programmaticMoveRef: React.MutableRefObject<number>;
 }
 
-function MapEventHandler({ onMoveEnd, onMapInteraction }: MapEventHandlerProps) {
+function MapEventHandler({ onMoveEnd, onUserMove, onProgrammaticMoveEnd, onMapInteraction, programmaticMoveRef }: MapEventHandlerProps) {
   useMapEvents({
     click()    { onMapInteraction(); },
-    dragstart(e){ e.target.closePopup(); onMapInteraction(); },
+    dragstart(e){
+      e.target.closePopup();
+      onMapInteraction();
+      // A user drag proves no programmatic animation is in flight.
+      // Reset the counter to 0 in case a leaked increment is left over
+      // (e.g. fitBounds interrupted flyTo, swallowing a moveend).
+      programmaticMoveRef.current = 0;
+    },
+    drag()     { onUserMove(); },   // fires every frame during user pan — shows button mid-drag
     moveend(e) {
       onMoveEnd(e.target.getCenter());
+      if (programmaticMoveRef.current > 0) {
+        programmaticMoveRef.current -= 1;
+        // Programmatic move just settled — snapshot bounds as the new search baseline
+        onProgrammaticMoveEnd();
+      } else {
+        onUserMove();             // also check on release (catches zoom buttons, scroll wheel, etc.)
+      }
     },
   });
 
@@ -162,7 +180,10 @@ interface Props {
   stations: OverpassNode[];
   filteredStationIds: Set<number>;
   onMoveEnd: (center: LatLng) => void;
+  onUserMove: () => void;
+  onProgrammaticMoveEnd: () => void;
   mapRef: React.MutableRefObject<LeafletMap | null>;
+  programmaticMoveRef: React.MutableRefObject<number>;
   selectedStationId: number | null;
   onStationSelect: (station: OverpassNode) => void;
   onStationDeselect: () => void;
@@ -173,7 +194,7 @@ interface Props {
   onInitialFlyComplete?: () => void;
 }
 
-export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, mapRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded, onInitialFlyComplete }: Props) {
+export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, onUserMove, onProgrammaticMoveEnd, mapRef, programmaticMoveRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded, onInitialFlyComplete }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -207,9 +228,10 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
       return;
     }
 
+    programmaticMoveRef.current += 1;
     map.once("moveend", () => onInitialFlyComplete?.());
     map.flyTo(target, targetZoom, { duration: 1.2 });
-  }, [userPosition, mapRef, onInitialFlyComplete]);
+  }, [userPosition, mapRef, programmaticMoveRef, onInitialFlyComplete]);
 
   return (
     <div
@@ -264,7 +286,10 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
         <ActiveTileLayer layer={activeLayer} />
         <MapEventHandler
           onMoveEnd={onMoveEnd}
+          onUserMove={onUserMove}
+          onProgrammaticMoveEnd={onProgrammaticMoveEnd}
           onMapInteraction={onMapInteraction}
+          programmaticMoveRef={programmaticMoveRef}
         />
         {userPosition && (
           <UserMarker lat={userPosition.lat} lng={userPosition.lng} accuracy={userPosition.accuracy} />

@@ -22,6 +22,7 @@ export default function App() {
           <Route path="/guides"   element={<GuidesPage />} />
           <Route path="/about"    element={<AboutPage />} />
           <Route path="/donate"   element={<DonatePage />} />
+          <Route path="*"         element={null} />
         </Routes>
       </Suspense>
     </SettingsProvider>
