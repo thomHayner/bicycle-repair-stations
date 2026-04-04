@@ -47,12 +47,16 @@ export default function MapPage() {
   // distinguish user-initiated moves from programmatic ones.
   const programmaticMoveRef = useRef(0);
   const programmaticFlyTo = useCallback((target: [number, number], zoom: number, options?: ZoomPanOptions) => {
+    const map = mapRef.current;
+    if (!map) return;
     programmaticMoveRef.current += 1;
-    mapRef.current?.flyTo(target, zoom, options);
+    map.flyTo(target, zoom, options);
   }, []);
   const programmaticFitBounds = useCallback((bounds: [[number, number], [number, number]], options?: FitBoundsOptions) => {
+    const map = mapRef.current;
+    if (!map) return;
     programmaticMoveRef.current += 1;
-    mapRef.current?.fitBounds(bounds, options);
+    map.fitBounds(bounds, options);
   }, []);
 
   // --- "Search this area" viewport-overlap tracking ---
@@ -260,6 +264,9 @@ export default function MapPage() {
   const handleSearchHere = () => {
     if (!mapCenter) return;
     setMapMovedSinceSearch(false);
+    // Snapshot current viewport immediately so panning while results load
+    // compares against where the user just searched, not the previous search.
+    lastSearchBoundsRef.current = mapRef.current?.getBounds() ?? null;
     setGivenLocation(mapCenter);
     const nearUser =
       userPosition !== null &&
