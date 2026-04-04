@@ -114,7 +114,6 @@ export function StationListView({
   const hasActiveFilters = activeFilters.size > 0;
   const options = unit === "mi" ? MI_OPTIONS : KM_OPTIONS;
 
-  const isFetchingStations = queryStatus === "loading";
   const { text: headerText, pulse: headerPulse, emptyPanelText } = getHeaderState(
     queryStatus, total, shown, hasActiveFilters, selectedDist, unit,
   );

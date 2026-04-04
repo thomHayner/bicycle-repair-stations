@@ -45,22 +45,23 @@ export function useStationQuery(
   const abortRef = useRef<AbortController | null>(null);
 
   // --- Synchronous staleness detection (React "adjust state during render") ---
-  // Detects coordinate changes DURING render so we can set "loading" before the
-  // browser paints, eliminating the stale frame that flashes old data.
-  const lastCoordsRef = useRef<{ lat: number; lng: number } | null>(null);
+  // Tracks the last coordinates we computed state for. When coords change during
+  // render, we set "loading" BEFORE the browser paints, eliminating the stale
+  // frame that flashes old data. Uses state (not ref) per React docs.
+  const [prevCoords, setPrevCoords] = useState<{ lat: number; lng: number } | null>(null);
   if (lat !== null && lng !== null) {
-    const prev = lastCoordsRef.current;
-    const coordsChanged = !prev || prev.lat !== lat || prev.lng !== lng;
+    const coordsChanged = !prevCoords || prevCoords.lat !== lat || prevCoords.lng !== lng;
     if (coordsChanged) {
       const cached = readCache();
       if (cached && isCovered(lat, lng, cached)) {
         // Cache covers new coords — serve immediately, no stale frame
-        lastCoordsRef.current = { lat, lng };
+        setPrevCoords({ lat, lng });
         if (state.status !== "success" || state.stations !== cached.stations) {
           setState({ status: "success", stations: cached.stations });
         }
       } else if (state.status !== "loading" && state.status !== "idle") {
         // Coords changed, no cache coverage — force loading BEFORE paint
+        setPrevCoords({ lat, lng });
         setState({ status: "loading" });
       }
     }
@@ -69,13 +70,10 @@ export function useStationQuery(
   useEffect(() => {
     if (lat === null || lng === null) return;
 
-    // Update ref so render-time check knows these coords are handled
-    lastCoordsRef.current = { lat, lng };
-
     // Cache hit — serve immediately
     const cached = readCache();
     if (cached && isCovered(lat, lng, cached)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: latch cached data synchronously
       setState({ status: "success", stations: cached.stations });
       return;
     }
