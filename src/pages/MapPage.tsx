@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, lazy, Suspense } from "react";
-import type { Map as LeafletMap, LatLng } from "leaflet";
+import type { Map as LeafletMap, LatLng, LatLngBounds, FitBoundsOptions, ZoomPanOptions } from "leaflet";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useStationQuery } from "../hooks/useStationQuery";
 import { Toolbar } from "../components/Toolbar/Toolbar";
@@ -18,9 +18,70 @@ const MapView = lazy(() =>
   import("../components/Map/MapView").then((m) => ({ default: m.MapView }))
 );
 
+/** Fraction of bounds `a` still visible within bounds `b` (0–1). */
+function boundsOverlapRatio(a: LatLngBounds, b: LatLngBounds): number {
+  const intWest  = Math.max(a.getWest(),  b.getWest());
+  const intEast  = Math.min(a.getEast(),  b.getEast());
+  const intSouth = Math.max(a.getSouth(), b.getSouth());
+  const intNorth = Math.min(a.getNorth(), b.getNorth());
+  if (intEast <= intWest || intNorth <= intSouth) return 0;
+  const intArea = (intEast - intWest) * (intNorth - intSouth);
+  const aArea   = (a.getEast() - a.getWest()) * (a.getNorth() - a.getSouth());
+  return aArea > 0 ? intArea / aArea : 0;
+}
+
 export default function MapPage() {
   const geo = useGeolocation();
   const mapRef = useRef<LeafletMap | null>(null);
+
+  // --- Programmatic movement tracking ---
+  // Counter: incremented before flyTo/fitBounds, decremented on moveend — lets MapEventHandler
+  // distinguish user-initiated moves from programmatic ones.
+  const programmaticMoveRef = useRef(0);
+  const programmaticFlyTo = useCallback((target: [number, number], zoom: number, options?: ZoomPanOptions) => {
+    programmaticMoveRef.current += 1;
+    mapRef.current?.flyTo(target, zoom, options);
+  }, []);
+  const programmaticFitBounds = useCallback((bounds: [[number, number], [number, number]], options?: FitBoundsOptions) => {
+    programmaticMoveRef.current += 1;
+    mapRef.current?.fitBounds(bounds, options);
+  }, []);
+
+  // --- "Search this area" viewport-overlap tracking ---
+  const lastSearchBoundsRef = useRef<LatLngBounds | null>(null);
+  const [mapMovedSinceSearch, setMapMovedSinceSearch] = useState(false);
+  const moveDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearMoveDebounce = useCallback(() => {
+    if (moveDebounceRef.current) {
+      clearTimeout(moveDebounceRef.current);
+      moveDebounceRef.current = null;
+    }
+  }, []);
+
+  // Called by MapEventHandler when a programmatic flyTo/fitBounds settles —
+  // snapshot the viewport as the new search baseline.
+  const handleProgrammaticMoveEnd = useCallback(() => {
+    lastSearchBoundsRef.current = mapRef.current?.getBounds() ?? null;
+  }, []);
+
+  // Called by MapEventHandler on user-initiated moveend — debounced overlap check
+  const handleUserMove = useCallback(() => {
+    clearMoveDebounce();
+    moveDebounceRef.current = setTimeout(() => {
+      const last = lastSearchBoundsRef.current;
+      const current = mapRef.current?.getBounds();
+      if (!last || !current) return;
+      if (boundsOverlapRatio(last, current) < 0.5) {
+        setMapMovedSinceSearch(true);
+      }
+    }, 300);
+  }, [clearMoveDebounce]);
+
+  // Cleanup debounce on unmount
+  useEffect(() => {
+    return () => { clearMoveDebounce(); };
+  }, [clearMoveDebounce]);
 
   // Location the user explicitly provided (geo or search) — drives Overpass fetches
   const [givenLocation, setGivenLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -109,14 +170,14 @@ export default function MapPage() {
     const DEG_PER_MILE = 1 / 69;
     const latDelta = distMiles * DEG_PER_MILE;
     const lngDelta = latDelta / Math.cos((givenLocation.lat * Math.PI) / 180);
-    mapRef.current?.fitBounds(
+    programmaticFitBounds(
       [
         [givenLocation.lat - latDelta, givenLocation.lng - lngDelta],
         [givenLocation.lat + latDelta, givenLocation.lng + lngDelta],
       ],
       { padding: [40, 40], maxZoom: 16 }
     );
-  }, [query.status, allStations, givenLocation, unit]);
+  }, [query.status, allStations, givenLocation, unit, programmaticFitBounds]);
 
   // Map pan updates the filter anchor (used only when no givenLocation)
   const handleMoveEnd = useCallback((center: LatLng) => {
@@ -125,35 +186,33 @@ export default function MapPage() {
   }, []);
 
   const handleLocationFound = (pos: { lat: number; lng: number }, zoom = 13) => {
+    clearMoveDebounce();
+    setMapMovedSinceSearch(false);
     setGivenLocation(pos);
     const nearUser =
       userPosition !== null &&
       haversineDistanceMiles(pos.lat, pos.lng, userPosition.lat, userPosition.lng) < 1;
     setSearchedLocation(nearUser ? null : pos);
     setErrorDismissed(false);
-    if (mapRef.current) {
-      mapRef.current.flyTo([pos.lat, pos.lng], zoom, { duration: 1.2 });
-    }
+    programmaticFlyTo([pos.lat, pos.lng], zoom, { duration: 1.2 });
   };
 
   // Recenter to GPS position — clears the search pin since the blue dot already marks the spot
   const handleRecenter = () => {
     if (!userPosition) return;
+    clearMoveDebounce();
+    setMapMovedSinceSearch(false);
     setGivenLocation(userPosition);
     setSearchedLocation(null);
     setErrorDismissed(false);
-    if (mapRef.current) {
-      mapRef.current.flyTo([userPosition.lat, userPosition.lng], 16, { duration: 1.2 });
-    }
+    programmaticFlyTo([userPosition.lat, userPosition.lng], 16, { duration: 1.2 });
   };
 
   const handleStationSelect = useCallback((station: OverpassNode) => {
     setSelectedStationId(station.id);
     setListExpanded(false);
-    if (mapRef.current) {
-      mapRef.current.flyTo([station.lat, station.lon], 17, { duration: 0.8 });
-    }
-  }, [mapRef]);
+    programmaticFlyTo([station.lat, station.lon], 17, { duration: 0.8 });
+  }, [programmaticFlyTo]);
 
   const handleStationDeselect = useCallback(() => setSelectedStationId(null), []);
 
@@ -186,13 +245,29 @@ export default function MapPage() {
     geo.status === "loading" ||
     (geo.status === "resolved" && !initialFlyComplete);
 
-  const showSearchHere =
-    givenLocation !== null &&
-    mapCenter !== null &&
-    haversineDistanceMiles(mapCenter.lat, mapCenter.lng, givenLocation.lat, givenLocation.lng) > 18;
+  const showSearchHere = mapMovedSinceSearch;
+
+  // When fresh results arrive, reset the "moved" flag and snapshot current viewport.
+  // This covers cache hits (status jumps straight to "success") and network fetches alike.
+  const prevGivenLocation = useRef(givenLocation);
+  useEffect(() => {
+    if (query.status === "success" && givenLocation !== prevGivenLocation.current) {
+      prevGivenLocation.current = givenLocation;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: reset flag when search location changes with successful results
+      setMapMovedSinceSearch(false);
+      // Bounds snapshot is handled by handleProgrammaticMoveEnd when the flyTo/fitBounds settles,
+      // but if the query resolved from cache without any programmatic move (e.g. same location),
+      // snapshot now as a fallback.
+      if (programmaticMoveRef.current === 0) {
+        lastSearchBoundsRef.current = mapRef.current?.getBounds() ?? null;
+      }
+    }
+  }, [query.status, givenLocation]);
 
   const handleSearchHere = () => {
     if (!mapCenter) return;
+    clearMoveDebounce();
+    setMapMovedSinceSearch(false);
     setGivenLocation(mapCenter);
     const nearUser =
       userPosition !== null &&
@@ -235,11 +310,13 @@ export default function MapPage() {
 
   const showError = query.status === "error" && !errorDismissed;
 
+  const showPill = isFetchingStations || (showSearchHere && selectedStationId === null);
+
   return (
     <>
       <LoadingOverlay visible={showOverlay} />
 
-      {(isFetchingStations || (showSearchHere && selectedStationId === null)) && (
+      {showPill && (
         <div
           className="fixed left-0 right-0 z-[999] flex justify-center pointer-events-none transition-[top] duration-200"
           style={{ top: locationDenied ? 112 : 80 }}
@@ -295,7 +372,10 @@ export default function MapPage() {
             stations={allStations}
             filteredStationIds={filteredStationIds}
             onMoveEnd={handleMoveEnd}
+            onUserMove={handleUserMove}
+            onProgrammaticMoveEnd={handleProgrammaticMoveEnd}
             mapRef={mapRef}
+            programmaticMoveRef={programmaticMoveRef}
             selectedStationId={selectedStationId}
             onStationSelect={handleStationSelect}
             onStationDeselect={handleStationDeselect}
