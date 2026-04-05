@@ -134,7 +134,7 @@ export default function ReportBugPage() {
         )}
 
         {createdIssue ? (
-          <div className="rounded-2xl border border-green-200 bg-green-50 px-5 py-5 text-sm text-green-900 dark:bg-green-950/20 dark:border-green-800/70 dark:text-green-300 flex flex-col gap-4">
+          <div className="rounded-2xl border border-green-200 bg-green-50 px-5 py-5 text-sm text-green-900 dark:bg-green-950/20 dark:border-green-800/70 dark:text-green-300 flex flex-col gap-4 elevation-1">
             <p className="text-base font-semibold text-green-900 dark:text-green-200">Thanks for the report.</p>
             <p>
               Issue #{createdIssue.issueNumber} was created successfully and is ready for maintainer triage.

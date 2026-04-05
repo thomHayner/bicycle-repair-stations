@@ -29,7 +29,7 @@ export function ErrorToast({ message, onDismiss }: Props) {
       aria-live="assertive"
       className={[
         "fixed top-[68px] left-1/2 -translate-x-1/2 z-[1500] max-w-[90vw]",
-        "bg-[var(--color-error)] text-[var(--color-on-error)] text-sm font-medium px-4 py-3 rounded-xl shadow-lg",
+        "bg-[var(--color-error)] text-[var(--color-on-error)] text-sm font-medium px-4 py-3 rounded-xl elevation-2",
         "flex items-center gap-2 transition-all duration-300",
         visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2",
       ].join(" ")}

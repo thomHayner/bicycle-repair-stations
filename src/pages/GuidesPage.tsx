@@ -87,7 +87,7 @@ function VideoCard({ video }: { video: Video }) {
       href={`https://www.youtube.com/watch?v=${video.id}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex gap-3 items-center bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl shadow-sm p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
+      className="flex gap-3 items-center bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl elevation-1 p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
     >
       <div className="relative shrink-0 w-28 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 aspect-video">
         <img
@@ -139,7 +139,7 @@ export default function GuidesPage() {
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto">
         {/* Park Tool banner */}
-        <div className="mx-4 mt-5 mb-1 bg-[var(--color-secondary)] rounded-2xl px-5 py-4 flex items-center justify-between gap-4 shadow-md">
+        <div className="mx-4 mt-5 mb-1 bg-[var(--color-secondary)] rounded-2xl px-5 py-4 flex items-center justify-between gap-4 elevation-2">
           <div>
             <p className="font-bold text-[var(--color-on-secondary)] text-base leading-tight">Park Tool</p>
             <p className="text-[var(--color-secondary-container)] text-xs mt-0.5">Bike Repair &amp; Maintenance Series</p>

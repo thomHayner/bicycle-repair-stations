@@ -5,7 +5,7 @@ import { useShare } from "../context/useShare";
 function Accordion({ title, children }: { title: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl shadow-sm overflow-hidden">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl elevation-1 overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((p) => !p)}
@@ -60,7 +60,7 @@ export default function AboutPage() {
 
         <div className="flex flex-col gap-2">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Data &amp; Credits</p>
-          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] divide-y divide-[var(--color-border)] shadow-sm">
+          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] divide-y divide-[var(--color-border)] elevation-1">
             <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400">
               <span>© OpenStreetMap contributors</span>
@@ -86,7 +86,7 @@ export default function AboutPage() {
 
         <div className="flex flex-col gap-2">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Contribute</p>
-          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] divide-y divide-[var(--color-border)] shadow-sm">
+          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] divide-y divide-[var(--color-border)] elevation-1">
             <a href="https://www.openstreetmap.org/edit" target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400">
               <span>Add a missing station on OSM</span>
