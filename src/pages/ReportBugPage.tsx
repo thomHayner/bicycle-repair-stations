@@ -50,11 +50,30 @@ export default function ReportBugPage() {
         body: JSON.stringify(form),
       });
 
-      const payload = await response.json().catch(() => ({}));
+      const contentType = response.headers.get("content-type") ?? "";
+      const payload = contentType.includes("application/json")
+        ? await response.json().catch(() => ({}))
+        : { error: await response.text().catch(() => "") };
+
       if (!response.ok) {
-        const message = typeof payload.error === "string"
-          ? payload.error
-          : "We could not submit your bug report right now.";
+        const serverError = typeof payload.error === "string" ? payload.error.trim() : "";
+        const statusMessage = (() => {
+          if (response.status === 404) {
+            return "Bug report API is unavailable in this environment. If you are testing locally, use the deployed site to submit.";
+          }
+          if (response.status === 403) {
+            return "This origin is not allowed to submit bug reports. Please check APP_ORIGINS in your backend environment.";
+          }
+          if (response.status === 500) {
+            return "Bug report service is not configured yet. Please confirm GitHub token and repo environment variables.";
+          }
+          if (response.status === 502) {
+            return "GitHub issue creation failed upstream. Please try again in a minute.";
+          }
+          return `We could not submit your bug report right now (HTTP ${response.status}).`;
+        })();
+
+        const message = serverError || statusMessage;
         throw new Error(message);
       }
 
@@ -64,6 +83,10 @@ export default function ReportBugPage() {
       });
       setForm(EMPTY_FORM);
     } catch (submitError) {
+      if (submitError instanceof TypeError) {
+        setError("Network error while submitting bug report. Please check your connection and try again.");
+        return;
+      }
       setError(submitError instanceof Error ? submitError.message : "Submission failed. Please try again.");
     } finally {
       setIsSubmitting(false);
