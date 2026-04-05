@@ -106,7 +106,7 @@ export default function ReportBugPage() {
           onClick={() => navigate(-1)}
           aria-label="Back"
           title="Go back"
-          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 dark:active:bg-slate-700 transition-colors focus-ring"
+          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 state-surface-strong transition-colors focus-ring"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6"/>
@@ -151,7 +151,7 @@ export default function ReportBugPage() {
               <button
                 type="button"
                 onClick={resetForAnotherReport}
-                className="inline-flex justify-center items-center rounded-full border border-green-400/60 dark:border-green-700 px-4 py-2.5 font-semibold hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 focus-ring"
+                className="inline-flex justify-center items-center rounded-full border border-green-400/60 dark:border-green-700 px-4 py-2.5 font-semibold state-surface focus-ring"
               >
                 Report another bug
               </button>

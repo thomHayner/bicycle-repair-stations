@@ -82,7 +82,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
             title="Open menu"
-            className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 dark:active:bg-slate-700 transition-colors focus-ring shrink-0"
+            className="w-9 h-9 flex items-center justify-center rounded-full text-[var(--color-text-secondary)] state-surface-strong transition-colors focus-ring shrink-0"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <line x1="3" y1="6"  x2="21" y2="6"/>
@@ -194,7 +194,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
           "flex items-center justify-center transition-colors focus-ring",
           layerPickerOpen
             ? "text-[var(--color-primary)] bg-[var(--color-surface-search)]"
-            : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
+            : "text-[var(--color-text-secondary)] state-surface",
         ].join(" ")}
       >
         {/* Layers / stack icon */}
@@ -212,7 +212,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         aria-label="Share app"
         title="Share app"
         style={{ top: fabTop + (44 + 8) * 2 }}
-        className="fixed right-3 z-[1000] w-11 h-11 rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring"
+        className="fixed right-3 z-[1000] w-11 h-11 rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 flex items-center justify-center text-[var(--color-text-secondary)] state-surface transition-colors focus-ring"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <circle cx="18" cy="5" r="3"/>
@@ -246,7 +246,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
                 "w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors",
                 activeLayer === l.id
                   ? "bg-[var(--color-secondary-container)] text-[var(--color-primary)] font-semibold"
-                  : "text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
+                  : "text-slate-700 dark:text-slate-200 state-surface",
                 "focus-ring-inset",
               ].join(" ")}
             >

@@ -23,7 +23,7 @@ export default function DonatePage() {
           onClick={() => navigate(-1)}
           aria-label="Back"
           title="Go back"
-          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 dark:active:bg-slate-700 transition-colors focus-ring"
+          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 state-surface-strong transition-colors focus-ring"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6"/>
@@ -60,7 +60,7 @@ export default function DonatePage() {
                   "flex-1 py-3 rounded-full text-sm font-semibold transition-colors focus-ring",
                   selected === amount
                     ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
-                    : "border border-[var(--color-border)] bg-[var(--color-surface)] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
+                    : "border border-[var(--color-border)] bg-[var(--color-surface)] text-slate-600 dark:text-slate-300 state-surface",
                 ].join(" ")}
               >
                 ${amount}
