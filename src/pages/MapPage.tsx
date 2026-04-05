@@ -321,7 +321,7 @@ export default function MapPage() {
           style={{ top: locationDenied ? 112 : 80 }}
         >
           {/* Grid container = pill shell; both variants overlap at col/row 1 so pill never resizes */}
-          <div className="grid bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm shadow-lg border border-slate-100 dark:border-[#1e2a3a] rounded-full text-sm font-semibold text-slate-800 dark:text-slate-100">
+          <div className="grid bg-[var(--color-surface-glass)] backdrop-blur-sm shadow-lg border border-[var(--color-border)] rounded-full text-sm font-semibold text-slate-800 dark:text-slate-100">
 
             {/* Loading variant: [spinner] [text] [invisible 15px spacer] */}
             <div
@@ -338,7 +338,7 @@ export default function MapPage() {
               onClick={handleSearchHere}
               tabIndex={showSearchHere ? 0 : -1}
               aria-hidden={!showSearchHere}
-              className={`col-start-1 row-start-1 flex items-center gap-2 px-4 py-2 rounded-full active:bg-slate-50 dark:active:bg-slate-800/50 transition-opacity duration-150 ${showSearchHere ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+              className={`col-start-1 row-start-1 flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400 transition-opacity duration-150 ${showSearchHere ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
             >
               <span className={`inline-block w-3 h-3 border-2 border-green-600 border-t-transparent rounded-full shrink-0 ${isFetchingStations ? "animate-spin" : "invisible"}`} />
               Search this area

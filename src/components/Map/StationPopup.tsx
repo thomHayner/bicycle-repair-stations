@@ -37,12 +37,12 @@ export function StationPopup({ station, distMi }: Props) {
       {(hasTools || hasPump || hasRepair) && (
         <div className="flex flex-wrap gap-1 mb-3">
           {hasTools && (
-            <span className="bg-green-50 dark:bg-green-950/60 text-green-700 dark:text-green-400 text-[12px] px-2 py-0.5 rounded-full font-semibold">
+            <span className="bg-[var(--color-primary-container)] text-[var(--color-on-primary-container)] text-[12px] px-2 py-0.5 rounded-full font-semibold">
               🔧 Tools
             </span>
           )}
           {hasPump && (
-            <span className="bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-400 text-[12px] px-2 py-0.5 rounded-full font-semibold">
+            <span className="bg-[var(--color-secondary-container)] text-[var(--color-on-secondary-container)] text-[12px] px-2 py-0.5 rounded-full font-semibold">
               💨 Pump
             </span>
           )}
@@ -74,7 +74,7 @@ export function StationPopup({ station, distMi }: Props) {
         href={getDirectionsUrl(station.lat, station.lon)}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-1.5 w-full py-2 btn-get-directions bg-green-700 dark:bg-green-400 rounded-[10px] text-[13px] font-bold no-underline active:bg-green-800 dark:active:bg-green-300 transition-colors"
+        className="flex items-center justify-center gap-1.5 w-full py-2 btn-get-directions bg-[var(--color-primary)] rounded-[10px] text-[13px] font-bold no-underline hover:brightness-95 active:brightness-90 focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400 transition-colors"
       >
         {/* Turn-by-turn arrow icon */}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
