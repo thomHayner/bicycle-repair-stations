@@ -74,7 +74,7 @@ export function StationPopup({ station, distMi }: Props) {
         href={getDirectionsUrl(station.lat, station.lon)}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-1.5 w-full py-2 btn-get-directions bg-[var(--color-primary)] rounded-[10px] text-[13px] font-bold no-underline hover:brightness-95 active:brightness-90 focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400 transition-colors"
+        className="flex items-center justify-center gap-1.5 w-full py-2 btn-get-directions bg-[var(--color-primary)] rounded-[10px] text-[13px] font-bold no-underline hover:brightness-95 active:brightness-90 focus-ring transition-colors"
       >
         {/* Turn-by-turn arrow icon */}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
