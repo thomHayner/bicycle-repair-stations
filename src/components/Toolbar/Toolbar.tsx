@@ -96,10 +96,10 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
             </svg>
-            <span className="font-bold text-slate-900 dark:text-white text-sm leading-tight hidden sm:block">
+            <span className="font-bold type-title-small text-slate-900 dark:text-white leading-tight hidden sm:block">
               BicycleRepairStations.com
             </span>
-            <span className="font-bold text-slate-900 dark:text-white text-sm leading-tight sm:hidden">
+            <span className="font-bold type-title-small text-slate-900 dark:text-white leading-tight sm:hidden">
               BRS
             </span>
           </div>

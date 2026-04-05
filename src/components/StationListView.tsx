@@ -129,7 +129,7 @@ export function StationListView({
         aria-expanded={expanded}
         aria-label={expanded ? "Collapse station list" : "Expand station list"}
       >
-        <span className="flex items-center gap-1.5 text-sm font-semibold text-slate-800 dark:text-slate-100">
+        <span className="flex items-center gap-1.5 type-title-small text-slate-800 dark:text-slate-100">
           <span key={headerKey} className={headerPulse ? "animate-pulse" : undefined}>
             {headerText}
           </span>
@@ -158,7 +158,7 @@ export function StationListView({
                 type="button"
                 onClick={() => onUnitChange(u)}
                 className={[
-                  "text-xs font-semibold px-3 py-1 transition-colors focus-ring-inset",
+                  "type-label-small px-3 py-1 transition-colors focus-ring-inset",
                   u === unit
                     ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
                     : "bg-[var(--color-surface-container)] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
@@ -174,7 +174,7 @@ export function StationListView({
               type="button"
               onClick={() => onDistChange(d)}
               className={[
-                "text-xs font-semibold px-3 py-1 rounded-full border transition-colors focus-ring",
+                "type-label-small px-3 py-1 rounded-full border transition-colors focus-ring",
                 d === selectedDist
                   ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-[var(--color-on-primary)]"
                   : "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
@@ -196,7 +196,7 @@ export function StationListView({
                 type="button"
                 onClick={() => toggleFilter(f.key)}
                 className={[
-                  "text-xs font-semibold px-3 py-1 rounded-full border transition-colors focus-ring",
+                  "type-label-small px-3 py-1 rounded-full border transition-colors focus-ring",
                   on ? f.active : f.inactive + " hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
                 ].join(" ")}
               >

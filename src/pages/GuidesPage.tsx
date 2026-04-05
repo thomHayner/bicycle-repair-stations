@@ -105,7 +105,7 @@ function VideoCard({ video }: { video: Video }) {
           </div>
         </div>
       </div>
-      <p className="text-sm font-medium text-slate-700 dark:text-slate-200 leading-snug flex-1">
+      <p className="type-title-small text-slate-700 dark:text-slate-200 leading-snug flex-1">
         {video.title}
       </p>
       <svg className="shrink-0 text-slate-500 dark:text-slate-400" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -133,7 +133,7 @@ export default function GuidesPage() {
             <polyline points="15 18 9 12 15 6"/>
           </svg>
         </button>
-        <span className="font-semibold text-slate-900 dark:text-white flex-1">Repair Guides</span>
+        <span className="type-title-medium text-slate-900 dark:text-white flex-1">Repair Guides</span>
       </header>
 
       {/* Scrollable content */}
@@ -142,7 +142,7 @@ export default function GuidesPage() {
         <div className="mx-4 mt-5 mb-1 bg-[var(--color-secondary)] rounded-2xl px-5 py-4 flex items-center justify-between gap-4 elevation-2">
           <div>
             <p className="font-bold text-[var(--color-on-secondary)] text-base leading-tight">Park Tool</p>
-            <p className="text-[var(--color-secondary-container)] text-xs mt-0.5">Bike Repair &amp; Maintenance Series</p>
+            <p className="type-body-small text-[var(--color-secondary-container)] mt-0.5">Bike Repair &amp; Maintenance Series</p>
           </div>
           <a
             href="https://www.youtube.com/@ParkTool"
@@ -161,7 +161,7 @@ export default function GuidesPage() {
         <div className="px-4 pb-8 flex flex-col gap-6 mt-5">
           {CATEGORIES.map((cat) => (
             <section key={cat.label}>
-              <h2 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <h2 className="type-label-overline text-slate-500 dark:text-slate-400 mb-2 flex items-center gap-1.5">
                 <span>{cat.emoji}</span>
                 <span>{cat.label}</span>
               </h2>
@@ -174,7 +174,7 @@ export default function GuidesPage() {
           ))}
 
           {/* Footer note */}
-          <p className="text-center text-xs text-slate-500 dark:text-slate-400 pb-2">
+          <p className="type-body-small text-center text-slate-500 dark:text-slate-400 pb-2">
             Videos by{" "}
             <a href="https://www.parktool.com" target="_blank" rel="noopener noreferrer" className="underline">
               Park Tool

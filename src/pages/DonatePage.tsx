@@ -29,7 +29,7 @@ export default function DonatePage() {
             <polyline points="15 18 9 12 15 6"/>
           </svg>
         </button>
-        <span className="font-semibold text-slate-900 dark:text-white">Donate</span>
+        <span className="type-title-medium text-slate-900 dark:text-white">Donate</span>
       </header>
 
       <div className="flex-1 overflow-y-auto px-5 py-8 flex flex-col gap-8">
@@ -49,7 +49,7 @@ export default function DonatePage() {
 
         {/* Preset amounts */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Choose an amount</p>
+          <p className="type-label-overline text-slate-500 dark:text-slate-400">Choose an amount</p>
           <div className="flex gap-3">
             {PRESET_AMOUNTS.map((amount) => (
               <button
@@ -71,7 +71,7 @@ export default function DonatePage() {
 
         {/* Custom amount */}
         <div className="flex flex-col gap-3">
-          <label htmlFor="custom-amount" className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          <label htmlFor="custom-amount" className="type-label-overline text-slate-500 dark:text-slate-400">
             Or enter a custom amount
           </label>
           <div className="relative">
@@ -109,14 +109,14 @@ export default function DonatePage() {
           >
             {effectiveAmount !== null ? `Donate $${effectiveAmount}` : "Donate"}
           </button>
-          <p className="text-center text-xs text-slate-400 dark:text-slate-500">
+          <p className="type-body-small text-center text-slate-400 dark:text-slate-500">
             Payment integration coming soon — button is currently disabled.
           </p>
         </div>
 
         {/* Info card */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Where your donation goes</p>
+          <p className="type-label-overline text-slate-500 dark:text-slate-400">Where your donation goes</p>
           <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] elevation-1 px-4 py-4 flex flex-col gap-2.5">
             {[
               "Server and hosting costs",
