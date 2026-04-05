@@ -104,7 +104,7 @@ export function createClusterIcon(cluster: { getChildCount(): number }): L.DivIc
  */
 export function createMutedClusterIcon(): L.DivIcon {
   return L.divIcon({
-    html: `<div></div>`,
+    html: `<div><span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Station cluster</span></div>`,
     className: "station-cluster-muted",
     iconSize: L.point(20, 20),
     iconAnchor: L.point(10, 10),

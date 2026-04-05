@@ -4,15 +4,17 @@ interface Props {
 }
 
 export function LoadingOverlay({ visible, message = "Finding your location\u2026" }: Props) {
+  if (!visible) return null;
   return (
     <div
       className={[
         "fixed inset-0 z-[2000] flex flex-col items-center justify-center bg-white dark:bg-[#080c14]",
         "transition-opacity duration-300",
-        visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+        "opacity-100 pointer-events-auto",
       ].join(" ")}
-      aria-hidden={!visible}
       role="status"
+      aria-live="polite"
+      aria-atomic="true"
     >
       {/* Bicycle + wrench logo */}
       <div className="mb-6 flex flex-col items-center gap-3">

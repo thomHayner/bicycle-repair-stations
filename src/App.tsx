@@ -18,17 +18,19 @@ export default function App() {
         <Analytics /> {/* Vercel Analytics component for tracking user interactions */}
         <SpeedInsights /> {/* Vercel Speed Insights component for performance monitoring */}
 
-        {/* MapPage is always mounted — navigating to overlay pages never unmounts the map */}
-        <MapPage />
-        <Suspense fallback={null}>
-          <Routes>
-            <Route path="/guides"   element={<GuidesPage />} />
-            <Route path="/about"    element={<AboutPage />} />
-            <Route path="/donate"   element={<DonatePage />} />
-            <Route path="/report-bug" element={<ReportBugPage />} />
-            <Route path="*"         element={null} />
-          </Routes>
-        </Suspense>
+        <main id="main-content" className="h-full" aria-label="Bicycle repair stations app">
+          {/* MapPage is always mounted — navigating to overlay pages never unmounts the map */}
+          <MapPage />
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/guides"   element={<GuidesPage />} />
+              <Route path="/about"    element={<AboutPage />} />
+              <Route path="/donate"   element={<DonatePage />} />
+              <Route path="/report-bug" element={<ReportBugPage />} />
+              <Route path="*"         element={null} />
+            </Routes>
+          </Suspense>
+        </main>
       </ShareProvider>
     </SettingsProvider>
   );
