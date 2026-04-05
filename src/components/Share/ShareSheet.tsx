@@ -50,6 +50,8 @@ export function ShareSheet({
         role="dialog"
         aria-modal="true"
         aria-label="Share this app"
+        aria-hidden={!open}
+        {...(!open ? { inert: "" } : {})}
       >
         <div className="mb-3 px-1">
           <p className="text-sm font-bold text-slate-900 dark:text-slate-100">Share this app</p>

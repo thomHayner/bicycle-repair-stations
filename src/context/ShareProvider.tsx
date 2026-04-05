@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, useRef, useEffect, type ReactNode } from "react";
 import { Ctx, type ShareEntryPoint } from "./shareCtx";
 import { ShareSheet } from "../components/Share/ShareSheet";
 import {
@@ -14,10 +14,18 @@ export function ShareProvider({ children }: { children: ReactNode }) {
   const [shareOpen, setShareOpen] = useState(false);
   const [shareEntryPoint, setShareEntryPoint] = useState<ShareEntryPoint>("toolbar");
   const [shareNotice, setShareNotice] = useState<string | null>(null);
+  const noticeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (noticeTimeout.current) clearTimeout(noticeTimeout.current);
+    };
+  }, []);
 
   const showShareNotice = (message: string) => {
+    if (noticeTimeout.current) clearTimeout(noticeTimeout.current);
     setShareNotice(message);
-    setTimeout(() => setShareNotice(null), 2600);
+    noticeTimeout.current = setTimeout(() => setShareNotice(null), 2600);
   };
 
   const openShare = (entryPoint: ShareEntryPoint) => {
