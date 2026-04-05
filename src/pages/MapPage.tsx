@@ -338,7 +338,7 @@ export default function MapPage() {
               onClick={handleSearchHere}
               tabIndex={showSearchHere ? 0 : -1}
               aria-hidden={!showSearchHere}
-              className={`col-start-1 row-start-1 flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 focus-ring transition-opacity duration-150 ${showSearchHere ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+              className={`col-start-1 row-start-1 flex items-center gap-2 px-4 py-2 rounded-full state-surface focus-ring transition-opacity duration-150 ${showSearchHere ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
             >
               <span className={`inline-block w-3 h-3 border-2 border-green-600 border-t-transparent rounded-full shrink-0 ${isFetchingStations ? "animate-spin" : "invisible"}`} />
               Search this area

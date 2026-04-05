@@ -171,6 +171,30 @@
   font-weight: 400;
 }
 
+.state-surface {
+  transition: background-color 150ms;
+}
+
+.state-surface:hover {
+  background-color: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+}
+
+.state-surface:active {
+  background-color: color-mix(in srgb, var(--color-text-primary) 12%, transparent);
+}
+
+.state-surface-strong {
+  transition: background-color 150ms;
+}
+
+.state-surface-strong:hover {
+  background-color: color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+}
+
+.state-surface-strong:active {
+  background-color: color-mix(in srgb, var(--color-text-primary) 16%, transparent);
+}
+
 /* ── Base ────────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -249,17 +273,17 @@ button, a {
 
 /* ── Cluster marker styling ──────────────────────────────────────────────── */
 .station-cluster {
-  background: rgba(22, 163, 74, 0.25);   /* green-600 at 25% */
+  background: color-mix(in srgb, var(--color-primary) 25%, transparent);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .station-cluster div {
-  background: #16a34a;                    /* green-600 — matches stationIcon */
-  border: 2px solid white;
+  background: var(--color-primary);
+  border: 2px solid var(--color-on-primary);
   border-radius: 50%;
-  color: white;
+  color: var(--color-on-primary);
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -267,11 +291,11 @@ button, a {
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 .dark .station-cluster {
-  background: rgba(34, 197, 94, 0.2);     /* green-500 at 20% for dark mode */
+  background: color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 .dark .station-cluster div {
-  background: #22c55e;                    /* dark-mode primary green */
-  border-color: rgba(255,255,255,0.7);
+  background: var(--color-primary);
+  border-color: color-mix(in srgb, var(--color-on-primary) 70%, transparent);
 }
 
 /* Muted cluster for out-of-radius cached stations — small, no count */
@@ -281,13 +305,13 @@ button, a {
 .station-cluster-muted div {
   width: 14px;
   height: 14px;
-  background: #16a34a;
-  border: 1.5px solid white;
+  background: var(--color-primary);
+  border: 1.5px solid var(--color-on-primary);
   border-radius: 50%;
   opacity: 0.5;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 .dark .station-cluster-muted div {
-  background: #22c55e;
-  border-color: rgba(255,255,255,0.6);
+  background: var(--color-primary);
+  border-color: color-mix(in srgb, var(--color-on-primary) 60%, transparent);
 }

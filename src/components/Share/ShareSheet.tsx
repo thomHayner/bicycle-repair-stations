@@ -16,7 +16,7 @@ function ShareButton({ label, onClick }: { label: string; onClick: () => void })
     <button
       type="button"
       onClick={onClick}
-      className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-container)] px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring"
+      className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-container)] px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 state-surface focus-ring"
     >
       {label}
     </button>
@@ -127,7 +127,7 @@ export function ShareSheet({
           <button
             type="button"
             onClick={onClose}
-            className="w-full rounded-xl px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 active:bg-slate-200 dark:active:bg-slate-700/60 transition-colors focus-ring"
+            className="w-full rounded-xl px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 state-surface-strong focus-ring"
           >
             Cancel
           </button>
