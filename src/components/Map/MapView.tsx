@@ -250,7 +250,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
           aria-label="Zoom in"
           title="Zoom in"
           onClick={() => mapRef.current?.zoomIn()}
-          className="w-11 h-11 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400"
+          className="w-11 h-11 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring-inset"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
@@ -262,7 +262,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
           aria-label="Zoom out"
           title="Zoom out"
           onClick={() => mapRef.current?.zoomOut()}
-          className="w-11 h-11 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400"
+          className="w-11 h-11 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring-inset"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"/>

@@ -122,7 +122,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
             onClick={onClose}
             aria-label="Close menu"
             title="Close menu"
-            className="w-11 h-11 flex items-center justify-center rounded-full text-slate-400 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 dark:active:bg-slate-700 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
+            className="w-11 h-11 flex items-center justify-center rounded-full text-slate-400 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 dark:active:bg-slate-700 transition-colors focus-ring"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -134,7 +134,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
         <nav className="flex-1 overflow-y-auto py-2">
           {NAV_ITEMS.map((item) => (
             <button key={item.path} onClick={() => go(item.path)}
-              className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400">
+              className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring-inset">
               <span className="text-lg leading-none w-6 text-center">{item.emoji}</span>
               <span className="font-medium">{item.label}</span>
             </button>
@@ -144,7 +144,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
 
           {INFO_ITEMS.map((item) => (
             <button key={item.path} onClick={() => go(item.path)}
-              className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400">
+              className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring-inset">
               <span className="text-lg leading-none w-6 text-center">{item.emoji}</span>
               <span className="font-medium">{item.label}</span>
             </button>
@@ -152,7 +152,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
 
           <button
             onClick={onShare}
-            className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400"
+            className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring-inset"
           >
             <span className="text-lg leading-none w-6 text-center">🔗</span>
             <span className="font-medium">Share this app</span>
@@ -162,7 +162,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
 
           {EXTERNAL_ITEMS.map((item) => (
             <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" onClick={onClose}
-              className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400">
+              className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring-inset">
               <span className="text-lg leading-none w-6 text-center">{item.emoji}</span>
               <span className="font-medium">{item.label}</span>
               <svg className="ml-auto text-slate-300 dark:text-slate-600" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -182,7 +182,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
               {THEME_OPTIONS.map(({ value, label }) => (
                 <button key={value} type="button" onClick={() => setTheme(value)}
                   className={[
-                    "text-xs font-semibold px-3 py-1.5 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400",
+                    "text-xs font-semibold px-3 py-1.5 transition-colors focus-ring-inset",
                     value === theme
                       ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
                       : "bg-[var(--color-surface-container)] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
@@ -200,7 +200,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
               {(["mi", "km"] as Unit[]).map((u) => (
                 <button key={u} type="button" onClick={() => onUnitChange(u)}
                   className={[
-                    "text-xs font-semibold px-4 py-1.5 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400",
+                    "text-xs font-semibold px-4 py-1.5 transition-colors focus-ring-inset",
                     u === unit
                       ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
                       : "bg-[var(--color-surface-container)] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",

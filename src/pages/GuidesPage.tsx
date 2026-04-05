@@ -87,7 +87,7 @@ function VideoCard({ video }: { video: Video }) {
       href={`https://www.youtube.com/watch?v=${video.id}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex gap-3 items-center bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl elevation-1 p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
+      className="flex gap-3 items-center bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl elevation-1 p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring"
     >
       <div className="relative shrink-0 w-28 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 aspect-video">
         <img
@@ -127,7 +127,7 @@ export default function GuidesPage() {
           onClick={() => navigate(-1)}
           aria-label="Back"
           title="Go back"
-          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 dark:active:bg-slate-700 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
+          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 dark:active:bg-slate-700 transition-colors focus-ring"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6"/>
@@ -148,7 +148,7 @@ export default function GuidesPage() {
             href="https://www.youtube.com/@ParkTool"
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 flex items-center gap-1.5 bg-white rounded-full px-3 py-1.5 text-[#ff0000] text-xs font-bold hover:bg-red-50 active:bg-red-100 transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+            className="shrink-0 flex items-center gap-1.5 bg-white rounded-full px-3 py-1.5 text-[#ff0000] text-xs font-bold hover:bg-red-50 active:bg-red-100 transition-colors focus-ring-contrast"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#ff0000" stroke="none" aria-hidden="true">
               <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/>
