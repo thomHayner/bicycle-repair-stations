@@ -261,17 +261,10 @@ button, a {
 .leaflet-control-attribution {
   font-size: 10px !important;
   color: var(--color-on-surface-variant) !important;
-  background: rgba(255, 255, 255, 0.92) !important;
+  background: var(--color-surface-glass) !important;
 }
 .leaflet-control-attribution a {
   color: var(--color-primary) !important;
-}
-.dark .leaflet-control-attribution {
-  color: var(--color-on-surface-variant) !important;
-  background: rgba(8, 12, 20, 0.92) !important;
-}
-.dark .leaflet-control-attribution a {
-  color: var(--color-primary-text) !important;
 }
 
 /* ── Dark-mode tile inversion ─────────────────────────────────────────────── */

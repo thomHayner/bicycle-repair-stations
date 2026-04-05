@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type ReactNode } from "react";
+import { useState, useRef, useEffect, useCallback, type ReactNode } from "react";
 import { Ctx, type ShareEntryPoint } from "./shareCtx";
 import { ShareSheet } from "../components/Share/ShareSheet";
 import {
@@ -34,7 +34,7 @@ export function ShareProvider({ children }: { children: ReactNode }) {
     setShareOpen(true);
   };
 
-  const closeShare = () => setShareOpen(false);
+  const closeShare = useCallback(() => setShareOpen(false), []);
 
   const handleNativeShare = async () => {
     if (!isNativeShareSupported()) return;

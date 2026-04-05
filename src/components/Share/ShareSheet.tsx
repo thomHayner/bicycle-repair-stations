@@ -78,7 +78,9 @@ export function ShareSheet({
 
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      previousActive?.focus();
+      if (previousActive && previousActive.isConnected && previousActive.offsetParent !== null) {
+        previousActive.focus();
+      }
     };
   }, [open, onClose]);
 
@@ -103,7 +105,7 @@ export function ShareSheet({
         aria-modal="true"
         aria-label="Share this app"
         aria-hidden={!open}
-        {...(!open ? { inert: true } : {})}
+        {...(!open ? { inert: "" } : {})}
         aria-labelledby="share-sheet-title"
       >
         <div className="mb-3 px-1">

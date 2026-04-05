@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import type { Map as LeafletMap } from "leaflet";
 import { LAYERS, type LayerId } from "../../lib/layers";
 import { MenuDrawer } from "../Menu/MenuDrawer";
@@ -34,6 +34,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
   const [layerPickerOpen, setLayerPickerOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const handleMenuClose = useCallback(() => setMenuOpen(false), []);
 
   const handleRecenter = () => {
     if (!userPosition) return;
@@ -259,7 +260,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
 
       <MenuDrawer
         open={menuOpen}
-        onClose={() => setMenuOpen(false)}
+        onClose={handleMenuClose}
         onShare={() => {
           setMenuOpen(false);
           openShare("menu");

@@ -80,7 +80,9 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
     document.addEventListener("keydown", onKeyDown);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      previousActive?.focus();
+      if (previousActive && previousActive.isConnected && previousActive.offsetParent !== null) {
+        previousActive.focus();
+      }
     };
   }, [open, onClose]);
 
@@ -109,6 +111,8 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
         role="dialog"
         aria-modal="true"
         aria-labelledby="menu-drawer-title"
+        aria-hidden={!open}
+        {...(!open ? { inert: "" } : {})}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-5 border-b border-[var(--color-border)]">
