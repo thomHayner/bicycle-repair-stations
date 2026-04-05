@@ -1,6 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+async function redirectToCheckout(amountDollars: number) {
+  const response = await fetch("/api/create-checkout-session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ amount: amountDollars * 100 }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error || "Checkout failed");
+  if (data.url) window.location.href = data.url;
+}
+
 const PRESET_AMOUNTS = [1, 2, 5] as const;
 type PresetAmount = (typeof PRESET_AMOUNTS)[number];
 
@@ -8,6 +20,8 @@ export default function DonatePage() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<PresetAmount | null>(2);
   const [customInput, setCustomInput] = useState("10");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const effectiveAmount: number | null = (() => {
     if (selected !== null) return selected;
@@ -95,10 +109,17 @@ export default function DonatePage() {
         <div className="flex flex-col gap-2">
           <button
             type="button"
-            disabled={effectiveAmount === null}
-            onClick={() => {
-              // TODO: integrate payment processor (Buy Me a Coffee / Ko-fi / Patreon / etc.)
-              // Navigate to external donation URL with amount: effectiveAmount
+            disabled={effectiveAmount === null || loading}
+            onClick={async () => {
+              if (effectiveAmount === null) return;
+              setLoading(true);
+              setError(null);
+              try {
+                await redirectToCheckout(effectiveAmount);
+              } catch (err) {
+                setError(err instanceof Error ? err.message : "Something went wrong.");
+                setLoading(false);
+              }
             }}
             className={[
               "w-full py-3.5 rounded-full text-sm font-bold transition-colors focus-ring",
@@ -107,10 +128,13 @@ export default function DonatePage() {
                 : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed",
             ].join(" ")}
           >
-            {effectiveAmount !== null ? `Donate $${effectiveAmount}` : "Donate"}
+            {loading ? "Redirecting…" : effectiveAmount !== null ? `Donate $${effectiveAmount}` : "Donate"}
           </button>
+          {error && (
+            <p className="type-body-small text-center text-red-500 dark:text-red-400">{error}</p>
+          )}
           <p className="type-body-small text-center text-slate-400 dark:text-slate-500">
-            Payment integration coming soon — button is currently disabled.
+            Secure payment via Stripe. No card details are stored by this app.
           </p>
         </div>
 
