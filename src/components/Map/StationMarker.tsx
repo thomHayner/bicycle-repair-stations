@@ -17,6 +17,7 @@ interface Props {
 export const StationMarker = memo(function StationMarker({ station, isSelected, isInRadius, onSelect, onDeselect, userDistances }: Props) {
   const markerRef = useRef<LeafletMarker | null>(null);
   const map = useMap();
+  const stationName = station.tags.name ?? "Bicycle repair station";
 
   // Disable Leaflet's auto-popup on marker click. The popup stays bound
   // (so programmatic openPopup() works), but clicking won't auto-open it.
@@ -84,6 +85,8 @@ export const StationMarker = memo(function StationMarker({ station, isSelected, 
       ref={markerRef}
       position={[station.lat, station.lon]}
       icon={icon}
+      title={stationName}
+      alt={stationName}
       eventHandlers={eventHandlers}
     >
       <Popup

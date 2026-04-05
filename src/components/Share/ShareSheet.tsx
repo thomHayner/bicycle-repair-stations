@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 interface Props {
   open: boolean;
   canUseNativeShare: boolean;
@@ -31,6 +33,55 @@ export function ShareSheet({
   onShareEmail,
   onCopyLink,
 }: Props) {
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const previousActive = document.activeElement as HTMLElement | null;
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    const getFocusable = () =>
+      [...panel.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )];
+
+    const initial = getFocusable()[0];
+    initial?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+
+      const focusable = getFocusable();
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      previousActive?.focus();
+    };
+  }, [open, onClose]);
+
   return (
     <>
       <div
@@ -42,6 +93,7 @@ export function ShareSheet({
       />
 
       <div
+        ref={panelRef}
         className={[
           "fixed left-3 right-3 bottom-3 z-[2700] rounded-2xl border border-slate-100 dark:border-[#1e2a3a] bg-slate-50 dark:bg-[#080c14] p-3 shadow-2xl",
           "transition-transform duration-200",
@@ -49,10 +101,10 @@ export function ShareSheet({
         ].join(" ")}
         role="dialog"
         aria-modal="true"
-        aria-label="Share this app"
+        aria-labelledby="share-sheet-title"
       >
         <div className="mb-3 px-1">
-          <p className="text-sm font-bold text-slate-900 dark:text-slate-100">Share this app</p>
+          <p id="share-sheet-title" className="text-sm font-bold text-slate-900 dark:text-slate-100">Share this app</p>
           <p className="text-xs text-slate-500 dark:text-slate-400">
             Personal sharing only: X, Facebook, email, or copy link.
           </p>
