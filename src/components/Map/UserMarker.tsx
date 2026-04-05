@@ -22,7 +22,13 @@ export function UserMarker({ lat, lng, accuracy }: Props) {
           }}
         />
       )}
-      <Marker position={[lat, lng]} icon={userIcon} zIndexOffset={1000}>
+      <Marker
+        position={[lat, lng]}
+        icon={userIcon}
+        zIndexOffset={1000}
+        title="Your location"
+        alt="Your location"
+      >
         <Tooltip permanent={false} direction="top" offset={[0, -14]}>
           You are here
         </Tooltip>

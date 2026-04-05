@@ -18,3 +18,6 @@
 - [ ] Dark mode and light mode tested
 - [ ] Mobile viewport tested (or change is not UI-related)
 - [ ] No new a11y contrast issues introduced
+- [ ] ARIA semantics preserved (landmarks, control names, live regions)
+- [ ] Dialog keyboard behavior verified (focus trap, Escape close, focus return)
+- [ ] Axe scan run on touched route(s)
