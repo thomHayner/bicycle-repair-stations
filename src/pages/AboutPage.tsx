@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useShare } from "../context/useShare";
 
 function Accordion({ title, children }: { title: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -30,12 +31,16 @@ function Accordion({ title, children }: { title: string; children: React.ReactNo
 
 export default function AboutPage() {
   const navigate = useNavigate();
+  const { openShare } = useShare();
+
   return (
+    <>
     <div className="fixed inset-0 z-[2000] bg-slate-50 dark:bg-[#080c14] flex flex-col">
       <header className="flex items-center gap-3 px-4 py-4 bg-white dark:bg-[#0d1220] border-b border-slate-100 dark:border-[#1e2a3a] shadow-sm">
         <button
           onClick={() => navigate(-1)}
           aria-label="Back"
+          title="Go back"
           className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 active:bg-slate-100 dark:active:bg-slate-800 transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -82,6 +87,12 @@ export default function AboutPage() {
         <div className="flex flex-col gap-2">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Contribute</p>
           <div className="bg-white dark:bg-[#0d1220] rounded-2xl border border-slate-100 dark:border-[#1e2a3a] divide-y divide-slate-100 dark:divide-[#1e2a3a] shadow-sm">
+            <a href="https://www.openstreetmap.org/edit" target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50">
+              <span>Add a missing station on OSM</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 dark:text-slate-400"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+
             <button
               type="button"
               onClick={() => navigate("/report-bug")}
@@ -91,12 +102,6 @@ export default function AboutPage() {
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 dark:text-slate-400"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
 
-            <a href="https://www.openstreetmap.org/edit" target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50">
-              <span>Add a missing station on OSM</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 dark:text-slate-400"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-
             <button
               type="button"
               onClick={() => navigate("/donate")}
@@ -104,6 +109,21 @@ export default function AboutPage() {
             >
               <span>Support with a donation</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 dark:text-slate-400"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => openShare("about")}
+              className="w-full flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50"
+            >
+              <span>Share this app</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 dark:text-slate-400">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
             </button>
           </div>
         </div>
@@ -146,5 +166,6 @@ export default function AboutPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

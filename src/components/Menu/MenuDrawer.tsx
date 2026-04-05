@@ -6,6 +6,7 @@ import type { Unit } from "../../lib/units";
 interface Props {
   open: boolean;
   onClose: () => void;
+  onShare: () => void;
   unit: Unit;
   onUnitChange: (unit: Unit) => void;
 }
@@ -31,7 +32,7 @@ const THEME_OPTIONS: { value: Theme; label: string }[] = [
   { value: "system", label: "System" },
 ];
 
-export function MenuDrawer({ open, onClose, unit, onUnitChange }: Props) {
+export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props) {
   const navigate = useNavigate();
   const { theme, setTheme } = useSettings();
 
@@ -68,6 +69,7 @@ export function MenuDrawer({ open, onClose, unit, onUnitChange }: Props) {
           <button
             onClick={onClose}
             aria-label="Close menu"
+            title="Close menu"
             className="w-8 h-8 flex items-center justify-center rounded-full text-slate-400 dark:text-slate-500 active:bg-slate-100 dark:active:bg-slate-800 transition-colors"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -95,6 +97,14 @@ export function MenuDrawer({ open, onClose, unit, onUnitChange }: Props) {
               <span className="font-medium">{item.label}</span>
             </button>
           ))}
+
+          <button
+            onClick={onShare}
+            className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50 transition-colors"
+          >
+            <span className="text-lg leading-none w-6 text-center">🔗</span>
+            <span className="font-medium">Share this app</span>
+          </button>
 
           <div className="my-2 mx-5 border-t border-slate-100 dark:border-[#1e2a3a]" />
 
