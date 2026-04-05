@@ -10,9 +10,9 @@
    !important is required to beat both the UA a:visited rule and Leaflet's
    !important color on .leaflet-popup-content. */
 .btn-get-directions,
-.btn-get-directions:visited          { color: white !important; }
+.btn-get-directions:visited          { color: var(--color-on-primary) !important; }
 .dark .btn-get-directions,
-.dark .btn-get-directions:visited    { color: black !important; }
+.dark .btn-get-directions:visited    { color: var(--color-on-primary) !important; }
 
 /* ── Semantic color tokens ────────────────────────────────────────────────── */
 :root {
