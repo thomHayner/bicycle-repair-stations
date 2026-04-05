@@ -263,6 +263,7 @@ export function StationListView({
                     onClick={(e) => e.stopPropagation()}
                     className="flex items-center justify-center w-8 h-8 rounded-full bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 active:bg-green-100 dark:active:bg-green-900/50 transition-colors"
                     aria-label={`Get directions to ${name}`}
+                    title={`Get directions to ${name}`}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M21.71 11.29l-9-9a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l9 9a1 1 0 0 0 1.42 0l9-9a1 1 0 0 0 0-1.42zM13 16.17V13H9v-2h4V7.83l4.17 4.17L13 16.17z"/>

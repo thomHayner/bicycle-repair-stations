@@ -30,15 +30,17 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 - **Three map layers** — Cycling (default), Satellite, Standard — selectable via a FAB picker
 - **Dark mode tile inversion** — light-mode tiles inverted with a CSS filter for all non-satellite layers; no separate dark tile providers needed
 - **Locate me FAB** — flies back to current GPS position at zoom 18; dimmed until GPS resolves
+- **Share FAB** — standalone map control that opens a unified share modal (same handler used by map, menu, and About page)
 - **Zoom-out guard** — hides markers and shows a toast when the visible map spans more than 75 miles
 - **User position marker** — blue pulsing dot with accuracy radius ring
 
 ### Navigation & Pages
 - **Always-mounted map** — navigating to other pages never unmounts or reloads the map
 - **Repair Guides** — curated Park Tool YouTube videos in 7 categories (Flat Tyre, Brakes, Gears, Chain, Wheels, Headset, Bottom Bracket)
-- **About** — credits, contribute link, Privacy Policy, and Terms of Service with accordion expand/collapse
+- **About** — credits, contribute links (OSM / bug / donate / share), Privacy Policy, and Terms of Service with accordion expand/collapse
+- **Share modal** — one global modal for personal sharing (X, Facebook, email, copy link, plus native app share option)
 - **Report a bug** — in-app form that opens GitHub issues for maintainer triage
-- **Menu drawer** — slide-in navigation with theme toggle (Light / Dark / System) and unit toggle
+- **Menu drawer** — slide-in navigation with theme toggle (Light / Dark / System), unit toggle, and Share action
 
 ### PWA & Accessibility
 - **PWA installable** — `manifest.json` with standalone display; 192 × 192 and 512 × 512 icons
@@ -165,12 +167,16 @@ src/
 │   │   ├── StationPopup.tsx
 │   │   └── UserMarker.tsx
 │   ├── Menu/MenuDrawer.tsx          # Slide-in navigation + theme/unit toggles
+│   ├── Share/ShareSheet.tsx          # Unified personal-share modal UI
 │   └── Toolbar/
-│       └── Toolbar.tsx              # Search bar, locate FAB, layer FAB, geocoding
+│       └── Toolbar.tsx              # Search bar + map FABs (locate, layer, share) + geocoding
 ├── context/
+│   ├── ShareProvider.tsx            # Global share state + handlers + analytics + one modal instance
 │   ├── SettingsContext.tsx          # Theme + unit provider (wraps app at root)
 │   ├── settingsCtx.ts               # Context object definition (avoids fast-refresh issues)
-│   └── useSettings.ts               # Consumer hook
+│   ├── shareCtx.ts                  # Share context object/type definitions
+│   ├── useSettings.ts               # Settings consumer hook
+│   └── useShare.ts                  # Share consumer hook
 ├── hooks/
 │   ├── useGeolocation.ts            # GPS watchPosition with denied-permission fallback
 │   ├── useOverpassQuery.ts          # Primary Overpass fetch + localStorage cache
@@ -181,7 +187,9 @@ src/
 │   ├── env.ts                       # VITE_ environment variable accessors with defaults
 │   ├── layers.ts                    # Map tile layer ID type + LAYERS display array
 │   ├── leafletConfig.ts             # Leaflet default icon fix + custom DivIcon helpers
+│   ├── analytics.ts                 # Vercel custom event wrapper
 │   ├── overpass.ts                  # Overpass query builder + fetch with mirror fallback
+│   ├── share.ts                     # Share payload + channel URL builders + copy-link helper
 │   ├── stationCache.ts              # localStorage cache read/write/coverage-check logic
 │   └── units.ts                     # Unit types (mi/km) + distance preset arrays
 ├── pages/
@@ -834,6 +842,7 @@ All tile requests are made directly from the user's browser. No API keys. No pro
 | Low | Service Worker background sync to refresh station cache while offline |
 | Low | "Report station issue" link that pre-fills an OSM changeset |
 | Low | Swipe-to-dismiss gesture on the station list panel |
+| Low | Optional station-level share from popup (deferred; users can already share from native maps after tapping Get Directions) |
 
 ### 6.4 Build & Run
 

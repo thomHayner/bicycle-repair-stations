@@ -3,6 +3,7 @@ import type { Map as LeafletMap } from "leaflet";
 import { LAYERS, type LayerId } from "../../lib/layers";
 import { MenuDrawer } from "../Menu/MenuDrawer";
 import type { Unit } from "../../lib/units";
+import { useShare } from "../../context/useShare";
 
 interface Props {
   onLocationFound: (pos: { lat: number; lng: number }, zoom?: number) => void;
@@ -26,6 +27,7 @@ async function geocode(query: string): Promise<{ lat: number; lng: number } | nu
 }
 
 export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
+  const { openShare } = useShare();
   const [query, setQuery] = useState("");
   const [isGeocoding, setIsGeocoding] = useState(false);
   const [locationNotFound, setLocationNotFound] = useState(false);
@@ -79,6 +81,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
+            title="Open menu"
             className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 active:bg-slate-100 dark:active:bg-slate-800 transition-colors shrink-0"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -128,6 +131,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
                 <button
                   type="submit"
                   aria-label="Search"
+                  title="Search location"
                   className="min-w-[44px] min-h-[44px] flex items-center justify-center text-green-600 dark:text-green-500 active:text-green-800 transition-colors shrink-0"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -137,6 +141,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
               )}
             </div>
           </form>
+
         </div>
 
         {locationNotFound && (
@@ -158,6 +163,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         onClick={handleRecenter}
         disabled={!userPosition}
         aria-label="Use my location"
+        title={userPosition ? "Use my location" : "Location unavailable"}
         style={{ top: fabTop }}
         className={[
           "fixed right-3 z-[1000] w-11 h-11 rounded-full",
@@ -180,6 +186,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         type="button"
         onClick={() => setLayerPickerOpen((p) => !p)}
         aria-label="Select map layer"
+        title="Select map layer"
         style={{ top: fabTop + 44 + 8 }}
         className={[
           "fixed right-3 z-[1000] w-11 h-11 rounded-full",
@@ -195,6 +202,24 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
           <polygon points="12 2 2 7 12 12 22 7 12 2"/>
           <polyline points="2 17 12 22 22 17"/>
           <polyline points="2 12 12 17 22 12"/>
+        </svg>
+      </button>
+
+      {/* Share FAB — below the layer picker */}
+      <button
+        type="button"
+        onClick={() => openShare("toolbar")}
+        aria-label="Share app"
+        title="Share app"
+        style={{ top: fabTop + (44 + 8) * 2 }}
+        className="fixed right-3 z-[1000] w-11 h-11 rounded-full bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm shadow-lg flex items-center justify-center text-slate-600 dark:text-slate-300 active:bg-slate-50 dark:active:bg-slate-800/50 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
         </svg>
       </button>
 
@@ -231,7 +256,16 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         </div>
       )}
 
-      <MenuDrawer open={menuOpen} onClose={() => setMenuOpen(false)} unit={unit} onUnitChange={onUnitChange} />
+      <MenuDrawer
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onShare={() => {
+          setMenuOpen(false);
+          openShare("menu");
+        }}
+        unit={unit}
+        onUnitChange={onUnitChange}
+      />
     </>
   );
 }

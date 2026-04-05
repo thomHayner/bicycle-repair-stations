@@ -248,6 +248,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
         <button
           type="button"
           aria-label="Zoom in"
+          title="Zoom in"
           onClick={() => mapRef.current?.zoomIn()}
           className="w-11 h-11 flex items-center justify-center text-slate-600 dark:text-slate-300 active:bg-slate-100 dark:active:bg-slate-800/50 transition-colors"
         >
@@ -259,6 +260,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
         <button
           type="button"
           aria-label="Zoom out"
+          title="Zoom out"
           onClick={() => mapRef.current?.zoomOut()}
           className="w-11 h-11 flex items-center justify-center text-slate-600 dark:text-slate-300 active:bg-slate-100 dark:active:bg-slate-800/50 transition-colors"
         >
