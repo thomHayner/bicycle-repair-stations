@@ -87,7 +87,7 @@ function VideoCard({ video }: { video: Video }) {
       href={`https://www.youtube.com/watch?v=${video.id}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex gap-3 items-center bg-white dark:bg-[#0d1220] border border-slate-100 dark:border-[#1e2a3a] rounded-xl shadow-sm p-2 active:bg-slate-50 dark:active:bg-slate-800/50 transition-colors"
+      className="flex gap-3 items-center bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl shadow-sm p-2 active:bg-slate-50 dark:active:bg-slate-800/50 transition-colors"
     >
       <div className="relative shrink-0 w-28 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 aspect-video">
         <img
@@ -120,9 +120,9 @@ export default function GuidesPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed inset-0 z-[2000] bg-slate-50 dark:bg-[#080c14] flex flex-col">
+    <div className="fixed inset-0 z-[2000] bg-[var(--color-surface-container)] flex flex-col">
       {/* Header */}
-      <header className="flex items-center gap-3 px-4 py-4 bg-white dark:bg-[#0d1220] border-b border-slate-100 dark:border-[#1e2a3a] shadow-sm shrink-0">
+      <header className="flex items-center gap-3 px-4 py-4 bg-[var(--color-surface)] border-b border-[var(--color-border)] shadow-sm shrink-0">
         <button
           onClick={() => navigate(-1)}
           aria-label="Back"
@@ -139,10 +139,10 @@ export default function GuidesPage() {
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto">
         {/* Park Tool banner */}
-        <div className="mx-4 mt-5 mb-1 bg-[#0066b2] dark:bg-[#003d6e] rounded-2xl px-5 py-4 flex items-center justify-between gap-4 shadow-md">
+        <div className="mx-4 mt-5 mb-1 bg-[var(--color-secondary)] rounded-2xl px-5 py-4 flex items-center justify-between gap-4 shadow-md">
           <div>
-            <p className="font-bold text-white text-base leading-tight">Park Tool</p>
-            <p className="text-blue-100 text-xs mt-0.5">Bike Repair &amp; Maintenance Series</p>
+            <p className="font-bold text-[var(--color-on-secondary)] text-base leading-tight">Park Tool</p>
+            <p className="text-[var(--color-secondary-container)] text-xs mt-0.5">Bike Repair &amp; Maintenance Series</p>
           </div>
           <a
             href="https://www.youtube.com/@ParkTool"
