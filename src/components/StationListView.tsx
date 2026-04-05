@@ -46,9 +46,9 @@ function getHeaderState(
 }
 
 const AMENITY_FILTERS = [
-  { key: "pump",   label: "💨 Pump",   tag: "service:bicycle:pump",   active: "bg-sky-700 dark:bg-sky-400 border-sky-700 dark:border-sky-400 text-white dark:text-black",    inactive: "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300" },
-  { key: "tools",  label: "🔧 Tools",  tag: "service:bicycle:tools",  active: "bg-green-700 dark:bg-green-400 border-green-700 dark:border-green-400 text-white dark:text-black",  inactive: "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300" },
-  { key: "repair", label: "🛠 Repair", tag: "service:bicycle:repair", active: "bg-amber-700 dark:bg-amber-400 border-amber-700 dark:border-amber-400 text-white dark:text-black",  inactive: "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300" },
+  { key: "pump",   label: "💨 Pump",   tag: "service:bicycle:pump",   active: "bg-[var(--color-secondary)] border-[var(--color-secondary)] text-[var(--color-on-secondary)]",    inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
+  { key: "tools",  label: "🔧 Tools",  tag: "service:bicycle:tools",  active: "bg-[var(--color-primary)] border-[var(--color-primary)] text-[var(--color-on-primary)]",  inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
+  { key: "repair", label: "🛠 Repair", tag: "service:bicycle:repair", active: "bg-amber-700 dark:bg-amber-400 border-amber-700 dark:border-amber-400 text-white dark:text-black",  inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
 ] as const;
 
 type FilterKey = (typeof AMENITY_FILTERS)[number]["key"];
@@ -120,7 +120,7 @@ export function StationListView({
   const headerKey = headerPulse ? "loading" : headerText;
 
   return (
-    <div className="fixed bottom-[65px] left-3 right-3 z-[900] rounded-2xl shadow-lg bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm overflow-hidden">
+    <div className="fixed bottom-[65px] left-3 right-3 z-[900] rounded-2xl shadow-lg bg-[var(--color-surface-glass)] backdrop-blur-sm overflow-hidden">
 
       {/* Handle — always visible */}
       <button
@@ -150,8 +150,8 @@ export function StationListView({
         }`}
       >
         {/* Distance row */}
-        <div className="border-t border-slate-100 dark:border-[#1e2a3a] px-4 py-3 flex items-center gap-2 flex-wrap">
-          <div className="flex rounded-full border border-slate-200 dark:border-[#1e2a3a] overflow-hidden shrink-0 mr-1">
+        <div className="border-t border-[var(--color-border)] px-4 py-3 flex items-center gap-2 flex-wrap">
+          <div className="flex rounded-full border border-[var(--color-border)] overflow-hidden shrink-0 mr-1">
             {(["mi", "km"] as Unit[]).map((u) => (
               <button
                 key={u}
@@ -160,8 +160,8 @@ export function StationListView({
                 className={[
                   "text-xs font-semibold px-3 py-1 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400",
                   u === unit
-                    ? "bg-green-600 text-white"
-                    : "bg-white dark:bg-[#0d1220] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
+                    ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
+                    : "bg-[var(--color-surface-container)] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
                 ].join(" ")}
               >
                 {u}
@@ -176,8 +176,8 @@ export function StationListView({
               className={[
                 "text-xs font-semibold px-3 py-1 rounded-full border transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-1 dark:focus-visible:outline-green-400",
                 d === selectedDist
-                  ? "bg-green-600 border-green-600 text-white"
-                  : "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
+                  ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-[var(--color-on-primary)]"
+                  : "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
               ].join(" ")}
             >
               {d}
@@ -186,7 +186,7 @@ export function StationListView({
         </div>
 
         {/* Amenity filter row */}
-        <div className="border-t border-slate-100 dark:border-[#1e2a3a] px-4 py-2.5 flex items-center gap-2 flex-wrap">
+        <div className="border-t border-[var(--color-border)] px-4 py-2.5 flex items-center gap-2 flex-wrap">
           <span className="text-xs text-slate-500 dark:text-slate-400 shrink-0">Filter:</span>
           {AMENITY_FILTERS.map((f) => {
             const on = activeFilters.has(f.key);
@@ -216,7 +216,7 @@ export function StationListView({
         </div>
 
         {/* Station list */}
-        <div className="border-t border-slate-100 dark:border-[#1e2a3a]">
+        <div className="border-t border-[var(--color-border)]">
           {emptyPanelText && (
             <div className="px-4 py-5 text-sm text-slate-500 dark:text-slate-400 text-center">
               {emptyPanelText}
@@ -237,7 +237,7 @@ export function StationListView({
                 key={station.id}
                 onClick={() => onStationSelect(station)}
                 className={`w-full flex items-start justify-between px-4 py-3 text-left hover:bg-slate-50 dark:hover:bg-slate-800/30 active:bg-slate-100 dark:active:bg-slate-700/40 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400 ${
-                  i > 0 ? "border-t border-slate-100 dark:border-[#1e2a3a]" : ""
+                  i > 0 ? "border-t border-[var(--color-border)]" : ""
                 }`}
               >
                 <div className="flex-1 min-w-0">
