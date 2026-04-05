@@ -112,7 +112,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
         aria-modal="true"
         aria-labelledby="menu-drawer-title"
         aria-hidden={!open}
-        {...(!open ? { inert: "" } : {})}
+        {...(!open ? { inert: true } : {})}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-5 border-b border-[var(--color-border)]">
