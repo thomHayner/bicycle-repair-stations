@@ -72,7 +72,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
   return (
     <>
       <header
-        className="fixed top-3 left-3 right-3 z-[1000] bg-[var(--color-surface-glass)] backdrop-blur-sm shadow-lg rounded-2xl overflow-hidden"
+        className="fixed top-3 left-3 right-3 z-[1000] bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 rounded-2xl overflow-hidden"
         style={{ height: locationDenied || locationNotFound ? "auto" : 56 }}
       >
         <div className="flex items-center px-3 gap-2" style={{ height: 56 }}>
@@ -167,7 +167,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         style={{ top: fabTop }}
         className={[
           "fixed right-3 z-[1000] w-11 h-11 rounded-full",
-          "bg-[var(--color-surface-glass)] backdrop-blur-sm shadow-lg",
+          "bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2",
           "flex items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400",
           userPosition
             ? "text-[var(--color-primary)] hover:bg-[var(--color-surface-search)] active:bg-[var(--color-secondary-container)]"
@@ -190,7 +190,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         style={{ top: fabTop + 44 + 8 }}
         className={[
           "fixed right-3 z-[1000] w-11 h-11 rounded-full",
-          "bg-[var(--color-surface-glass)] backdrop-blur-sm shadow-lg",
+          "bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2",
           "flex items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400",
           layerPickerOpen
             ? "text-[var(--color-primary)] bg-[var(--color-surface-search)]"
@@ -212,7 +212,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         aria-label="Share app"
         title="Share app"
         style={{ top: fabTop + (44 + 8) * 2 }}
-        className="fixed right-3 z-[1000] w-11 h-11 rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm shadow-lg flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
+        className="fixed right-3 z-[1000] w-11 h-11 rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <circle cx="18" cy="5" r="3"/>
@@ -235,7 +235,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
       {layerPickerOpen && (
         <div
           style={{ top: fabTop + 44 + 8 }}
-          className="fixed right-[60px] z-[1000] bg-[var(--color-surface-glass)] backdrop-blur-sm shadow-lg rounded-2xl overflow-hidden min-w-[152px]"
+          className="fixed right-[60px] z-[1000] bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 rounded-2xl overflow-hidden min-w-[152px]"
         >
           {LAYERS.map((l) => (
             <button

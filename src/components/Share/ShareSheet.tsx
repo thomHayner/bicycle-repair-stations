@@ -95,7 +95,7 @@ export function ShareSheet({
       <div
         ref={panelRef}
         className={[
-          "fixed left-3 right-3 bottom-3 z-[2700] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-container)] p-3 shadow-2xl",
+          "fixed left-3 right-3 bottom-3 z-[2700] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-container)] p-3 elevation-3",
           "transition-transform duration-200",
           open ? "translate-y-0" : "translate-y-[120%]",
         ].join(" ")}

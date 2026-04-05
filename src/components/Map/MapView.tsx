@@ -242,7 +242,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
 
       {/* Zoom controls — sit above collapsed list handle; overlap is fine when list is open */}
       <div
-        className="fixed right-3 z-[1000] flex flex-col rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm shadow-lg overflow-hidden transition-[bottom] duration-300"
+        className="fixed right-3 z-[1000] flex flex-col rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 overflow-hidden transition-[bottom] duration-300"
         style={{ bottom: listExpanded ? 92 : 120 }}
       >
         <button

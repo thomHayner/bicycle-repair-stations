@@ -117,7 +117,7 @@ export default function DonatePage() {
         {/* Info card */}
         <div className="flex flex-col gap-3">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Where your donation goes</p>
-          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm px-4 py-4 flex flex-col gap-2.5">
+          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] elevation-1 px-4 py-4 flex flex-col gap-2.5">
             {[
               "Server and hosting costs",
               "Map tile and API usage",

@@ -321,7 +321,7 @@ export default function MapPage() {
           style={{ top: locationDenied ? 112 : 80 }}
         >
           {/* Grid container = pill shell; both variants overlap at col/row 1 so pill never resizes */}
-          <div className="grid bg-[var(--color-surface-glass)] backdrop-blur-sm shadow-lg border border-[var(--color-border)] rounded-full text-sm font-semibold text-slate-800 dark:text-slate-100">
+          <div className="grid bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 border border-[var(--color-border)] rounded-full text-sm font-semibold text-slate-800 dark:text-slate-100">
 
             {/* Loading variant: [spinner] [text] [invisible 15px spacer] */}
             <div

@@ -101,7 +101,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
       <div
         ref={panelRef}
         className={[
-          "fixed left-0 top-0 bottom-0 z-[1600] w-72 flex flex-col shadow-2xl",
+          "fixed left-0 top-0 bottom-0 z-[1600] w-72 flex flex-col elevation-3",
           "bg-[var(--color-surface)]",
           "transition-transform duration-300",
           open ? "translate-x-0" : "-translate-x-full",
