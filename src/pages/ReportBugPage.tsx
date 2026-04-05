@@ -93,6 +93,12 @@ export default function ReportBugPage() {
     }
   };
 
+  const resetForAnotherReport = () => {
+    setCreatedIssue(null);
+    setError(null);
+    setForm(EMPTY_FORM);
+  };
+
   return (
     <div className="fixed inset-0 z-[2000] bg-slate-50 dark:bg-[#080c14] flex flex-col">
       <header className="flex items-center gap-3 px-4 py-4 bg-white dark:bg-[#0d1220] border-b border-slate-100 dark:border-[#1e2a3a] shadow-sm shrink-0">
@@ -120,111 +126,123 @@ export default function ReportBugPage() {
           Keep this report public-safe. Do not include personal information, email addresses, phone numbers, home/work addresses, or account secrets.
         </div>
 
-        {createdIssue && (
-          <div className="rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-900 dark:bg-green-950/20 dark:border-green-800/70 dark:text-green-300 flex items-center justify-between gap-3">
-            <span>Issue #{createdIssue.issueNumber} created successfully.</span>
-            <a
-              href={createdIssue.issueUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold underline underline-offset-2"
-            >
-              View issue
-            </a>
-          </div>
-        )}
-
         {error && (
           <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 dark:bg-red-950/20 dark:border-red-800/70 dark:text-red-300">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <FieldLabel htmlFor="bug-summary" label="Bug summary" required />
-          <input
-            id="bug-summary"
-            value={form.summary}
-            onChange={(event) => setField("summary", event.target.value)}
-            placeholder="Short title for the issue"
-            maxLength={120}
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
-          />
+        {createdIssue ? (
+          <div className="rounded-2xl border border-green-200 bg-green-50 px-5 py-5 text-sm text-green-900 dark:bg-green-950/20 dark:border-green-800/70 dark:text-green-300 flex flex-col gap-4">
+            <p className="text-base font-semibold text-green-900 dark:text-green-200">Thanks for the report.</p>
+            <p>
+              Issue #{createdIssue.issueNumber} was created successfully and is ready for maintainer triage.
+            </p>
+            <div className="flex flex-col gap-2">
+              <a
+                href={createdIssue.issueUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex justify-center items-center rounded-full bg-green-700 text-white dark:bg-green-500 dark:text-black px-4 py-2.5 font-semibold"
+              >
+                View issue on GitHub
+              </a>
+              <button
+                type="button"
+                onClick={resetForAnotherReport}
+                className="inline-flex justify-center items-center rounded-full border border-green-400/60 dark:border-green-700 px-4 py-2.5 font-semibold"
+              >
+                Report another bug
+              </button>
+            </div>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <FieldLabel htmlFor="bug-summary" label="Bug summary" required />
+            <input
+              id="bug-summary"
+              value={form.summary}
+              onChange={(event) => setField("summary", event.target.value)}
+              placeholder="Short title for the issue"
+              maxLength={120}
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+            />
 
-          <FieldLabel htmlFor="bug-description" label="What happened?" required />
-          <textarea
-            id="bug-description"
-            value={form.description}
-            onChange={(event) => setField("description", event.target.value)}
-            rows={4}
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
-          />
+            <FieldLabel htmlFor="bug-description" label="What happened?" required />
+            <textarea
+              id="bug-description"
+              value={form.description}
+              onChange={(event) => setField("description", event.target.value)}
+              rows={4}
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+            />
 
-          <FieldLabel htmlFor="bug-steps" label="Steps to reproduce" required />
-          <textarea
-            id="bug-steps"
-            value={form.steps}
-            onChange={(event) => setField("steps", event.target.value)}
-            rows={4}
-            placeholder={"1. Open the app\n2. Tap ...\n3. See error"}
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
-          />
+            <FieldLabel htmlFor="bug-steps" label="Steps to reproduce" required />
+            <textarea
+              id="bug-steps"
+              value={form.steps}
+              onChange={(event) => setField("steps", event.target.value)}
+              rows={4}
+              placeholder={"1. Open the app\n2. Tap ...\n3. See error"}
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+            />
 
-          <FieldLabel htmlFor="bug-expected" label="Expected behaviour" required />
-          <textarea
-            id="bug-expected"
-            value={form.expected}
-            onChange={(event) => setField("expected", event.target.value)}
-            rows={3}
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
-          />
+            <FieldLabel htmlFor="bug-expected" label="Expected behaviour" required />
+            <textarea
+              id="bug-expected"
+              value={form.expected}
+              onChange={(event) => setField("expected", event.target.value)}
+              rows={3}
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+            />
 
-          <FieldLabel htmlFor="bug-theme" label="Colour theme" />
-          <select
-            id="bug-theme"
-            value={form.theme}
-            onChange={(event) => setField("theme", event.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
-          >
-            <option>Light</option>
-            <option>Dark</option>
-            <option>System default</option>
-            <option>Not sure</option>
-          </select>
+            <FieldLabel htmlFor="bug-theme" label="Colour theme" />
+            <select
+              id="bug-theme"
+              value={form.theme}
+              onChange={(event) => setField("theme", event.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+            >
+              <option>Light</option>
+              <option>Dark</option>
+              <option>System default</option>
+              <option>Not sure</option>
+            </select>
 
-          <FieldLabel htmlFor="bug-device" label="Device and browser" />
-          <input
-            id="bug-device"
-            value={form.device}
-            onChange={(event) => setField("device", event.target.value)}
-            placeholder="e.g. iPhone 15 / Safari 17"
-            maxLength={140}
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
-          />
+            <FieldLabel htmlFor="bug-device" label="Device and browser" />
+            <input
+              id="bug-device"
+              value={form.device}
+              onChange={(event) => setField("device", event.target.value)}
+              placeholder="e.g. iPhone 15 / Safari 17"
+              maxLength={140}
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+            />
 
-          <FieldLabel htmlFor="bug-screenshots" label="Screenshots or recording links" />
-          <textarea
-            id="bug-screenshots"
-            value={form.screenshots}
-            onChange={(event) => setField("screenshots", event.target.value)}
-            rows={3}
-            placeholder="Paste links to screenshots, videos, or cloud files"
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
-          />
+            <FieldLabel htmlFor="bug-screenshots" label="Screenshots or recording links" />
+            <textarea
+              id="bug-screenshots"
+              value={form.screenshots}
+              onChange={(event) => setField("screenshots", event.target.value)}
+              rows={3}
+              placeholder="Paste links to screenshots, videos, or cloud files"
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+            />
 
-          <button
-            type="submit"
-            disabled={!canSubmit}
-            className={[
-              "w-full py-3.5 mt-1 rounded-full text-sm font-bold transition-colors",
-              canSubmit
-                ? "bg-green-600 dark:bg-green-500 text-white active:bg-green-700 dark:active:bg-green-600"
-                : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed",
-            ].join(" ")}
-          >
-            {isSubmitting ? "Submitting..." : "Submit bug report"}
-          </button>
-        </form>
+            <button
+              type="submit"
+              disabled={!canSubmit}
+              className={[
+                "w-full py-3.5 mt-1 rounded-full text-sm font-bold transition-colors",
+                canSubmit
+                  ? "bg-green-600 dark:bg-green-500 text-white active:bg-green-700 dark:active:bg-green-600"
+                  : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed",
+              ].join(" ")}
+            >
+              {isSubmitting ? "Submitting..." : "Submit bug report"}
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
