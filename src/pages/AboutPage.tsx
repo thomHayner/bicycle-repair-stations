@@ -5,7 +5,7 @@ import { useShare } from "../context/useShare";
 function Accordion({ title, children }: { title: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="bg-white dark:bg-[#0d1220] border border-slate-100 dark:border-[#1e2a3a] rounded-2xl shadow-sm overflow-hidden">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl shadow-sm overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((p) => !p)}
@@ -21,7 +21,7 @@ function Accordion({ title, children }: { title: string; children: React.ReactNo
         </svg>
       </button>
       {open && (
-        <div className="px-4 pb-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed space-y-3 border-t border-slate-100 dark:border-[#1e2a3a]">
+        <div className="px-4 pb-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed space-y-3 border-t border-[var(--color-border)]">
           {children}
         </div>
       )}
@@ -35,8 +35,8 @@ export default function AboutPage() {
 
   return (
     <>
-    <div className="fixed inset-0 z-[2000] bg-slate-50 dark:bg-[#080c14] flex flex-col">
-      <header className="flex items-center gap-3 px-4 py-4 bg-white dark:bg-[#0d1220] border-b border-slate-100 dark:border-[#1e2a3a] shadow-sm">
+    <div className="fixed inset-0 z-[2000] bg-[var(--color-surface-container)] flex flex-col">
+      <header className="flex items-center gap-3 px-4 py-4 bg-[var(--color-surface)] border-b border-[var(--color-border)] shadow-sm">
         <button
           onClick={() => navigate(-1)}
           aria-label="Back"
@@ -51,7 +51,7 @@ export default function AboutPage() {
       </header>
       <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-6">
         <div className="flex flex-col items-center gap-2 text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
           </svg>
           <p className="font-bold text-slate-900 dark:text-white text-xl">BicycleRepairStations.com</p>
@@ -60,7 +60,7 @@ export default function AboutPage() {
 
         <div className="flex flex-col gap-2">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Data &amp; Credits</p>
-          <div className="bg-white dark:bg-[#0d1220] rounded-2xl border border-slate-100 dark:border-[#1e2a3a] divide-y divide-slate-100 dark:divide-[#1e2a3a] shadow-sm">
+          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] divide-y divide-[var(--color-border)] shadow-sm">
             <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50">
               <span>© OpenStreetMap contributors</span>
@@ -86,7 +86,7 @@ export default function AboutPage() {
 
         <div className="flex flex-col gap-2">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Contribute</p>
-          <div className="bg-white dark:bg-[#0d1220] rounded-2xl border border-slate-100 dark:border-[#1e2a3a] divide-y divide-slate-100 dark:divide-[#1e2a3a] shadow-sm">
+          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] divide-y divide-[var(--color-border)] shadow-sm">
             <a href="https://www.openstreetmap.org/edit" target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50">
               <span>Add a missing station on OSM</span>

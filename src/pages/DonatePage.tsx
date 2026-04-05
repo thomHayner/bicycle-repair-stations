@@ -17,8 +17,8 @@ export default function DonatePage() {
   })();
 
   return (
-    <div className="fixed inset-0 z-[2000] bg-slate-50 dark:bg-[#080c14] flex flex-col">
-      <header className="flex items-center gap-3 px-4 py-4 bg-white dark:bg-[#0d1220] border-b border-slate-100 dark:border-[#1e2a3a] shadow-sm shrink-0">
+    <div className="fixed inset-0 z-[2000] bg-[var(--color-surface-container)] flex flex-col">
+      <header className="flex items-center gap-3 px-4 py-4 bg-[var(--color-surface)] border-b border-[var(--color-border)] shadow-sm shrink-0">
         <button
           onClick={() => navigate(-1)}
           aria-label="Back"
@@ -38,7 +38,7 @@ export default function DonatePage() {
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" strokeWidth="2.5"
             strokeLinecap="round" strokeLinejoin="round"
-            className="text-green-600 dark:text-green-500">
+            className="text-[var(--color-primary)]">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
           <p className="font-bold text-slate-900 dark:text-white text-xl">Support BicycleRepairStations</p>
@@ -59,8 +59,8 @@ export default function DonatePage() {
                 className={[
                   "flex-1 py-3 rounded-full text-sm font-semibold transition-colors",
                   selected === amount
-                    ? "bg-green-600 dark:bg-green-500 text-white"
-                    : "border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-slate-600 dark:text-slate-300 active:bg-slate-50 dark:active:bg-slate-800/50",
+                    ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
+                    : "border border-[var(--color-border)] bg-[var(--color-surface)] text-slate-600 dark:text-slate-300 active:bg-slate-50 dark:active:bg-slate-800/50",
                 ].join(" ")}
               >
                 ${amount}
@@ -86,7 +86,7 @@ export default function DonatePage() {
               placeholder="10"
               value={customInput}
               onChange={(e) => { setCustomInput(e.target.value); setSelected(null); }}
-              className="w-full pl-7 pr-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+              className="w-full pl-7 pr-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
             />
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function DonatePage() {
             className={[
               "w-full py-3.5 rounded-full text-sm font-bold transition-colors",
               effectiveAmount !== null
-                ? "bg-green-600 dark:bg-green-500 text-white active:bg-green-700 dark:active:bg-green-600"
+                ? "bg-[var(--color-primary)] text-[var(--color-on-primary)] active:brightness-90"
                 : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed",
             ].join(" ")}
           >
@@ -117,14 +117,14 @@ export default function DonatePage() {
         {/* Info card */}
         <div className="flex flex-col gap-3">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Where your donation goes</p>
-          <div className="bg-white dark:bg-[#0d1220] rounded-2xl border border-slate-100 dark:border-[#1e2a3a] shadow-sm px-4 py-4 flex flex-col gap-2.5">
+          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-sm px-4 py-4 flex flex-col gap-2.5">
             {[
               "Server and hosting costs",
               "Map tile and API usage",
               "Keeping the app free and maintained",
             ].map((item) => (
               <div key={item} className="flex items-center gap-2.5 text-sm text-slate-600 dark:text-slate-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-green-400 shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] shrink-0" />
                 {item}
               </div>
             ))}

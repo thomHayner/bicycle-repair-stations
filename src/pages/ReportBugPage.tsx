@@ -100,8 +100,8 @@ export default function ReportBugPage() {
   };
 
   return (
-    <div className="fixed inset-0 z-[2000] bg-slate-50 dark:bg-[#080c14] flex flex-col">
-      <header className="flex items-center gap-3 px-4 py-4 bg-white dark:bg-[#0d1220] border-b border-slate-100 dark:border-[#1e2a3a] shadow-sm shrink-0">
+    <div className="fixed inset-0 z-[2000] bg-[var(--color-surface-container)] flex flex-col">
+      <header className="flex items-center gap-3 px-4 py-4 bg-[var(--color-surface)] border-b border-[var(--color-border)] shadow-sm shrink-0">
         <button
           onClick={() => navigate(-1)}
           aria-label="Back"
@@ -144,7 +144,7 @@ export default function ReportBugPage() {
                 href={createdIssue.issueUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex justify-center items-center rounded-full bg-green-700 text-white dark:bg-green-500 dark:text-black px-4 py-2.5 font-semibold"
+                className="inline-flex justify-center items-center rounded-full bg-[var(--color-primary)] text-[var(--color-on-primary)] px-4 py-2.5 font-semibold"
               >
                 View issue on GitHub
               </a>
@@ -166,7 +166,7 @@ export default function ReportBugPage() {
               onChange={(event) => setField("summary", event.target.value)}
               placeholder="Short title for the issue"
               maxLength={120}
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
             />
 
             <FieldLabel htmlFor="bug-description" label="What happened?" required />
@@ -175,7 +175,7 @@ export default function ReportBugPage() {
               value={form.description}
               onChange={(event) => setField("description", event.target.value)}
               rows={4}
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
             />
 
             <FieldLabel htmlFor="bug-steps" label="Steps to reproduce" required />
@@ -185,7 +185,7 @@ export default function ReportBugPage() {
               onChange={(event) => setField("steps", event.target.value)}
               rows={4}
               placeholder={"1. Open the app\n2. Tap ...\n3. See error"}
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
             />
 
             <FieldLabel htmlFor="bug-expected" label="Expected behaviour" required />
@@ -194,7 +194,7 @@ export default function ReportBugPage() {
               value={form.expected}
               onChange={(event) => setField("expected", event.target.value)}
               rows={3}
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
             />
 
             <FieldLabel htmlFor="bug-theme" label="Colour theme" />
@@ -202,7 +202,7 @@ export default function ReportBugPage() {
               id="bug-theme"
               value={form.theme}
               onChange={(event) => setField("theme", event.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
             >
               <option>Light</option>
               <option>Dark</option>
@@ -217,7 +217,7 @@ export default function ReportBugPage() {
               onChange={(event) => setField("device", event.target.value)}
               placeholder="e.g. iPhone 15 / Safari 17"
               maxLength={140}
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
             />
 
             <FieldLabel htmlFor="bug-screenshots" label="Screenshots or recording links" />
@@ -227,7 +227,7 @@ export default function ReportBugPage() {
               onChange={(event) => setField("screenshots", event.target.value)}
               rows={3}
               placeholder="Paste links to screenshots, videos, or cloud files"
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
             />
 
             <button
@@ -236,7 +236,7 @@ export default function ReportBugPage() {
               className={[
                 "w-full py-3.5 mt-1 rounded-full text-sm font-bold transition-colors",
                 canSubmit
-                  ? "bg-green-600 dark:bg-green-500 text-white active:bg-green-700 dark:active:bg-green-600"
+                  ? "bg-[var(--color-primary)] text-[var(--color-on-primary)] active:brightness-90"
                   : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed",
               ].join(" ")}
             >
