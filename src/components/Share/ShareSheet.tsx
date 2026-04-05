@@ -101,6 +101,9 @@ export function ShareSheet({
         ].join(" ")}
         role="dialog"
         aria-modal="true"
+        aria-label="Share this app"
+        aria-hidden={!open}
+        {...(!open ? { inert: true } : {})}
         aria-labelledby="share-sheet-title"
       >
         <div className="mb-3 px-1">
