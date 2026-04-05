@@ -125,7 +125,7 @@ export function StationListView({
       {/* Handle — always visible */}
       <button
         onClick={() => onExpandedChange(!expanded)}
-        className="w-full flex items-center justify-between px-4 py-3"
+        className="w-full flex items-center justify-between px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/40 active:bg-slate-100 dark:active:bg-slate-700/50 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400"
         aria-expanded={expanded}
         aria-label={expanded ? "Collapse station list" : "Expand station list"}
       >
@@ -158,10 +158,10 @@ export function StationListView({
                 type="button"
                 onClick={() => onUnitChange(u)}
                 className={[
-                  "text-xs font-semibold px-3 py-1 transition-colors",
+                  "text-xs font-semibold px-3 py-1 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400",
                   u === unit
                     ? "bg-green-600 text-white"
-                    : "bg-white dark:bg-[#0d1220] text-slate-500 dark:text-slate-400 active:bg-slate-50 dark:active:bg-slate-800/50",
+                    : "bg-white dark:bg-[#0d1220] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
                 ].join(" ")}
               >
                 {u}
@@ -174,10 +174,10 @@ export function StationListView({
               type="button"
               onClick={() => onDistChange(d)}
               className={[
-                "text-xs font-semibold px-3 py-1 rounded-full border transition-colors",
+                "text-xs font-semibold px-3 py-1 rounded-full border transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-1 dark:focus-visible:outline-green-400",
                 d === selectedDist
                   ? "bg-green-600 border-green-600 text-white"
-                  : "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300 active:bg-slate-50 dark:active:bg-slate-800/50",
+                  : "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
               ].join(" ")}
             >
               {d}
@@ -196,8 +196,8 @@ export function StationListView({
                 type="button"
                 onClick={() => toggleFilter(f.key)}
                 className={[
-                  "text-xs font-semibold px-3 py-1 rounded-full border transition-colors",
-                  on ? f.active : f.inactive + " active:bg-slate-50 dark:active:bg-slate-800/50",
+                  "text-xs font-semibold px-3 py-1 rounded-full border transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-1 dark:focus-visible:outline-green-400",
+                  on ? f.active : f.inactive + " hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
                 ].join(" ")}
               >
                 {f.label}
@@ -208,7 +208,7 @@ export function StationListView({
             <button
               type="button"
               onClick={() => setActiveFilters(new Set())}
-              className="text-xs text-slate-500 dark:text-slate-400 underline ml-1"
+              className="text-xs text-slate-500 dark:text-slate-400 underline ml-1 hover:text-slate-700 dark:hover:text-slate-200 focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400 rounded"
             >
               Clear
             </button>
@@ -236,7 +236,7 @@ export function StationListView({
               <button
                 key={station.id}
                 onClick={() => onStationSelect(station)}
-                className={`w-full flex items-start justify-between px-4 py-3 text-left active:bg-slate-50 dark:active:bg-slate-800/30 transition-colors ${
+                className={`w-full flex items-start justify-between px-4 py-3 text-left hover:bg-slate-50 dark:hover:bg-slate-800/30 active:bg-slate-100 dark:active:bg-slate-700/40 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-inset dark:focus-visible:outline-green-400 ${
                   i > 0 ? "border-t border-slate-100 dark:border-[#1e2a3a]" : ""
                 }`}
               >
@@ -261,7 +261,7 @@ export function StationListView({
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 active:bg-green-100 dark:active:bg-green-900/50 transition-colors"
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/50 active:bg-green-200 dark:active:bg-green-900/70 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
                     aria-label={`Get directions to ${name}`}
                     title={`Get directions to ${name}`}
                   >
