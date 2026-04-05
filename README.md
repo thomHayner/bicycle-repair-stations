@@ -3,7 +3,7 @@
 [![CI](https://github.com/thomHayner/bicycle-repair-stations/actions/workflows/ci.yml/badge.svg)](https://github.com/thomHayner/bicycle-repair-stations/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-A mobile-first **Progressive Web App** that helps cyclists instantly locate public bicycle repair stations near them. Station data is sourced live from [OpenStreetMap](https://www.openstreetmap.org/) via the Overpass API — no proprietary database, no user accounts, no tracking, no API keys required.
+A mobile-first **Progressive Web App** that helps cyclists instantly locate public bicycle repair stations near them. Station data is sourced live from [OpenStreetMap](https://www.openstreetmap.org/) via the Overpass API — no proprietary database, no user accounts, no personally identifying tracking, no API keys required.
 
 ---
 
@@ -294,7 +294,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow, code style 
 
 > Combined reference document: Project Charter · Features · User Stories · Technical Specification · Data & API Specification · Development Notes
 >
-> Last updated: March 2026
+> Last updated: April 2026
 
 ---
 
@@ -315,11 +315,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow, code style 
 **BicycleRepairStations.com**
 
 ### 1.2 Purpose
-A free, open-source, mobile-first Progressive Web App (PWA) that helps cyclists instantly locate public bicycle repair stations near them. Station data is sourced exclusively from OpenStreetMap via the Overpass API — no proprietary database, no user accounts, no tracking.
+A free, open-source, mobile-first Progressive Web App (PWA) that helps cyclists instantly locate public bicycle repair stations near them. Station data is sourced exclusively from OpenStreetMap via the Overpass API — no proprietary database, no user accounts, no personally identifying tracking.
 
 ### 1.3 Goals
 - Provide the fastest possible path from "I need to fix my bike" to "here is the nearest repair station."
-- Require zero sign-up, zero data collection, and work offline after first load (PWA).
+- Require zero sign-up, avoid collecting directly identifying personal data, and work offline after first load (PWA).
 - Be fully accessible (WCAG AA minimum, AAA where practical) and usable on any modern mobile browser.
 - Remain free to use; sustain hosting costs through a non-intrusive bottom banner ad slot.
 
@@ -392,6 +392,15 @@ Cyclists who are on the road, have a mechanical issue, and need a public repair 
 | F-25 | **WCAG contrast** | All text/background combinations meet WCAG AA (4.5 : 1 normal text, 3 : 1 large / UI). Primary interactive elements meet AAA (7 : 1). |
 | F-26 | **Touch targets** | All buttons and links ≥ 44 × 44 px. |
 | F-27 | **Ad banner slot** | Fixed 50 px bottom bar reserved for a 320 × 50 Mobile Banner ad unit (Google AdSense compatible). |
+
+### 2.6 Sharing
+
+| # | Feature | Notes |
+|---|---------|-------|
+| F-28 | **Unified share modal** | A single global share modal instance is mounted at app root via `ShareProvider`. All entry points open the same modal and use the same handler path. |
+| F-29 | **Share entry points** | Share can be opened from the map Share FAB, Menu Drawer, and About page Contribute section. Each trigger calls `openShare(entryPoint)` from shared context. |
+| F-30 | **Personal-share channels** | In-modal options: X, Facebook, Email, and Copy link, plus native app share when supported by the browser/device. Community-broadcast channels are intentionally excluded. |
+| F-31 | **Share analytics events** | Vercel custom events are tracked for `share_opened`, `share_channel_clicked`, `share_native_initiated`, `share_native_success`, `share_native_cancelled`, `share_native_failed`, and `share_copy_link` (with success/failure). |
 
 ---
 
@@ -682,7 +691,7 @@ Detection: `navigator.userAgent` check for `iPad|iPhone|iPod`.
 
 ## 5. Data & API Specification
 
-This project is a **pure consumer** of open, unauthenticated APIs. No API keys are required and no data is sent from users to any proprietary server.
+This project is a **consumer** of open, unauthenticated map/data APIs. No API keys are required for map or station queries. The app also sends anonymous usage/performance telemetry to Vercel Analytics and Vercel Speed Insights, and user-initiated share actions may open third-party destinations.
 
 ### 5.1 Overpass API — Station Data
 
