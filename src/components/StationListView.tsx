@@ -120,7 +120,10 @@ export function StationListView({
   const headerKey = headerPulse ? "loading" : headerText;
 
   return (
-    <div className="fixed bottom-[65px] left-3 right-3 z-[900] rounded-2xl elevation-2 bg-[var(--color-surface-glass)] backdrop-blur-sm overflow-hidden">
+    <div
+      className="fixed left-3 right-3 z-[900] rounded-2xl elevation-2 bg-[var(--color-surface-glass)] backdrop-blur-sm overflow-hidden"
+      style={{ bottom: "var(--layout-sheet-bottom)" }}
+    >
 
       {/* Handle — always visible */}
       <button

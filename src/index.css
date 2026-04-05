@@ -16,6 +16,14 @@
 
 /* ── Semantic color tokens ────────────────────────────────────────────────── */
 :root {
+  /* Layout contract: keep map attribution visible above all fixed bottom chrome */
+  --layout-ad-height:      50px;
+  --layout-safe-bottom:    env(safe-area-inset-bottom, 0px);
+  --layout-map-bottom:     calc(var(--layout-ad-height) + var(--layout-safe-bottom));
+  --layout-sheet-gap:      34px;
+  --layout-sheet-collapsed: 56px;
+  --layout-sheet-bottom:   calc(var(--layout-map-bottom) + var(--layout-sheet-gap));
+
   /* Surfaces */
   --color-surface:         #ffffff;
   --color-surface-container: #f8fafc;

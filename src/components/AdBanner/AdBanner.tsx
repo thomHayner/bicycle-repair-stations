@@ -2,7 +2,10 @@ export function AdBanner() {
   return (
     <aside
       className="fixed bottom-0 left-0 right-0 z-[999] bg-white dark:bg-[#0d1220] border-t border-slate-200 dark:border-[#1e2a3a] flex items-center justify-center"
-      style={{ height: 50 }}
+      style={{
+        height: "calc(var(--layout-ad-height) + var(--layout-safe-bottom))",
+        paddingBottom: "var(--layout-safe-bottom)",
+      }}
       role="complementary"
       aria-label="Advertisement"
     >

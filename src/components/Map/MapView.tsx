@@ -194,7 +194,7 @@ interface Props {
   onInitialFlyComplete?: () => void;
 }
 
-export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, onUserMove, onProgrammaticMoveEnd, mapRef, programmaticMoveRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, listExpanded, onInitialFlyComplete }: Props) {
+export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, onUserMove, onProgrammaticMoveEnd, mapRef, programmaticMoveRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, onInitialFlyComplete }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -237,13 +237,13 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
     <div
       id="map-container"
       className={`fixed inset-0${dark && activeLayer !== "satellite" ? " map-dark-tiles" : ""}`}
-      style={{ bottom: 50, backgroundColor: tileBg }}
+      style={{ bottom: "var(--layout-map-bottom)", backgroundColor: tileBg }}
     >
 
-      {/* Zoom controls — sit above collapsed list handle; overlap is fine when list is open */}
+      {/* Zoom controls stay fixed above collapsed list; expanded sheet overlays them */}
       <div
-        className="fixed right-3 z-[1000] flex flex-col rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 overflow-hidden transition-[bottom] duration-300"
-        style={{ bottom: listExpanded ? 92 : 120 }}
+        className="fixed right-3 z-[850] flex flex-col rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 overflow-hidden"
+        style={{ bottom: "calc(var(--layout-sheet-bottom) + var(--layout-sheet-collapsed) + 8px)" }}
       >
         <button
           type="button"
