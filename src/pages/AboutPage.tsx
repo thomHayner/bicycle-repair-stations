@@ -131,15 +131,17 @@ export default function AboutPage() {
         <div className="flex flex-col gap-2">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Legal</p>
           <Accordion title="Privacy Policy">
-            <p className="pt-3"><strong className="text-slate-600 dark:text-slate-300">Last updated: March 2026</strong></p>
+            <p className="pt-3"><strong className="text-slate-600 dark:text-slate-300">Last updated: April 2026</strong></p>
             <p><strong className="text-slate-600 dark:text-slate-300">Data we collect</strong><br/>
-            BicycleRepairStations.com does not collect, store, or transmit any personal information. No accounts are required, no cookies are used, and no personal data is collected.</p>
+            BicycleRepairStations.com does not require user accounts and does not collect directly identifying personal information. No advertising cookies are used. Anonymous usage and performance events are collected through Vercel Analytics and Vercel Speed Insights, including high-level interaction events such as share actions.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Location</strong><br/>
             If you grant location permission, your coordinates are used only to centre the map and find nearby stations. Your location is never sent to our servers — it is processed entirely in your browser and discarded when you close the app.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Local storage</strong><br/>
             Your preference settings (distance unit, colour theme) are stored in your browser's local storage so they persist between visits. This data never leaves your device.</p>
+            <p><strong className="text-slate-600 dark:text-slate-300">Sharing features</strong><br/>
+            If you use the app's share tools, links may include campaign parameters (for example, source/medium/campaign tags) so aggregate traffic sources can be measured. Any post content you choose to share is submitted directly by you to the selected platform, app, or email client under that service's own privacy terms.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Third-party services</strong><br/>
-            Tile images are loaded from CARTO, ESRI, Stadia Maps, and OpenStreetMap servers. These providers may log your IP address as part of normal web server operation. Station data is fetched from the Overpass API. Location searches use the Nominatim geocoding service. Anonymous, cookieless page-view and performance data is collected by Vercel Analytics and Vercel Speed Insights — no personal information is linked to this data. Please refer to each provider's own privacy policy for details.</p>
+            Tile images are loaded from CARTO, ESRI, Stadia Maps, and OpenStreetMap servers. These providers may log your IP address as part of normal web server operation. Station data is fetched from the Overpass API. Location searches use the Nominatim geocoding service. Anonymous page-view, performance, and interaction events are collected by Vercel Analytics and Vercel Speed Insights. When you choose share actions, links may be opened in third-party platforms (for example, X, Facebook, email providers, or device-native share targets). Please refer to each provider's own privacy policy and terms for details.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Children</strong><br/>
             This service is not directed at children under 13. We do not knowingly collect data from children.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Contact</strong><br/>
@@ -147,19 +149,21 @@ export default function AboutPage() {
           </Accordion>
 
           <Accordion title="Terms of Service">
-            <p className="pt-3"><strong className="text-slate-600 dark:text-slate-300">Last updated: March 2026</strong></p>
+            <p className="pt-3"><strong className="text-slate-600 dark:text-slate-300">Last updated: April 2026</strong></p>
             <p><strong className="text-slate-600 dark:text-slate-300">Acceptance</strong><br/>
             By using BicycleRepairStations.com you agree to these terms. If you do not agree, please stop using the service.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Service description</strong><br/>
-            This app helps you locate public bicycle repair stations mapped in OpenStreetMap. It is provided free of charge as a convenience tool for cyclists.</p>
+            This app helps you locate public bicycle repair stations mapped in OpenStreetMap. It also includes optional sharing tools for distributing app links through personal channels. The service is provided free of charge as a convenience tool for cyclists.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Data accuracy</strong><br/>
             Station data is sourced from OpenStreetMap, a community-edited dataset. Information may be incomplete, inaccurate, or out of date. Always verify that a station exists and is operational before relying on it for a repair. We accept no liability for missing, incorrectly tagged, or decommissioned stations.</p>
+            <p><strong className="text-slate-600 dark:text-slate-300">Sharing responsibility</strong><br/>
+            If you use sharing features, you are responsible for what you publish and where you publish it. Do not use the service to spam, harass, or post unlawful content. You are responsible for compliance with the terms of any third-party platform you use.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">No warranty</strong><br/>
             The service is provided "as is" without warranty of any kind, express or implied. We do not guarantee uptime, accuracy, or fitness for any particular purpose.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Limitation of liability</strong><br/>
             To the fullest extent permitted by law, BicycleRepairStations.com and its operators are not liable for any direct, indirect, incidental, or consequential damages arising from your use of or inability to use the service.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Third-party content</strong><br/>
-            Map tiles, station data, and geocoding results are provided by third parties. Their respective terms of service apply.</p>
+            Map tiles, station data, geocoding results, and optional share destinations are provided by third parties. Their respective terms of service apply.</p>
             <p><strong className="text-slate-600 dark:text-slate-300">Changes</strong><br/>
             We may update these terms at any time. Continued use of the service after changes are posted constitutes acceptance of the revised terms.</p>
           </Accordion>
