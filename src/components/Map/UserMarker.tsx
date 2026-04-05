@@ -15,8 +15,8 @@ export function UserMarker({ lat, lng, accuracy }: Props) {
           center={[lat, lng]}
           radius={accuracy}
           pathOptions={{
-            color: "#3b82f6",
-            fillColor: "#3b82f6",
+            color: "var(--color-secondary)",
+            fillColor: "var(--color-secondary)",
             fillOpacity: 0.12,
             weight: 1,
           }}
