@@ -18,18 +18,18 @@ export function StationPopup({ station, distMi }: Props) {
 
   return (
     <div>
-      <p className="font-bold text-[15px] text-slate-900 dark:text-slate-100 mb-2 leading-snug">
+      <p className="font-bold text-[15px] text-[var(--color-text-primary)] mb-2 leading-snug">
         {name}
       </p>
 
       {tags.description && (
-        <p className="text-[13px] text-slate-600 dark:text-slate-300 mb-2">
+        <p className="text-[13px] text-[var(--color-text-secondary)] mb-2">
           {tags.description}
         </p>
       )}
 
       {tags.operator && (
-        <p className="text-[13px] text-slate-600 dark:text-slate-300 mb-1.5">
+        <p className="text-[13px] text-[var(--color-text-secondary)] mb-1.5">
           <span className="font-semibold">Operator: </span>{tags.operator}
         </p>
       )}
@@ -55,7 +55,7 @@ export function StationPopup({ station, distMi }: Props) {
       )}
 
       {tags.opening_hours && (
-        <p className="text-[13px] text-slate-600 dark:text-slate-300 mb-1.5 flex items-start gap-1">
+        <p className="text-[13px] text-[var(--color-text-secondary)] mb-1.5 flex items-start gap-1">
           <span>🕐</span>
           <span>{tags.opening_hours}</span>
         </p>
@@ -64,7 +64,7 @@ export function StationPopup({ station, distMi }: Props) {
       {distMi != null && (() => {
         const distDisplay = unit === "km" ? distMi * KM_PER_MILE : distMi;
         return (
-          <p className="text-[12px] text-slate-500 dark:text-slate-400 mb-2">
+          <p className="text-[12px] text-[var(--color-text-muted)] mb-2">
             {distDisplay < 0.1 ? "<0.1" : distDisplay.toFixed(1)} {unit} away
           </p>
         );
