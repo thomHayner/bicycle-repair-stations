@@ -237,13 +237,24 @@ button, a {
 }
 .leaflet-popup-close-button {
   /* Align vertically with the title: 14px top padding + ~1px optical offset */
-  top: 16px !important;
-  right: 4px !important;
-  width: 28px !important;
-  height: 28px !important;
+  top: 14px !important;
+  right: 2px !important;
+  width: 32px !important;
+  height: 32px !important;
   font-size: 18px !important;
-  line-height: 28px !important;
+  line-height: 32px !important;
   color: var(--color-text-secondary) !important;
+  border-radius: 9999px;
+}
+.leaflet-popup-close-button:hover {
+  background: color-mix(in srgb, var(--color-text-primary) 8%, transparent) !important;
+}
+.leaflet-popup-close-button:active {
+  background: color-mix(in srgb, var(--color-text-primary) 14%, transparent) !important;
+}
+.leaflet-popup-close-button:focus-visible {
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: 1px;
 }
 
 /* Attribution is too big on mobile by default */
