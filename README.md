@@ -186,9 +186,10 @@ src/
 │   └── units.ts                     # Unit types (mi/km) + distance preset arrays
 ├── pages/
 │   ├── AboutPage.tsx
+│   ├── DonatePage.tsx
 │   ├── GuidesPage.tsx
 │   ├── MapPage.tsx                  # Root page — always mounted, never unmounted
-│   └── SettingsPage.tsx
+│   └── ReportBugPage.tsx
 └── types/
     └── overpass.ts                  # OverpassNode + OverpassResponse TypeScript interfaces
 ```
@@ -205,6 +206,7 @@ The project deploys to **Vercel** via the native GitHub integration. Every push 
 3. Optionally add `VITE_*` environment variables under **Project Settings → Environment Variables**
 
 The `vercel.json` at the project root configures the SPA rewrite (`/* → /index.html`) and a `Referrer-Policy: strict-origin-when-cross-origin` security header.
+This is intentional: unknown routes are served the app shell (not a separate server 404 page) so the map experience remains the default catch-all entry.
 
 ---
 
@@ -559,9 +561,10 @@ src/
 │   └── units.ts                     # Unit types (mi/km) + distance preset arrays
 ├── pages/
 │   ├── AboutPage.tsx
+│   ├── DonatePage.tsx
 │   ├── GuidesPage.tsx
 │   ├── MapPage.tsx                  # Root page — always mounted, never unmounted
-│   └── SettingsPage.tsx
+│   └── ReportBugPage.tsx
 └── types/
     └── overpass.ts                  # OverpassNode + OverpassResponse TypeScript interfaces
 ```
@@ -579,8 +582,9 @@ src/
   <Suspense fallback={null}>
     <Routes>
       <Route path="/guides"   element={<GuidesPage />} />
-      <Route path="/settings" element={<SettingsPage />} />
       <Route path="/about"    element={<AboutPage />} />
+      <Route path="/donate"   element={<DonatePage />} />
+      <Route path="/report-bug" element={<ReportBugPage />} />
     </Routes>
   </Suspense>
 </SettingsProvider>
