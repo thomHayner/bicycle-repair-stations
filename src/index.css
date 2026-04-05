@@ -249,18 +249,18 @@ button, a {
 /* Attribution is too big on mobile by default */
 .leaflet-control-attribution {
   font-size: 10px !important;
-  color: #334155 !important;
+  color: var(--color-on-surface-variant) !important;
   background: rgba(255, 255, 255, 0.92) !important;
 }
 .leaflet-control-attribution a {
-  color: #1e40af !important;
+  color: var(--color-primary) !important;
 }
 .dark .leaflet-control-attribution {
-  color: #cbd5e1 !important;
+  color: var(--color-on-surface-variant) !important;
   background: rgba(8, 12, 20, 0.92) !important;
 }
 .dark .leaflet-control-attribution a {
-  color: #93c5fd !important;
+  color: var(--color-primary-text) !important;
 }
 
 /* ── Dark-mode tile inversion ─────────────────────────────────────────────── */

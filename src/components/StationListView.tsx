@@ -125,7 +125,7 @@ export function StationListView({
       {/* Handle — always visible */}
       <button
         onClick={() => onExpandedChange(!expanded)}
-        className="w-full flex items-center justify-between px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/40 active:bg-slate-100 dark:active:bg-slate-700/50 transition-colors focus-ring-inset"
+        className="w-full flex items-center justify-between px-4 py-3 state-surface transition-colors focus-ring-inset"
         aria-expanded={expanded}
         aria-label={expanded ? "Collapse station list" : "Expand station list"}
       >
@@ -161,7 +161,7 @@ export function StationListView({
                   "type-label-small px-3 py-1 transition-colors focus-ring-inset",
                   u === unit
                     ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
-                    : "bg-[var(--color-surface-container)] text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
+                    : "bg-[var(--color-surface-container)] text-slate-500 dark:text-slate-400 state-surface",
                 ].join(" ")}
               >
                 {u}
@@ -177,7 +177,7 @@ export function StationListView({
                 "type-label-small px-3 py-1 rounded-full border transition-colors focus-ring",
                 d === selectedDist
                   ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-[var(--color-on-primary)]"
-                  : "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
+                  : "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300 state-surface",
               ].join(" ")}
             >
               {d}
@@ -197,7 +197,7 @@ export function StationListView({
                 onClick={() => toggleFilter(f.key)}
                 className={[
                   "type-label-small px-3 py-1 rounded-full border transition-colors focus-ring",
-                  on ? f.active : f.inactive + " hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
+                  on ? f.active : f.inactive + " state-surface",
                 ].join(" ")}
               >
                 {f.label}
@@ -236,7 +236,7 @@ export function StationListView({
               <button
                 key={station.id}
                 onClick={() => onStationSelect(station)}
-                className={`w-full flex items-start justify-between px-4 py-3 text-left hover:bg-slate-50 dark:hover:bg-slate-800/30 active:bg-slate-100 dark:active:bg-slate-700/40 transition-colors focus-ring-inset ${
+                className={`w-full flex items-start justify-between px-4 py-3 text-left state-surface transition-colors focus-ring-inset ${
                   i > 0 ? "border-t border-[var(--color-border)]" : ""
                 }`}
               >
