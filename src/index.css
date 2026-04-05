@@ -260,18 +260,11 @@ button, a {
 /* Attribution is too big on mobile by default */
 .leaflet-control-attribution {
   font-size: 10px !important;
-  color: var(--color-on-surface-variant) !important;
-  background: rgba(255, 255, 255, 0.92) !important;
+  color: var(--color-text-muted) !important;
+  background: var(--color-surface-glass) !important;
 }
 .leaflet-control-attribution a {
   color: var(--color-primary) !important;
-}
-.dark .leaflet-control-attribution {
-  color: var(--color-on-surface-variant) !important;
-  background: rgba(8, 12, 20, 0.92) !important;
-}
-.dark .leaflet-control-attribution a {
-  color: var(--color-primary-text) !important;
 }
 
 /* ── Dark-mode tile inversion ─────────────────────────────────────────────── */
@@ -292,7 +285,7 @@ button, a {
 }
 .station-cluster div {
   background: var(--color-primary);
-  border: 2px solid var(--color-on-primary);
+  border: 2px solid var(--color-surface);
   border-radius: 50%;
   color: var(--color-on-primary);
   font-weight: 700;
@@ -306,7 +299,6 @@ button, a {
 }
 .dark .station-cluster div {
   background: var(--color-primary);
-  border-color: color-mix(in srgb, var(--color-on-primary) 70%, transparent);
 }
 
 /* Muted cluster for out-of-radius cached stations — small, no count */
@@ -317,12 +309,11 @@ button, a {
   width: 14px;
   height: 14px;
   background: var(--color-primary);
-  border: 1.5px solid var(--color-on-primary);
+  border: 1.5px solid var(--color-surface);
   border-radius: 50%;
   opacity: 0.5;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 .dark .station-cluster-muted div {
   background: var(--color-primary);
-  border-color: color-mix(in srgb, var(--color-on-primary) 60%, transparent);
 }

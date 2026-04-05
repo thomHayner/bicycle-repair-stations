@@ -78,7 +78,9 @@ export function ShareSheet({
 
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      previousActive?.focus();
+      if (previousActive && previousActive.isConnected && previousActive.offsetParent !== null) {
+        previousActive.focus();
+      }
     };
   }, [open, onClose]);
 
