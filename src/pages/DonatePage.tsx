@@ -17,19 +17,19 @@ export default function DonatePage() {
   })();
 
   return (
-    <div className="fixed inset-0 z-[2000] bg-slate-50 dark:bg-[#080c14] flex flex-col">
-      <header className="flex items-center gap-3 px-4 py-4 bg-white dark:bg-[#0d1220] border-b border-slate-100 dark:border-[#1e2a3a] shadow-sm shrink-0">
+    <div className="fixed inset-0 z-[2000] bg-[var(--color-surface-container)] flex flex-col">
+      <header className="flex items-center gap-3 px-4 py-4 bg-[var(--color-surface)] border-b border-[var(--color-border)] shadow-sm shrink-0">
         <button
           onClick={() => navigate(-1)}
           aria-label="Back"
           title="Go back"
-          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 active:bg-slate-100 dark:active:bg-slate-800 transition-colors"
+          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 state-surface-strong transition-colors focus-ring"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6"/>
           </svg>
         </button>
-        <span className="font-semibold text-slate-900 dark:text-white">Donate</span>
+        <span className="type-title-medium text-slate-900 dark:text-white">Donate</span>
       </header>
 
       <div className="flex-1 overflow-y-auto px-5 py-8 flex flex-col gap-8">
@@ -38,7 +38,7 @@ export default function DonatePage() {
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" strokeWidth="2.5"
             strokeLinecap="round" strokeLinejoin="round"
-            className="text-green-600 dark:text-green-500">
+            className="text-[var(--color-primary)]">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
           <p className="font-bold text-slate-900 dark:text-white text-xl">Support BicycleRepairStations</p>
@@ -49,7 +49,7 @@ export default function DonatePage() {
 
         {/* Preset amounts */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Choose an amount</p>
+          <p className="type-label-overline text-slate-500 dark:text-slate-400">Choose an amount</p>
           <div className="flex gap-3">
             {PRESET_AMOUNTS.map((amount) => (
               <button
@@ -57,10 +57,10 @@ export default function DonatePage() {
                 type="button"
                 onClick={() => { setSelected(amount); setCustomInput(""); }}
                 className={[
-                  "flex-1 py-3 rounded-full text-sm font-semibold transition-colors",
+                  "flex-1 py-3 rounded-full text-sm font-semibold transition-colors focus-ring",
                   selected === amount
-                    ? "bg-green-600 dark:bg-green-500 text-white"
-                    : "border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-slate-600 dark:text-slate-300 active:bg-slate-50 dark:active:bg-slate-800/50",
+                    ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
+                    : "border border-[var(--color-border)] bg-[var(--color-surface)] text-slate-600 dark:text-slate-300 state-surface",
                 ].join(" ")}
               >
                 ${amount}
@@ -71,7 +71,7 @@ export default function DonatePage() {
 
         {/* Custom amount */}
         <div className="flex flex-col gap-3">
-          <label htmlFor="custom-amount" className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          <label htmlFor="custom-amount" className="type-label-overline text-slate-500 dark:text-slate-400">
             Or enter a custom amount
           </label>
           <div className="relative">
@@ -86,7 +86,7 @@ export default function DonatePage() {
               placeholder="10"
               value={customInput}
               onChange={(e) => { setCustomInput(e.target.value); setSelected(null); }}
-              className="w-full pl-7 pr-4 py-3 rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
+              className="w-full pl-7 pr-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500/50 dark:focus:ring-green-400/40 transition-colors"
             />
           </div>
         </div>
@@ -101,30 +101,30 @@ export default function DonatePage() {
               // Navigate to external donation URL with amount: effectiveAmount
             }}
             className={[
-              "w-full py-3.5 rounded-full text-sm font-bold transition-colors",
+              "w-full py-3.5 rounded-full text-sm font-bold transition-colors focus-ring",
               effectiveAmount !== null
-                ? "bg-green-600 dark:bg-green-500 text-white active:bg-green-700 dark:active:bg-green-600"
+                ? "bg-[var(--color-primary)] text-[var(--color-on-primary)] hover:brightness-95 active:brightness-90"
                 : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed",
             ].join(" ")}
           >
             {effectiveAmount !== null ? `Donate $${effectiveAmount}` : "Donate"}
           </button>
-          <p className="text-center text-xs text-slate-400 dark:text-slate-500">
+          <p className="type-body-small text-center text-slate-400 dark:text-slate-500">
             Payment integration coming soon — button is currently disabled.
           </p>
         </div>
 
         {/* Info card */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Where your donation goes</p>
-          <div className="bg-white dark:bg-[#0d1220] rounded-2xl border border-slate-100 dark:border-[#1e2a3a] shadow-sm px-4 py-4 flex flex-col gap-2.5">
+          <p className="type-label-overline text-slate-500 dark:text-slate-400">Where your donation goes</p>
+          <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] elevation-1 px-4 py-4 flex flex-col gap-2.5">
             {[
               "Server and hosting costs",
               "Map tile and API usage",
               "Keeping the app free and maintained",
             ].map((item) => (
               <div key={item} className="flex items-center gap-2.5 text-sm text-slate-600 dark:text-slate-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-green-400 shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] shrink-0" />
                 {item}
               </div>
             ))}

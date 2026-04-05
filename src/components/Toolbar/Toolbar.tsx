@@ -72,7 +72,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
   return (
     <>
       <header
-        className="fixed top-3 left-3 right-3 z-[1000] bg-white/95 dark:bg-[#080c14]/95 backdrop-blur-sm shadow-lg rounded-2xl overflow-hidden"
+        className="fixed top-3 left-3 right-3 z-[1000] bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 rounded-2xl overflow-hidden"
         style={{ height: locationDenied || locationNotFound ? "auto" : 56 }}
       >
         <div className="flex items-center px-3 gap-2" style={{ height: 56 }}>
@@ -82,7 +82,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
             title="Open menu"
-            className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 active:bg-slate-100 dark:active:bg-slate-800 transition-colors shrink-0"
+            className="w-9 h-9 flex items-center justify-center rounded-full text-[var(--color-text-secondary)] state-surface-strong transition-colors focus-ring shrink-0"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <line x1="3" y1="6"  x2="21" y2="6"/>
@@ -93,13 +93,13 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
 
           {/* Logo */}
           <div className="flex items-center gap-1.5 shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
             </svg>
-            <span className="font-bold text-slate-900 dark:text-white text-sm leading-tight hidden sm:block">
+            <span className="font-bold type-title-small text-slate-900 dark:text-white leading-tight hidden sm:block">
               BicycleRepairStations.com
             </span>
-            <span className="font-bold text-slate-900 dark:text-white text-sm leading-tight sm:hidden">
+            <span className="font-bold type-title-small text-slate-900 dark:text-white leading-tight sm:hidden">
               BRS
             </span>
           </div>
@@ -110,7 +110,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
               "flex items-center w-full rounded-full border transition-colors",
               locationNotFound
                 ? "border-red-400 bg-red-50 dark:bg-red-950/30 dark:border-red-800"
-                : "border-sky-200 bg-sky-50 dark:border-[#1e3a5f] dark:bg-[#0d1830] focus-within:border-green-400 focus-within:bg-white dark:focus-within:border-sky-600 dark:focus-within:bg-[#0d1830]",
+                : "border-[var(--color-border-search)] bg-[var(--color-surface-search)] focus-within:border-[var(--color-primary)] focus-within:bg-[var(--color-surface)]",
             ].join(" ")}>
               <input
                 ref={inputRef}
@@ -132,7 +132,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
                   type="submit"
                   aria-label="Search"
                   title="Search location"
-                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-green-600 dark:text-green-500 active:text-green-800 transition-colors shrink-0"
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[var(--color-primary)] hover:brightness-90 active:brightness-75 transition-colors focus-ring shrink-0"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -167,10 +167,10 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         style={{ top: fabTop }}
         className={[
           "fixed right-3 z-[1000] w-11 h-11 rounded-full",
-          "bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm shadow-lg",
-          "flex items-center justify-center transition-colors",
+          "bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2",
+          "flex items-center justify-center transition-colors focus-ring",
           userPosition
-            ? "text-green-600 dark:text-green-500 active:bg-sky-50 dark:active:bg-sky-950/30"
+            ? "text-[var(--color-primary)] hover:bg-[var(--color-surface-search)] active:bg-[var(--color-secondary-container)]"
             : "text-slate-300 dark:text-slate-500 cursor-default",
         ].join(" ")}
       >
@@ -190,11 +190,11 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         style={{ top: fabTop + 44 + 8 }}
         className={[
           "fixed right-3 z-[1000] w-11 h-11 rounded-full",
-          "bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm shadow-lg",
-          "flex items-center justify-center transition-colors",
+          "bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2",
+          "flex items-center justify-center transition-colors focus-ring",
           layerPickerOpen
-            ? "text-green-600 dark:text-green-500 bg-sky-50/80 dark:bg-sky-950/30"
-            : "text-slate-600 dark:text-slate-300 active:bg-slate-50 dark:active:bg-slate-800/50",
+            ? "text-[var(--color-primary)] bg-[var(--color-surface-search)]"
+            : "text-[var(--color-text-secondary)] state-surface",
         ].join(" ")}
       >
         {/* Layers / stack icon */}
@@ -212,7 +212,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         aria-label="Share app"
         title="Share app"
         style={{ top: fabTop + (44 + 8) * 2 }}
-        className="fixed right-3 z-[1000] w-11 h-11 rounded-full bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm shadow-lg flex items-center justify-center text-slate-600 dark:text-slate-300 active:bg-slate-50 dark:active:bg-slate-800/50 transition-colors"
+        className="fixed right-3 z-[1000] w-11 h-11 rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 flex items-center justify-center text-[var(--color-text-secondary)] state-surface transition-colors focus-ring"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <circle cx="18" cy="5" r="3"/>
@@ -235,7 +235,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
       {layerPickerOpen && (
         <div
           style={{ top: fabTop + 44 + 8 }}
-          className="fixed right-[60px] z-[1000] bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm shadow-lg rounded-2xl overflow-hidden min-w-[152px]"
+          className="fixed right-[60px] z-[1000] bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 rounded-2xl overflow-hidden min-w-[152px]"
         >
           {LAYERS.map((l) => (
             <button
@@ -245,8 +245,9 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
               className={[
                 "w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors",
                 activeLayer === l.id
-                  ? "bg-sky-50 dark:bg-sky-950/40 text-green-700 dark:text-green-400 font-semibold"
-                  : "text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50",
+                  ? "bg-[var(--color-secondary-container)] text-[var(--color-primary)] font-semibold"
+                  : "text-slate-700 dark:text-slate-200 state-surface",
+                "focus-ring-inset",
               ].join(" ")}
             >
               <span className="text-base leading-none">{l.emoji}</span>

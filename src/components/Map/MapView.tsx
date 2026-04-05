@@ -242,7 +242,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
 
       {/* Zoom controls — sit above collapsed list handle; overlap is fine when list is open */}
       <div
-        className="fixed right-3 z-[1000] flex flex-col rounded-full bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm shadow-lg overflow-hidden transition-[bottom] duration-300"
+        className="fixed right-3 z-[1000] flex flex-col rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 overflow-hidden transition-[bottom] duration-300"
         style={{ bottom: listExpanded ? 92 : 120 }}
       >
         <button
@@ -250,19 +250,19 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
           aria-label="Zoom in"
           title="Zoom in"
           onClick={() => mapRef.current?.zoomIn()}
-          className="w-11 h-11 flex items-center justify-center text-slate-600 dark:text-slate-300 active:bg-slate-100 dark:active:bg-slate-800/50 transition-colors"
+          className="w-11 h-11 flex items-center justify-center text-[var(--color-text-secondary)] state-surface transition-colors focus-ring-inset"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
           </svg>
         </button>
-        <div className="h-px bg-slate-200 dark:bg-slate-700 mx-2" />
+        <div className="h-px bg-[var(--color-border)] mx-2" />
         <button
           type="button"
           aria-label="Zoom out"
           title="Zoom out"
           onClick={() => mapRef.current?.zoomOut()}
-          className="w-11 h-11 flex items-center justify-center text-slate-600 dark:text-slate-300 active:bg-slate-100 dark:active:bg-slate-800/50 transition-colors"
+          className="w-11 h-11 flex items-center justify-center text-[var(--color-text-secondary)] state-surface transition-colors focus-ring-inset"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"/>

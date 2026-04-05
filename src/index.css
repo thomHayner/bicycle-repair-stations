@@ -10,14 +10,16 @@
    !important is required to beat both the UA a:visited rule and Leaflet's
    !important color on .leaflet-popup-content. */
 .btn-get-directions,
-.btn-get-directions:visited          { color: white !important; }
+.btn-get-directions:visited          { color: var(--color-on-primary) !important; }
 .dark .btn-get-directions,
-.dark .btn-get-directions:visited    { color: black !important; }
+.dark .btn-get-directions:visited    { color: var(--color-on-primary) !important; }
 
 /* ── Semantic color tokens ────────────────────────────────────────────────── */
 :root {
   /* Surfaces */
   --color-surface:         #ffffff;
+  --color-surface-container: #f8fafc;
+  --color-surface-container-high: #f1f5f9;
   --color-surface-muted:   #f8fafc;
   --color-surface-search:  #eff6ff;   /* sky-50 — calming light blue */
   --color-surface-glass:   rgba(255, 255, 255, 0.95);
@@ -34,8 +36,28 @@
 
   /* Primary green */
   --color-primary:         #16a34a;
+  --color-on-primary:      #ffffff;
+  --color-primary-container: #dcfce7;
+  --color-on-primary-container: #14532d;
   --color-primary-light:   #f0fdf4;
   --color-primary-text:    #166534;
+
+  /* Secondary blue roles */
+  --color-secondary:       #0066b2;
+  --color-on-secondary:    #ffffff;
+  --color-secondary-container: #e0f2fe;
+  --color-on-secondary-container: #0c4a6e;
+
+  /* Error roles */
+  --color-error:           #b42318;
+  --color-on-error:        #ffffff;
+  --color-error-container: #fee4e2;
+  --color-on-error-container: #7a271a;
+
+  /* Elevation */
+  --elevation-1: 0 1px 3px rgba(15, 23, 42, 0.12), 0 1px 2px rgba(15, 23, 42, 0.08);
+  --elevation-2: 0 4px 10px rgba(15, 23, 42, 0.14), 0 2px 6px rgba(15, 23, 42, 0.1);
+  --elevation-3: 0 10px 24px rgba(15, 23, 42, 0.18), 0 6px 12px rgba(15, 23, 42, 0.12);
 
   /* Park Tool brand blue — WCAG AA 5.21:1 on white */
   --color-park-tool:       #0066b2;
@@ -45,6 +67,8 @@
 .dark {
   /* Surfaces — near-black, very slight blue tint */
   --color-surface:         #080c14;
+  --color-surface-container: #0d1220;
+  --color-surface-container-high: #151f30;
   --color-surface-muted:   #0d1220;
   --color-surface-search:  #0d1830;
   --color-surface-glass:   rgba(8, 12, 20, 0.95);
@@ -61,12 +85,114 @@
 
   /* Primary green — slightly brighter for dark backgrounds */
   --color-primary:         #22c55e;
+  --color-on-primary:      #052e16;
+  --color-primary-container: #14532d;
+  --color-on-primary-container: #bbf7d0;
   --color-primary-light:   #052e16;
   --color-primary-text:    #4ade80;
+
+  /* Secondary blue roles */
+  --color-secondary:       #3b9ede;
+  --color-on-secondary:    #041320;
+  --color-secondary-container: #0d2a44;
+  --color-on-secondary-container: #d9eeff;
+
+  /* Error roles */
+  --color-error:           #f97066;
+  --color-on-error:        #2d0605;
+  --color-error-container: #5b1b16;
+  --color-on-error-container: #ffd5d2;
+
+  /* Elevation */
+  --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.38), 0 1px 2px rgba(0, 0, 0, 0.28);
+  --elevation-2: 0 6px 14px rgba(0, 0, 0, 0.42), 0 3px 8px rgba(0, 0, 0, 0.32);
+  --elevation-3: 0 12px 28px rgba(0, 0, 0, 0.5), 0 6px 14px rgba(0, 0, 0, 0.38);
 
   /* Park Tool blue stays the same */
   --color-park-tool:       #3b9ede;
   --color-park-tool-muted: #0d2a44;
+}
+
+.elevation-1 { box-shadow: var(--elevation-1); }
+.elevation-2 { box-shadow: var(--elevation-2); }
+.elevation-3 { box-shadow: var(--elevation-3); }
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.focus-ring-inset:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.focus-ring-contrast:focus-visible {
+  outline: 2px solid var(--color-surface);
+  outline-offset: 2px;
+}
+
+.type-label-overline {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.type-label-small {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.type-title-small {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.type-title-medium {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.type-body-small {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.type-body-medium {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.state-surface {
+  transition: background-color 150ms;
+}
+
+.state-surface:hover {
+  background-color: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+}
+
+.state-surface:active {
+  background-color: color-mix(in srgb, var(--color-text-primary) 12%, transparent);
+}
+
+.state-surface-strong {
+  transition: background-color 150ms;
+}
+
+.state-surface-strong:hover {
+  background-color: color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+}
+
+.state-surface-strong:active {
+  background-color: color-mix(in srgb, var(--color-text-primary) 16%, transparent);
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
@@ -111,30 +237,41 @@ button, a {
 }
 .leaflet-popup-close-button {
   /* Align vertically with the title: 14px top padding + ~1px optical offset */
-  top: 16px !important;
-  right: 4px !important;
-  width: 28px !important;
-  height: 28px !important;
+  top: 14px !important;
+  right: 2px !important;
+  width: 32px !important;
+  height: 32px !important;
   font-size: 18px !important;
-  line-height: 28px !important;
+  line-height: 32px !important;
   color: var(--color-text-secondary) !important;
+  border-radius: 9999px;
+}
+.leaflet-popup-close-button:hover {
+  background: color-mix(in srgb, var(--color-text-primary) 8%, transparent) !important;
+}
+.leaflet-popup-close-button:active {
+  background: color-mix(in srgb, var(--color-text-primary) 14%, transparent) !important;
+}
+.leaflet-popup-close-button:focus-visible {
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: 1px;
 }
 
 /* Attribution is too big on mobile by default */
 .leaflet-control-attribution {
   font-size: 10px !important;
-  color: #334155 !important;
+  color: var(--color-on-surface-variant) !important;
   background: rgba(255, 255, 255, 0.92) !important;
 }
 .leaflet-control-attribution a {
-  color: #1e40af !important;
+  color: var(--color-primary) !important;
 }
 .dark .leaflet-control-attribution {
-  color: #cbd5e1 !important;
+  color: var(--color-on-surface-variant) !important;
   background: rgba(8, 12, 20, 0.92) !important;
 }
 .dark .leaflet-control-attribution a {
-  color: #93c5fd !important;
+  color: var(--color-primary-text) !important;
 }
 
 /* ── Dark-mode tile inversion ─────────────────────────────────────────────── */
@@ -147,17 +284,17 @@ button, a {
 
 /* ── Cluster marker styling ──────────────────────────────────────────────── */
 .station-cluster {
-  background: rgba(22, 163, 74, 0.25);   /* green-600 at 25% */
+  background: color-mix(in srgb, var(--color-primary) 25%, transparent);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .station-cluster div {
-  background: #16a34a;                    /* green-600 — matches stationIcon */
-  border: 2px solid white;
+  background: var(--color-primary);
+  border: 2px solid var(--color-on-primary);
   border-radius: 50%;
-  color: white;
+  color: var(--color-on-primary);
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -165,11 +302,11 @@ button, a {
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 .dark .station-cluster {
-  background: rgba(34, 197, 94, 0.2);     /* green-500 at 20% for dark mode */
+  background: color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 .dark .station-cluster div {
-  background: #22c55e;                    /* dark-mode primary green */
-  border-color: rgba(255,255,255,0.7);
+  background: var(--color-primary);
+  border-color: color-mix(in srgb, var(--color-on-primary) 70%, transparent);
 }
 
 /* Muted cluster for out-of-radius cached stations — small, no count */
@@ -179,13 +316,13 @@ button, a {
 .station-cluster-muted div {
   width: 14px;
   height: 14px;
-  background: #16a34a;
-  border: 1.5px solid white;
+  background: var(--color-primary);
+  border: 1.5px solid var(--color-on-primary);
   border-radius: 50%;
   opacity: 0.5;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 .dark .station-cluster-muted div {
-  background: #22c55e;
-  border-color: rgba(255,255,255,0.6);
+  background: var(--color-primary);
+  border-color: color-mix(in srgb, var(--color-on-primary) 60%, transparent);
 }

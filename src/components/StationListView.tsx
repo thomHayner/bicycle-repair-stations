@@ -46,9 +46,9 @@ function getHeaderState(
 }
 
 const AMENITY_FILTERS = [
-  { key: "pump",   label: "💨 Pump",   tag: "service:bicycle:pump",   active: "bg-sky-700 dark:bg-sky-400 border-sky-700 dark:border-sky-400 text-white dark:text-black",    inactive: "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300" },
-  { key: "tools",  label: "🔧 Tools",  tag: "service:bicycle:tools",  active: "bg-green-700 dark:bg-green-400 border-green-700 dark:border-green-400 text-white dark:text-black",  inactive: "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300" },
-  { key: "repair", label: "🛠 Repair", tag: "service:bicycle:repair", active: "bg-amber-700 dark:bg-amber-400 border-amber-700 dark:border-amber-400 text-white dark:text-black",  inactive: "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300" },
+  { key: "pump",   label: "💨 Pump",   tag: "service:bicycle:pump",   active: "bg-[var(--color-secondary)] border-[var(--color-secondary)] text-[var(--color-on-secondary)]",    inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
+  { key: "tools",  label: "🔧 Tools",  tag: "service:bicycle:tools",  active: "bg-[var(--color-primary)] border-[var(--color-primary)] text-[var(--color-on-primary)]",  inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
+  { key: "repair", label: "🛠 Repair", tag: "service:bicycle:repair", active: "bg-amber-700 dark:bg-amber-400 border-amber-700 dark:border-amber-400 text-white dark:text-black",  inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
 ] as const;
 
 type FilterKey = (typeof AMENITY_FILTERS)[number]["key"];
@@ -120,16 +120,16 @@ export function StationListView({
   const headerKey = headerPulse ? "loading" : headerText;
 
   return (
-    <div className="fixed bottom-[65px] left-3 right-3 z-[900] rounded-2xl shadow-lg bg-white/95 dark:bg-[#0d1220]/95 backdrop-blur-sm overflow-hidden">
+    <div className="fixed bottom-[65px] left-3 right-3 z-[900] rounded-2xl elevation-2 bg-[var(--color-surface-glass)] backdrop-blur-sm overflow-hidden">
 
       {/* Handle — always visible */}
       <button
         onClick={() => onExpandedChange(!expanded)}
-        className="w-full flex items-center justify-between px-4 py-3"
+        className="w-full flex items-center justify-between px-4 py-3 state-surface transition-colors focus-ring-inset"
         aria-expanded={expanded}
         aria-label={expanded ? "Collapse station list" : "Expand station list"}
       >
-        <span className="flex items-center gap-1.5 text-sm font-semibold text-slate-800 dark:text-slate-100">
+        <span className="flex items-center gap-1.5 type-title-small text-slate-800 dark:text-slate-100">
           <span key={headerKey} className={headerPulse ? "animate-pulse" : undefined}>
             {headerText}
           </span>
@@ -150,18 +150,18 @@ export function StationListView({
         }`}
       >
         {/* Distance row */}
-        <div className="border-t border-slate-100 dark:border-[#1e2a3a] px-4 py-3 flex items-center gap-2 flex-wrap">
-          <div className="flex rounded-full border border-slate-200 dark:border-[#1e2a3a] overflow-hidden shrink-0 mr-1">
+        <div className="border-t border-[var(--color-border)] px-4 py-3 flex items-center gap-2 flex-wrap">
+          <div className="flex rounded-full border border-[var(--color-border)] overflow-hidden shrink-0 mr-1">
             {(["mi", "km"] as Unit[]).map((u) => (
               <button
                 key={u}
                 type="button"
                 onClick={() => onUnitChange(u)}
                 className={[
-                  "text-xs font-semibold px-3 py-1 transition-colors",
+                  "type-label-small px-3 py-1 transition-colors focus-ring-inset",
                   u === unit
-                    ? "bg-green-600 text-white"
-                    : "bg-white dark:bg-[#0d1220] text-slate-500 dark:text-slate-400 active:bg-slate-50 dark:active:bg-slate-800/50",
+                    ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
+                    : "bg-[var(--color-surface-container)] text-slate-500 dark:text-slate-400 state-surface",
                 ].join(" ")}
               >
                 {u}
@@ -174,10 +174,10 @@ export function StationListView({
               type="button"
               onClick={() => onDistChange(d)}
               className={[
-                "text-xs font-semibold px-3 py-1 rounded-full border transition-colors",
+                "type-label-small px-3 py-1 rounded-full border transition-colors focus-ring",
                 d === selectedDist
-                  ? "bg-green-600 border-green-600 text-white"
-                  : "bg-white dark:bg-[#0d1220] border-slate-200 dark:border-[#1e2a3a] text-slate-600 dark:text-slate-300 active:bg-slate-50 dark:active:bg-slate-800/50",
+                  ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-[var(--color-on-primary)]"
+                  : "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300 state-surface",
               ].join(" ")}
             >
               {d}
@@ -186,7 +186,7 @@ export function StationListView({
         </div>
 
         {/* Amenity filter row */}
-        <div className="border-t border-slate-100 dark:border-[#1e2a3a] px-4 py-2.5 flex items-center gap-2 flex-wrap">
+        <div className="border-t border-[var(--color-border)] px-4 py-2.5 flex items-center gap-2 flex-wrap">
           <span className="text-xs text-slate-500 dark:text-slate-400 shrink-0">Filter:</span>
           {AMENITY_FILTERS.map((f) => {
             const on = activeFilters.has(f.key);
@@ -196,8 +196,8 @@ export function StationListView({
                 type="button"
                 onClick={() => toggleFilter(f.key)}
                 className={[
-                  "text-xs font-semibold px-3 py-1 rounded-full border transition-colors",
-                  on ? f.active : f.inactive + " active:bg-slate-50 dark:active:bg-slate-800/50",
+                  "type-label-small px-3 py-1 rounded-full border transition-colors focus-ring",
+                  on ? f.active : f.inactive + " state-surface",
                 ].join(" ")}
               >
                 {f.label}
@@ -208,7 +208,7 @@ export function StationListView({
             <button
               type="button"
               onClick={() => setActiveFilters(new Set())}
-              className="text-xs text-slate-500 dark:text-slate-400 underline ml-1"
+              className="text-xs text-slate-500 dark:text-slate-400 underline ml-1 hover:text-slate-700 dark:hover:text-slate-200 focus-ring rounded"
             >
               Clear
             </button>
@@ -216,7 +216,7 @@ export function StationListView({
         </div>
 
         {/* Station list */}
-        <div className="border-t border-slate-100 dark:border-[#1e2a3a]">
+        <div className="border-t border-[var(--color-border)]">
           {emptyPanelText && (
             <div className="px-4 py-5 text-sm text-slate-500 dark:text-slate-400 text-center">
               {emptyPanelText}
@@ -236,8 +236,8 @@ export function StationListView({
               <button
                 key={station.id}
                 onClick={() => onStationSelect(station)}
-                className={`w-full flex items-start justify-between px-4 py-3 text-left active:bg-slate-50 dark:active:bg-slate-800/30 transition-colors ${
-                  i > 0 ? "border-t border-slate-100 dark:border-[#1e2a3a]" : ""
+                className={`w-full flex items-start justify-between px-4 py-3 text-left state-surface transition-colors focus-ring-inset ${
+                  i > 0 ? "border-t border-[var(--color-border)]" : ""
                 }`}
               >
                 <div className="flex-1 min-w-0">
@@ -261,7 +261,7 @@ export function StationListView({
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 active:bg-green-100 dark:active:bg-green-900/50 transition-colors"
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/50 active:bg-green-200 dark:active:bg-green-900/70 transition-colors focus-ring"
                     aria-label={`Get directions to ${name}`}
                     title={`Get directions to ${name}`}
                   >
