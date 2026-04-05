@@ -2,6 +2,21 @@ declare const process: {
   env: Record<string, string | undefined>;
 };
 
+type HeaderValue = string | string[] | undefined;
+
+interface NodeRequest {
+  method?: string;
+  headers?: Record<string, HeaderValue>;
+  body?: unknown;
+}
+
+interface NodeResponse {
+  status: (code: number) => NodeResponse;
+  setHeader: (name: string, value: string) => void;
+  json: (body: unknown) => void;
+  end: (body?: string) => void;
+}
+
 interface BugPayload {
   summary?: unknown;
   description?: unknown;
@@ -17,14 +32,10 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_PER_IP = 6;
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
 
-function jsonResponse(status: number, body: Record<string, unknown>) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-store",
-    },
-  });
+function sendJson(response: NodeResponse, status: number, body: Record<string, unknown>) {
+  response.setHeader("Content-Type", "application/json");
+  response.setHeader("Cache-Control", "no-store");
+  response.status(status).json(body);
 }
 
 function asTrimmedString(value: unknown) {
@@ -63,30 +74,53 @@ function getAllowedOrigins() {
   return new Set(allowList);
 }
 
-export default async function handler(request: Request): Promise<Response> {
+function getHeader(request: NodeRequest, name: string): string {
+  const value = request.headers?.[name.toLowerCase()];
+  if (Array.isArray(value)) return value[0] ?? "";
+  return value ?? "";
+}
+
+function parsePayload(body: unknown): BugPayload | null {
+  if (body && typeof body === "object") return body as BugPayload;
+  if (typeof body === "string") {
+    try {
+      return JSON.parse(body) as BugPayload;
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+export default async function handler(request: NodeRequest, response: NodeResponse): Promise<void> {
   try {
     if (request.method === "OPTIONS") {
-      return new Response(null, { status: 204 });
+      response.status(204).end();
+      return;
     }
 
     if (request.method !== "POST") {
-      return jsonResponse(405, { error: "Method not allowed." });
+      sendJson(response, 405, { error: "Method not allowed." });
+      return;
     }
 
-    const originHeader = request.headers.get("origin");
+    const originHeader = getHeader(request, "origin");
     const allowedOrigins = getAllowedOrigins();
     if (allowedOrigins.size > 0 && originHeader && !allowedOrigins.has(originHeader)) {
-      return jsonResponse(403, { error: "Origin not allowed." });
+      sendJson(response, 403, { error: "Origin not allowed." });
+      return;
     }
 
-    const contentLength = Number(request.headers.get("content-length") ?? "0");
+    const contentLength = Number(getHeader(request, "content-length") || "0");
     if (contentLength > MAX_BODY_SIZE_BYTES) {
-      return jsonResponse(413, { error: "Payload too large." });
+      sendJson(response, 413, { error: "Payload too large." });
+      return;
     }
 
-    const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+    const clientIp = getHeader(request, "x-forwarded-for").split(",")[0]?.trim() || "unknown";
     if (!enforceRateLimit(clientIp)) {
-      return jsonResponse(429, { error: "Too many reports. Please try again in a minute." });
+      sendJson(response, 429, { error: "Too many reports. Please try again in a minute." });
+      return;
     }
 
     const githubToken = process.env.GITHUB_ISSUES_TOKEN;
@@ -99,16 +133,16 @@ export default async function handler(request: Request): Promise<Response> {
     if (!githubRepo) missingConfig.push("GITHUB_REPO_NAME");
 
     if (missingConfig.length > 0) {
-      return jsonResponse(500, {
+      sendJson(response, 500, {
         error: `Bug report service is not configured. Missing: ${missingConfig.join(", ")}.`,
       });
+      return;
     }
 
-    let payload: BugPayload;
-    try {
-      payload = (await request.json()) as BugPayload;
-    } catch {
-      return jsonResponse(400, { error: "Invalid JSON payload." });
+    const payload = parsePayload(request.body);
+    if (!payload) {
+      sendJson(response, 400, { error: "Invalid JSON payload." });
+      return;
     }
 
     const summary = asTrimmedString(payload.summary);
@@ -120,17 +154,19 @@ export default async function handler(request: Request): Promise<Response> {
     const screenshots = asTrimmedString(payload.screenshots) || "None provided";
 
     if (!summary || !description || !steps || !expected) {
-      return jsonResponse(400, { error: "Please complete all required fields." });
+      sendJson(response, 400, { error: "Please complete all required fields." });
+      return;
     }
 
     const combined = [summary, description, steps, expected, theme, device, screenshots].join("\n");
     if (containsRestrictedPII(combined)) {
-      return jsonResponse(400, {
+      sendJson(response, 400, {
         error: "Please remove email addresses and phone numbers before submitting.",
       });
+      return;
     }
 
-    const userAgent = request.headers.get("user-agent") ?? "Unknown user agent";
+    const userAgent = getHeader(request, "user-agent") || "Unknown user agent";
     const submittedAt = new Date().toISOString();
 
     const issueBody = [
@@ -176,20 +212,23 @@ export default async function handler(request: Request): Promise<Response> {
     });
 
     if (!githubResponse.ok) {
-      return jsonResponse(502, {
+      sendJson(response, 502, {
         error: "GitHub issue creation failed. Please try again shortly.",
       });
+      return;
     }
 
     const githubIssue = await githubResponse.json() as { html_url: string; number: number };
-    return jsonResponse(201, {
+    sendJson(response, 201, {
       issueUrl: githubIssue.html_url,
       issueNumber: githubIssue.number,
     });
+    return;
   } catch (error) {
     console.error("Unexpected report-bug error", error);
-    return jsonResponse(500, {
+    sendJson(response, 500, {
       error: "Bug report service failed unexpectedly. Please try again shortly.",
     });
+    return;
   }
 }
