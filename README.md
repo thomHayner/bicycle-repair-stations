@@ -48,6 +48,9 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 - **Dark mode** — class-based Tailwind dark mode following system preference; overridable to Light or Dark
 - **WCAG AA contrast** — all text/background combinations verified; primary interactive elements meet AAA (7 : 1)
 - **Touch targets** — all buttons and links ≥ 44 × 44 px
+- **Intentional ARIA semantics** — app shell uses landmarks (`main`, complementary ad region), icon-only controls have accessible names, and map markers expose meaningful names
+- **Intentional modal keyboard behavior** — share sheet and menu drawer are true dialogs with focus trap, Escape-to-close, and focus return
+- **Automated accessibility checks** — axe-core scans are part of release hygiene and run against key routes
 - **Ad banner slot** — fixed 50 px bottom bar compatible with standard 320 × 50 Mobile Banner ad units
 
 ---
@@ -279,6 +282,25 @@ Station data comes from OpenStreetMap contributors under the [ODbL 1.0](https://
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow, code style guide, and how to open issues or pull requests. The easiest contribution requires no code at all — just add a missing station directly on OpenStreetMap.
+
+---
+
+## Accessibility Contract
+
+Accessibility props and behaviors in this codebase are intentional and should be preserved unless there is a clear improvement:
+
+- Landmark structure (`main`, `header`, `nav`, and complementary ad region) is part of screen reader navigation.
+- Icon-only controls must keep explicit accessible names (`aria-label`) and should not rely on tooltip text (`title`) for accessibility.
+- Dialogs must retain focus management: initial focus, focus trap, Escape-to-close, and focus return to the trigger.
+- Live regions (`role="status"`, `aria-live`) should only be used for truly dynamic status updates.
+
+When changing UI controls, landmarks, dialogs, map markers, or live status components:
+
+1. Run `npm run build`.
+2. Run axe checks on affected routes.
+3. Verify keyboard-only flow manually (Tab/Shift+Tab/Enter/Escape).
+
+Detailed checklist and conventions: [docs/accessibility.md](docs/accessibility.md)
 
 ---
 
