@@ -112,13 +112,13 @@ export default function ReportBugPage() {
             <polyline points="15 18 9 12 15 6"/>
           </svg>
         </button>
-        <span className="font-semibold text-slate-900 dark:text-white">Report a bug</span>
+        <span className="type-title-medium text-slate-900 dark:text-white">Report a bug</span>
       </header>
 
       <div className="flex-1 overflow-y-auto px-5 py-6 flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <h1 className="text-xl font-bold text-slate-900 dark:text-white">Help us fix issues faster</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          <p className="type-body-medium text-slate-500 dark:text-slate-400 leading-relaxed">
             Your report creates a GitHub issue for maintainers to triage.
           </p>
         </div>
@@ -259,7 +259,7 @@ function FieldLabel({
   required?: boolean;
 }) {
   return (
-    <label htmlFor={htmlFor} className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+    <label htmlFor={htmlFor} className="type-label-overline text-slate-500 dark:text-slate-400">
       {label}
       {required ? " *" : ""}
     </label>

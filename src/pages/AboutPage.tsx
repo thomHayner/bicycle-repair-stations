@@ -9,7 +9,7 @@ function Accordion({ title, children }: { title: string; children: React.ReactNo
       <button
         type="button"
         onClick={() => setOpen((p) => !p)}
-        className="w-full flex items-center justify-between px-4 py-3.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring-inset"
+        className="w-full flex items-center justify-between px-4 py-3.5 type-title-small text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-ring-inset"
       >
         <span>{title}</span>
         <svg
@@ -47,7 +47,7 @@ export default function AboutPage() {
             <polyline points="15 18 9 12 15 6"/>
           </svg>
         </button>
-        <span className="font-semibold text-slate-900 dark:text-white">About</span>
+        <span className="type-title-medium text-slate-900 dark:text-white">About</span>
       </header>
       <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-6">
         <div className="flex flex-col items-center gap-2 text-center">
@@ -59,7 +59,7 @@ export default function AboutPage() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Data &amp; Credits</p>
+          <p className="type-label-overline text-slate-500 dark:text-slate-400">Data &amp; Credits</p>
           <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] divide-y divide-[var(--color-border)] elevation-1">
             <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 focus-ring-inset">
@@ -85,7 +85,7 @@ export default function AboutPage() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Contribute</p>
+          <p className="type-label-overline text-slate-500 dark:text-slate-400">Contribute</p>
           <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] divide-y divide-[var(--color-border)] elevation-1">
             <a href="https://www.openstreetmap.org/edit" target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-between px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 focus-ring-inset">
@@ -129,7 +129,7 @@ export default function AboutPage() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Legal</p>
+          <p className="type-label-overline text-slate-500 dark:text-slate-400">Legal</p>
           <Accordion title="Privacy Policy">
             <p className="pt-3"><strong className="text-slate-600 dark:text-slate-300">Last updated: April 2026</strong></p>
             <p><strong className="text-slate-600 dark:text-slate-300">Data we collect</strong><br/>
