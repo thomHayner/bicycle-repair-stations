@@ -23,7 +23,7 @@ export default function DonatePage() {
           onClick={() => navigate(-1)}
           aria-label="Back"
           title="Go back"
-          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 active:bg-slate-100 dark:active:bg-slate-800 transition-colors"
+          className="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200 dark:active:bg-slate-700 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6"/>
@@ -57,10 +57,10 @@ export default function DonatePage() {
                 type="button"
                 onClick={() => { setSelected(amount); setCustomInput(""); }}
                 className={[
-                  "flex-1 py-3 rounded-full text-sm font-semibold transition-colors",
+                  "flex-1 py-3 rounded-full text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400",
                   selected === amount
                     ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
-                    : "border border-[var(--color-border)] bg-[var(--color-surface)] text-slate-600 dark:text-slate-300 active:bg-slate-50 dark:active:bg-slate-800/50",
+                    : "border border-[var(--color-border)] bg-[var(--color-surface)] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60",
                 ].join(" ")}
               >
                 ${amount}
@@ -101,9 +101,9 @@ export default function DonatePage() {
               // Navigate to external donation URL with amount: effectiveAmount
             }}
             className={[
-              "w-full py-3.5 rounded-full text-sm font-bold transition-colors",
+              "w-full py-3.5 rounded-full text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400",
               effectiveAmount !== null
-                ? "bg-[var(--color-primary)] text-[var(--color-on-primary)] active:brightness-90"
+                ? "bg-[var(--color-primary)] text-[var(--color-on-primary)] hover:brightness-95 active:brightness-90"
                 : "bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed",
             ].join(" ")}
           >
