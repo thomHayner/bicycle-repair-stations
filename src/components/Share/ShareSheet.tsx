@@ -16,7 +16,7 @@ function ShareButton({ label, onClick }: { label: string; onClick: () => void })
     <button
       type="button"
       onClick={onClick}
-      className="w-full rounded-xl border border-slate-200 dark:border-[#1e2a3a] bg-white dark:bg-[#0d1220] px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 active:bg-slate-50 dark:active:bg-slate-800/50 transition-colors"
+      className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-container)] px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 active:bg-slate-100 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
     >
       {label}
     </button>
@@ -95,7 +95,7 @@ export function ShareSheet({
       <div
         ref={panelRef}
         className={[
-          "fixed left-3 right-3 bottom-3 z-[2700] rounded-2xl border border-slate-100 dark:border-[#1e2a3a] bg-slate-50 dark:bg-[#080c14] p-3 shadow-2xl",
+          "fixed left-3 right-3 bottom-3 z-[2700] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-container)] p-3 shadow-2xl",
           "transition-transform duration-200",
           open ? "translate-y-0" : "translate-y-[120%]",
         ].join(" ")}
@@ -124,7 +124,7 @@ export function ShareSheet({
           <button
             type="button"
             onClick={onClose}
-            className="w-full rounded-xl px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 active:bg-slate-100 dark:active:bg-slate-800/50 transition-colors"
+            className="w-full rounded-xl px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 active:bg-slate-200 dark:active:bg-slate-700/60 transition-colors focus-visible:outline-2 focus-visible:outline-green-600 focus-visible:outline-offset-2 dark:focus-visible:outline-green-400"
           >
             Cancel
           </button>
