@@ -47,7 +47,31 @@ npm run dev            # http://localhost:5173
 - **TypeScript** — no `any`, no `ts-ignore` without a comment explaining why.
 - **Tailwind** — use existing colour tokens and spacing scale; don't add arbitrary values without justification.
 - **Accessibility** — all new text/background combinations must meet WCAG AA (4.5 : 1). Interactive elements should meet AAA (7 : 1). Check with the browser DevTools contrast checker.
+- **ARIA semantics are intentional** — preserve landmarks, control names, dialog semantics, and live-region behavior unless the change is a clear accessibility improvement.
+- **Do not use tooltip text as accessibility text** — `title` is supplemental only; rely on visible labels and ARIA attributes.
+- **Dialog behavior is required** — modals/drawers must support initial focus, focus trap, Escape close, and focus return.
 - **Mobile-first** — test at 375 px width (iPhone SE viewport) before opening a PR.
+
+### Accessibility regression checks
+
+Before opening a UI-affecting PR, run:
+
+```bash
+npm run build
+```
+
+Then run axe against each changed route (example):
+
+```bash
+npx --yes @axe-core/cli http://127.0.0.1:4173/ --exit
+npx --yes @axe-core/cli http://127.0.0.1:4173/about --exit
+```
+
+Also perform a quick keyboard check:
+
+- Tab/Shift+Tab order is logical and visible.
+- Icon-only controls announce meaningful names.
+- Dialogs trap focus, close on Escape, and return focus to trigger.
 
 ---
 
