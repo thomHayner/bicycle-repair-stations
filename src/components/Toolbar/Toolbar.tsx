@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { memo, useCallback, useRef, useState } from "react";
 import type { Map as LeafletMap } from "leaflet";
 import { LAYERS, type LayerId } from "../../lib/layers";
 import { MenuDrawer } from "../Menu/MenuDrawer";
@@ -26,7 +26,7 @@ async function geocode(query: string): Promise<{ lat: number; lng: number } | nu
   return { lat: Number(results[0].lat), lng: Number(results[0].lon) };
 }
 
-export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
+export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
   const { openShare } = useShare();
   const [query, setQuery] = useState("");
   const [isGeocoding, setIsGeocoding] = useState(false);
@@ -270,4 +270,4 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
       />
     </>
   );
-}
+});

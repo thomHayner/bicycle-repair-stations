@@ -184,7 +184,7 @@ export default function MapPage() {
     setErrorDismissed(false);
   }, []);
 
-  const handleLocationFound = (pos: { lat: number; lng: number }, zoom = 13) => {
+  const handleLocationFound = useCallback((pos: { lat: number; lng: number }, zoom = 13) => {
     setMapMovedSinceSearch(false);
     setGivenLocation(pos);
     const nearUser =
@@ -193,17 +193,17 @@ export default function MapPage() {
     setSearchedLocation(nearUser ? null : pos);
     setErrorDismissed(false);
     programmaticFlyTo([pos.lat, pos.lng], zoom, { duration: 1.2 });
-  };
+  }, [userPosition, programmaticFlyTo]);
 
   // Recenter to GPS position — clears the search pin since the blue dot already marks the spot
-  const handleRecenter = () => {
+  const handleRecenter = useCallback(() => {
     if (!userPosition) return;
     setMapMovedSinceSearch(false);
     setGivenLocation(userPosition);
     setSearchedLocation(null);
     setErrorDismissed(false);
     programmaticFlyTo([userPosition.lat, userPosition.lng], 16, { duration: 1.2 });
-  };
+  }, [userPosition, programmaticFlyTo]);
 
   const handleStationSelect = useCallback((station: OverpassNode) => {
     setSelectedStationId(station.id);
@@ -218,12 +218,12 @@ export default function MapPage() {
   const handleMapInteraction = useCallback(() => setListExpanded(false), []);
 
   // Distance pill selected manually by the user
-  const handleDistChange = (dist: number) => {
+  const handleDistChange = useCallback((dist: number) => {
     setSelectedDist(dist);
-  };
+  }, []);
 
   // Unit toggle — snap selectedDist to the nearest preset in the new unit
-  const handleUnitChange = (newUnit: Unit) => {
+  const handleUnitChange = useCallback((newUnit: Unit) => {
     if (newUnit === unit) return;
     setUnit(newUnit);
     const currentMiles = unit === "mi" ? selectedDist : selectedDist / KM_PER_MILE;
@@ -233,7 +233,7 @@ export default function MapPage() {
       Math.abs(b - converted) < Math.abs(a - converted) ? b : a
     );
     setSelectedDist(closest);
-  };
+  }, [unit, setUnit, selectedDist]);
 
   const isFetchingStations = query.status === "loading";
 
@@ -261,7 +261,7 @@ export default function MapPage() {
     }
   }, [query.status, givenLocation]);
 
-  const handleSearchHere = () => {
+  const handleSearchHere = useCallback(() => {
     if (!mapCenter) return;
     setMapMovedSinceSearch(false);
     // Snapshot current viewport immediately so panning while results load
@@ -272,7 +272,7 @@ export default function MapPage() {
       userPosition !== null &&
       haversineDistanceMiles(mapCenter.lat, mapCenter.lng, userPosition.lat, userPosition.lng) < 1;
     setSearchedLocation(nearUser ? null : mapCenter);
-  };
+  }, [mapCenter, userPosition]);
 
   // Filter centre: explicit location (geo/search) → map centre → null
   const filterCenter = givenLocation ?? mapCenter;

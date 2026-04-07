@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useMemo, useState } from "react";
 import type { OverpassNode } from "../types/overpass";
 import { haversineDistanceMiles } from "../lib/distance";
 import { getDirectionsUrl } from "../lib/directions";
@@ -68,7 +68,7 @@ interface Props {
   queryStatus: QueryStatus;
 }
 
-export function StationListView({
+export const StationListView = memo(function StationListView({
   stations,
   filterCenter,
   userDistances,
@@ -92,22 +92,28 @@ export function StationListView({
   };
 
   // Sort by distance
-  const sorted = filterCenter
-    ? [...stations].sort(
-        (a, b) =>
-          haversineDistanceMiles(filterCenter.lat, filterCenter.lng, a.lat, a.lon) -
-          haversineDistanceMiles(filterCenter.lat, filterCenter.lng, b.lat, b.lon)
-      )
-    : stations;
+  const sorted = useMemo(
+    () => filterCenter
+      ? [...stations].sort(
+          (a, b) =>
+            haversineDistanceMiles(filterCenter.lat, filterCenter.lng, a.lat, a.lon) -
+            haversineDistanceMiles(filterCenter.lat, filterCenter.lng, b.lat, b.lon)
+        )
+      : stations,
+    [stations, filterCenter],
+  );
 
   // Apply amenity filters (AND logic — must have all selected)
-  const filtered = activeFilters.size === 0
-    ? sorted
-    : sorted.filter((s) =>
-        [...activeFilters].every(
-          (key) => s.tags[AMENITY_FILTERS.find((f) => f.key === key)!.tag] === "yes"
-        )
-      );
+  const filtered = useMemo(
+    () => activeFilters.size === 0
+      ? sorted
+      : sorted.filter((s) =>
+          [...activeFilters].every(
+            (key) => s.tags[AMENITY_FILTERS.find((f) => f.key === key)!.tag] === "yes"
+          )
+        ),
+    [sorted, activeFilters],
+  );
 
   const total = stations.length;
   const shown = filtered.length;
@@ -280,4 +286,4 @@ export function StationListView({
       </div>
     </div>
   );
-}
+});

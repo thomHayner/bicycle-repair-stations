@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Marker, Circle, Tooltip } from "react-leaflet";
 import { userIcon } from "../../lib/leafletConfig";
 
@@ -7,19 +8,21 @@ interface Props {
   accuracy?: number;
 }
 
-export function UserMarker({ lat, lng, accuracy }: Props) {
+const ACCURACY_CIRCLE_OPTIONS = {
+  color: "var(--color-secondary)",
+  fillColor: "var(--color-secondary)",
+  fillOpacity: 0.12,
+  weight: 1,
+} as const;
+
+export const UserMarker = memo(function UserMarker({ lat, lng, accuracy }: Props) {
   return (
     <>
       {accuracy != null && accuracy < 5000 && (
         <Circle
           center={[lat, lng]}
           radius={accuracy}
-          pathOptions={{
-            color: "var(--color-secondary)",
-            fillColor: "var(--color-secondary)",
-            fillOpacity: 0.12,
-            weight: 1,
-          }}
+          pathOptions={ACCURACY_CIRCLE_OPTIONS}
         />
       )}
       <Marker
@@ -35,4 +38,4 @@ export function UserMarker({ lat, lng, accuracy }: Props) {
       </Marker>
     </>
   );
-}
+});
