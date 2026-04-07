@@ -1,9 +1,11 @@
+import { memo } from "react";
+
 interface Props {
   visible: boolean;
   message?: string;
 }
 
-export function LoadingOverlay({ visible, message = "Finding your location\u2026" }: Props) {
+export const LoadingOverlay = memo(function LoadingOverlay({ visible, message = "Finding your location\u2026" }: Props) {
   if (!visible) return null;
   return (
     <div
@@ -33,4 +35,4 @@ export function LoadingOverlay({ visible, message = "Finding your location\u2026
       </div>
     </div>
   );
-}
+});

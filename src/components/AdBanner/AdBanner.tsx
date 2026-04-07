@@ -1,4 +1,6 @@
-export function AdBanner() {
+import { memo } from "react";
+
+export const AdBanner = memo(function AdBanner() {
   return (
     <aside
       className="fixed bottom-0 left-0 right-0 z-[999] bg-white dark:bg-[#0d1220] border-t border-slate-200 dark:border-[#1e2a3a] flex items-center justify-center"
@@ -26,4 +28,4 @@ export function AdBanner() {
       <span className="text-xs text-slate-500 dark:text-slate-400 select-none">Advertisement</span>
     </aside>
   );
-}
+});

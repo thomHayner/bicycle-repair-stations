@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Unit } from "../lib/units";
 import { Ctx, type Theme } from "./settingsCtx";
 
@@ -34,17 +34,17 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     () => (localStorage.getItem("brs-unit") as Unit) ?? "mi"
   );
 
-  const setTheme = (t: Theme) => {
+  const setTheme = useCallback((t: Theme) => {
     setThemeState(t);
     setResolvedTheme(getResolved(t));
     localStorage.setItem("brs-theme", t);
     applyTheme(t);
-  };
+  }, []);
 
-  const setUnit = (u: Unit) => {
+  const setUnit = useCallback((u: Unit) => {
     setUnitState(u);
     localStorage.setItem("brs-unit", u);
-  };
+  }, []);
 
   // Apply theme on mount + listen for system preference changes.
   // setResolvedTheme is intentionally omitted here — it's handled synchronously in
@@ -61,8 +61,13 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     return () => mq.removeEventListener("change", handler);
   }, [theme]);
 
+  const ctxValue = useMemo(
+    () => ({ theme, setTheme, resolvedTheme, unit, setUnit }),
+    [theme, setTheme, resolvedTheme, unit, setUnit],
+  );
+
   return (
-    <Ctx.Provider value={{ theme, setTheme, resolvedTheme, unit, setUnit }}>
+    <Ctx.Provider value={ctxValue}>
       {children}
     </Ctx.Provider>
   );

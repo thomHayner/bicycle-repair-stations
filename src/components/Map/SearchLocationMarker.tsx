@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Marker, Tooltip } from "react-leaflet";
 import { searchLocationIcon } from "../../lib/leafletConfig";
 
@@ -6,7 +7,7 @@ interface Props {
   lng: number;
 }
 
-export function SearchLocationMarker({ lat, lng }: Props) {
+export const SearchLocationMarker = memo(function SearchLocationMarker({ lat, lng }: Props) {
   return (
     <Marker
       position={[lat, lng]}
@@ -20,4 +21,4 @@ export function SearchLocationMarker({ lat, lng }: Props) {
       </Tooltip>
     </Marker>
   );
-}
+});
