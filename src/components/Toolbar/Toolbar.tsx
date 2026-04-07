@@ -17,13 +17,55 @@ interface Props {
   onUnitChange: (unit: Unit) => void;
 }
 
+const GEOCODE_CACHE_KEY = "brs_geocode";
+const GEOCODE_TTL_MS = 7 * 86_400_000; // 7 days
+const GEOCODE_MAX_ENTRIES = 50;
+
+interface GeocodeCache {
+  [query: string]: { lat: number; lng: number; ts: number };
+}
+
+function readGeocodeCache(): GeocodeCache {
+  try {
+    return JSON.parse(localStorage.getItem(GEOCODE_CACHE_KEY) ?? "{}") as GeocodeCache;
+  } catch {
+    return {};
+  }
+}
+
+function writeGeocodeCache(cache: GeocodeCache): void {
+  try {
+    localStorage.setItem(GEOCODE_CACHE_KEY, JSON.stringify(cache));
+  } catch { /* full or unavailable */ }
+}
+
 async function geocode(query: string): Promise<{ lat: number; lng: number } | null> {
+  const key = query.toLowerCase().trim();
+  const cache = readGeocodeCache();
+  const hit = cache[key];
+  if (hit && Date.now() - hit.ts < GEOCODE_TTL_MS) {
+    return { lat: hit.lat, lng: hit.lng };
+  }
+
   const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
   const res = await fetch(url, { headers: { "Accept-Language": "en" } });
   if (!res.ok) return null;
   const results = await res.json();
   if (!results[0]) return null;
-  return { lat: Number(results[0].lat), lng: Number(results[0].lon) };
+  const result = { lat: Number(results[0].lat), lng: Number(results[0].lon) };
+
+  // Evict oldest entries if cache is full
+  const entries = Object.entries(cache);
+  if (entries.length >= GEOCODE_MAX_ENTRIES) {
+    entries.sort((a, b) => a[1].ts - b[1].ts);
+    for (const [old] of entries.slice(0, entries.length - GEOCODE_MAX_ENTRIES + 1)) {
+      delete cache[old];
+    }
+  }
+  cache[key] = { ...result, ts: Date.now() };
+  writeGeocodeCache(cache);
+
+  return result;
 }
 
 export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
