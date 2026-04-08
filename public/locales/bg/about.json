@@ -1,0 +1,15 @@
+{
+  "pageTitle": "За приложението",
+  "tagline": "Намерете обществени станции за ремонт на велосипеди наблизо.",
+  "dataCredits": "Данни и признания",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — интерактивни карти",
+  "cartoTiles": "CARTO — плочки на картата",
+  "overpassData": "Overpass API — данни за станции",
+  "contribute": "Допринесете",
+  "addMissingStation": "Добавете липсваща станция в OSM",
+  "reportBug": "Докладвайте грешка",
+  "supportDonation": "Подкрепете с дарение",
+  "shareThisApp": "Споделете това приложение",
+  "legal": "Правна информация"
+}
