@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Close menu",
+  "findStations": "Find Stations",
+  "repairGuides": "Repair Guides",
+  "about": "About",
+  "reportBug": "Report a bug",
+  "donate": "Donate",
+  "addMissingStation": "Add a missing station",
+  "shareThisApp": "Share this app",
+  "theme": "Theme",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "themeSystem": "System",
+  "distance": "Distance",
+  "language": "Language"
+}
