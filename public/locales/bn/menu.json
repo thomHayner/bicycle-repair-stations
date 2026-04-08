@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "মেনু বন্ধ করুন",
+  "findStations": "স্টেশন খুঁজুন",
+  "repairGuides": "মেরামত গাইড",
+  "about": "সম্পর্কে",
+  "reportBug": "একটি বাগ রিপোর্ট করুন",
+  "donate": "দান করুন",
+  "addMissingStation": "একটি অনুপস্থিত স্টেশন যোগ করুন",
+  "shareThisApp": "এই অ্যাপ শেয়ার করুন",
+  "theme": "থিম",
+  "themeLight": "হালকা",
+  "themeDark": "গাঢ়",
+  "themeSystem": "সিস্টেম",
+  "distance": "দূরত্ব",
+  "language": "ভাষা"
+}
