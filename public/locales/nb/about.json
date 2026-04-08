@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Om",
+  "tagline": "Finn offentlige sykkelreparasjonsstasjoner i nærheten av deg.",
+  "dataCredits": "Data og kreditering",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — interaktive kart",
+  "cartoTiles": "CARTO — kartfliser",
+  "overpassData": "Overpass API — stasjonsdata",
+  "contribute": "Bidra",
+  "addMissingStation": "Legg til en manglende stasjon på OSM",
+  "reportBug": "Rapporter en feil",
+  "supportDonation": "Støtt med en donasjon",
+  "shareThisApp": "Del denne appen",
+  "legal": "Juridisk"
+}
