@@ -1,0 +1,21 @@
+{
+  "pageTitle": "عطیہ",
+  "heroTitle": "BicycleRepairStations کی مدد کریں",
+  "heroText": "کیا سائٹ نے آپ کو اسٹیشن تلاش کرنے یا سڑک پر واپس آنے میں مدد کی؟ دوسرے سائیکل سواروں کے لیے مفت رکھنے میں مدد کرنا چاہتے ہیں؟ کوئی بھی رقم ہوسٹنگ اور ترقیاتی اخراجات پورے کرنے میں مدد دیتی ہے۔",
+  "chooseAmount": "رقم منتخب کریں",
+  "customAmount": "یا اپنی مرضی کی رقم درج کریں",
+  "redirecting": "ری ڈائریکٹ ہو رہا ہے…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD عطیہ کریں",
+  "donateButton": "عطیہ",
+  "somethingWentWrong": "کچھ غلط ہو گیا۔",
+  "stripeNotice": "Stripe کے ذریعے محفوظ ادائیگی (USD)۔ اس ایپ کے ذریعے کارڈ کی کوئی تفصیل محفوظ نہیں کی جاتی۔",
+  "whereItGoes": "آپ کا عطیہ کہاں جاتا ہے",
+  "serverCosts": "سرور اور ہوسٹنگ اخراجات",
+  "apiUsage": "نقشہ ٹائل اور API استعمال",
+  "keepingFree": "ایپ کو مفت اور برقرار رکھنا",
+  "successTitle": "عطیہ مکمل",
+  "thankYou": "شکریہ!",
+  "successMessage": "آپ کا عطیہ BicycleRepairStations کو دنیا بھر کے سائیکل سواروں کے لیے مفت اور برقرار رکھنے میں مدد کرتا ہے۔",
+  "backToMap": "نقشے پر واپس جائیں"
+}
