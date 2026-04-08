@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "මෙනුව වසන්න",
+  "findStations": "ස්ථාන සොයන්න",
+  "repairGuides": "අලුත්වැඩියා මාර්ගෝපදේශ",
+  "about": "පිළිබඳව",
+  "reportBug": "දෝෂයක් වාර්තා කරන්න",
+  "donate": "පරිත්‍යාග කරන්න",
+  "addMissingStation": "නැති ස්ථානයක් එකතු කරන්න",
+  "shareThisApp": "මෙම යෙදුම බෙදාගන්න",
+  "theme": "තේමාව",
+  "themeLight": "ලා",
+  "themeDark": "අඳුරු",
+  "themeSystem": "පද්ධතිය",
+  "distance": "දුර",
+  "language": "භාෂාව"
+}
