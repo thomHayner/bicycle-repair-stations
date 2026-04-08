@@ -1,0 +1,21 @@
+{
+  "pageTitle": "ለግስ",
+  "heading": "BicycleRepairStations.com ን ይደግፉ",
+  "heroText": "ይህ መተግበሪያ ነፃ፣ በማስታወቂያ የሚደገፍ እና ክፍት ምንጭ ነው። ልገሳዎች የአስተናጋጅ፣ የካርታ ሰድሮች እና የልማት ወጪዎችን ለመሸፈን ይረዳሉ።",
+  "chooseAmount": "መጠን ይምረጡ",
+  "donateAmount": "${{amount}} USD ለግስ",
+  "customAmount": "ወይም ብጁ መጠን ያስገቡ",
+  "customPlaceholder": "መጠን",
+  "redirecting": "በማዘዋወር ላይ…",
+  "donateButton": "${{amount}} USD ለግስ",
+  "somethingWentWrong": "የሆነ ችግር ተከስቷል።",
+  "stripeNotice": "ክፍያዎች በStripe በUSD ደህንነቱ በተጠበቀ ሁኔታ ይከናወናሉ።",
+  "whereItGoes": "ልገሳዎ የሚሄድበት",
+  "infoHosting": "የአገልጋይ እና የአስተናጋጅ ወጪዎች",
+  "infoTiles": "የካርታ ሰድር አገልግሎቶች",
+  "infoDev": "ቀጣይ ልማት እና ጥገና",
+  "backToMap": "ወደ ካርታ ተመለስ",
+  "successTitle": "ልገሳ ተጠናቋል",
+  "thankYou": "አመሰግናለሁ!",
+  "successMessage": "ለጋስ አስተዋፅኦዎ BicycleRepairStations.com ለሁሉም ብስክሌተኞች ነፃ እንዲቆይ ይረዳል።"
+}

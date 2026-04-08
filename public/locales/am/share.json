@@ -1,0 +1,12 @@
+{
+  "shareApp": "መተግበሪያ ያጋሩ",
+  "shareStation": "ጣቢያ ያጋሩ",
+  "shareAppMessage": "BicycleRepairStations.com ን በመጠቀም በአቅራቢያዎ ያሉ የህዝብ ብስክሌት ጥገና ጣቢያዎችን ያግኙ!",
+  "shareStationMessage": "ይህን የብስክሌት ጥገና ጣቢያ ይመልከቱ: {{name}}",
+  "copyLink": "ሊንክ ቅዳ",
+  "linkCopied": "ሊንክ ተቀድቷል!",
+  "email": "ኢሜይል",
+  "emailSubjectApp": "በአቅራቢያዎ ያሉ የብስክሌት ጥገና ጣቢያዎች",
+  "emailSubjectStation": "የብስክሌት ጥገና ጣቢያ: {{name}}",
+  "shareVia": "በ{{platform}} ያጋሩ"
+}
