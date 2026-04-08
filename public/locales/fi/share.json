@@ -1,0 +1,11 @@
+{
+  "title": "Jaa tämä sovellus",
+  "subtitle": "Vain henkilökohtainen jakaminen: X, Facebook, sähköposti tai kopioi linkki.",
+  "nativeShare": "Lisää sovelluksia (Instagram/Nextdoor jos asennettu)",
+  "shareOnX": "Jaa X:ssä",
+  "shareOnFacebook": "Jaa Facebookissa",
+  "shareByEmail": "Jaa sähköpostilla",
+  "copyLink": "Kopioi linkki",
+  "linkCopied": "Linkki kopioitu leikepöydälle.",
+  "copyFailed": "Linkkiä ei voitu kopioida tässä selaimessa."
+}

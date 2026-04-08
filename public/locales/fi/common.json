@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "Pyörän korjausasema-sovellus",
+  "back": "Takaisin",
+  "goBack": "Mene takaisin",
+  "cancel": "Peruuta",
+  "dismiss": "Sulje",
+  "findingLocation": "Haetaan sijaintiasi…",
+  "advertisement": "Mainos",
+  "findDescription": "Löydä julkiset pyörän korjausasemat läheltäsi."
+}
