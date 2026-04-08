@@ -1,0 +1,12 @@
+{
+  "shareApp": "Колдонмону бөлүшүү",
+  "shareStation": "Станцияны бөлүшүү",
+  "shareAppMessage": "BicycleRepairStations.com менен жакын жердеги коомдук велосипед оңдоо станцияларын табыңыз!",
+  "shareStationMessage": "Бул велосипед оңдоо станциясын караңыз: {{name}}",
+  "copyLink": "Шилтемени көчүрүү",
+  "linkCopied": "Шилтеме көчүрүлдү!",
+  "email": "Электрондук почта",
+  "emailSubjectApp": "Жакын жердеги велосипед оңдоо станциялары",
+  "emailSubjectStation": "Велосипед оңдоо станциясы: {{name}}",
+  "shareVia": "{{platform}} аркылуу бөлүшүү"
+}
