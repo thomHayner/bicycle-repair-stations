@@ -1,0 +1,12 @@
+{
+  "shareApp": "Deila forriti",
+  "shareStation": "Deila stöð",
+  "shareAppMessage": "Finndu opinberar hjólreiðaviðgerðarstöðvar nálægt þér á BicycleRepairStations.com!",
+  "shareStationMessage": "Skoðaðu þessa hjólreiðaviðgerðarstöð: {{name}}",
+  "copyLink": "Afrita hlekk",
+  "linkCopied": "Hlekkur afritaður!",
+  "email": "Tölvupóstur",
+  "emailSubjectApp": "Hjólreiðaviðgerðarstöðvar nálægt þér",
+  "emailSubjectStation": "Hjólreiðaviðgerðarstöð: {{name}}",
+  "shareVia": "Deila í gegnum {{platform}}"
+}

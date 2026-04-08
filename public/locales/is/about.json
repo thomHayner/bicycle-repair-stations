@@ -1,0 +1,13 @@
+{
+  "pageTitle": "Um",
+  "heading": "Um BicycleRepairStations.com",
+  "intro": "Ókeypis opinn hugbúnaður til að finna opinberar hjólreiðaviðgerðarstöðvar um allan heim. Hannað fyrir hjólreiðafólk sem þarf dælu, verkfæri eða viðgerðarstöð á leiðinni.",
+  "openSourceTitle": "Opinn hugbúnaður",
+  "openSource": "Þetta verkefni er opinn hugbúnaður og tiltækt á <githubLink>GitHub</githubLink>. Framlög, villutilkynningar og óskir um eiginleika eru velkomin.",
+  "dataTitle": "Gögn",
+  "data": "Gögn um stöðvar koma frá <osmLink>OpenStreetMap</osmLink>, ókeypis samvinnukorti af heiminum. Ef þú finnur stöð sem vantar eða er röng geturðu lagað hana beint á OpenStreetMap og hún mun birtast hér.",
+  "privacyTitle": "Friðhelgi",
+  "privacy": "Við virðum friðhelgi þína. Þetta forrit notar engar vafrakökur, engar nýskráningar og safnar engum persónulegum gögnum. Staðsetning þín er aðeins notuð í vafranum þínum og er aldrei send á netþjóna okkar.",
+  "donateTitle": "Styrkja verkefnið",
+  "donate": "Ef þú finnur þetta verkfæri gagnlegt, íhugaðu að <donateLink>gefa lítinn styrk</donateLink> til að standa straum af hýsingarkostnaði og halda verkefninu gangandi."
+}
