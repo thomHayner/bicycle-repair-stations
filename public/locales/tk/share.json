@@ -1,0 +1,12 @@
+{
+  "shareApp": "Programmany paýlaş",
+  "shareStation": "Stansiýany paýlaş",
+  "shareAppMessage": "BicycleRepairStations.com bilen ýakynňyzdaky jemgyýetçilik welosiped abatlaýyş stansiýalaryny tapyň!",
+  "shareStationMessage": "Bu welosiped abatlaýyş stansiýasyna göz aýlaň: {{name}}",
+  "copyLink": "Salgylanmany göçür",
+  "linkCopied": "Salgylanma göçürildi!",
+  "email": "E-poçta",
+  "emailSubjectApp": "Ýakynňyzdaky welosiped abatlaýyş stansiýalary",
+  "emailSubjectStation": "Welosiped abatlaýyş stansiýasy: {{name}}",
+  "shareVia": "{{platform}} arkaly paýlaş"
+}
