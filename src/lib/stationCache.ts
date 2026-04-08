@@ -7,14 +7,7 @@ import { haversineDistanceMiles } from "./distance";
  */
 export const FETCH_RADIUS_KM = 40.2335; // 25 miles
 
-/**
- * Re-fetch threshold: 20% of the fetch radius.
- * - 25 mi fetch → ~5 mi threshold (matches previous fixed value)
- * - 50 mi fetch → 10 mi, 100 mi → 20 mi, 250 mi → 50 mi
- */
-function refetchThreshold(radiusKm: number): number {
-  return radiusKm * 0.2;
-}
+
 
 // Bumped v2 → v3 to invalidate stale 65-km caches from the previous build.
 const STORAGE_KEY = "brs_v3";
@@ -52,11 +45,12 @@ export function writeCache(data: StationCache): void {
 
 /**
  * Returns true if the cache covers a query at (lat, lng) for the given radius.
- * Checks both proximity to cache centre AND that the cached radius is sufficient.
- * A bigger cache always covers a smaller request (e.g. 100 mi cache covers 25 mi).
+ * Geometric check: the entire needed circle must fit inside the cached circle.
+ * A bigger cache always covers a smaller request (e.g. 100 mi cache covers 25 mi)
+ * and tolerates more movement before triggering a re-fetch.
  */
 export function isCovered(lat: number, lng: number, cache: StationCache, neededRadiusKm: number = FETCH_RADIUS_KM): boolean {
   const distKm =
     haversineDistanceMiles(lat, lng, cache.center.lat, cache.center.lng) * 1.60934;
-  return distKm <= refetchThreshold(neededRadiusKm) && cache.radiusKm >= neededRadiusKm;
+  return distKm + neededRadiusKm <= cache.radiusKm;
 }

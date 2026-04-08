@@ -211,14 +211,15 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
   const handleZoomIn = useCallback(() => mapRef.current?.zoomIn(), [mapRef]);
   const handleZoomOut = useCallback(() => mapRef.current?.zoomOut(), [mapRef]);
 
-  const inRadiusStations = useMemo(
-    () => stations.filter((s) => filteredStationIds.has(s.id)),
-    [stations, filteredStationIds],
-  );
-  const outOfRadiusStations = useMemo(
-    () => stations.filter((s) => !filteredStationIds.has(s.id)),
-    [stations, filteredStationIds],
-  );
+  const { inRadiusStations, outOfRadiusStations } = useMemo(() => {
+    const inRadius = stations.filter((s) => filteredStationIds.has(s.id));
+    return {
+      inRadiusStations: inRadius,
+      outOfRadiusStations: showMutedMarkers
+        ? stations.filter((s) => !filteredStationIds.has(s.id))
+        : [],
+    };
+  }, [stations, filteredStationIds, showMutedMarkers]);
 
   // Fly to user position once it resolves; signal completion so the splash screen can dismiss
   const didFlyRef = useRef(false);

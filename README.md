@@ -46,7 +46,7 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 
 ### PWA & Accessibility
 - **PWA installable** — `manifest.json` with standalone display; 192 × 192 and 512 × 512 icons
-- **Offline tile caching** — Workbox CacheFirst strategy, 7-day TTL, 500 tile cap
+- **Offline tile caching** — Workbox CacheFirst strategy with separate caches per provider (CARTO 800 / ESRI 300 / WaymarkedTrails 400 entries), 7-day TTL
 - **Dark mode** — class-based Tailwind dark mode following system preference; overridable to Light or Dark
 - **WCAG AA contrast** — all text/background combinations verified; primary interactive elements meet AAA (7 : 1)
 - **Touch targets** — all buttons and links ≥ 44 × 44 px (48 × 48 px on toast dismiss per MD3)
@@ -250,7 +250,7 @@ Leaflet is an imperative DOM library; `react-leaflet` wraps it in React context.
 
 - Queries use `POST` with `application/x-www-form-urlencoded` (correct per Overpass documentation)
 - The standard fetch radius is **40.2 km (25 mi)**, covering all local-range pills (1–25 mi). Wider pills (50/100/250 mi) trigger on-demand fetches at their exact radius.
-- Results are written to `localStorage` (`brs_v3` key) with a 24-hour TTL; a new fetch fires only when the user moves beyond 20% of the fetch radius from the cache centre, or selects a pill wider than what the cache covers
+- Results are written to `localStorage` (`brs_v3` key) with a 24-hour TTL; a new fetch fires only when the needed search circle no longer fits inside the cached circle (geometric containment: `dist + neededRadius ≤ cachedRadius`)
 - Cache downgrades are free: a 100 mi cache covers any request ≤ 100 mi without re-fetching
 - Overpass timeout scales with fetch radius: 25 s for 25 mi, ~31 s for 50 mi, ~62 s for 100 mi, capped at 90 s
 - Three Overpass mirrors are tried in sequence on HTTP 429 / 5xx errors, network failures (`TypeError`), and server-side timeouts (detected via `remark` field in HTTP 200 responses)
@@ -373,7 +373,7 @@ Cyclists who are on the road, have a mechanical issue, and need a public repair 
 | F-01 | **Auto-locate** | On load, requests GPS via `watchPosition`. Centers map and fetches stations automatically. Falls back to London (51.505, −0.09) if permission is denied. |
 | F-02 | **Location search** | Geocodes free-text input via Nominatim and re-centers the map. Shows inline error if location not found. |
 | F-03 | **Search this area** | Floating button appears when the map pans away from the last search area (< 70% viewport overlap) or when the user zooms out beyond the selected distance pill (× 1.3 threshold). Pressing it snaps the distance pill to the closest match for the visible viewport and triggers a fresh Overpass query. Suppressed when already at the 250 mi max pill (only panning triggers it). |
-| F-04 | **Overpass station fetch** | Queries `amenity=bicycle_repair_station` nodes. Standard fetch radius is 40.2 km (25 mi), covering pills 1–25 mi. Selecting 50/100/250 mi triggers an on-demand fetch at the exact radius. Results cached in `localStorage` (`brs_v3`) for 24 hours; re-fetched when the user moves beyond 20% of the fetch radius from cache centre, or selects a wider pill than what the cache covers. Cache downgrades are free (100 mi cache serves any ≤ 100 mi request). |
+| F-04 | **Overpass station fetch** | Queries `amenity=bicycle_repair_station` nodes. Standard fetch radius is 40.2 km (25 mi), covering pills 1–25 mi. Selecting 50/100/250 mi triggers an on-demand fetch at the exact radius. Results cached in `localStorage` (`brs_v3`) for 24 hours; re-fetched when the needed search circle no longer fits inside the cached circle (geometric containment). Cache downgrades are free (100 mi cache serves any ≤ 100 mi request). |
 | F-05 | **Wide-area search** | Distance pills extend to 50, 100, and 250 mi (75, 150, 400 km). Selecting a larger pill triggers a wider Overpass query with scaled timeouts (25 s – 90 s). Out-of-radius stations appear as muted markers on the map only during wide searches (> 25 mi). Auto-radius never escalates beyond 25 mi — the user must manually tap a wider pill. |
 | F-06 | **Station markers** | Green map markers for all stations within the active radius. Tapping a marker centers the map (no zoom change) and opens a popup. |
 | F-07 | **Station popup** | Shows station name, description, operator, amenity badges (Tools / Pump / Repair), opening hours, and a **Get Directions** button. |
@@ -679,10 +679,12 @@ fetchRadiusKm = max(FETCH_RADIUS_KM, selectedDistKm)
 | Cache | Key | TTL | Eviction |
 |-------|-----|-----|---------|
 | Station data | `brs_v3` (localStorage) | 24 hours | Timestamp check on read |
-| Map tiles | Workbox `osm-tiles` | 7 days | Max 500 entries (LRU) |
+| Map tiles (CARTO) | Workbox `carto-tiles` | 7 days | Max 800 entries (LRU) |
+| Map tiles (ESRI) | Workbox `esri-tiles` | 7 days | Max 300 entries (LRU) |
+| Map tiles (Waymarked) | Workbox `waymarked-tiles` | 7 days | Max 400 entries (LRU) |
 | App shell (JS/CSS/HTML) | Workbox precache | Service worker update | New SW install |
 
-Cache coverage check: a new Overpass fetch is triggered when the user moves beyond **20% of the fetch radius** from the cache centre, or selects a pill wider than the cached radius. A 100 mi cache covers any request ≤ 100 mi without re-fetching.
+Cache coverage check: geometric containment — the entire needed search circle must fit inside the cached circle (`distFromCentre + neededRadius ≤ cachedRadius`). A 100 mi cache covers any ≤ 100 mi request and tolerates proportionally more movement before triggering a re-fetch.
 
 ### 4.7 Theme System
 
