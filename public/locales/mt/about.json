@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Dwar",
+  "tagline": "Sib stazzjonijiet pubbliċi tat-tiswija tar-roti fil-qrib tiegħek.",
+  "dataCredits": "Data u Krediti",
+  "osmContributors": "© kontributuri ta' OpenStreetMap",
+  "leafletMaps": "Leaflet — mapep interattivi",
+  "cartoTiles": "CARTO — tiles tal-mappa",
+  "overpassData": "Overpass API — data tal-istazzjonijiet",
+  "contribute": "Ikkontribwixxi",
+  "addMissingStation": "Żid stazzjon nieqes fuq OSM",
+  "reportBug": "Irrapporta bug",
+  "supportDonation": "Appoġġja b'donazzjoni",
+  "shareThisApp": "Aqsam din l-app",
+  "legal": "Legali"
+}

@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Agħti donazzjoni",
+  "heroTitle": "Appoġġja BicycleRepairStations",
+  "heroText": "Is-sit għenitek issib stazzjon jew terġa' titla' fit-triq? Trid tgħin iżżommha b'xejn għal ċiklisti oħra? Kwalunkwe ammont jgħin ikopri l-ispejjeż tal-hosting u l-iżvilupp.",
+  "chooseAmount": "Agħżel ammont",
+  "customAmount": "Jew daħħal ammont personalizzat",
+  "redirecting": "Qed nirridirezzjona…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Agħti donazzjoni ta' ${{amount}} USD",
+  "donateButton": "Agħti donazzjoni",
+  "somethingWentWrong": "Xi ħaġa marret ħażin.",
+  "stripeNotice": "Pagament sigur permezz ta' Stripe (USD). L-ebda dettalji tal-kard ma jinħażnu minn din l-app.",
+  "whereItGoes": "Fejn tmur id-donazzjoni tiegħek",
+  "serverCosts": "Spejjeż tas-server u l-hosting",
+  "apiUsage": "Użu tat-tiles tal-mappa u l-API",
+  "keepingFree": "Inżommu l-app b'xejn u mantinuta",
+  "successTitle": "Donazzjoni Kompleta",
+  "thankYou": "Grazzi!",
+  "successMessage": "Id-donazzjoni tiegħek tgħin iżżomm BicycleRepairStations b'xejn u mantinuta għaċ-ċiklisti kullimkien.",
+  "backToMap": "Lura lejn il-mappa"
+}
