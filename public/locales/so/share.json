@@ -1,0 +1,12 @@
+{
+  "shareApp": "Wadaag Abka",
+  "shareStation": "Wadaag Saldhigga",
+  "shareAppMessage": "Raadi saldhigyada dayactirka baaskiilka ee dadweynaha ee kuu dhow BicycleRepairStations.com!",
+  "shareStationMessage": "Eeg saldhiggan dayactirka baaskiilka: {{name}}",
+  "copyLink": "Koobiyee Linkiga",
+  "linkCopied": "Linkiga waa la koobiyeeyay!",
+  "email": "Iimaylka",
+  "emailSubjectApp": "Saldhigyada Dayactirka Baaskiilka ee Kuu Dhow",
+  "emailSubjectStation": "Saldhigga Dayactirka Baaskiilka: {{name}}",
+  "shareVia": "Ku wadaag {{platform}}"
+}
