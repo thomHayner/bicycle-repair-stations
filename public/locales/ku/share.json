@@ -1,0 +1,12 @@
+{
+  "shareApp": "Sepanê Parve Bike",
+  "shareStation": "Stasyonê Parve Bike",
+  "shareAppMessage": "Stasyonên tamîrkirina bisîklêtên giştî yên li nêzîkê xwe bi BicycleRepairStations.com re bibînin!",
+  "shareStationMessage": "Vê stasyona tamîrkirina bisîklêtê bibînin: {{name}}",
+  "copyLink": "Lînkê Kopî Bike",
+  "linkCopied": "Lînk hat kopîkirin!",
+  "email": "E-peyam",
+  "emailSubjectApp": "Stasyonên Tamîrkirina Bisîklêtê Li Nêzîkê Te",
+  "emailSubjectStation": "Stasyona Tamîrkirina Bisîklêtê: {{name}}",
+  "shareVia": "Bi rêya {{platform}} parve bike"
+}
