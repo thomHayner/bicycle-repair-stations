@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Nikela",
+  "heroTitle": "Sekela BicycleRepairStations",
+  "heroText": "Ingabe isayithi likusize ukuthola isiteshi noma ukubuyela emgwaqweni? Ufuna ukusiza ukugcina limahhala kwabanye abagibeli bamabhayisikili? Noma iyiphi inani lisiza ukukhokhela izindleko zokuphatha nokuthuthukisa.",
+  "chooseAmount": "Khetha inani",
+  "customAmount": "Noma faka inani lakho",
+  "redirecting": "Iyaqondisa kabusha\u2026",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Nikela ${{amount}} USD",
+  "donateButton": "Nikela",
+  "somethingWentWrong": "Kukhona okungahambanga kahle.",
+  "stripeNotice": "Ukukhokha okuphephile nge-Stripe (USD). Awekho amininingwane ekhadi agcinwa yilolu hlelo lokusebenza.",
+  "whereItGoes": "Isipho sakho siya kuphi",
+  "serverCosts": "Izindleko zeseva nokuphatha",
+  "apiUsage": "Ukusetshenziswa kwamathayela emephu ne-API",
+  "keepingFree": "Ukugcina uhlelo lokusebenza lumahhala futhi lunakekelwa",
+  "successTitle": "Isipho Siphelile",
+  "thankYou": "Siyabonga!",
+  "successMessage": "Isipho sakho sisiza ukugcina BicycleRepairStations limahhala futhi linakekelwa kubagibeli bamabhayisikili yonke indawo.",
+  "backToMap": "Buyela emephini"
+}
