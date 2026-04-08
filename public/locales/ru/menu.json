@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Закрыть меню",
+  "findStations": "Найти станции",
+  "repairGuides": "Руководства по ремонту",
+  "about": "О приложении",
+  "reportBug": "Сообщить об ошибке",
+  "donate": "Пожертвовать",
+  "addMissingStation": "Добавить отсутствующую станцию",
+  "shareThisApp": "Поделиться этим приложением",
+  "theme": "Тема",
+  "themeLight": "Светлая",
+  "themeDark": "Тёмная",
+  "themeSystem": "Системная",
+  "distance": "Расстояние",
+  "language": "Язык"
+}

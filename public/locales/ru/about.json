@@ -1,0 +1,15 @@
+{
+  "pageTitle": "О приложении",
+  "tagline": "Найдите публичные велосипедные ремонтные станции рядом с вами.",
+  "dataCredits": "Данные и авторство",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — интерактивные карты",
+  "cartoTiles": "CARTO — тайлы карты",
+  "overpassData": "Overpass API — данные о станциях",
+  "contribute": "Внести вклад",
+  "addMissingStation": "Добавить отсутствующую станцию в OSM",
+  "reportBug": "Сообщить об ошибке",
+  "supportDonation": "Поддержать пожертвованием",
+  "shareThisApp": "Поделиться этим приложением",
+  "legal": "Правовая информация"
+}
