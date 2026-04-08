@@ -1,0 +1,11 @@
+{
+  "title": "Compartir esta aplicación",
+  "subtitle": "Solo para compartir personal: X, Facebook, correo electrónico o copiar enlace.",
+  "nativeShare": "Más aplicaciones (Instagram/Nextdoor si están instaladas)",
+  "shareOnX": "Compartir en X",
+  "shareOnFacebook": "Compartir en Facebook",
+  "shareByEmail": "Compartir por correo",
+  "copyLink": "Copiar enlace",
+  "linkCopied": "Enlace copiado al portapapeles.",
+  "copyFailed": "No se pudo copiar el enlace en este navegador."
+}
