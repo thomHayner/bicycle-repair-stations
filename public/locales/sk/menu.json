@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Zavrieť ponuku",
+  "findStations": "Nájsť stanice",
+  "repairGuides": "Sprievodcovia opravami",
+  "about": "O aplikácii",
+  "reportBug": "Nahlásiť chybu",
+  "donate": "Darovať",
+  "addMissingStation": "Pridať chýbajúcu stanicu",
+  "shareThisApp": "Zdieľať túto aplikáciu",
+  "theme": "Motív",
+  "themeLight": "Svetlý",
+  "themeDark": "Tmavý",
+  "themeSystem": "Systémový",
+  "distance": "Vzdialenosť",
+  "language": "Jazyk"
+}
