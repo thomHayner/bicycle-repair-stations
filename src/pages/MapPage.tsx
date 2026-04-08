@@ -109,19 +109,20 @@ export default function MapPage() {
       return;
     }
 
-    // Zoom-out check: does the viewport show area beyond the fetched radius?
+    // Zoom-out check: does the viewport show area beyond the *selected* radius?
+    // Compare against the pill the user chose (displayMiles), not the cache/fetch
+    // radius — so zooming out from 2 mi immediately offers "Search this area" at 5 mi.
     // Skip if already at the max pill (250 mi) — there's nothing bigger to search.
     const maxPillMi = MI_OPTIONS_ALL[MI_OPTIONS_ALL.length - 1];
-    const fetchRadiusMi = fetchRadiusKm / KM_PER_MILE;
-    if (fetchRadiusMi < maxPillMi) {
+    if (displayMiles < maxPillMi) {
       const center = map!.getCenter();
       const ne = current.getNorthEast();
       const viewportRadiusMi = haversineDistanceMiles(center.lat, center.lng, ne.lat, ne.lng);
-      if (viewportRadiusMi > fetchRadiusMi * 1.3) {
+      if (viewportRadiusMi > displayMiles * 1.3) {
         setMapMovedSinceSearch(true);
       }
     }
-  }, [fetchRadiusKm]);
+  }, [displayMiles]);
 
   const [activeLayer, setActiveLayer] = useState<LayerId>("cycling");
   const [errorDismissed, setErrorDismissed] = useState(false);
