@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Затвори мени",
+  "findStations": "Пронађи станице",
+  "repairGuides": "Водичи за поправку",
+  "about": "О апликацији",
+  "reportBug": "Пријави грешку",
+  "donate": "Донирај",
+  "addMissingStation": "Додај станицу која недостаје",
+  "shareThisApp": "Подели ову апликацију",
+  "theme": "Тема",
+  "themeLight": "Светла",
+  "themeDark": "Тамна",
+  "themeSystem": "Системска",
+  "distance": "Удаљеност",
+  "language": "Језик"
+}
