@@ -60,13 +60,39 @@ export const SUPPORTED_LOCALES = [
   { code: "ku", name: "Kurdish",    nativeName: "Kurdî",      dir: "ltr" },
   { code: "ky", name: "Kyrgyz",     nativeName: "Кыргызча",   dir: "ltr" },
   { code: "tk", name: "Turkmen",    nativeName: "Türkmen",    dir: "ltr" },
+  // Africa
+  { code: "sw", name: "Swahili",    nativeName: "Kiswahili",  dir: "ltr" },
+  { code: "am", name: "Amharic",    nativeName: "አማርኛ",       dir: "ltr" },
+  { code: "ha", name: "Hausa",      nativeName: "Hausa",      dir: "ltr" },
+  { code: "yo", name: "Yoruba",     nativeName: "Yorùbá",     dir: "ltr" },
+  { code: "ig", name: "Igbo",       nativeName: "Igbo",       dir: "ltr" },
+  { code: "so", name: "Somali",     nativeName: "Soomaali",   dir: "ltr" },
+  { code: "zu", name: "Zulu",       nativeName: "isiZulu",    dir: "ltr" },
+  { code: "mg", name: "Malagasy",   nativeName: "Malagasy",   dir: "ltr" },
+  { code: "rw", name: "Kinyarwanda", nativeName: "Kinyarwanda", dir: "ltr" },
+  // Indian subcontinent
+  { code: "hi", name: "Hindi",      nativeName: "हिन्दी",       dir: "ltr" },
+  { code: "bn", name: "Bengali",    nativeName: "বাংলা",       dir: "ltr" },
+  { code: "ta", name: "Tamil",      nativeName: "தமிழ்",       dir: "ltr" },
+  { code: "te", name: "Telugu",     nativeName: "తెలుగు",      dir: "ltr" },
+  { code: "mr", name: "Marathi",    nativeName: "मराठी",       dir: "ltr" },
+  { code: "gu", name: "Gujarati",   nativeName: "ગુજરાતી",    dir: "ltr" },
+  { code: "kn", name: "Kannada",    nativeName: "ಕನ್ನಡ",       dir: "ltr" },
+  { code: "ml", name: "Malayalam",  nativeName: "മലയാളം",     dir: "ltr" },
+  { code: "pa", name: "Punjabi",    nativeName: "ਪੰਜਾਬੀ",      dir: "ltr" },
+  { code: "si", name: "Sinhala",    nativeName: "සිංහල",      dir: "ltr" },
+  { code: "or", name: "Odia",       nativeName: "ଓଡ଼ିଆ",       dir: "ltr" },
+  // Leftover gaps
+  { code: "ps", name: "Pashto",     nativeName: "پښتو",       dir: "rtl" },
+  { code: "mt", name: "Maltese",    nativeName: "Malti",      dir: "ltr" },
+  { code: "tg", name: "Tajik",      nativeName: "Тоҷикӣ",     dir: "ltr" },
 ] as const;
 
 export type LocaleCode = (typeof SUPPORTED_LOCALES)[number]["code"];
 export const LOCALE_CODES = SUPPORTED_LOCALES.map((l) => l.code);
 export const DEFAULT_LOCALE: LocaleCode = "en";
 
-export const RTL_LOCALES = new Set<string>(["ar", "fa", "ur", "he"]);
+export const RTL_LOCALES = new Set<string>(["ar", "fa", "ur", "he", "ps"]);
 export const isRTL = (code: string) => RTL_LOCALES.has(code);
 
 /** Countries that use imperial/miles — everyone else uses metric. */
@@ -93,7 +119,7 @@ export const COUNTRY_TO_LOCALE: Partial<Record<string, LocaleCode>> = {
   KW: "ar", QA: "ar", BH: "ar", OM: "ar", LB: "ar", LY: "ar", TN: "ar",
   YE: "ar", SY: "ar",
   // Farsi
-  IR: "fa", AF: "fa", TJ: "fa",
+  IR: "fa",
   // Turkish
   TR: "tr", CY: "tr",
   // Japanese
@@ -198,6 +224,30 @@ export const COUNTRY_TO_LOCALE: Partial<Record<string, LocaleCode>> = {
   KG: "ky",
   // Turkmen
   TM: "tk",
+  // Swahili (East Africa)
+  KE: "sw", TZ: "sw", UG: "sw", RW: "sw",
+  // Amharic
+  ET: "am",
+  // Hausa
+  NG: "ha",
+  // Somali
+  SO: "so", DJ: "so",
+  // Zulu (South Africa already mapped to af — ZA stays af, Zulu is manual select)
+  // Malagasy
+  MG: "mg",
+  // Kinyarwanda (RW already mapped to sw above — Kinyarwanda is manual select)
+  // Hindi
+  IN: "hi",
+  // Bengali
+  BD: "bn",
+  // Sinhala
+  LK: "si",
+  // Pashto (Afghanistan — Pashto is the most common, Dari/Farsi is manual select)
+  AF: "ps",
+  // Maltese
+  MT: "mt",
+  // Tajik
+  TJ: "tg",
 };
 
 /** Convert locale code to og:locale format. */
@@ -218,6 +268,11 @@ export function toOgLocale(code: string): string {
     lo: "lo_LA", lt: "lt_LT", lv: "lv_LV", cs: "cs_CZ",
     sk: "sk_SK", kk: "kk_KZ", "zh-Hant": "zh_TW", af: "af_ZA",
     is: "is_IS", ca: "ca_ES", ku: "ku_TR", ky: "ky_KG", tk: "tk_TM",
+    sw: "sw_KE", am: "am_ET", ha: "ha_NG", yo: "yo_NG", ig: "ig_NG",
+    so: "so_SO", zu: "zu_ZA", mg: "mg_MG", rw: "rw_RW",
+    hi: "hi_IN", bn: "bn_BD", ta: "ta_IN", te: "te_IN", mr: "mr_IN",
+    gu: "gu_IN", kn: "kn_IN", ml: "ml_IN", pa: "pa_IN", si: "si_LK",
+    or: "or_IN", ps: "ps_AF", mt: "mt_MT", tg: "tg_TJ",
   };
   return map[code] ?? "en_US";
 }
