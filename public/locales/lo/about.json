@@ -1,0 +1,15 @@
+{
+  "pageTitle": "ກ່ຽວກັບ",
+  "tagline": "ຊອກຫາສະຖານີສ້ອມລົດຖີບສາທາລະນະໃກ້ທ່ານ.",
+  "dataCredits": "ຂໍ້ມູນ ແລະ ເຄຣດິດ",
+  "osmContributors": "© ຜູ້ປະກອບສ່ວນ OpenStreetMap",
+  "leafletMaps": "Leaflet — ແຜນທີ່ແບບໂຕ້ຕອບ",
+  "cartoTiles": "CARTO — ກ້ອງແຜນທີ່",
+  "overpassData": "Overpass API — ຂໍ້ມູນສະຖານີ",
+  "contribute": "ປະກອບສ່ວນ",
+  "addMissingStation": "ເພີ່ມສະຖານີທີ່ຂາດຫາຍໃນ OSM",
+  "reportBug": "ລາຍງານຂໍ້ຜິດພາດ",
+  "supportDonation": "ສະໜັບສະໜູນດ້ວຍການບໍລິຈາກ",
+  "shareThisApp": "ແບ່ງປັນແອັບນີ້",
+  "legal": "ກົດໝາຍ"
+}
