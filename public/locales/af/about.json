@@ -1,0 +1,13 @@
+{
+  "pageTitle": "Oor ons",
+  "heading": "Oor BicycleRepairStations.com",
+  "intro": "'n Gratis, oopbron-hulpmiddel om openbare fietsherstelaanlêe wêreldwyd te vind. Gebou vir fietsryers wat 'n pomp, gereedskap of 'n herstelstaander nodig het terwyl hulle op pad is.",
+  "openSourceTitle": "Oopbron",
+  "openSource": "Hierdie projek is oopbron en beskikbaar op <githubLink>GitHub</githubLink>. Bydraes, foutverslae en kenmerkversoeke is welkom.",
+  "dataTitle": "Data",
+  "data": "Aanlegdata kom van <osmLink>OpenStreetMap</osmLink>, 'n gratis, samewerkende kaart van die wêreld. As jy 'n ontbrekende of verkeerde aanleg vind, kan jy dit direk op OpenStreetMap regstel en dit sal hier verskyn.",
+  "privacyTitle": "Privaatheid",
+  "privacy": "Ons respekteer jou privaatheid. Hierdie toepassing gebruik geen koekies, geen registrasies en geen persoonlike dataversameling nie. Jou ligging word slegs in jou blaaier gebruik en word nooit na ons bedieners gestuur nie.",
+  "donateTitle": "Ondersteun die projek",
+  "donate": "As jy hierdie hulpmiddel nuttig vind, oorweeg dit asseblief om <donateLink>'n klein skenking te maak</donateLink> om gasheerkostes te dek en die projek aan die gang te hou."
+}

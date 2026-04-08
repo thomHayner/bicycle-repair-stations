@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Skenk",
+  "heading": "Ondersteun BicycleRepairStations.com",
+  "heroText": "Hierdie toepassing is gratis, advertensie-ondersteun en oopbron. Skenkings help om gasheer-, kaarttegel- en ontwikkelingskostes te dek.",
+  "chooseAmount": "Kies 'n bedrag",
+  "donateAmount": "Skenk ${{amount}} USD",
+  "customAmount": "Of voer 'n pasgemaakte bedrag in",
+  "customPlaceholder": "Bedrag",
+  "redirecting": "Herlei tans\u2026",
+  "donateButton": "Skenk ${{amount}} USD",
+  "somethingWentWrong": "Iets het verkeerd gegaan.",
+  "stripeNotice": "Betalings word veilig deur Stripe in USD verwerk.",
+  "whereItGoes": "Waarheen jou skenking gaan",
+  "infoHosting": "Bediener- en gasheerkostes",
+  "infoTiles": "Kaartteëldienste",
+  "infoDev": "Deurlopende ontwikkeling en onderhoud",
+  "backToMap": "Terug na kaart",
+  "successTitle": "Skenking voltooi",
+  "thankYou": "Dankie!",
+  "successMessage": "Jou vrygewige bydrae help om BicycleRepairStations.com gratis te hou vir fietsryers oral."
+}

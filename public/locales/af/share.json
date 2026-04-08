@@ -1,0 +1,12 @@
+{
+  "shareApp": "Deel toepassing",
+  "shareStation": "Deel aanleg",
+  "shareAppMessage": "Vind openbare fietsherstelaanlêe naby jou met BicycleRepairStations.com!",
+  "shareStationMessage": "Kyk na hierdie fietsherstelaanleg: {{name}}",
+  "copyLink": "Kopieer skakel",
+  "linkCopied": "Skakel gekopieer!",
+  "email": "E-pos",
+  "emailSubjectApp": "Fietsherstelaanlêe naby jou",
+  "emailSubjectStation": "Fietsherstelaanleg: {{name}}",
+  "shareVia": "Deel via {{platform}}"
+}
