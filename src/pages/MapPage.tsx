@@ -127,6 +127,9 @@ export default function MapPage() {
   const [activeLayer, setActiveLayer] = useState<LayerId>("cycling");
   const [errorDismissed, setErrorDismissed] = useState(false);
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
+
+  // Track last successful selectedDist so we can revert on error (Fix 6)
+  const lastSuccessDistRef = useRef(selectedDist);
   const [listExpanded, setListExpanded] = useState(false);
   const [initialFlyComplete, setInitialFlyComplete] = useState(false);
 
@@ -160,6 +163,7 @@ export default function MapPage() {
     givenLocation?.lng ?? null,
     fetchRadiusKm,
   );
+  const { retry } = query;
 
   // Preserve previous stations during loading so the list doesn't flash empty.
   // Google/Apple Maps pattern: old results stay visible with a pulsing header,
@@ -171,7 +175,7 @@ export default function MapPage() {
     setStaleStations(queryStations);
   }
   const allStations = useMemo(
-    () => queryStations ?? (query.status === "loading" ? staleStations : []),
+    () => queryStations ?? (query.status === "loading" || query.status === "error" ? staleStations : []),
     [queryStations, query.status, staleStations],
   );
 
@@ -272,6 +276,14 @@ export default function MapPage() {
 
   const handleInitialFlyComplete = useCallback(() => setInitialFlyComplete(true), []);
 
+  // Fix 8: Safety net — if MapView chunk fails to load or flyTo never fires,
+  // force the overlay away after 15 seconds to avoid a permanent spinner.
+  useEffect(() => {
+    if (initialFlyComplete) return;
+    const timer = setTimeout(() => setInitialFlyComplete(true), 15_000);
+    return () => clearTimeout(timer);
+  }, [initialFlyComplete]);
+
   const handleMapInteraction = useCallback(() => setListExpanded(false), []);
 
   // Distance pill selected manually by the user
@@ -319,6 +331,23 @@ export default function MapPage() {
     }
   }, [query.status, givenLocation]);
 
+  // Fix 5: Restore "Search this area" FAB after error so user can retry
+  useEffect(() => {
+    if (query.status === "error") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: surface retry affordance when fetch fails
+      setMapMovedSinceSearch(true);
+    }
+  }, [query.status]);
+
+  // Fix 6: Track last successful distance; revert pill on error
+  useEffect(() => {
+    if (query.status === "success") {
+      lastSuccessDistRef.current = selectedDist;
+    } else if (query.status === "error" && selectedDist !== lastSuccessDistRef.current) {
+      setSelectedDist(lastSuccessDistRef.current);
+    }
+  }, [query.status, selectedDist]);
+
   const handleSearchHere = useCallback(() => {
     if (!mapCenter) return;
     setMapMovedSinceSearch(false);
@@ -347,7 +376,9 @@ export default function MapPage() {
       userPosition !== null &&
       haversineDistanceMiles(mapCenter.lat, mapCenter.lng, userPosition.lat, userPosition.lng) < 1;
     setSearchedLocation(nearUser ? null : mapCenter);
-  }, [mapCenter, userPosition, unit]);
+    // Ensure the fetch re-runs even at the same coordinates (same-location retry after error)
+    retry();
+  }, [mapCenter, userPosition, unit, retry]);
 
   // Filter centre: explicit location (geo/search) → map centre → null
   const filterCenter = givenLocation ?? mapCenter;

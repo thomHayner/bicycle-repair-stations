@@ -30,10 +30,20 @@ async function tryEndpoint(
   }
 
   const json: OverpassResponse = await res.json();
+
+  // Overpass returns HTTP 200 with a `remark` field on server-side timeouts
+  if (json.remark && /timeout|runtime error/i.test(json.remark)) {
+    throw new Error("Overpass API error: server timeout");
+  }
+
   return json.elements;
 }
 
 function isRetryable(err: Error): boolean {
+  // Network-level failures (offline, DNS, CORS) throw TypeError per Fetch spec
+  if (err instanceof TypeError) return true;
+  // Server-side Overpass timeout — worth trying another mirror
+  if (err.message.includes("server timeout")) return true;
   return RETRYABLE_STATUSES.has(
     Number(err.message.match(/HTTP (\d+)/)?.[1] ?? 0)
   );

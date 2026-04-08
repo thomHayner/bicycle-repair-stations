@@ -28,7 +28,7 @@ export function ErrorToast({ message, onDismiss }: Props) {
       role="alert"
       aria-live="assertive"
       className={[
-        "fixed top-[68px] left-1/2 -translate-x-1/2 z-[1500] max-w-[90vw]",
+        "fixed top-[68px] left-1/2 -translate-x-1/2 z-[1500] min-w-[240px] max-w-[90vw]",
         "bg-[var(--color-error)] text-[var(--color-on-error)] text-sm font-medium px-4 py-3 rounded-xl elevation-2",
         "flex items-center gap-2 transition-all duration-300",
         visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2",
@@ -42,7 +42,7 @@ export function ErrorToast({ message, onDismiss }: Props) {
       <span>{message}</span>
       <button
         onClick={() => { setVisible(false); setTimeout(onDismiss, 300); }}
-        className="ml-1 min-w-[32px] min-h-[32px] flex items-center justify-center rounded-full hover:bg-black/10 active:bg-black/20 focus-ring-contrast transition-colors"
+        className="ml-1 min-w-[48px] min-h-[48px] -mr-2 flex items-center justify-center rounded-full hover:bg-black/10 active:bg-black/20 focus-ring-contrast transition-colors"
         aria-label="Dismiss"
         title="Dismiss"
       >

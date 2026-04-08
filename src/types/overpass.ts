@@ -20,4 +20,6 @@ export interface OverpassNode {
 export interface OverpassResponse {
   version: number;
   elements: OverpassNode[];
+  /** Present when the server encounters a runtime error or timeout. */
+  remark?: string;
 }

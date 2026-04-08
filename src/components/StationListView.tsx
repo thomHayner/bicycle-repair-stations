@@ -1,8 +1,11 @@
-import { memo, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useRef, useState } from "react";
 import type { OverpassNode } from "../types/overpass";
 import { haversineDistanceMiles } from "../lib/distance";
 import { getDirectionsUrl } from "../lib/directions";
 import { type Unit, KM_PER_MILE } from "../lib/units";
+
+/** How many stations to render initially and per scroll batch. */
+const PAGE_SIZE = 20;
 
 export type QueryStatus = "idle" | "loading" | "success" | "none" | "error";
 
@@ -85,6 +88,8 @@ export const StationListView = memo(function StationListView({
   queryStatus,
 }: Props) {
   const [activeFilters, setActiveFilters] = useState<Set<FilterKey>>(new Set());
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const toggleFilter = (key: FilterKey) => {
     setActiveFilters((prev) => {
@@ -117,6 +122,30 @@ export const StationListView = memo(function StationListView({
         ),
     [sorted, activeFilters],
   );
+
+  // Reset visible count when the list changes (new search, filter toggle, etc.)
+  // Uses "adjust state during render" pattern (useState, not useRef) per React docs.
+  const [prevFiltered, setPrevFiltered] = useState(filtered);
+  if (prevFiltered !== filtered) {
+    setPrevFiltered(filtered);
+    if (visibleCount !== PAGE_SIZE) setVisibleCount(PAGE_SIZE);
+  }
+
+  const visibleStations = useMemo(
+    () => filtered.slice(0, visibleCount),
+    [filtered, visibleCount],
+  );
+  const hasMore = visibleCount < filtered.length;
+
+  // Load next page when scrolled near the bottom
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el || !hasMore) return;
+    // Trigger when within 100px of the bottom
+    if (el.scrollHeight - el.scrollTop - el.clientHeight < 100) {
+      setVisibleCount((c) => c + PAGE_SIZE);
+    }
+  }, [hasMore]);
 
   const total = stations.length;
   const shown = filtered.length;
@@ -157,6 +186,8 @@ export const StationListView = memo(function StationListView({
 
       {/* Expanded panel */}
       <div
+        ref={scrollRef}
+        onScroll={handleScroll}
         className={`transition-[max-height] duration-300 ease-in-out ${
           expanded ? "max-h-[50vh] overflow-y-auto" : "max-h-0 overflow-hidden"
         }`}
@@ -235,7 +266,7 @@ export const StationListView = memo(function StationListView({
             </div>
           )}
 
-          {filtered.map((station, i) => {
+          {visibleStations.map((station, i) => {
             const distMi = userDistances?.get(station.id) ?? null;
             const distDisplay = distMi == null ? null : unit === "km" ? distMi * KM_PER_MILE : distMi;
 
@@ -285,6 +316,14 @@ export const StationListView = memo(function StationListView({
               </button>
             );
           })}
+
+          {hasMore && (
+            <div className="px-4 py-3 text-center border-t border-[var(--color-border)]">
+              <span className="text-xs text-slate-400 dark:text-slate-500">
+                Showing {visibleCount} of {shown} — scroll for more
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>
