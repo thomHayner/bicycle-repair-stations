@@ -2,17 +2,19 @@ import type { OverpassNode } from "../types/overpass";
 import { haversineDistanceMiles } from "./distance";
 
 /**
- * Fetch radius in km — exactly 25 miles (25 × 1.60934).
- * Matches the maximum selectable display radius so we cache exactly what
- * the user can request to see.
+ * Standard fetch radius in km — exactly 25 miles (25 × 1.60934).
+ * Covers all local-range pills (1–25 mi). Wider pills trigger larger fetches.
  */
 export const FETCH_RADIUS_KM = 40.2335; // 25 miles
 
 /**
- * How far the user can move from the last fetch centre before we need to
- * re-fetch. Fixed at 5 miles — independent of the display radius.
+ * Re-fetch threshold: 20% of the fetch radius.
+ * - 25 mi fetch → ~5 mi threshold (matches previous fixed value)
+ * - 50 mi fetch → 10 mi, 100 mi → 20 mi, 250 mi → 50 mi
  */
-const REFETCH_THRESHOLD_KM = 8.047; // 5 miles
+function refetchThreshold(radiusKm: number): number {
+  return radiusKm * 0.2;
+}
 
 // Bumped v2 → v3 to invalidate stale 65-km caches from the previous build.
 const STORAGE_KEY = "brs_v3";
@@ -49,11 +51,12 @@ export function writeCache(data: StationCache): void {
 }
 
 /**
- * Returns true if (lat, lng) is within REFETCH_THRESHOLD_KM of the cache
- * centre, meaning the cached data fully covers the 25-mile display radius.
+ * Returns true if the cache covers a query at (lat, lng) for the given radius.
+ * Checks both proximity to cache centre AND that the cached radius is sufficient.
+ * A bigger cache always covers a smaller request (e.g. 100 mi cache covers 25 mi).
  */
-export function isCovered(lat: number, lng: number, cache: StationCache): boolean {
+export function isCovered(lat: number, lng: number, cache: StationCache, neededRadiusKm: number = FETCH_RADIUS_KM): boolean {
   const distKm =
     haversineDistanceMiles(lat, lng, cache.center.lat, cache.center.lng) * 1.60934;
-  return distKm <= REFETCH_THRESHOLD_KM;
+  return distKm <= refetchThreshold(neededRadiusKm) && cache.radiusKm >= neededRadiusKm;
 }
