@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Mag-donate",
+  "heroTitle": "Suportahan ang BicycleRepairStations",
+  "heroText": "Nakatulong ba ang site sa iyo na mahanap ang isang istasyon o makabalik sa daan? Gusto mo bang tulungan itong manatiling libre para sa ibang mga mananakay? Anumang halaga ay nakakatulong sa gastos ng hosting at pagpapaunlad.",
+  "chooseAmount": "Pumili ng halaga",
+  "customAmount": "O magpasok ng custom na halaga",
+  "redirecting": "Nire-redirect…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Mag-donate ng ${{amount}} USD",
+  "donateButton": "Mag-donate",
+  "somethingWentWrong": "May nangyaring mali.",
+  "stripeNotice": "Ligtas na pagbabayad sa pamamagitan ng Stripe (USD). Walang detalye ng card na iniimbak ang app na ito.",
+  "whereItGoes": "Saan napupunta ang iyong donasyon",
+  "serverCosts": "Gastos ng server at hosting",
+  "apiUsage": "Paggamit ng map tile at API",
+  "keepingFree": "Pinapanatiling libre at maintained ang app",
+  "successTitle": "Kumpleto na ang Donasyon",
+  "thankYou": "Salamat!",
+  "successMessage": "Ang iyong donasyon ay tumutulong na panatilihing libre at maintained ang BicycleRepairStations para sa mga mananakay sa buong mundo.",
+  "backToMap": "Bumalik sa mapa"
+}

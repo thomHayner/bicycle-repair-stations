@@ -1,0 +1,11 @@
+{
+  "title": "I-share ang app na ito",
+  "subtitle": "Para lamang sa personal na pagbabahagi: X, Facebook, email, o kopyahin ang link.",
+  "nativeShare": "Higit pang mga app (Instagram/Nextdoor kung naka-install)",
+  "shareOnX": "I-share sa X",
+  "shareOnFacebook": "I-share sa Facebook",
+  "shareByEmail": "I-share sa pamamagitan ng Email",
+  "copyLink": "Kopyahin ang link",
+  "linkCopied": "Nakopya na ang link sa clipboard.",
+  "copyFailed": "Hindi makopya ang link sa browser na ito."
+}
