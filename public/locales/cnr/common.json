@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "Aplikacija stanica za popravku bicikla",
+  "back": "Nazad",
+  "goBack": "Idi nazad",
+  "cancel": "Otkaži",
+  "dismiss": "Odbaci",
+  "findingLocation": "Pronalaženje vaše lokacije…",
+  "advertisement": "Oglas",
+  "findDescription": "Pronađite javne stanice za popravku bicikla u blizini."
+}
