@@ -286,7 +286,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
       <MapContainer
         center={initialCenter}
         zoom={16}
-        minZoom={5}
+        minZoom={6}
         maxZoom={18}
         style={{ width: "100%", height: "100%", background: tileBg }}
         zoomControl={false}
