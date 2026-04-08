@@ -160,10 +160,18 @@ export default function MapPage() {
     fetchRadiusKm,
   );
 
+  // Preserve previous stations during loading so the list doesn't flash empty.
+  // Google/Apple Maps pattern: old results stay visible with a pulsing header,
+  // then swap in-place when the new data arrives.
+  // Uses "adjust state during render" (same pattern as useStationQuery).
   const queryStations = query.status === "success" ? query.stations : undefined;
+  const [staleStations, setStaleStations] = useState<OverpassNode[]>([]);
+  if (queryStations && queryStations !== staleStations) {
+    setStaleStations(queryStations);
+  }
   const allStations = useMemo(
-    () => queryStations ?? [],
-    [queryStations]
+    () => queryStations ?? (query.status === "loading" ? staleStations : []),
+    [queryStations, query.status, staleStations],
   );
 
   // Track whether the user has manually selected a radius this session.
