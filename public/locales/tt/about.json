@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Хакында",
+  "tagline": "Якыныгыздагы иҗтимагый велосипед тамирлау станцияләрен табыгыз.",
+  "dataCredits": "Мәгълүматлар һәм рәхмәтләр",
+  "osmContributors": "© OpenStreetMap катнашучылары",
+  "leafletMaps": "Leaflet — интерактив карталар",
+  "cartoTiles": "CARTO — карта кыйгачлары",
+  "overpassData": "Overpass API — станция мәгълүматлары",
+  "contribute": "Катнашу",
+  "addMissingStation": "OSM-да булмаган станцияне өстәү",
+  "reportBug": "Хата турында хәбәр итү",
+  "supportDonation": "Иганә белән ярдәм итү",
+  "shareThisApp": "Бу кушымтаны уртаклашу",
+  "legal": "Хокукый мәгълүмат"
+}
