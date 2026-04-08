@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Մասին",
+  "tagline": "Գտեք հանրային հեծանվի վերանորոգման կայարաններ ձեր մոտ:",
+  "dataCredits": "Տվյալներ և վաստակ",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — ինտերակտիվ քարտեզներ",
+  "cartoTiles": "CARTO — քարտեզի սալիկներ",
+  "overpassData": "Overpass API — կայարանի տվյալներ",
+  "contribute": "Մասնակցել",
+  "addMissingStation": "OSM-ում ավելացնել բացակայող կայարան",
+  "reportBug": "Հաղորդել սխալի մասին",
+  "supportDonation": "Աջակցել նվիրատվությամբ",
+  "shareThisApp": "Կիսվել այս հավելվածով",
+  "legal": "Իրավական"
+}

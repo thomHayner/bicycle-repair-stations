@@ -1,0 +1,11 @@
+{
+  "title": "Կիսվել այս հավելվածով",
+  "subtitle": "Միայն անձնական կիսվելու համար՝ X, Facebook, էլ. փոստ կամ հղման պատճենում:",
+  "nativeShare": "Ավելի շատ հավելվածներ (Instagram/Nextdoor, եթե տեղադրված են)",
+  "shareOnX": "Կիսվել X-ում",
+  "shareOnFacebook": "Կիսվել Facebook-ում",
+  "shareByEmail": "Կիսվել էլ. փոստով",
+  "copyLink": "Պատճենել հղումը",
+  "linkCopied": "Հղումը պատճենված է clipboard-ում:",
+  "copyFailed": "Այս բրաուզերում հղումը հնարավոր չեղավ պատճենել:"
+}
