@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Doneren",
+  "heroTitle": "Steun BicycleRepairStations",
+  "heroText": "Heeft de site je geholpen een station te vinden of weer op weg te komen? Wil je helpen het gratis te houden voor andere fietsers? Elk bedrag helpt bij het dekken van hosting- en ontwikkelkosten.",
+  "chooseAmount": "Kies een bedrag",
+  "customAmount": "Of voer een aangepast bedrag in",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Doneer ${{amount}} USD",
+  "donateButton": "Doneren",
+  "redirecting": "Doorsturen…",
+  "somethingWentWrong": "Er is iets misgegaan.",
+  "stripeNotice": "Veilige betaling via Stripe (USD). Geen kaartgegevens worden opgeslagen door deze app.",
+  "whereItGoes": "Waar je donatie naartoe gaat",
+  "serverCosts": "Server- en hostingkosten",
+  "apiUsage": "Kaarttegels en API-gebruik",
+  "keepingFree": "De app gratis en onderhouden houden",
+  "successTitle": "Donatie voltooid",
+  "thankYou": "Bedankt!",
+  "successMessage": "Je donatie helpt BicycleRepairStations gratis en onderhouden te houden voor fietsers overal.",
+  "backToMap": "Terug naar de kaart"
+}
