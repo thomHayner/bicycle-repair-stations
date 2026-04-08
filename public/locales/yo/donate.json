@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Ṣètọrẹ",
+  "heading": "Ṣètìlẹ́yìn fún BicycleRepairStations.com",
+  "heroText": "Àpò ohun èlò yìí jẹ́ ọ̀fẹ́, ìpolówó ló ń ṣètìlẹ́yìn rẹ̀, ó sì jẹ́ orísun ṣíṣí. Ẹ̀bùn ṣèrànwọ́ láti san owó ìgbàlejò, mápù taìlì, àti ìdàgbàsókè.",
+  "chooseAmount": "Yan iye owó kan",
+  "donateAmount": "Ṣètọrẹ ${{amount}} USD",
+  "customAmount": "Tàbí tẹ iye owó tìẹ",
+  "customPlaceholder": "Iye owó",
+  "redirecting": "Ń darí lọ…",
+  "donateButton": "Ṣètọrẹ ${{amount}} USD",
+  "somethingWentWrong": "Nǹkan kan kò lọ dáadáa.",
+  "stripeNotice": "Stripe ló ń ṣètò ìsanwó lọ́nà aláàbò ní USD.",
+  "whereItGoes": "Ibi tí ẹ̀bùn rẹ ń lọ",
+  "infoHosting": "Owó ẹ̀rọ ìpèsè àti ìgbàlejò",
+  "infoTiles": "Àwọn iṣẹ́ mápù taìlì",
+  "infoDev": "Ìdàgbàsókè àti ìtọ́jú tó ń tẹ̀síwájú",
+  "backToMap": "Padà sí mápù",
+  "successTitle": "Ẹ̀bùn Ti Parí",
+  "thankYou": "A dúpẹ́!",
+  "successMessage": "Ẹ̀bùn onínúure rẹ ṣèrànwọ́ láti jẹ́ kí BicycleRepairStations.com jẹ́ ọ̀fẹ́ fún àwọn agbẹ̀kẹ́lé níbi gbogbo."
+}

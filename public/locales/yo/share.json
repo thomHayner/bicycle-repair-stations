@@ -1,0 +1,12 @@
+{
+  "shareApp": "Pín Àpò Ohun Èlò",
+  "shareStation": "Pín Ibùdó",
+  "shareAppMessage": "Wá àwọn ibùdó àtúnṣe kẹ̀kẹ́ nítòsí rẹ pẹ̀lú BicycleRepairStations.com!",
+  "shareStationMessage": "Wo ibùdó àtúnṣe kẹ̀kẹ́ yìí: {{name}}",
+  "copyLink": "Dà Ìjápọ̀",
+  "linkCopied": "A ti dà ìjápọ̀!",
+  "email": "Ímeèlì",
+  "emailSubjectApp": "Àwọn Ibùdó Àtúnṣe Kẹ̀kẹ́ Nítòsí Rẹ",
+  "emailSubjectStation": "Ibùdó Àtúnṣe Kẹ̀kẹ́: {{name}}",
+  "shareVia": "Pín nípasẹ̀ {{platform}}"
+}
