@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Quyên góp",
+  "heroTitle": "Hỗ trợ BicycleRepairStations",
+  "heroText": "Trang web có giúp bạn tìm được trạm hoặc quay lại đường đua không? Bạn muốn giúp giữ cho nó miễn phí cho các người đi xe đạp khác không? Bất kỳ khoản tiền nào cũng giúp trang trải chi phí lưu trữ và phát triển.",
+  "chooseAmount": "Chọn số tiền",
+  "customAmount": "Hoặc nhập số tiền tùy chỉnh",
+  "redirecting": "Đang chuyển hướng…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Quyên góp ${{amount}} USD",
+  "donateButton": "Quyên góp",
+  "somethingWentWrong": "Đã xảy ra sự cố.",
+  "stripeNotice": "Thanh toán an toàn qua Stripe (USD). Ứng dụng này không lưu trữ thông tin thẻ.",
+  "whereItGoes": "Quyên góp của bạn dùng để làm gì",
+  "serverCosts": "Chi phí máy chủ và lưu trữ",
+  "apiUsage": "Sử dụng ô bản đồ và API",
+  "keepingFree": "Giữ ứng dụng miễn phí và được bảo trì",
+  "successTitle": "Quyên Góp Hoàn Tất",
+  "thankYou": "Cảm ơn bạn!",
+  "successMessage": "Quyên góp của bạn giúp BicycleRepairStations luôn miễn phí và được bảo trì cho người đi xe đạp trên toàn thế giới.",
+  "backToMap": "Quay lại bản đồ"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Chia sẻ ứng dụng này",
+  "subtitle": "Chỉ chia sẻ cá nhân: X, Facebook, email hoặc sao chép liên kết.",
+  "nativeShare": "Thêm ứng dụng (Instagram/Nextdoor nếu đã cài đặt)",
+  "shareOnX": "Chia sẻ trên X",
+  "shareOnFacebook": "Chia sẻ trên Facebook",
+  "shareByEmail": "Chia sẻ qua Email",
+  "copyLink": "Sao chép liên kết",
+  "linkCopied": "Đã sao chép liên kết vào clipboard.",
+  "copyFailed": "Không thể sao chép liên kết trên trình duyệt này."
+}
