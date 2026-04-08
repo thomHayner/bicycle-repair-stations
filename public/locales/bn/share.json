@@ -1,12 +1,11 @@
 {
-  "shareApp": "অ্যাপ শেয়ার করুন",
-  "shareStation": "স্টেশন শেয়ার করুন",
-  "shareAppMessage": "BicycleRepairStations.com দিয়ে আপনার কাছাকাছি পাবলিক সাইকেল মেরামত স্টেশন খুঁজুন!",
-  "shareStationMessage": "এই সাইকেল মেরামত স্টেশনটি দেখুন: {{name}}",
+  "title": "Share this app",
+  "subtitle": "Personal sharing only: X, Facebook, email, or copy link.",
+  "nativeShare": "More apps (Instagram/Nextdoor if installed)",
+  "shareOnX": "Share on X",
+  "shareOnFacebook": "Share on Facebook",
+  "shareByEmail": "Share by Email",
   "copyLink": "লিংক কপি করুন",
   "linkCopied": "লিংক কপি হয়েছে!",
-  "email": "ইমেইল",
-  "emailSubjectApp": "আপনার কাছাকাছি সাইকেল মেরামত স্টেশন",
-  "emailSubjectStation": "সাইকেল মেরামত স্টেশন: {{name}}",
-  "shareVia": "{{platform}}-এর মাধ্যমে শেয়ার করুন"
+  "copyFailed": "Could not copy link on this browser."
 }

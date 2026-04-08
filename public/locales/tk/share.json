@@ -1,12 +1,11 @@
 {
-  "shareApp": "Programmany paýlaş",
-  "shareStation": "Stansiýany paýlaş",
-  "shareAppMessage": "BicycleRepairStations.com bilen ýakynňyzdaky jemgyýetçilik welosiped abatlaýyş stansiýalaryny tapyň!",
-  "shareStationMessage": "Bu welosiped abatlaýyş stansiýasyna göz aýlaň: {{name}}",
+  "title": "Share this app",
+  "subtitle": "Personal sharing only: X, Facebook, email, or copy link.",
+  "nativeShare": "More apps (Instagram/Nextdoor if installed)",
+  "shareOnX": "Share on X",
+  "shareOnFacebook": "Share on Facebook",
+  "shareByEmail": "Share by Email",
   "copyLink": "Salgylanmany göçür",
   "linkCopied": "Salgylanma göçürildi!",
-  "email": "E-poçta",
-  "emailSubjectApp": "Ýakynňyzdaky welosiped abatlaýyş stansiýalary",
-  "emailSubjectStation": "Welosiped abatlaýyş stansiýasy: {{name}}",
-  "shareVia": "{{platform}} arkaly paýlaş"
+  "copyFailed": "Could not copy link on this browser."
 }

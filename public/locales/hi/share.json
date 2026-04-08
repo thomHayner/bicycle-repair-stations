@@ -1,12 +1,11 @@
 {
-  "shareApp": "ऐप साझा करें",
-  "shareStation": "स्टेशन साझा करें",
-  "shareAppMessage": "BicycleRepairStations.com के साथ अपने पास सार्वजनिक साइकिल मरम्मत स्टेशन खोजें!",
-  "shareStationMessage": "यह साइकिल मरम्मत स्टेशन देखें: {{name}}",
+  "title": "Share this app",
+  "subtitle": "Personal sharing only: X, Facebook, email, or copy link.",
+  "nativeShare": "More apps (Instagram/Nextdoor if installed)",
+  "shareOnX": "Share on X",
+  "shareOnFacebook": "Share on Facebook",
+  "shareByEmail": "Share by Email",
   "copyLink": "लिंक कॉपी करें",
   "linkCopied": "लिंक कॉपी हो गया!",
-  "email": "ईमेल",
-  "emailSubjectApp": "आपके पास साइकिल मरम्मत स्टेशन",
-  "emailSubjectStation": "साइकिल मरम्मत स्टेशन: {{name}}",
-  "shareVia": "{{platform}} के ज़रिए साझा करें"
+  "copyFailed": "Could not copy link on this browser."
 }

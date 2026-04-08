@@ -1,12 +1,11 @@
 {
-  "shareApp": "መተግበሪያ ያጋሩ",
-  "shareStation": "ጣቢያ ያጋሩ",
-  "shareAppMessage": "BicycleRepairStations.com ን በመጠቀም በአቅራቢያዎ ያሉ የህዝብ ብስክሌት ጥገና ጣቢያዎችን ያግኙ!",
-  "shareStationMessage": "ይህን የብስክሌት ጥገና ጣቢያ ይመልከቱ: {{name}}",
+  "title": "Share this app",
+  "subtitle": "Personal sharing only: X, Facebook, email, or copy link.",
+  "nativeShare": "More apps (Instagram/Nextdoor if installed)",
+  "shareOnX": "Share on X",
+  "shareOnFacebook": "Share on Facebook",
+  "shareByEmail": "Share by Email",
   "copyLink": "ሊንክ ቅዳ",
   "linkCopied": "ሊንክ ተቀድቷል!",
-  "email": "ኢሜይል",
-  "emailSubjectApp": "በአቅራቢያዎ ያሉ የብስክሌት ጥገና ጣቢያዎች",
-  "emailSubjectStation": "የብስክሌት ጥገና ጣቢያ: {{name}}",
-  "shareVia": "በ{{platform}} ያጋሩ"
+  "copyFailed": "Could not copy link on this browser."
 }

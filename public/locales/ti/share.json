@@ -1,12 +1,11 @@
 {
-  "shareApp": "መተግበሪ ኣካፍል",
-  "shareStation": "መደበር ኣካፍል",
-  "shareAppMessage": "ኣብ ጥቓኻ ዝርከባ ናይ ህዝቢ ብሽክለታ ጽገና መደበራት ብ BicycleRepairStations.com ርኸብ!",
-  "shareStationMessage": "እዚ ናይ ብሽክለታ ጽገና መደበር ርአ: {{name}}",
+  "title": "Share this app",
+  "subtitle": "Personal sharing only: X, Facebook, email, or copy link.",
+  "nativeShare": "More apps (Instagram/Nextdoor if installed)",
+  "shareOnX": "Share on X",
+  "shareOnFacebook": "Share on Facebook",
+  "shareByEmail": "Share by Email",
   "copyLink": "ሊንክ ቅዳሕ",
   "linkCopied": "ሊንክ ተቐዲሑ!",
-  "email": "ኢመይል",
-  "emailSubjectApp": "ኣብ ጥቓኻ ዝርከባ ናይ ብሽክለታ ጽገና መደበራት",
-  "emailSubjectStation": "ናይ ብሽክለታ ጽገና መደበር: {{name}}",
-  "shareVia": "ብ {{platform}} ኣካፍል"
+  "copyFailed": "Could not copy link on this browser."
 }
