@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { OverpassNode } from "../types/overpass";
 import { fetchStations } from "../lib/overpass";
 import { ENV } from "../lib/env";
@@ -11,6 +11,11 @@ export type StationQueryState =
   | { status: "none" }
   | { status: "error"; message: string };
 
+export type StationQueryResult = StationQueryState & {
+  /** Increment to re-run the fetch at the same coordinates (retry after error). */
+  retry: () => void;
+};
+
 function errorMessage(err: Error): string {
   if (err.message.includes("429"))
     return "Too many requests — please wait a moment and try again.";
@@ -20,6 +25,10 @@ function errorMessage(err: Error): string {
     err.message.includes("503")
   )
     return "The map server is busy — please try again in a moment.";
+  if (err.message.includes("server timeout"))
+    return "Search timed out — try a smaller area or try again.";
+  if (err instanceof TypeError)
+    return "Network error — check your connection and try again.";
   return err.message || "Failed to load stations. Check your connection.";
 }
 
@@ -37,12 +46,16 @@ export function useStationQuery(
   lat: number | null,
   lng: number | null,
   fetchRadiusKm: number = FETCH_RADIUS_KM,
-): StationQueryState {
+): StationQueryResult {
   const [state, setState] = useState<StationQueryState>(() => {
     const cached = readCache();
     if (!cached) return { status: "idle" };
     return { status: "success", stations: cached.stations };
   });
+
+  // Incrementing retryTick re-runs the fetch even at the same coordinates.
+  const [retryTick, setRetryTick] = useState(0);
+  const retry = useCallback(() => setRetryTick((t) => t + 1), []);
 
   const abortRef = useRef<AbortController | null>(null);
 
@@ -75,7 +88,7 @@ export function useStationQuery(
     // Cache hit — serve immediately
     const cached = readCache();
     if (cached && isCovered(lat, lng, cached, fetchRadiusKm)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: latch cached data synchronously
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- early return: cache hit avoids fetch
       setState({ status: "success", stations: cached.stations });
       return;
     }
@@ -101,11 +114,11 @@ export function useStationQuery(
         if (err.name === "AbortError") return;
         setState({ status: "error", message: errorMessage(err) });
       });
-  }, [lat, lng, fetchRadiusKm]);
+  }, [lat, lng, fetchRadiusKm, retryTick]);
 
   useEffect(() => {
     return () => { abortRef.current?.abort(); };
   }, []);
 
-  return state;
+  return { ...state, retry };
 }
