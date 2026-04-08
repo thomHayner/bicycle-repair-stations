@@ -1,0 +1,12 @@
+{
+  "shareApp": "ऐप साझा करें",
+  "shareStation": "स्टेशन साझा करें",
+  "shareAppMessage": "BicycleRepairStations.com के साथ अपने पास सार्वजनिक साइकिल मरम्मत स्टेशन खोजें!",
+  "shareStationMessage": "यह साइकिल मरम्मत स्टेशन देखें: {{name}}",
+  "copyLink": "लिंक कॉपी करें",
+  "linkCopied": "लिंक कॉपी हो गया!",
+  "email": "ईमेल",
+  "emailSubjectApp": "आपके पास साइकिल मरम्मत स्टेशन",
+  "emailSubjectStation": "साइकिल मरम्मत स्टेशन: {{name}}",
+  "shareVia": "{{platform}} के ज़रिए साझा करें"
+}

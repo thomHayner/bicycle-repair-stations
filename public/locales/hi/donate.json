@@ -1,0 +1,21 @@
+{
+  "pageTitle": "दान करें",
+  "heading": "BicycleRepairStations.com का समर्थन करें",
+  "heroText": "यह ऐप मुफ़्त, विज्ञापन-समर्थित और ओपन सोर्स है। दान होस्टिंग, मैप टाइल्स और विकास खर्चों को कवर करने में मदद करता है।",
+  "chooseAmount": "एक राशि चुनें",
+  "donateAmount": "${{amount}} USD दान करें",
+  "customAmount": "या एक कस्टम राशि दर्ज करें",
+  "customPlaceholder": "राशि",
+  "redirecting": "रीडायरेक्ट हो रहा है…",
+  "donateButton": "${{amount}} USD दान करें",
+  "somethingWentWrong": "कुछ गलत हो गया।",
+  "stripeNotice": "भुगतान Stripe द्वारा USD में सुरक्षित रूप से प्रोसेस किए जाते हैं।",
+  "whereItGoes": "आपका दान कहाँ जाता है",
+  "infoHosting": "सर्वर और होस्टिंग लागत",
+  "infoTiles": "मैप टाइल सेवाएँ",
+  "infoDev": "निरंतर विकास और रखरखाव",
+  "backToMap": "मानचित्र पर वापस जाएँ",
+  "successTitle": "दान पूरा हुआ",
+  "thankYou": "धन्यवाद!",
+  "successMessage": "आपका उदार योगदान BicycleRepairStations.com को हर जगह साइकिल चालकों के लिए मुफ़्त बनाए रखने में मदद करता है।"
+}
