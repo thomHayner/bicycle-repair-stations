@@ -55,6 +55,11 @@ export const SUPPORTED_LOCALES = [
   { code: "sk", name: "Slovak",     nativeName: "Slovenčina", dir: "ltr" },
   { code: "kk", name: "Kazakh",     nativeName: "Қазақ",      dir: "ltr" },
   { code: "af", name: "Afrikaans",  nativeName: "Afrikaans",  dir: "ltr" },
+  { code: "is", name: "Icelandic",  nativeName: "Íslenska",   dir: "ltr" },
+  { code: "ca", name: "Catalan",    nativeName: "Català",     dir: "ltr" },
+  { code: "ku", name: "Kurdish",    nativeName: "Kurdî",      dir: "ltr" },
+  { code: "ky", name: "Kyrgyz",     nativeName: "Кыргызча",   dir: "ltr" },
+  { code: "tk", name: "Turkmen",    nativeName: "Türkmen",    dir: "ltr" },
 ] as const;
 
 export type LocaleCode = (typeof SUPPORTED_LOCALES)[number]["code"];
@@ -106,7 +111,7 @@ export const COUNTRY_TO_LOCALE: Partial<Record<string, LocaleCode>> = {
   // Vietnamese
   VN: "vi",
   // Russian
-  RU: "ru", BY: "ru", KG: "ru",
+  RU: "ru", BY: "ru",
   // Polish
   PL: "pl",
   // Danish
@@ -183,6 +188,16 @@ export const COUNTRY_TO_LOCALE: Partial<Record<string, LocaleCode>> = {
   KZ: "kk",
   // Afrikaans
   ZA: "af",
+  // Icelandic
+  IS: "is",
+  // Catalan (Andorra; Catalonia uses ES → "es")
+  AD: "ca",
+  // Kurdish (Iraq Kurdistan region — country-level maps to Arabic)
+  // Kurdish speakers in TR/IQ/SY/IR will need to manually select Kurdish
+  // Kyrgyz
+  KG: "ky",
+  // Turkmen
+  TM: "tk",
 };
 
 /** Convert locale code to og:locale format. */
@@ -202,6 +217,7 @@ export function toOgLocale(code: string): string {
     he: "he_IL", id: "id_ID", my: "my_MM", km: "km_KH",
     lo: "lo_LA", lt: "lt_LT", lv: "lv_LV", cs: "cs_CZ",
     sk: "sk_SK", kk: "kk_KZ", "zh-Hant": "zh_TW", af: "af_ZA",
+    is: "is_IS", ca: "ca_ES", ku: "ku_TR", ky: "ky_KG", tk: "tk_TM",
   };
   return map[code] ?? "en_US";
 }
