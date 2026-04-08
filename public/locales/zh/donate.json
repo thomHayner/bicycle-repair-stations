@@ -1,0 +1,21 @@
+{
+  "pageTitle": "捐款",
+  "heroTitle": "支持 BicycleRepairStations",
+  "heroText": "本网站帮助您找到维修站或恢复骑行了吗？想帮助让其他骑行者免费使用吗？任何金额都有助于支付托管和开发费用。",
+  "chooseAmount": "选择金额",
+  "customAmount": "或输入自定义金额",
+  "redirecting": "正在跳转…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "捐款 ${{amount}} USD",
+  "donateButton": "捐款",
+  "somethingWentWrong": "出现错误。",
+  "stripeNotice": "通过 Stripe 安全付款（美元）。本应用不存储任何银行卡信息。",
+  "whereItGoes": "您的捐款用途",
+  "serverCosts": "服务器和托管费用",
+  "apiUsage": "地图图块和 API 使用费",
+  "keepingFree": "保持应用免费并持续维护",
+  "successTitle": "捐款完成",
+  "thankYou": "谢谢您！",
+  "successMessage": "您的捐款帮助 BicycleRepairStations 保持免费，并为全球骑行者持续维护。",
+  "backToMap": "返回地图"
+}

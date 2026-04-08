@@ -1,0 +1,15 @@
+{
+  "pageTitle": "关于",
+  "tagline": "在您附近查找公共自行车维修站。",
+  "dataCredits": "数据来源与致谢",
+  "osmContributors": "© OpenStreetMap 贡献者",
+  "leafletMaps": "Leaflet — 交互式地图",
+  "cartoTiles": "CARTO — 地图图块",
+  "overpassData": "Overpass API — 维修站数据",
+  "contribute": "贡献",
+  "addMissingStation": "在 OSM 上添加缺失的维修站",
+  "reportBug": "报告错误",
+  "supportDonation": "捐款支持",
+  "shareThisApp": "分享此应用",
+  "legal": "法律声明"
+}

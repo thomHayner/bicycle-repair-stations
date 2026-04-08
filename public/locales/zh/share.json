@@ -1,0 +1,11 @@
+{
+  "title": "分享此应用",
+  "subtitle": "仅限个人分享：X、Facebook、电子邮件或复制链接。",
+  "nativeShare": "更多应用（如已安装 Instagram/Nextdoor）",
+  "shareOnX": "在 X 上分享",
+  "shareOnFacebook": "在 Facebook 上分享",
+  "shareByEmail": "通过电子邮件分享",
+  "copyLink": "复制链接",
+  "linkCopied": "链接已复制到剪贴板。",
+  "copyFailed": "此浏览器无法复制链接。"
+}
