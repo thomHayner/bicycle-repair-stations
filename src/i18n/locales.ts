@@ -90,13 +90,16 @@ export const SUPPORTED_LOCALES = [
   { code: "ga", name: "Irish",      nativeName: "Gaeilge",    dir: "ltr" },
   { code: "lb", name: "Luxembourgish", nativeName: "Lëtzebuergesch", dir: "ltr" },
   { code: "eu", name: "Basque",     nativeName: "Euskara",    dir: "ltr" },
+  { code: "tt", name: "Tatar",      nativeName: "Татарча",    dir: "ltr" },
+  { code: "dz", name: "Dzongkha",   nativeName: "རྫོང་ཁ",      dir: "ltr" },
+  { code: "dv", name: "Dhivehi",    nativeName: "ދިވެހި",      dir: "rtl" },
 ] as const;
 
 export type LocaleCode = (typeof SUPPORTED_LOCALES)[number]["code"];
 export const LOCALE_CODES = SUPPORTED_LOCALES.map((l) => l.code);
 export const DEFAULT_LOCALE: LocaleCode = "en";
 
-export const RTL_LOCALES = new Set<string>(["ar", "fa", "ur", "he", "ps"]);
+export const RTL_LOCALES = new Set<string>(["ar", "fa", "ur", "he", "ps", "dv"]);
 export const isRTL = (code: string) => RTL_LOCALES.has(code);
 
 /** Countries that use imperial/miles — everyone else uses metric. */
@@ -121,7 +124,7 @@ export const COUNTRY_TO_LOCALE: Partial<Record<string, LocaleCode>> = {
   // Arabic
   SA: "ar", AE: "ar", EG: "ar", MA: "ar", DZ: "ar", IQ: "ar", JO: "ar",
   KW: "ar", QA: "ar", BH: "ar", OM: "ar", LB: "ar", LY: "ar", TN: "ar",
-  YE: "ar", SY: "ar",
+  YE: "ar", SY: "ar", PS: "ar",
   // Farsi
   IR: "fa",
   // Turkish
@@ -259,6 +262,13 @@ export const COUNTRY_TO_LOCALE: Partial<Record<string, LocaleCode>> = {
   // Luxembourgish
   LU: "lb",
   // Basque (speakers in ES/FR will need to manually select — no country-level mapping)
+  // Tatar (Tatarstan is within Russia — Tatar speakers will need to manually select)
+  // Dzongkha
+  BT: "dz",
+  // Dhivehi
+  MV: "dv",
+  // Additional country mappings for existing languages
+  BN: "ms", TL: "pt", KP: "ko",
 };
 
 /** Convert locale code to og:locale format. */
@@ -285,6 +295,7 @@ export function toOgLocale(code: string): string {
     gu: "gu_IN", kn: "kn_IN", ml: "ml_IN", pa: "pa_IN", si: "si_LK",
     or: "or_IN", ps: "ps_AF", mt: "mt_MT", tg: "tg_TJ", ti: "ti_ER",
     ga: "ga_IE", lb: "lb_LU", eu: "eu_ES",
+    tt: "tt_RU", dz: "dz_BT", dv: "dv_MV",
   };
   return map[code] ?? "en_US";
 }
