@@ -12,26 +12,27 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 ### Map & Station Discovery
 - **Auto-locate** — requests GPS on load, centers the map and fetches stations automatically
 - **Location search** — geocodes any city, address, or landmark via Nominatim and re-centers the map
-- **Search this area** — floating button appears when the map drifts far from the last fetch; triggers a fresh query at the current center
-- **Wide-area fallback** — if no stations exist within the primary radius, automatically searches up to 1,000 miles and shows the 5 nearest, or reports "No stations within 1,000 mi"
-- **Station markers** — green markers for all in-radius stations; tap to center and open a detail popup
+- **Search this area** — floating button appears when the map drifts from the last fetch or when the user zooms out beyond the selected radius; triggers a fresh query and snaps the distance pill to match the viewport
+- **Wide-area search** — distance pills extend to 50, 100, and 250 mi (75, 150, 400 km); selecting a larger pill fetches a wider Overpass radius on demand, with scaled timeouts (25 s – 90 s)
+- **Station markers** — green markers for all in-radius stations; muted markers for out-of-radius stations appear only during wide searches (> 25 mi); tap to center and open a detail popup
 - **Station popup** — name, description, operator, amenity badges (Tools / Pump / Repair), opening hours, and a **Get Directions** button
 - **Get Directions** — Apple Maps (cycling mode) on iOS; Google Maps (bicycling mode) everywhere else
 - **Popup auto-close** — popup dismisses automatically when the user starts panning
 
 ### Station List & Filtering
 - **Station list panel** — bottom sheet listing all in-radius stations sorted by distance, expandable/collapsible
-- **Distance filter** — radius presets: 1, 2, 5, 10, 15, 20, 25 mi (or 1, 2, 5, 10, 20, 30, 40 km); auto-widens on zoom-out, never auto-narrows
-- **Unit toggle** — switch between miles and kilometres; persisted to `localStorage`
+- **Distance filter** — radius pills from 1 to 250 mi (1 to 400 km); pills 1–25 mi are served instantly from cache, pills 50/100/250 trigger on-demand wider fetches; auto-selects the smallest radius with results on first load, never auto-escalates beyond 25 mi
+- **User-selected radius persistence** — manually tapping a pill locks that selection across subsequent searches until page refresh
+- **Unit toggle** — switch between miles and kilometres; persisted to `localStorage`; large selections snap to the closest pill in the new unit
 - **Amenity filters** — AND-logic filter pills for Pump, Tools, and Repair; combinable with a single-tap Clear
-- **Loading indicator** — spinner + pulse animation in the station count header while a query is in flight
+- **Loading indicator** — FAB shows "Loading stations…" or "Searching wider area…"; station list keeps previous results visible with a pulsing header during refresh
 
 ### Map Controls
 - **Three map layers** — Cycling (default), Satellite, Standard — selectable via a FAB picker
 - **Dark mode tile inversion** — light-mode tiles inverted with a CSS filter for all non-satellite layers; no separate dark tile providers needed
 - **Locate me FAB** — flies back to current GPS position at zoom 18; dimmed until GPS resolves
 - **Share FAB** — standalone map control that opens a unified share modal (same handler used by map, menu, and About page)
-- **Zoom-out guard** — hides markers and shows a toast when the visible map spans more than 75 miles
+- **Zoom-out detection** — shows "Search this area" when the viewport exceeds the selected pill radius; suppressed when already at 250 mi (max pill)
 - **User position marker** — blue pulsing dot with accuracy radius ring
 
 ### Navigation & Pages
@@ -182,8 +183,7 @@ src/
 │   └── useShare.ts                  # Share consumer hook
 ├── hooks/
 │   ├── useGeolocation.ts            # GPS watchPosition with denied-permission fallback
-│   ├── useOverpassQuery.ts          # Primary Overpass fetch + localStorage cache
-│   └── useFallbackQuery.ts          # Wide-area fallback query (up to 1,000 mi / 1,609 km)
+│   └── useStationQuery.ts           # Unified Overpass fetch + localStorage cache (radius-aware)
 ├── lib/
 │   ├── directions.ts                # Platform-aware Apple Maps / Google Maps URL builder
 │   ├── distance.ts                  # Haversine distance formula + visible-width helper
@@ -248,9 +248,10 @@ Leaflet is an imperative DOM library; `react-leaflet` wraps it in React context.
 ### Overpass API
 
 - Queries use `POST` with `application/x-www-form-urlencoded` (correct per Overpass documentation)
-- The primary radius is **65 km** — large enough that the cache remains valid until the user moves more than ~24.7 km from the last fetch centre
-- Results are written to `localStorage` (`brs_v2` key) with a 24-hour TTL; a new fetch only fires when the user is outside the covered area
-- If the primary query returns zero stations, `useFallbackQuery` fires a **1,609 km / 60-second** Overpass query, sorts by distance, and surfaces the 5 nearest
+- The standard fetch radius is **40.2 km (25 mi)**, covering all local-range pills (1–25 mi). Wider pills (50/100/250 mi) trigger on-demand fetches at their exact radius.
+- Results are written to `localStorage` (`brs_v3` key) with a 24-hour TTL; a new fetch fires only when the user moves beyond 20% of the fetch radius from the cache centre, or selects a pill wider than what the cache covers
+- Cache downgrades are free: a 100 mi cache covers any request ≤ 100 mi without re-fetching
+- Overpass timeout scales with fetch radius: 25 s for 25 mi, ~31 s for 50 mi, ~62 s for 100 mi, capped at 90 s
 - Three Overpass mirrors are tried in sequence on HTTP 429 / 5xx errors
 
 ### Dark Mode Tile Inversion
@@ -369,9 +370,9 @@ Cyclists who are on the road, have a mechanical issue, and need a public repair 
 |---|---------|-------|
 | F-01 | **Auto-locate** | On load, requests GPS via `watchPosition`. Centers map and fetches stations automatically. Falls back to London (51.505, −0.09) if permission is denied. |
 | F-02 | **Location search** | Geocodes free-text input via Nominatim and re-centers the map. Shows inline error if location not found. |
-| F-03 | **Search this area** | Floating button appears when the map center drifts far from the last fetch anchor; triggers a fresh Overpass query at the current map center. |
-| F-04 | **Overpass station fetch** | Queries `amenity=bicycle_repair_station` nodes within a 65 km radius. Results cached in `localStorage` for 24 hours; re-fetched only when the user moves outside the covered area. |
-| F-05 | **Wide-area fallback** | If the primary 65 km fetch returns zero results, automatically searches up to **1,000 miles (1,609 km)**. Shows the 5 nearest stations and updates the "within X mi" display to the farthest distance, or shows "No stations within 1,000 mi" if nothing is found. |
+| F-03 | **Search this area** | Floating button appears when the map pans away from the last search area (< 70% viewport overlap) or when the user zooms out beyond the selected distance pill (× 1.3 threshold). Pressing it snaps the distance pill to the closest match for the visible viewport and triggers a fresh Overpass query. Suppressed when already at the 250 mi max pill (only panning triggers it). |
+| F-04 | **Overpass station fetch** | Queries `amenity=bicycle_repair_station` nodes. Standard fetch radius is 40.2 km (25 mi), covering pills 1–25 mi. Selecting 50/100/250 mi triggers an on-demand fetch at the exact radius. Results cached in `localStorage` (`brs_v3`) for 24 hours; re-fetched when the user moves beyond 20% of the fetch radius from cache centre, or selects a wider pill than what the cache covers. Cache downgrades are free (100 mi cache serves any ≤ 100 mi request). |
+| F-05 | **Wide-area search** | Distance pills extend to 50, 100, and 250 mi (75, 150, 400 km). Selecting a larger pill triggers a wider Overpass query with scaled timeouts (25 s – 90 s). Out-of-radius stations appear as muted markers on the map only during wide searches (> 25 mi). Auto-radius never escalates beyond 25 mi — the user must manually tap a wider pill. |
 | F-06 | **Station markers** | Green map markers for all stations within the active radius. Tapping a marker centers the map (no zoom change) and opens a popup. |
 | F-07 | **Station popup** | Shows station name, description, operator, amenity badges (Tools / Pump / Repair), opening hours, and a **Get Directions** button. |
 | F-08 | **Get Directions** | Platform-aware: Apple Maps (cycling mode) on iOS; Google Maps (bicycling mode) on all other platforms. Opens in the native maps app if installed. |
@@ -382,10 +383,10 @@ Cyclists who are on the road, have a mechanical issue, and need a public repair 
 | # | Feature | Notes |
 |---|---------|-------|
 | F-10 | **Station list panel** | Bottom sheet showing all stations within the selected radius, sorted by distance. Expandable/collapsible. |
-| F-11 | **Distance filter** | Preset radius pills: 1, 2, 5, 10, 15, 20, 25 mi (or 1, 2, 5, 10, 20, 30, 40 km). Auto-increases as the user zooms out; never auto-decreases. |
+| F-11 | **Distance filter** | Full radius pills: 1, 2, 5, 10, 15, 20, 25, 50, 100, 250 mi (or 1, 2, 5, 10, 20, 30, 40, 75, 150, 400 km). Pills 1–25 mi are served from cache instantly; pills 50+ trigger on-demand wider fetches. Auto-radius selects the smallest pill with results (≤ 25 mi only); manual selection is preserved across searches. |
 | F-12 | **Unit toggle** | Switch between miles and kilometres. Persisted in `localStorage`. |
 | F-13 | **Amenity filters** | AND-logic filter buttons for Pump, Tools, and Repair service tags. Can be combined. "Clear" resets all. |
-| F-14 | **Loading state** | While a query is in flight, the list header shows a spinner and the station count pulses. When zero results are found yet, shows "Searching nearby…". |
+| F-14 | **Loading state** | While a query is in flight, the floating pill shows "Loading stations…" or "Searching wider area…" (for > 25 mi fetches). The station list preserves previous results with a pulsing header count (Google/Apple Maps pattern) — no flash-to-empty. When no prior results exist, the list header shows "Searching nearby…". |
 
 ### 2.3 Map Controls
 
@@ -393,7 +394,7 @@ Cyclists who are on the road, have a mechanical issue, and need a public repair 
 |---|---------|-------|
 | F-15 | **Map layers** | Three tile layer options accessible via a FAB picker: **Cycling** (default — CARTO Positron + WaymarkedTrails cycling & MTB overlays), **Satellite** (ESRI World Imagery + CARTO labels overlay), **Standard** (CARTO Voyager). Dark mode applies a CSS filter inversion to all non-satellite layers automatically. |
 | F-16 | **Locate me FAB** | Re-centers map on the user's current GPS position at zoom 18. Disabled (visually dimmed) until GPS resolves. |
-| F-17 | **Zoom-out guard** | If the visible map width exceeds 75 miles, station markers are hidden and a "Zoom in to see repair stations" toast is shown. |
+| F-17 | **Zoom-out detection** | When the viewport exceeds the selected distance pill (× 1.3), the "Search this area" button appears, offering to search at a larger radius. Suppressed at the 250 mi max pill — only panning triggers it at that level. `minZoom` is set to 6 to support viewing a 250 mi radius on mobile. |
 | F-18 | **User position marker** | Blue pulsing dot with accuracy radius ring. |
 
 ### 2.4 Navigation & Pages
@@ -445,9 +446,9 @@ Cyclists who are on the road, have a mechanical issue, and need a public repair 
 ---
 
 **US-03 — Find stations in a remote area**
-> As a cyclist in a rural area, I want to be told about the nearest stations even if none exist within the normal 25-mile radius, so I know where to head rather than assuming the app is broken.
+> As a cyclist in a rural area, I want to search wider when no stations exist nearby, so I can find the closest repair station even if it's far away.
 
-*Acceptance criteria:* When the primary query returns 0 results, the list automatically shows "Searching nearby…" with a spinner, then either lists the 5 nearest stations within 1,000 miles (with the radius display updated to the farthest station's distance) or shows "No stations within 1,000 mi".
+*Acceptance criteria:* When the 25-mile auto-radius returns no results, the user sees "No stations found" and can manually tap a wider pill (50, 100, or 250 mi) to trigger a larger on-demand Overpass query. Out-of-radius stations appear as muted markers. Zooming out from the current pill also surfaces "Search this area" to prompt a wider search. The app never auto-escalates beyond 25 mi — wider searches are always user-initiated.
 
 ---
 
@@ -587,8 +588,7 @@ src/
 │   └── useSettings.ts               # Consumer hook
 ├── hooks/
 │   ├── useGeolocation.ts            # GPS watchPosition with denied-permission fallback
-│   ├── useOverpassQuery.ts          # Primary Overpass fetch + localStorage cache
-│   └── useFallbackQuery.ts          # Wide-area fallback query (up to 1,000 mi / 1,609 km)
+│   └── useStationQuery.ts           # Unified Overpass fetch + localStorage cache (radius-aware)
 ├── lib/
 │   ├── directions.ts                # Platform-aware Apple Maps / Google Maps URL builder
 │   ├── distance.ts                  # Haversine distance formula + visible-width helper
@@ -641,8 +641,7 @@ No external state library. State is colocated at the lowest necessary ancestor:
 | `activeLayer` | `MapPage` | Session |
 | `selectedStationId` | `MapPage` | Session |
 | `listExpanded` | `MapPage` | Session |
-| Overpass result | `useOverpassQuery` | `localStorage` (24 h TTL) |
-| Fallback result | `useFallbackQuery` | In-memory only |
+| Overpass result | `useStationQuery` | `localStorage` (24 h TTL) |
 | Active amenity filters | `StationListView` | Session |
 | Search query / not-found | `Toolbar` | Session |
 
@@ -655,33 +654,32 @@ GPS / Search
 givenLocation (MapPage state)
     │
     ▼
-useOverpassQuery(lat, lng)
-    ├── Cache hit? → return cached stations
-    └── Cache miss → fetchStations(lat, lng, 65 km)
+useStationQuery(lat, lng, fetchRadiusKm)
+    ├── Cache hit? (proximity + radius sufficient) → return cached stations
+    └── Cache miss → fetchStations(lat, lng, fetchRadiusKm, timeout)
             │
             ▼
         allStations (OverpassNode[])
             │
-            ├── length > 0 → filter by selectedDist → displayStations
-            └── length = 0 → fallbackEnabled = true
-                                │
-                                ▼
-                        useFallbackQuery(lat, lng, enabled)
-                            → fetchStations(lat, lng, 1609 km, timeout=60s)
-                            → sort by distance, take 5 nearest
-                            → displayStations = fallback.stations
-                            → selectedDist = farthestMi (in current unit)
+            ├── filter by selectedDist → filteredStations (in-radius)
+            └── remaining → outOfRadiusStations (muted markers, wide searches only)
+
+fetchRadiusKm = max(FETCH_RADIUS_KM, selectedDistKm)
+    Pills 1–25 mi  → 25 mi fetch (standard, serves all from cache)
+    Pill 50 mi      → 50 mi fetch
+    Pill 100 mi     → 100 mi fetch
+    Pill 250 mi     → 250 mi fetch (90 s timeout cap)
 ```
 
 ### 4.6 Caching Strategy
 
 | Cache | Key | TTL | Eviction |
 |-------|-----|-----|---------|
-| Station data | `brs_v2` (localStorage) | 24 hours | Timestamp check on read |
+| Station data | `brs_v3` (localStorage) | 24 hours | Timestamp check on read |
 | Map tiles | Workbox `osm-tiles` | 7 days | Max 500 entries (LRU) |
 | App shell (JS/CSS/HTML) | Workbox precache | Service worker update | New SW install |
 
-Cache coverage check: a new Overpass fetch is triggered only when the user's position is more than **~24.7 km** from the last fetch centre (= 65 km fetch radius − 40.3 km max display radius).
+Cache coverage check: a new Overpass fetch is triggered when the user moves beyond **20% of the fetch radius** from the cache centre, or selects a pill wider than the cached radius. A 100 mi cache covers any request ≤ 100 mi without re-fetching.
 
 ### 4.7 Theme System
 
@@ -846,7 +844,7 @@ All tile requests are made directly from the user's browser. No API keys. No pro
 | **Dark mode tiles** | Single CSS filter recipe applied to `.leaflet-tile-pane` via `.map-dark-tiles` class. Eliminates all separate dark tile providers. Satellite excluded from inversion. |
 | **Surface edges** | All shadow-only surfaces in dark mode given explicit `border border-[#1e2a3a]` — shadows are invisible on near-black backgrounds. |
 | **Repair guide videos** | All Park Tool video IDs verified via HTTP against `i.ytimg.com`. |
-| **Fallback search** | `useFallbackQuery` hook: fires 1,609 km / 60 s Overpass query when primary returns empty. Returns 5 nearest, updates `selectedDist` to farthest distance. Unit-change in fallback mode converts exactly (no preset snap). |
+| **Wide-area search** | `useStationQuery` accepts a `fetchRadiusKm` parameter that scales with the selected pill. Pills 1–25 mi use the standard 25 mi fetch; pills 50/100/250 mi trigger on-demand wider fetches with proportionally scaled Overpass timeouts (25 s – 90 s). Cache is radius-aware: a wider cache covers all smaller requests. Auto-radius never escalates beyond 25 mi. |
 | **CI / CD** | GitHub Actions `Lint & Build` workflow runs on every PR and push to `main`. Deploy handled by Vercel GitHub integration — no CLI tokens or deploy step in CI. |
 | **SettingsContext split** | Context split into `SettingsContext.tsx` (provider), `settingsCtx.ts` (context object), and `useSettings.ts` (hook) to satisfy ESLint fast-refresh rules. |
 
@@ -856,7 +854,7 @@ All tile requests are made directly from the user's browser. No API keys. No pro
 |------|--------|
 | **Ad slot height** | The current ad banner is 50 px — fits a 320 × 50 Mobile Banner but not a 320 × 100 Large Mobile Banner (higher CPM). Increasing to 100 px requires changing `style={{ height: 50 }}` in `AdBanner.tsx` and updating `StationListView` from `bottom-[65px]` to `bottom-[115px]`. |
 | **Overpass rate limits** | All three mirrors may be slow during peak hours. No retry back-off beyond the mirror cascade. |
-| **Fallback query size** | A 1,609 km radius Overpass query can return thousands of nodes in densely-mapped regions. Currently no cap; the hook takes the 5 nearest from whatever is returned. |
+| **Wide-area query size** | A 250 mi (402 km) radius Overpass query can return many stations in densely-mapped regions. No client-side cap; all results are cached and filtered by the selected pill radius. |
 | **Settings page** | Distance unit and colour theme are currently only accessible via the Menu Drawer. The dedicated Settings page is a placeholder. |
 | **Tile caching scope** | The Workbox runtime cache targets the OSM tile domain pattern only. CARTO, ESRI, and WaymarkedTrails tiles are not currently cached offline. |
 

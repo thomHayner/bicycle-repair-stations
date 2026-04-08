@@ -60,29 +60,6 @@ export default function MapPage() {
     map.fitBounds(bounds, options);
   }, []);
 
-  // --- "Search this area" viewport-overlap tracking ---
-  const lastSearchBoundsRef = useRef<LatLngBounds | null>(null);
-  const [mapMovedSinceSearch, setMapMovedSinceSearch] = useState(false);
-
-  // Called by MapEventHandler when a programmatic flyTo/fitBounds settles —
-  // snapshot the viewport as the new search baseline.
-  const handleProgrammaticMoveEnd = useCallback(() => {
-    lastSearchBoundsRef.current = mapRef.current?.getBounds() ?? null;
-  }, []);
-
-  // Called by MapEventHandler on user drag (every frame) and user moveend —
-  // shows the button in real time as the user pans past the overlap threshold.
-  // Cheap to call often: getBounds() is cached, the math is trivial, and
-  // React short-circuits duplicate setState(true) calls.
-  const handleUserMove = useCallback(() => {
-    const last = lastSearchBoundsRef.current;
-    const current = mapRef.current?.getBounds();
-    if (!last || !current) return;
-    if (boundsOverlapRatio(last, current) < 0.7) {
-      setMapMovedSinceSearch(true);
-    }
-  }, []);
-
   // Location the user explicitly provided (geo or search) — drives Overpass fetches
   const [givenLocation, setGivenLocation] = useState<{ lat: number; lng: number } | null>(null);
   // Set only on explicit user actions (typed search / "Search this area") — drives the search pin marker
@@ -104,6 +81,48 @@ export default function MapPage() {
 
   // Muted markers + wide search indicator only when viewing beyond standard range
   const isWideSearch = fetchRadiusKm > FETCH_RADIUS_KM;
+
+  // --- "Search this area" viewport-overlap tracking ---
+  const lastSearchBoundsRef = useRef<LatLngBounds | null>(null);
+  const [mapMovedSinceSearch, setMapMovedSinceSearch] = useState(false);
+
+  // Called by MapEventHandler when a programmatic flyTo/fitBounds settles —
+  // snapshot the viewport as the new search baseline.
+  const handleProgrammaticMoveEnd = useCallback(() => {
+    lastSearchBoundsRef.current = mapRef.current?.getBounds() ?? null;
+  }, []);
+
+  // Called by MapEventHandler on user drag (every frame) and user moveend —
+  // shows the button in real time as the user pans past the overlap threshold
+  // OR zooms out beyond the fetched area.
+  // Cheap to call often: getBounds() is cached, the math is trivial, and
+  // React short-circuits duplicate setState(true) calls.
+  const handleUserMove = useCallback(() => {
+    const map = mapRef.current;
+    const last = lastSearchBoundsRef.current;
+    const current = map?.getBounds();
+    if (!last || !current) return;
+
+    // Pan check: has ~30% of the viewport scrolled away from the search area?
+    if (boundsOverlapRatio(last, current) < 0.7) {
+      setMapMovedSinceSearch(true);
+      return;
+    }
+
+    // Zoom-out check: does the viewport show area beyond the *selected* radius?
+    // Compare against the pill the user chose (displayMiles), not the cache/fetch
+    // radius — so zooming out from 2 mi immediately offers "Search this area" at 5 mi.
+    // Skip if already at the max pill (250 mi) — there's nothing bigger to search.
+    const maxPillMi = MI_OPTIONS_ALL[MI_OPTIONS_ALL.length - 1];
+    if (displayMiles < maxPillMi) {
+      const center = map!.getCenter();
+      const ne = current.getNorthEast();
+      const viewportRadiusMi = haversineDistanceMiles(center.lat, center.lng, ne.lat, ne.lng);
+      if (viewportRadiusMi > displayMiles * 1.3) {
+        setMapMovedSinceSearch(true);
+      }
+    }
+  }, [displayMiles]);
 
   const [activeLayer, setActiveLayer] = useState<LayerId>("cycling");
   const [errorDismissed, setErrorDismissed] = useState(false);
@@ -142,10 +161,18 @@ export default function MapPage() {
     fetchRadiusKm,
   );
 
+  // Preserve previous stations during loading so the list doesn't flash empty.
+  // Google/Apple Maps pattern: old results stay visible with a pulsing header,
+  // then swap in-place when the new data arrives.
+  // Uses "adjust state during render" (same pattern as useStationQuery).
   const queryStations = query.status === "success" ? query.stations : undefined;
+  const [staleStations, setStaleStations] = useState<OverpassNode[]>([]);
+  if (queryStations && queryStations !== staleStations) {
+    setStaleStations(queryStations);
+  }
   const allStations = useMemo(
-    () => queryStations ?? [],
-    [queryStations]
+    () => queryStations ?? (query.status === "loading" ? staleStations : []),
+    [queryStations, query.status, staleStations],
   );
 
   // Track whether the user has manually selected a radius this session.
@@ -159,6 +186,7 @@ export default function MapPage() {
   const autoRadiusLocationRef = useRef<{ lat: number; lng: number } | null>(null);
   useEffect(() => {
     if (userSelectedDist) return; // user picked a radius — don't override
+    if (!initialFlyComplete) return; // wait for initial map animation to finish
     if (query.status !== "success") return;
     if (!givenLocation || allStations.length === 0) return;
 
@@ -194,7 +222,7 @@ export default function MapPage() {
       ],
       { padding: [40, 40], maxZoom: 16 }
     );
-  }, [userSelectedDist, query.status, allStations, givenLocation, unit, programmaticFitBounds]);
+  }, [userSelectedDist, initialFlyComplete, query.status, allStations, givenLocation, unit, programmaticFitBounds]);
 
   // Map pan updates the filter anchor (used only when no givenLocation)
   const handleMoveEnd = useCallback((center: LatLng) => {
@@ -202,7 +230,7 @@ export default function MapPage() {
     setErrorDismissed(false);
   }, []);
 
-  const handleLocationFound = useCallback((pos: { lat: number; lng: number }, zoom = 13) => {
+  const handleLocationFound = useCallback((pos: { lat: number; lng: number }) => {
     setMapMovedSinceSearch(false);
     setGivenLocation(pos);
     const nearUser =
@@ -210,8 +238,19 @@ export default function MapPage() {
       haversineDistanceMiles(pos.lat, pos.lng, userPosition.lat, userPosition.lng) < 1;
     setSearchedLocation(nearUser ? null : pos);
     setErrorDismissed(false);
-    programmaticFlyTo([pos.lat, pos.lng], zoom, { duration: 1.2 });
-  }, [userPosition, programmaticFlyTo]);
+    // Zoom to show the selected radius, not a fixed zoom level
+    const distMiles = displayMiles;
+    const DEG_PER_MILE = 1 / 69;
+    const latDelta = distMiles * DEG_PER_MILE;
+    const lngDelta = latDelta / Math.cos((pos.lat * Math.PI) / 180);
+    programmaticFitBounds(
+      [
+        [pos.lat - latDelta, pos.lng - lngDelta],
+        [pos.lat + latDelta, pos.lng + lngDelta],
+      ],
+      { padding: [40, 40], maxZoom: 16 }
+    );
+  }, [userPosition, displayMiles, programmaticFitBounds]);
 
   // Recenter to GPS position — clears the search pin since the blue dot already marks the spot
   const handleRecenter = useCallback(() => {
@@ -286,12 +325,29 @@ export default function MapPage() {
     // Snapshot current viewport immediately so panning while results load
     // compares against where the user just searched, not the previous search.
     lastSearchBoundsRef.current = mapRef.current?.getBounds() ?? null;
+
+    // Snap selectedDist to the closest pill matching the visible viewport radius
+    const map = mapRef.current;
+    if (map) {
+      const bounds = map.getBounds();
+      const center = map.getCenter();
+      const ne = bounds.getNorthEast();
+      const viewportRadiusMi = haversineDistanceMiles(center.lat, center.lng, ne.lat, ne.lng);
+      const opts = unit === "mi" ? MI_OPTIONS_ALL : KM_OPTIONS_ALL;
+      const viewportDist = unit === "km" ? viewportRadiusMi * KM_PER_MILE : viewportRadiusMi;
+      const closest = [...opts].reduce((a, b) =>
+        Math.abs(b - viewportDist) < Math.abs(a - viewportDist) ? b : a
+      );
+      setSelectedDist(closest);
+      setUserSelectedDist(true);
+    }
+
     setGivenLocation(mapCenter);
     const nearUser =
       userPosition !== null &&
       haversineDistanceMiles(mapCenter.lat, mapCenter.lng, userPosition.lat, userPosition.lng) < 1;
     setSearchedLocation(nearUser ? null : mapCenter);
-  }, [mapCenter, userPosition]);
+  }, [mapCenter, userPosition, unit]);
 
   // Filter centre: explicit location (geo/search) → map centre → null
   const filterCenter = givenLocation ?? mapCenter;
@@ -416,7 +472,6 @@ export default function MapPage() {
         selectedDist={selectedDist}
         onDistChange={handleDistChange}
         distOptions={distOptions}
-        isWideSearch={isWideSearch}
         onStationSelect={handleStationSelect}
         expanded={listExpanded}
         onExpandedChange={setListExpanded}

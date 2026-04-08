@@ -20,15 +20,15 @@ function getHeaderState(
   hasActiveFilters: boolean,
   selectedDist: number,
   unit: string,
-  isWideSearch: boolean,
 ): HeaderState {
   // Searching — query idle or in-flight with no prior results
   if ((queryStatus === "idle" || queryStatus === "loading") && total === 0)
-    return { text: isWideSearch ? "Searching wider area\u2026" : "Searching nearby\u2026", pulse: true, emptyPanelText: null };
+    return { text: "Searching nearby\u2026", pulse: true, emptyPanelText: null };
 
-  // Refreshing — re-fetching but we still have previous results on screen
+  // Refreshing — re-fetching but we still have previous results on screen.
+  // Show the previous count with a pulse; the FAB already says "Searching…"
   if (queryStatus === "loading" && total > 0)
-    return { text: isWideSearch ? "Searching wider area\u2026" : `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`, pulse: true, emptyPanelText: null };
+    return { text: `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`, pulse: true, emptyPanelText: null };
 
   // Query finished with zero results
   if (total === 0)
@@ -63,7 +63,6 @@ interface Props {
   selectedDist: number;
   onDistChange: (dist: number) => void;
   distOptions: readonly number[];
-  isWideSearch: boolean;
   onStationSelect: (station: OverpassNode) => void;
   expanded: boolean;
   onExpandedChange: (expanded: boolean) => void;
@@ -80,7 +79,6 @@ export const StationListView = memo(function StationListView({
   selectedDist,
   onDistChange,
   distOptions,
-  isWideSearch,
   onStationSelect,
   expanded,
   onExpandedChange,
@@ -126,7 +124,7 @@ export const StationListView = memo(function StationListView({
   const options = distOptions;
 
   const { text: headerText, pulse: headerPulse, emptyPanelText } = getHeaderState(
-    queryStatus, total, shown, hasActiveFilters, selectedDist, unit, isWideSearch,
+    queryStatus, total, shown, hasActiveFilters, selectedDist, unit,
   );
   const headerKey = headerPulse ? "loading" : headerText;
 
