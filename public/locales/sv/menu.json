@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Stäng meny",
+  "findStations": "Hitta stationer",
+  "repairGuides": "Reparationsguider",
+  "about": "Om",
+  "reportBug": "Rapportera ett fel",
+  "donate": "Donera",
+  "addMissingStation": "Lägg till en saknad station",
+  "shareThisApp": "Dela den här appen",
+  "theme": "Tema",
+  "themeLight": "Ljust",
+  "themeDark": "Mörkt",
+  "themeSystem": "System",
+  "distance": "Avstånd",
+  "language": "Språk"
+}
