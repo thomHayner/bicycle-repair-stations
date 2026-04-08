@@ -217,7 +217,7 @@ export default function MapPage() {
     setErrorDismissed(false);
   }, []);
 
-  const handleLocationFound = useCallback((pos: { lat: number; lng: number }, zoom = 13) => {
+  const handleLocationFound = useCallback((pos: { lat: number; lng: number }) => {
     setMapMovedSinceSearch(false);
     setGivenLocation(pos);
     const nearUser =
@@ -225,8 +225,19 @@ export default function MapPage() {
       haversineDistanceMiles(pos.lat, pos.lng, userPosition.lat, userPosition.lng) < 1;
     setSearchedLocation(nearUser ? null : pos);
     setErrorDismissed(false);
-    programmaticFlyTo([pos.lat, pos.lng], zoom, { duration: 1.2 });
-  }, [userPosition, programmaticFlyTo]);
+    // Zoom to show the selected radius, not a fixed zoom level
+    const distMiles = displayMiles;
+    const DEG_PER_MILE = 1 / 69;
+    const latDelta = distMiles * DEG_PER_MILE;
+    const lngDelta = latDelta / Math.cos((pos.lat * Math.PI) / 180);
+    programmaticFitBounds(
+      [
+        [pos.lat - latDelta, pos.lng - lngDelta],
+        [pos.lat + latDelta, pos.lng + lngDelta],
+      ],
+      { padding: [40, 40], maxZoom: 16 }
+    );
+  }, [userPosition, displayMiles, programmaticFitBounds]);
 
   // Recenter to GPS position — clears the search pin since the blue dot already marks the spot
   const handleRecenter = useCallback(() => {
