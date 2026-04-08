@@ -9,10 +9,13 @@ export interface SettingsCtx {
   resolvedTheme: "light" | "dark";
   unit: Unit;
   setUnit: (u: Unit) => void;
+  locale: string;
+  setLocale: (l: string) => void;
 }
 
 export const Ctx = createContext<SettingsCtx>({
   theme: "system", setTheme: () => {},
   resolvedTheme: "light",
   unit:  "mi",     setUnit:  () => {},
+  locale: "en",    setLocale: () => {},
 });

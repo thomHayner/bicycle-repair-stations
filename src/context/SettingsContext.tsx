@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Unit } from "../lib/units";
 import { Ctx, type Theme } from "./settingsCtx";
+import i18n from "../i18n";
+import { isRTL, toOgLocale } from "../i18n/locales";
 
 // Re-export Theme so existing `import type { Theme } from "./SettingsContext"` still works.
 // Type-only re-exports are transparent to react-refresh.
@@ -33,6 +35,9 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const [unit, setUnitState] = useState<Unit>(
     () => (localStorage.getItem("brs-unit") as Unit) ?? "mi"
   );
+  const [locale, setLocaleState] = useState<string>(
+    () => localStorage.getItem("brs-locale") ?? i18n.language ?? "en"
+  );
 
   const setTheme = useCallback((t: Theme) => {
     setThemeState(t);
@@ -44,6 +49,16 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const setUnit = useCallback((u: Unit) => {
     setUnitState(u);
     localStorage.setItem("brs-unit", u);
+  }, []);
+
+  const setLocale = useCallback((l: string) => {
+    setLocaleState(l);
+    localStorage.setItem("brs-locale", l);
+    i18n.changeLanguage(l);
+    document.documentElement.lang = l;
+    document.documentElement.dir = isRTL(l) ? "rtl" : "ltr";
+    const ogMeta = document.querySelector('meta[property="og:locale"]');
+    if (ogMeta) ogMeta.setAttribute("content", toOgLocale(l));
   }, []);
 
   // Apply theme on mount + listen for system preference changes.
@@ -62,8 +77,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, [theme]);
 
   const ctxValue = useMemo(
-    () => ({ theme, setTheme, resolvedTheme, unit, setUnit }),
-    [theme, setTheme, resolvedTheme, unit, setUnit],
+    () => ({ theme, setTheme, resolvedTheme, unit, setUnit, locale, setLocale }),
+    [theme, setTheme, resolvedTheme, unit, setUnit, locale, setLocale],
   );
 
   return (

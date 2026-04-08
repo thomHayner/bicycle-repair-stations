@@ -38,21 +38,21 @@ describe("StationListView pagination", () => {
     expect(stationButtons).toHaveLength(20);
   });
 
-  it("shows 'scroll for more' hint when there are more than 20 stations", () => {
+  it("shows pagination hint when there are more than 20 stations", () => {
     const stations = makeStations(50);
     render(<StationListView {...defaultProps} stations={stations} />);
 
-    expect(screen.getByText(/Showing 20 of 50/)).toBeInTheDocument();
-    expect(screen.getByText(/scroll for more/)).toBeInTheDocument();
+    // i18n mock renders: showingCount (visible:20, total:50)
+    expect(screen.getByText(/showingCount.*visible:20.*total:50/)).toBeInTheDocument();
   });
 
-  it("does NOT show 'scroll for more' when there are 20 or fewer stations", () => {
+  it("does NOT show pagination hint when there are 20 or fewer stations", () => {
     const stations = makeStations(15);
     render(<StationListView {...defaultProps} stations={stations} />);
 
     const stationButtons = screen.getAllByRole("button", { name: /Station \d+/ });
     expect(stationButtons).toHaveLength(15);
-    expect(screen.queryByText(/scroll for more/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/showingCount/)).not.toBeInTheDocument();
   });
 
   it("renders exactly all stations when count equals PAGE_SIZE", () => {
@@ -61,7 +61,7 @@ describe("StationListView pagination", () => {
 
     const stationButtons = screen.getAllByRole("button", { name: /Station \d+/ });
     expect(stationButtons).toHaveLength(20);
-    expect(screen.queryByText(/scroll for more/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/showingCount/)).not.toBeInTheDocument();
   });
 
   it("loads next batch when scrolled near the bottom", () => {
@@ -71,13 +71,13 @@ describe("StationListView pagination", () => {
     // Initially 20
     expect(screen.getAllByRole("button", { name: /Station \d+/ })).toHaveLength(20);
 
-    // Find the scrollable panel (the expanded div with overflow-y-auto)
-    const scrollPanel = screen.getByText(/Showing 20 of 50/).closest(
+    // Find the scrollable panel
+    const scrollPanel = screen.getByText(/showingCount.*visible:20.*total:50/).closest(
       "[class*='overflow-y-auto']"
     )!;
     expect(scrollPanel).toBeTruthy();
 
-    // Simulate scroll near bottom: scrollHeight - scrollTop - clientHeight < 100
+    // Simulate scroll near bottom
     Object.defineProperty(scrollPanel, "scrollHeight", { value: 2000, configurable: true });
     Object.defineProperty(scrollPanel, "scrollTop", { value: 1950, configurable: true });
     Object.defineProperty(scrollPanel, "clientHeight", { value: 100, configurable: true });
@@ -86,7 +86,7 @@ describe("StationListView pagination", () => {
 
     // Should now show 40
     expect(screen.getAllByRole("button", { name: /Station \d+/ })).toHaveLength(40);
-    expect(screen.getByText(/Showing 40 of 50/)).toBeInTheDocument();
+    expect(screen.getByText(/showingCount.*visible:40.*total:50/)).toBeInTheDocument();
   });
 
   it("loads remaining stations on second scroll (no over-render)", () => {
@@ -95,7 +95,7 @@ describe("StationListView pagination", () => {
 
     expect(screen.getAllByRole("button", { name: /Station \d+/ })).toHaveLength(20);
 
-    const scrollPanel = screen.getByText(/Showing 20 of 35/).closest(
+    const scrollPanel = screen.getByText(/showingCount.*visible:20.*total:35/).closest(
       "[class*='overflow-y-auto']"
     )!;
 
@@ -107,7 +107,7 @@ describe("StationListView pagination", () => {
 
     // All 35 should now be visible, hint gone
     expect(screen.getAllByRole("button", { name: /Station \d+/ })).toHaveLength(35);
-    expect(screen.queryByText(/scroll for more/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/showingCount/)).not.toBeInTheDocument();
   });
 
   it("resets to PAGE_SIZE when stations prop changes (new search)", () => {
@@ -117,7 +117,7 @@ describe("StationListView pagination", () => {
     );
 
     // Scroll to load more
-    const scrollPanel = screen.getByText(/Showing 20 of 50/).closest(
+    const scrollPanel = screen.getByText(/showingCount.*visible:20.*total:50/).closest(
       "[class*='overflow-y-auto']"
     )!;
     Object.defineProperty(scrollPanel, "scrollHeight", { value: 2000, configurable: true });
@@ -132,14 +132,14 @@ describe("StationListView pagination", () => {
 
     // Should reset to 20
     expect(screen.getAllByRole("button", { name: /Station \d+/ })).toHaveLength(20);
-    expect(screen.getByText(/Showing 20 of 30/)).toBeInTheDocument();
+    expect(screen.getByText(/showingCount.*visible:20.*total:30/)).toBeInTheDocument();
   });
 
   it("does not scroll-load when not near the bottom", () => {
     const stations = makeStations(50);
     render(<StationListView {...defaultProps} stations={stations} />);
 
-    const scrollPanel = screen.getByText(/Showing 20 of 50/).closest(
+    const scrollPanel = screen.getByText(/showingCount.*visible:20.*total:50/).closest(
       "[class*='overflow-y-auto']"
     )!;
 
@@ -157,7 +157,7 @@ describe("StationListView pagination", () => {
     const stations = makeStations(50);
     render(<StationListView {...defaultProps} stations={stations} />);
 
-    // Header should say "50 stations within 250 mi", not "20 stations"
-    expect(screen.getByText("50 stations within 250 mi")).toBeInTheDocument();
+    // Header uses stationCount key with count:50
+    expect(screen.getByText(/stationCount.*count:50.*distance:250.*unit:mi/)).toBeInTheDocument();
   });
 });

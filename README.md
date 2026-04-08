@@ -42,7 +42,20 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 - **About** — credits, contribute links (OSM / bug / donate / share), Privacy Policy, and Terms of Service with accordion expand/collapse
 - **Share modal** — one global modal for personal sharing (X, Facebook, email, copy link, plus native app share option)
 - **Report a bug** — in-app form that opens GitHub issues for maintainer triage
-- **Menu drawer** — slide-in navigation with theme toggle (Light / Dark / System), unit toggle, and Share action
+- **Menu drawer** — slide-in navigation with theme toggle (Light / Dark / System), unit toggle, language selector, and Share action
+
+### Internationalization (i18n)
+- **8 languages** — English, German, French, Spanish, Italian, Dutch, Portuguese, and Arabic
+- **Language selector** — dropdown in the menu drawer; persisted to `localStorage`
+- **First-visit language prompt** — detects country via IP geolocation; if a supported non-English locale is detected, shows a two-button language choice on the splash screen
+- **IP geolocation fallback** — when GPS is denied, a Vercel edge function approximates the user's location from their IP address (no IPs stored); falls back to Boulder, CO if the API is unavailable
+- **Auto-detect units** — first-visit users in US/UK/Myanmar default to miles; everyone else defaults to kilometres
+- **Locale-aware number formatting** — distances use `Intl.NumberFormat` (e.g., `1,5 km` in German)
+- **Geocode localization** — Nominatim `Accept-Language` header matches the active locale; geocode cache is keyed by `query + locale`
+- **RTL support** — Arabic layout mirrors the entire UI (menu from right, FABs on left, back arrows flipped)
+- **Pluralization** — i18next handles language-specific plural rules; Arabic uses all 6 plural forms
+- **Meta tags** — `<html lang>`, `<html dir>`, and `og:locale` meta tag update on language switch
+- **Offline translations** — non-English locale files cached via Workbox StaleWhileRevalidate (30-day TTL)
 
 ### PWA & Accessibility
 - **PWA installable** — `manifest.json` with standalone display; 192 × 192 and 512 × 512 icons
@@ -69,6 +82,7 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 | Map | Leaflet + react-leaflet | 1.9.x / 5.x |
 | Map tiles | CARTO, ESRI, WaymarkedTrails | No API key required |
 | Station data | Overpass API | No API key required |
+| i18n | i18next + react-i18next | 26.x / 17.x |
 | PWA | vite-plugin-pwa (Workbox) | 1.2.x |
 | Analytics | Vercel Analytics + Speed Insights | 2.x |
 | Linting | ESLint + typescript-eslint | 9.x / 8.x |

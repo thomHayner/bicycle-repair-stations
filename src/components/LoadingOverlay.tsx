@@ -1,12 +1,28 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
+import { SUPPORTED_LOCALES, type LocaleCode } from "../i18n/locales";
 
 interface Props {
   visible: boolean;
   message?: string;
+  /** If set, show a first-visit language prompt instead of the spinner. */
+  suggestedLocale?: LocaleCode | null;
+  onLocaleChosen?: (locale: string) => void;
 }
 
-export const LoadingOverlay = memo(function LoadingOverlay({ visible, message = "Finding your location\u2026" }: Props) {
+export const LoadingOverlay = memo(function LoadingOverlay({
+  visible,
+  message,
+  suggestedLocale,
+  onLocaleChosen,
+}: Props) {
+  const { t } = useTranslation("common");
   if (!visible) return null;
+
+  const suggested = suggestedLocale
+    ? SUPPORTED_LOCALES.find((l) => l.code === suggestedLocale)
+    : null;
+
   return (
     <div
       className={[
@@ -25,14 +41,34 @@ export const LoadingOverlay = memo(function LoadingOverlay({ visible, message = 
             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
           </svg>
         </div>
-        <h1 className="text-xl font-bold text-slate-900 dark:text-white">BicycleRepairStations.com</h1>
+        <h1 className="text-xl font-bold text-slate-900 dark:text-white">{t("appName")}</h1>
       </div>
 
-      {/* Spinner */}
-      <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
-        <span className="w-4 h-4 border-2 border-green-600 border-t-transparent rounded-full animate-spin inline-block" />
-        {message}
-      </div>
+      {suggested && onLocaleChosen ? (
+        <div className="flex flex-col items-center gap-3">
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={() => onLocaleChosen("en")}
+              className="px-6 py-2.5 rounded-full text-sm font-semibold border border-[var(--color-border)] bg-[var(--color-surface)] text-slate-700 dark:text-slate-200 state-surface focus-ring transition-colors"
+            >
+              English
+            </button>
+            <button
+              type="button"
+              onClick={() => onLocaleChosen(suggested.code)}
+              className="px-6 py-2.5 rounded-full text-sm font-semibold bg-[var(--color-primary)] text-[var(--color-on-primary)] hover:brightness-95 active:brightness-90 focus-ring transition-colors"
+            >
+              {suggested.nativeName}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+          <span className="w-4 h-4 border-2 border-green-600 border-t-transparent rounded-full animate-spin inline-block" />
+          {message ?? t("findingLocation")}
+        </div>
+      )}
     </div>
   );
 });
