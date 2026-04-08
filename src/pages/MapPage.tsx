@@ -9,7 +9,8 @@ import { AdBanner } from "../components/AdBanner/AdBanner";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 import { StationListView } from "../components/StationListView";
 import { haversineDistanceMiles } from "../lib/distance";
-import { type Unit, KM_PER_MILE, MI_OPTIONS, KM_OPTIONS } from "../lib/units";
+import { type Unit, KM_PER_MILE, MI_OPTIONS, KM_OPTIONS, MI_OPTIONS_ALL, KM_OPTIONS_ALL } from "../lib/units";
+import { FETCH_RADIUS_KM } from "../lib/stationCache";
 import { type LayerId } from "../lib/layers";
 import { useSettings } from "../context/useSettings";
 import type { OverpassNode } from "../types/overpass";
@@ -94,6 +95,16 @@ export default function MapPage() {
   const [selectedDist, setSelectedDist] = useState(() => unit === "km" ? 5 : 2);
   const displayMiles = unit === "mi" ? selectedDist : selectedDist / KM_PER_MILE;
 
+  // Always show all pills (1–250 mi / 1–400 km)
+  const distOptions = unit === "mi" ? MI_OPTIONS_ALL : KM_OPTIONS_ALL;
+
+  // Fetch radius = max(standard 25 mi, selected distance in km)
+  const selectedDistKm = unit === "mi" ? selectedDist * KM_PER_MILE : selectedDist;
+  const fetchRadiusKm = Math.max(FETCH_RADIUS_KM, selectedDistKm);
+
+  // Muted markers + wide search indicator only when viewing beyond standard range
+  const isWideSearch = fetchRadiusKm > FETCH_RADIUS_KM;
+
   const [activeLayer, setActiveLayer] = useState<LayerId>("cycling");
   const [errorDismissed, setErrorDismissed] = useState(false);
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
@@ -124,10 +135,11 @@ export default function MapPage() {
     }
   }, [geo, givenLocation]);
 
-  // Fires when givenLocation changes — never on map pan
+  // Fires when givenLocation or fetchRadiusKm changes — never on map pan
   const query = useStationQuery(
     givenLocation?.lat ?? null,
     givenLocation?.lng ?? null,
+    fetchRadiusKm,
   );
 
   const queryStations = query.status === "success" ? query.stations : undefined;
@@ -141,6 +153,7 @@ export default function MapPage() {
   // Runs once per unique givenLocation; manual pill changes are never overridden.
   const autoRadiusLocationRef = useRef<{ lat: number; lng: number } | null>(null);
   useEffect(() => {
+    if (userSelectedDistRef.current) return; // user picked a radius — don't override
     if (query.status !== "success") return;
     if (!givenLocation || allStations.length === 0) return;
 
@@ -217,18 +230,24 @@ export default function MapPage() {
 
   const handleMapInteraction = useCallback(() => setListExpanded(false), []);
 
+  // Track whether the user has manually selected a radius this session.
+  // When true, auto-radius is skipped so searches don't override the user's choice.
+  // Resets naturally on page refresh (ref, not persisted).
+  const userSelectedDistRef = useRef(false);
+
   // Distance pill selected manually by the user
   const handleDistChange = useCallback((dist: number) => {
+    userSelectedDistRef.current = true;
     setSelectedDist(dist);
   }, []);
 
-  // Unit toggle — snap selectedDist to the nearest preset in the new unit
+  // Unit toggle — snap selectedDist to the nearest preset in the new unit (full range)
   const handleUnitChange = useCallback((newUnit: Unit) => {
     if (newUnit === unit) return;
     setUnit(newUnit);
     const currentMiles = unit === "mi" ? selectedDist : selectedDist / KM_PER_MILE;
     const converted = newUnit === "km" ? currentMiles * KM_PER_MILE : currentMiles;
-    const options = newUnit === "km" ? KM_OPTIONS : MI_OPTIONS;
+    const options = newUnit === "km" ? KM_OPTIONS_ALL : MI_OPTIONS_ALL;
     const closest = [...options].reduce((a, b) =>
       Math.abs(b - converted) < Math.abs(a - converted) ? b : a
     );
@@ -329,7 +348,7 @@ export default function MapPage() {
               aria-hidden={showSearchHere}
             >
               <span className="inline-block w-3 h-3 border-2 border-green-600 border-t-transparent rounded-full animate-spin shrink-0" />
-              Loading stations…
+              {isWideSearch ? "Searching wider area\u2026" : "Loading stations\u2026"}
               <span className="w-[15px] h-[15px] shrink-0 invisible" aria-hidden="true" />
             </div>
 
@@ -370,6 +389,7 @@ export default function MapPage() {
             userDistances={userDistances}
             stations={allStations}
             filteredStationIds={filteredStationIds}
+            showMutedMarkers={isWideSearch}
             onMoveEnd={handleMoveEnd}
             onUserMove={handleUserMove}
             onProgrammaticMoveEnd={handleProgrammaticMoveEnd}
@@ -395,6 +415,8 @@ export default function MapPage() {
         onUnitChange={handleUnitChange}
         selectedDist={selectedDist}
         onDistChange={handleDistChange}
+        distOptions={distOptions}
+        isWideSearch={isWideSearch}
         onStationSelect={handleStationSelect}
         expanded={listExpanded}
         onExpandedChange={setListExpanded}

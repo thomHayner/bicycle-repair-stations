@@ -179,6 +179,7 @@ interface Props {
   userDistances: Map<number, number> | null;
   stations: OverpassNode[];
   filteredStationIds: Set<number>;
+  showMutedMarkers: boolean;
   onMoveEnd: (center: LatLng) => void;
   onUserMove: () => void;
   onProgrammaticMoveEnd: () => void;
@@ -194,7 +195,7 @@ interface Props {
   onInitialFlyComplete?: () => void;
 }
 
-export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, onUserMove, onProgrammaticMoveEnd, mapRef, programmaticMoveRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, onInitialFlyComplete }: Props) {
+export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, showMutedMarkers, onMoveEnd, onUserMove, onProgrammaticMoveEnd, mapRef, programmaticMoveRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, onInitialFlyComplete }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -285,7 +286,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
       <MapContainer
         center={initialCenter}
         zoom={16}
-        minZoom={10}
+        minZoom={5}
         maxZoom={18}
         style={{ width: "100%", height: "100%", background: tileBg }}
         zoomControl={false}
@@ -334,29 +335,31 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
             />
           ))}
         </MarkerClusterGroup>
-        {/* Out-of-radius cached stations — small muted clusters, no count */}
-        <MarkerClusterGroup
-          maxClusterRadius={60}
-          disableClusteringAtZoom={16}
-          iconCreateFunction={createMutedClusterIcon}
-          zoomToBoundsOnClick={true}
-          spiderfyOnMaxZoom={false}
-          showCoverageOnHover={false}
-          animate={true}
-          chunkedLoading={true}
-        >
-          {outOfRadiusStations.map((station) => (
-            <StationMarker
-              key={station.id}
-              station={station}
-              isSelected={station.id === selectedStationId}
-              isInRadius={false}
-              onSelect={onStationSelect}
-              onDeselect={onStationDeselect}
-              userDistances={userDistances}
-            />
-          ))}
-        </MarkerClusterGroup>
+        {/* Out-of-radius stations — small muted clusters, only shown for wide searches */}
+        {showMutedMarkers && (
+          <MarkerClusterGroup
+            maxClusterRadius={60}
+            disableClusteringAtZoom={16}
+            iconCreateFunction={createMutedClusterIcon}
+            zoomToBoundsOnClick={true}
+            spiderfyOnMaxZoom={false}
+            showCoverageOnHover={false}
+            animate={true}
+            chunkedLoading={true}
+          >
+            {outOfRadiusStations.map((station) => (
+              <StationMarker
+                key={station.id}
+                station={station}
+                isSelected={station.id === selectedStationId}
+                isInRadius={false}
+                onSelect={onStationSelect}
+                onDeselect={onStationDeselect}
+                userDistances={userDistances}
+              />
+            ))}
+          </MarkerClusterGroup>
+        )}
       </MapContainer>
     </div>
   );

@@ -2,7 +2,7 @@ import { memo, useMemo, useState } from "react";
 import type { OverpassNode } from "../types/overpass";
 import { haversineDistanceMiles } from "../lib/distance";
 import { getDirectionsUrl } from "../lib/directions";
-import { type Unit, KM_PER_MILE, MI_OPTIONS, KM_OPTIONS } from "../lib/units";
+import { type Unit, KM_PER_MILE } from "../lib/units";
 
 export type QueryStatus = "idle" | "loading" | "success" | "none" | "error";
 
@@ -20,14 +20,15 @@ function getHeaderState(
   hasActiveFilters: boolean,
   selectedDist: number,
   unit: string,
+  isWideSearch: boolean,
 ): HeaderState {
   // Searching — query idle or in-flight with no prior results
   if ((queryStatus === "idle" || queryStatus === "loading") && total === 0)
-    return { text: "Searching nearby\u2026", pulse: true, emptyPanelText: null };
+    return { text: isWideSearch ? "Searching wider area\u2026" : "Searching nearby\u2026", pulse: true, emptyPanelText: null };
 
   // Refreshing — re-fetching but we still have previous results on screen
   if (queryStatus === "loading" && total > 0)
-    return { text: `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`, pulse: true, emptyPanelText: null };
+    return { text: isWideSearch ? "Searching wider area\u2026" : `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`, pulse: true, emptyPanelText: null };
 
   // Query finished with zero results
   if (total === 0)
@@ -61,6 +62,8 @@ interface Props {
   onUnitChange: (unit: Unit) => void;
   selectedDist: number;
   onDistChange: (dist: number) => void;
+  distOptions: readonly number[];
+  isWideSearch: boolean;
   onStationSelect: (station: OverpassNode) => void;
   expanded: boolean;
   onExpandedChange: (expanded: boolean) => void;
@@ -76,6 +79,8 @@ export const StationListView = memo(function StationListView({
   onUnitChange,
   selectedDist,
   onDistChange,
+  distOptions,
+  isWideSearch,
   onStationSelect,
   expanded,
   onExpandedChange,
@@ -118,10 +123,10 @@ export const StationListView = memo(function StationListView({
   const total = stations.length;
   const shown = filtered.length;
   const hasActiveFilters = activeFilters.size > 0;
-  const options = unit === "mi" ? MI_OPTIONS : KM_OPTIONS;
+  const options = distOptions;
 
   const { text: headerText, pulse: headerPulse, emptyPanelText } = getHeaderState(
-    queryStatus, total, shown, hasActiveFilters, selectedDist, unit,
+    queryStatus, total, shown, hasActiveFilters, selectedDist, unit, isWideSearch,
   );
   const headerKey = headerPulse ? "loading" : headerText;
 
