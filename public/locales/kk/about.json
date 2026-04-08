@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Туралы",
+  "tagline": "Жаныңыздағы қоғамдық велосипед жөндеу стансаларын табыңыз.",
+  "dataCredits": "Деректер мен несиелер",
+  "osmContributors": "© OpenStreetMap үлесшілері",
+  "leafletMaps": "Leaflet — интерактивті карталар",
+  "cartoTiles": "CARTO — карта тайлдары",
+  "overpassData": "Overpass API — стансалар деректері",
+  "contribute": "Үлес қосу",
+  "addMissingStation": "OSM-ге жетіспейтін стансаны қосу",
+  "reportBug": "Қатені хабарлау",
+  "supportDonation": "Қайырымдылықпен қолдау",
+  "shareThisApp": "Осы қолданбамен бөлісу",
+  "legal": "Заңды"
+}
