@@ -1,0 +1,12 @@
+{
+  "shareApp": "Raba Manhaja",
+  "shareStation": "Raba Tashar",
+  "shareAppMessage": "Nemo tashoshin gyaran keke na jama'a kusa da ku da BicycleRepairStations.com!",
+  "shareStationMessage": "Duba wannan tashar gyaran keke: {{name}}",
+  "copyLink": "Kwafi Hanyar haɗi",
+  "linkCopied": "An kwafi hanyar haɗi!",
+  "email": "Imel",
+  "emailSubjectApp": "Tashoshin Gyaran Keke Kusa da Ku",
+  "emailSubjectStation": "Tashar Gyaran Keke: {{name}}",
+  "shareVia": "Raba ta {{platform}}"
+}
