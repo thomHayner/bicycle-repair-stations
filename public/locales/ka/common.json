@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "ველოსიპედის სარემონტო სადგურების აპლიკაცია",
+  "back": "უკან",
+  "goBack": "უკან დაბრუნება",
+  "cancel": "გაუქმება",
+  "dismiss": "დახურვა",
+  "findingLocation": "თქვენი მდებარეობა განისაზღვრება…",
+  "advertisement": "რეკლამა",
+  "findDescription": "იპოვეთ საჯაროველოსიპედის სარემონტო სადგურები თქვენ ახლოს."
+}
