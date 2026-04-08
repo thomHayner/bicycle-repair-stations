@@ -471,7 +471,6 @@ export default function MapPage() {
         selectedDist={selectedDist}
         onDistChange={handleDistChange}
         distOptions={distOptions}
-        isWideSearch={isWideSearch}
         onStationSelect={handleStationSelect}
         expanded={listExpanded}
         onExpandedChange={setListExpanded}
