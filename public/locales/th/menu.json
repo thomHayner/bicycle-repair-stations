@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "ปิดเมนู",
+  "findStations": "ค้นหาสถานี",
+  "repairGuides": "คู่มือการซ่อม",
+  "about": "เกี่ยวกับ",
+  "reportBug": "รายงานข้อบกพร่อง",
+  "donate": "บริจาค",
+  "addMissingStation": "เพิ่มสถานีที่หายไป",
+  "shareThisApp": "แชร์แอปนี้",
+  "theme": "ธีม",
+  "themeLight": "สว่าง",
+  "themeDark": "มืด",
+  "themeSystem": "ระบบ",
+  "distance": "ระยะทาง",
+  "language": "ภาษา"
+}

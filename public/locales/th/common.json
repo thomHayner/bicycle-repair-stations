@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "แอปสถานีซ่อมจักรยาน",
+  "back": "กลับ",
+  "goBack": "กลับไป",
+  "cancel": "ยกเลิก",
+  "dismiss": "ปิด",
+  "findingLocation": "กำลังค้นหาตำแหน่งของคุณ…",
+  "advertisement": "โฆษณา",
+  "findDescription": "ค้นหาสถานีซ่อมจักรยานสาธารณะใกล้คุณ"
+}
