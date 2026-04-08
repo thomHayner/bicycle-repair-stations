@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Doniraj",
+  "heroTitle": "Podržite BicycleRepairStations",
+  "heroText": "Je li vam stranica pomogla pronaći stanicu ili se vratiti na cestu? Želite li pomoći da ostane besplatna za druge bicikliste? Svaki iznos pomaže pokriti troškove hostinga i razvoja.",
+  "chooseAmount": "Odaberite iznos",
+  "customAmount": "Ili unesite prilagođeni iznos",
+  "redirecting": "Preusmjeravanje…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Doniraj ${{amount}} USD",
+  "donateButton": "Doniraj",
+  "somethingWentWrong": "Nešto je pošlo po krivu.",
+  "stripeNotice": "Sigurno plaćanje putem Stripe (USD). Ova aplikacija ne pohranjuje podatke kartice.",
+  "whereItGoes": "Gdje ide vaša donacija",
+  "serverCosts": "Troškovi poslužitelja i hostinga",
+  "apiUsage": "Korištenje pločica karte i API-ja",
+  "keepingFree": "Održavanje aplikacije besplatnom i ažurnom",
+  "successTitle": "Donacija završena",
+  "thankYou": "Hvala vam!",
+  "successMessage": "Vaša donacija pomaže da BicycleRepairStations ostane besplatan i održavan za bicikliste svugdje.",
+  "backToMap": "Natrag na kartu"
+}
