@@ -1,0 +1,15 @@
+{
+  "pageTitle": "O aplikacji",
+  "tagline": "Znajdź publiczne stacje naprawy rowerów w pobliżu.",
+  "dataCredits": "Dane i podziękowania",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — interaktywne mapy",
+  "cartoTiles": "CARTO — kafelki mapy",
+  "overpassData": "Overpass API — dane o stacjach",
+  "contribute": "Współtwórz",
+  "addMissingStation": "Dodaj brakującą stację w OSM",
+  "reportBug": "Zgłoś błąd",
+  "supportDonation": "Wesprzyj darowizną",
+  "shareThisApp": "Udostępnij tę aplikację",
+  "legal": "Informacje prawne"
+}
