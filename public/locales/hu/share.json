@@ -1,0 +1,11 @@
+{
+  "title": "Alkalmazás megosztása",
+  "subtitle": "Csak személyes megosztás: X, Facebook, e-mail vagy link másolása.",
+  "nativeShare": "További alkalmazások (Instagram/Nextdoor, ha telepítve van)",
+  "shareOnX": "Megosztás X-en",
+  "shareOnFacebook": "Megosztás Facebookon",
+  "shareByEmail": "Megosztás e-mailben",
+  "copyLink": "Link másolása",
+  "linkCopied": "Link másolva a vágólapra.",
+  "copyFailed": "Nem sikerült másolni a linket ezen a böngészőn."
+}

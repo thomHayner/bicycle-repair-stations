@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Menü bezárása",
+  "findStations": "Állomások keresése",
+  "repairGuides": "Javítási útmutatók",
+  "about": "Névjegy",
+  "reportBug": "Hiba bejelentése",
+  "donate": "Adományozás",
+  "addMissingStation": "Hiányzó állomás hozzáadása",
+  "shareThisApp": "Ez az alkalmazás megosztása",
+  "theme": "Téma",
+  "themeLight": "Világos",
+  "themeDark": "Sötét",
+  "themeSystem": "Rendszer",
+  "distance": "Távolság",
+  "language": "Nyelv"
+}

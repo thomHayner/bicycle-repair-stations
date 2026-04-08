@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Adományozás",
+  "heroTitle": "Támogassa a BicycleRepairStations-t",
+  "heroText": "Segített az oldal megtalálni egy állomást vagy visszajutni az útra? Szeretne hozzájárulni ahhoz, hogy más kerékpárosok számára is ingyenes maradjon? Bármilyen összeg segít fedezni a tárhely- és fejlesztési költségeket.",
+  "chooseAmount": "Válasszon összeget",
+  "customAmount": "Vagy adjon meg egyéni összeget",
+  "redirecting": "Átirányítás…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Adományozás: ${{amount}} USD",
+  "donateButton": "Adományozás",
+  "somethingWentWrong": "Valami hiba történt.",
+  "stripeNotice": "Biztonságos fizetés Stripe-on keresztül (USD). Az alkalmazás nem tárolja a kártyaadatokat.",
+  "whereItGoes": "Mire fordítjuk az adományát",
+  "serverCosts": "Szerver- és tárhelyköltségek",
+  "apiUsage": "Térképcsempe és API-használat",
+  "keepingFree": "Az alkalmazás ingyenessége és karbantartása",
+  "successTitle": "Adomány teljesítve",
+  "thankYou": "Köszönjük!",
+  "successMessage": "Adományával hozzájárul ahhoz, hogy a BicycleRepairStations mindenütt ingyenes és karbantartott maradjon a kerékpárosok számára.",
+  "backToMap": "Vissza a térképhez"
+}
