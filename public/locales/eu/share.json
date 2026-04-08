@@ -1,0 +1,11 @@
+{
+  "title": "Partekatu aplikazio hau",
+  "subtitle": "Partekatzeko modu pertsonalak soilik: X, Facebook, posta elektronikoa, edo kopiatu esteka.",
+  "nativeShare": "Aplikazio gehiago (Instagram/Nextdoor instalatuta badaude)",
+  "shareOnX": "Partekatu X-en",
+  "shareOnFacebook": "Partekatu Facebook-en",
+  "shareByEmail": "Partekatu posta elektronikoz",
+  "copyLink": "Kopiatu esteka",
+  "linkCopied": "Esteka arbelean kopiatu da.",
+  "copyFailed": "Ezin izan da esteka kopiatu nabigatzaile honetan."
+}

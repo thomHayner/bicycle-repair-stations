@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Honi buruz",
+  "tagline": "Aurkitu zure inguruko bizikleta konponketa gune publikoak.",
+  "dataCredits": "Datuak eta kredituak",
+  "osmContributors": "\u00a9 OpenStreetMap kolaboratzaileak",
+  "leafletMaps": "Leaflet \u2014 mapa interaktiboak",
+  "cartoTiles": "CARTO \u2014 mapa lauza",
+  "overpassData": "Overpass API \u2014 gune datuak",
+  "contribute": "Lagundu",
+  "addMissingStation": "Gehitu falta den gune bat OSM-n",
+  "reportBug": "Jakinarazi akats bat",
+  "supportDonation": "Lagundu dohaintza batekin",
+  "shareThisApp": "Partekatu aplikazio hau",
+  "legal": "Lege oharra"
+}

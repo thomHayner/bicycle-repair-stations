@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Dohaintza egin",
+  "heroTitle": "Lagundu BicycleRepairStations",
+  "heroText": "Guneak aurkitzeko edo bidean jarraitzeko lagundu al dizu webguneak? Txirrindulari guztientzat doakoa izaten laguntzen lagundu nahi duzu? Edozein kopuruk laguntzen du ostalaritza eta garapen kostuak ordaintzen.",
+  "chooseAmount": "Hautatu kopuru bat",
+  "customAmount": "Edo sartu kopuru pertsonalizatu bat",
+  "redirecting": "Birbideratzen\u2026",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Dohaintza egin ${{amount}} USD",
+  "donateButton": "Dohaintza egin",
+  "somethingWentWrong": "Zerbaitek huts egin du.",
+  "stripeNotice": "Ordainketa segurua Stripe bidez (USD). Aplikazio honek ez du txartel daturik gordetzen.",
+  "whereItGoes": "Nora doa zure dohaintza",
+  "serverCosts": "Zerbitzari eta ostalaritza kostuak",
+  "apiUsage": "Mapa lauzen eta APIaren erabilera",
+  "keepingFree": "Aplikazioa doako eta mantendua izaten jarraitzea",
+  "successTitle": "Dohaintza osatua",
+  "thankYou": "Eskerrik asko!",
+  "successMessage": "Zure dohaintzak BicycleRepairStations doako eta mantendua izaten laguntzen du mundu osoko txirrindularientzat.",
+  "backToMap": "Itzuli mapara"
+}
