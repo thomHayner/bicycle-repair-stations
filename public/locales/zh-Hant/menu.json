@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "關閉選單",
+  "findStations": "尋找站點",
+  "repairGuides": "維修指南",
+  "about": "關於",
+  "reportBug": "回報錯誤",
+  "donate": "捐款",
+  "addMissingStation": "新增缺漏的站點",
+  "shareThisApp": "分享此應用程式",
+  "theme": "主題",
+  "themeLight": "淺色",
+  "themeDark": "深色",
+  "themeSystem": "系統",
+  "distance": "距離",
+  "language": "語言"
+}

@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "自行車維修站應用程式",
+  "back": "返回",
+  "goBack": "返回上一頁",
+  "cancel": "取消",
+  "dismiss": "關閉",
+  "findingLocation": "正在定位您的位置\u2026",
+  "advertisement": "廣告",
+  "findDescription": "尋找您附近的公共自行車維修站。"
+}

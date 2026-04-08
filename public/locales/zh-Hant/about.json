@@ -1,0 +1,13 @@
+{
+  "pageTitle": "關於",
+  "heading": "關於 BicycleRepairStations.com",
+  "intro": "一款免費的開源工具，用於尋找全球各地的公共自行車維修站。專為騎行途中需要打氣筒、工具或維修架的單車騎士打造。",
+  "openSourceTitle": "開放原始碼",
+  "openSource": "本專案為開放原始碼，程式碼公開於 <githubLink>GitHub</githubLink>。歡迎貢獻程式碼、回報錯誤及提出功能需求。",
+  "dataTitle": "資料來源",
+  "data": "站點資料來自 <osmLink>OpenStreetMap</osmLink>，一個免費的協作式世界地圖。如果您發現缺漏或不正確的站點，可以直接在 OpenStreetMap 上修正，更新後將會同步至此處。",
+  "privacyTitle": "隱私",
+  "privacy": "我們尊重您的隱私。本應用程式不使用 Cookie、不需要註冊帳號，也不收集任何個人資料。您的位置資訊僅在您的瀏覽器中使用，絕不會傳送至我們的伺服器。",
+  "donateTitle": "支持本專案",
+  "donate": "如果您覺得這個工具實用，歡迎<donateLink>小額捐款</donateLink>以協助支付伺服器費用並維持專案的持續運作。"
+}

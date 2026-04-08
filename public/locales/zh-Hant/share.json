@@ -1,0 +1,12 @@
+{
+  "shareApp": "分享應用程式",
+  "shareStation": "分享站點",
+  "shareAppMessage": "使用 BicycleRepairStations.com 尋找您附近的公共自行車維修站！",
+  "shareStationMessage": "看看這個自行車維修站：{{name}}",
+  "copyLink": "複製連結",
+  "linkCopied": "已複製連結！",
+  "email": "電子郵件",
+  "emailSubjectApp": "您附近的自行車維修站",
+  "emailSubjectStation": "自行車維修站：{{name}}",
+  "shareVia": "透過 {{platform}} 分享"
+}
