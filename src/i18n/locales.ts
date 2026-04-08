@@ -12,6 +12,7 @@ export const SUPPORTED_LOCALES = [
   { code: "ja", name: "Japanese",   nativeName: "日本語",      dir: "ltr" },
   { code: "ko", name: "Korean",     nativeName: "한국어",       dir: "ltr" },
   { code: "zh", name: "Chinese",    nativeName: "中文",        dir: "ltr" },
+  { code: "zh-Hant", name: "Chinese (Traditional)", nativeName: "繁體中文", dir: "ltr" },
   { code: "tl", name: "Tagalog",    nativeName: "Tagalog",    dir: "ltr" },
   { code: "th", name: "Thai",       nativeName: "ไทย",        dir: "ltr" },
   { code: "vi", name: "Vietnamese", nativeName: "Tiếng Việt", dir: "ltr" },
@@ -53,6 +54,7 @@ export const SUPPORTED_LOCALES = [
   { code: "cs", name: "Czech",      nativeName: "Čeština",    dir: "ltr" },
   { code: "sk", name: "Slovak",     nativeName: "Slovenčina", dir: "ltr" },
   { code: "kk", name: "Kazakh",     nativeName: "Қазақ",      dir: "ltr" },
+  { code: "af", name: "Afrikaans",  nativeName: "Afrikaans",  dir: "ltr" },
 ] as const;
 
 export type LocaleCode = (typeof SUPPORTED_LOCALES)[number]["code"];
@@ -94,7 +96,9 @@ export const COUNTRY_TO_LOCALE: Partial<Record<string, LocaleCode>> = {
   // Korean
   KR: "ko",
   // Chinese
-  CN: "zh", TW: "zh", HK: "zh", SG: "zh",
+  CN: "zh", SG: "zh",
+  // Traditional Chinese
+  TW: "zh-Hant", HK: "zh-Hant", MO: "zh-Hant",
   // Tagalog
   PH: "tl",
   // Thai
@@ -177,6 +181,8 @@ export const COUNTRY_TO_LOCALE: Partial<Record<string, LocaleCode>> = {
   SK: "sk",
   // Kazakh
   KZ: "kk",
+  // Afrikaans
+  ZA: "af",
 };
 
 /** Convert locale code to og:locale format. */
@@ -195,7 +201,7 @@ export function toOgLocale(code: string): string {
     hy: "hy_AM", ne: "ne_NP", mn: "mn_MN", ms: "ms_MY",
     he: "he_IL", id: "id_ID", my: "my_MM", km: "km_KH",
     lo: "lo_LA", lt: "lt_LT", lv: "lv_LV", cs: "cs_CZ",
-    sk: "sk_SK", kk: "kk_KZ",
+    sk: "sk_SK", kk: "kk_KZ", "zh-Hant": "zh_TW", af: "af_ZA",
   };
   return map[code] ?? "en_US";
 }
