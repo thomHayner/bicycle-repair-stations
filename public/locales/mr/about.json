@@ -1,0 +1,15 @@
+{
+  "pageTitle": "माहिती",
+  "tagline": "तुमच्या जवळच्या सार्वजनिक सायकल दुरुस्ती स्टेशन शोधा.",
+  "dataCredits": "डेटा आणि श्रेय",
+  "osmContributors": "© OpenStreetMap योगदानकर्ते",
+  "leafletMaps": "Leaflet — संवादात्मक नकाशे",
+  "cartoTiles": "CARTO — नकाशा टाइल",
+  "overpassData": "Overpass API — स्टेशन डेटा",
+  "contribute": "योगदान द्या",
+  "addMissingStation": "OSM वर गहाळ स्टेशन जोडा",
+  "reportBug": "बग नोंदवा",
+  "supportDonation": "देणगीद्वारे समर्थन करा",
+  "shareThisApp": "हा अॅप शेअर करा",
+  "legal": "कायदेशीर"
+}
