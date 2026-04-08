@@ -110,13 +110,16 @@ export default function MapPage() {
     }
 
     // Zoom-out check: does the viewport show area beyond the fetched radius?
-    // Compare viewport diagonal (corner-to-center distance) against the fetch radius.
-    const center = map!.getCenter();
-    const ne = current.getNorthEast();
-    const viewportRadiusMi = haversineDistanceMiles(center.lat, center.lng, ne.lat, ne.lng);
+    // Skip if already at the max pill (250 mi) — there's nothing bigger to search.
+    const maxPillMi = MI_OPTIONS_ALL[MI_OPTIONS_ALL.length - 1];
     const fetchRadiusMi = fetchRadiusKm / KM_PER_MILE;
-    if (viewportRadiusMi > fetchRadiusMi * 1.3) {
-      setMapMovedSinceSearch(true);
+    if (fetchRadiusMi < maxPillMi) {
+      const center = map!.getCenter();
+      const ne = current.getNorthEast();
+      const viewportRadiusMi = haversineDistanceMiles(center.lat, center.lng, ne.lat, ne.lng);
+      if (viewportRadiusMi > fetchRadiusMi * 1.3) {
+        setMapMovedSinceSearch(true);
+      }
     }
   }, [fetchRadiusKm]);
 
