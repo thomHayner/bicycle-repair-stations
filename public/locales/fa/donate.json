@@ -1,0 +1,21 @@
+{
+  "pageTitle": "کمک مالی",
+  "heroTitle": "حمایت از BicycleRepairStations",
+  "heroText": "آیا این سایت به شما کمک کرد تا ایستگاهی پیدا کنید یا به جاده برگردید؟ می‌خواهید آن را برای دیگر دوچرخه‌سواران رایگان نگه دارید؟ هر مقداری در پوشش هزینه‌های میزبانی و توسعه کمک می‌کند.",
+  "chooseAmount": "مقدار را انتخاب کنید",
+  "customAmount": "یا مقدار سفارشی وارد کنید",
+  "redirecting": "در حال انتقال…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "کمک مالی ${{amount}} USD",
+  "donateButton": "کمک مالی",
+  "somethingWentWrong": "مشکلی پیش آمد.",
+  "stripeNotice": "پرداخت امن از طریق Stripe (USD). هیچ اطلاعات کارتی توسط این برنامه ذخیره نمی‌شود.",
+  "whereItGoes": "کمک مالی شما کجا می‌رود",
+  "serverCosts": "هزینه‌های سرور و میزبانی",
+  "apiUsage": "استفاده از کاشی نقشه و API",
+  "keepingFree": "نگه داشتن برنامه رایگان و نگهداری‌شده",
+  "successTitle": "کمک مالی کامل شد",
+  "thankYou": "متشکریم!",
+  "successMessage": "کمک مالی شما به حفظ BicycleRepairStations رایگان و نگهداری‌شده برای دوچرخه‌سواران در سراسر جهان کمک می‌کند.",
+  "backToMap": "بازگشت به نقشه"
+}
