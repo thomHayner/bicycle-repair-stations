@@ -86,6 +86,7 @@ export const SUPPORTED_LOCALES = [
   { code: "ps", name: "Pashto",     nativeName: "پښتو",       dir: "rtl" },
   { code: "mt", name: "Maltese",    nativeName: "Malti",      dir: "ltr" },
   { code: "tg", name: "Tajik",      nativeName: "Тоҷикӣ",     dir: "ltr" },
+  { code: "ti", name: "Tigrinya",   nativeName: "ትግርኛ",      dir: "ltr" },
 ] as const;
 
 export type LocaleCode = (typeof SUPPORTED_LOCALES)[number]["code"];
@@ -248,6 +249,8 @@ export const COUNTRY_TO_LOCALE: Partial<Record<string, LocaleCode>> = {
   MT: "mt",
   // Tajik
   TJ: "tg",
+  // Tigrinya
+  ER: "ti",
 };
 
 /** Convert locale code to og:locale format. */
@@ -272,7 +275,7 @@ export function toOgLocale(code: string): string {
     so: "so_SO", zu: "zu_ZA", mg: "mg_MG", rw: "rw_RW",
     hi: "hi_IN", bn: "bn_BD", ta: "ta_IN", te: "te_IN", mr: "mr_IN",
     gu: "gu_IN", kn: "kn_IN", ml: "ml_IN", pa: "pa_IN", si: "si_LK",
-    or: "or_IN", ps: "ps_AF", mt: "mt_MT", tg: "tg_TJ",
+    or: "or_IN", ps: "ps_AF", mt: "mt_MT", tg: "tg_TJ", ti: "ti_ER",
   };
   return map[code] ?? "en_US";
 }
