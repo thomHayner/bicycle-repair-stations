@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "メニューを閉じる",
+  "findStations": "ステーションを探す",
+  "repairGuides": "修理ガイド",
+  "about": "アプリについて",
+  "reportBug": "バグを報告",
+  "donate": "寄付する",
+  "addMissingStation": "不足しているステーションを追加",
+  "shareThisApp": "このアプリをシェア",
+  "theme": "テーマ",
+  "themeLight": "ライト",
+  "themeDark": "ダーク",
+  "themeSystem": "システム",
+  "distance": "距離",
+  "language": "言語"
+}

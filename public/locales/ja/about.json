@@ -1,0 +1,15 @@
+{
+  "pageTitle": "アプリについて",
+  "tagline": "近くにある公共の自転車修理ステーションを見つけましょう。",
+  "dataCredits": "データとクレジット",
+  "osmContributors": "© OpenStreetMap コントリビューター",
+  "leafletMaps": "Leaflet — インタラクティブマップ",
+  "cartoTiles": "CARTO — マップタイル",
+  "overpassData": "Overpass API — ステーションデータ",
+  "contribute": "貢献する",
+  "addMissingStation": "OSM に不足しているステーションを追加",
+  "reportBug": "バグを報告",
+  "supportDonation": "寄付でサポート",
+  "shareThisApp": "このアプリをシェア",
+  "legal": "法的情報"
+}

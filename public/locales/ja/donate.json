@@ -1,0 +1,21 @@
+{
+  "pageTitle": "寄付する",
+  "heroTitle": "BicycleRepairStations を支援する",
+  "heroText": "このサイトがステーションを見つけたり、走り続けるのに役立ちましたか？他のサイクリストのために無料で維持することに協力していただけますか？どんな金額でもホスティングと開発費用の一助となります。",
+  "chooseAmount": "金額を選択",
+  "customAmount": "または金額を入力",
+  "redirecting": "リダイレクト中…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD を寄付する",
+  "donateButton": "寄付する",
+  "somethingWentWrong": "問題が発生しました。",
+  "stripeNotice": "Stripe による安全な決済 (USD)。カード情報はこのアプリには保存されません。",
+  "whereItGoes": "寄付の使途",
+  "serverCosts": "サーバーおよびホスティング費用",
+  "apiUsage": "マップタイルと API の使用料",
+  "keepingFree": "アプリを無料かつメンテナンス状態に保つため",
+  "successTitle": "寄付が完了しました",
+  "thankYou": "ありがとうございます！",
+  "successMessage": "ご寄付は、BicycleRepairStations を世界中のサイクリストのために無料かつメンテナンスされた状態に保つことに役立ちます。",
+  "backToMap": "マップに戻る"
+}

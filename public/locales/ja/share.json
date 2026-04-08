@@ -1,0 +1,11 @@
+{
+  "title": "このアプリをシェア",
+  "subtitle": "個人的な共有のみ: X、Facebook、メール、またはリンクをコピー。",
+  "nativeShare": "その他のアプリ (インストール済みの場合は Instagram/Nextdoor)",
+  "shareOnX": "X でシェア",
+  "shareOnFacebook": "Facebook でシェア",
+  "shareByEmail": "メールでシェア",
+  "copyLink": "リンクをコピー",
+  "linkCopied": "リンクをクリップボードにコピーしました。",
+  "copyFailed": "このブラウザではリンクをコピーできませんでした。"
+}
