@@ -1,0 +1,12 @@
+{
+  "shareApp": "Compartir aplicació",
+  "shareStation": "Compartir estació",
+  "shareAppMessage": "Trobeu estacions públiques de reparació de bicicletes a prop vostre amb BicycleRepairStations.com!",
+  "shareStationMessage": "Mireu aquesta estació de reparació de bicicletes: {{name}}",
+  "copyLink": "Copiar enllaç",
+  "linkCopied": "Enllaç copiat!",
+  "email": "Correu electrònic",
+  "emailSubjectApp": "Estacions de reparació de bicicletes a prop vostre",
+  "emailSubjectStation": "Estació de reparació de bicicletes: {{name}}",
+  "shareVia": "Compartir via {{platform}}"
+}
