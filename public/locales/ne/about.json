@@ -1,0 +1,15 @@
+{
+  "pageTitle": "बारेमा",
+  "tagline": "तपाईंको नजिकका सार्वजनिक साइकल मर्मत स्टेशनहरू खोज्नुहोस्।",
+  "dataCredits": "डेटा र श्रेय",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — अन्तर्क्रियात्मक नक्शाहरू",
+  "cartoTiles": "CARTO — नक्शा टाइलहरू",
+  "overpassData": "Overpass API — स्टेशन डेटा",
+  "contribute": "योगदान गर्नुहोस्",
+  "addMissingStation": "OSM मा छुटेको स्टेशन थप्नुहोस्",
+  "reportBug": "बग रिपोर्ट गर्नुहोस्",
+  "supportDonation": "दानद्वारा सहयोग गर्नुहोस्",
+  "shareThisApp": "यो एप साझा गर्नुहोस्",
+  "legal": "कानुनी"
+}

@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "मेनु बन्द गर्नुहोस्",
+  "findStations": "स्टेशनहरू खोज्नुहोस्",
+  "repairGuides": "मर्मत मार्गदर्शिकाहरू",
+  "about": "बारेमा",
+  "reportBug": "बग रिपोर्ट गर्नुहोस्",
+  "donate": "दान गर्नुहोस्",
+  "addMissingStation": "छुटेको स्टेशन थप्नुहोस्",
+  "shareThisApp": "यो एप साझा गर्नुहोस्",
+  "theme": "थिम",
+  "themeLight": "हल्का",
+  "themeDark": "गाढा",
+  "themeSystem": "सिस्टम",
+  "distance": "दूरी",
+  "language": "भाषा"
+}
