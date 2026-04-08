@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "Εφαρμογή σταθμών επισκευής ποδηλάτων",
+  "back": "Πίσω",
+  "goBack": "Επιστροφή",
+  "cancel": "Ακύρωση",
+  "dismiss": "Κλείσιμο",
+  "findingLocation": "Εντοπισμός τοποθεσίας σας…",
+  "advertisement": "Διαφήμιση",
+  "findDescription": "Βρείτε δημόσιους σταθμούς επισκευής ποδηλάτων κοντά σας."
+}

@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Σχετικά",
+  "tagline": "Βρείτε δημόσιους σταθμούς επισκευής ποδηλάτων κοντά σας.",
+  "dataCredits": "Δεδομένα και αναγνωρίσεις",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — διαδραστικοί χάρτες",
+  "cartoTiles": "CARTO — πλακίδια χάρτη",
+  "overpassData": "Overpass API — δεδομένα σταθμών",
+  "contribute": "Συνεισφορά",
+  "addMissingStation": "Προσθήκη λείπου σταθμού στο OSM",
+  "reportBug": "Αναφορά σφάλματος",
+  "supportDonation": "Υποστήριξη με δωρεά",
+  "shareThisApp": "Κοινοποίηση αυτής της εφαρμογής",
+  "legal": "Νομικά"
+}
