@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Bexş Bike",
+  "heading": "Piştgiriya BicycleRepairStations.com",
+  "heroText": "Ev sepan belaş e, bi reklaman tê piştgirîkirin, û çavkaniya vekirî ye. Bexş alîkariya vegirtina lêçûnên mêvandariyê, xişeyên nexşeyê, û pêşveçûnê dike.",
+  "chooseAmount": "Mîqdarek hilbijêre",
+  "donateAmount": "Bexşa ${{amount}} USD",
+  "customAmount": "An mîqdarek taybet binivîse",
+  "customPlaceholder": "Mîqdar",
+  "redirecting": "Tê veguhastin\u2026",
+  "donateButton": "Bexşa ${{amount}} USD",
+  "somethingWentWrong": "Tiştek çewt çû.",
+  "stripeNotice": "Pere bi ewlehî ji hêla Stripe ve bi USD tên pêvajokirin.",
+  "whereItGoes": "Bexşa te diçe ku derê",
+  "infoHosting": "Lêçûnên pêşkêşkar û mêvandariyê",
+  "infoTiles": "Xizmetên xişeyên nexşeyê",
+  "infoDev": "Pêşveçûn û lênihêrîna domdar",
+  "backToMap": "Vegere nexşeyê",
+  "successTitle": "Bexş Qediya",
+  "thankYou": "Spas!",
+  "successMessage": "Beşdariya te ya comerd alîkarî dike ku BicycleRepairStations.com ji bo bisîklêtçiyên li her derê belaş bimîne."
+}

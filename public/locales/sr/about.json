@@ -1,0 +1,15 @@
+{
+  "pageTitle": "О апликацији",
+  "tagline": "Пронађите јавне бициклистичке сервисне станице у близини.",
+  "dataCredits": "Подаци и захвале",
+  "osmContributors": "© OpenStreetMap сарадници",
+  "leafletMaps": "Leaflet — интерактивне карте",
+  "cartoTiles": "CARTO — плочице карте",
+  "overpassData": "Overpass API — подаци о станицама",
+  "contribute": "Допринесите",
+  "addMissingStation": "Додајте станицу која недостаје на OSM",
+  "reportBug": "Пријавите грешку",
+  "supportDonation": "Подржите донацијом",
+  "shareThisApp": "Поделите ову апликацију",
+  "legal": "Правно"
+}

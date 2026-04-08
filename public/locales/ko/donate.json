@@ -1,0 +1,21 @@
+{
+  "pageTitle": "후원하기",
+  "heroTitle": "BicycleRepairStations 지원하기",
+  "heroText": "이 사이트가 스테이션을 찾거나 다시 길을 나서는 데 도움이 되었나요? 다른 사이클리스트를 위해 무료로 유지하는 데 도움을 주시겠어요? 어떤 금액이든 호스팅 및 개발 비용을 충당하는 데 도움이 됩니다.",
+  "chooseAmount": "금액 선택",
+  "customAmount": "또는 직접 금액 입력",
+  "redirecting": "이동 중…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD 후원하기",
+  "donateButton": "후원하기",
+  "somethingWentWrong": "문제가 발생했습니다.",
+  "stripeNotice": "Stripe를 통한 안전한 결제 (USD). 카드 정보는 이 앱에 저장되지 않습니다.",
+  "whereItGoes": "후원금의 사용처",
+  "serverCosts": "서버 및 호스팅 비용",
+  "apiUsage": "지도 타일 및 API 사용료",
+  "keepingFree": "앱을 무료로 유지하고 관리하기 위해",
+  "successTitle": "후원 완료",
+  "thankYou": "감사합니다!",
+  "successMessage": "여러분의 후원은 BicycleRepairStations를 전 세계 사이클리스트를 위해 무료로 유지하고 관리하는 데 도움이 됩니다.",
+  "backToMap": "지도로 돌아가기"
+}

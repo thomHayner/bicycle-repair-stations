@@ -1,0 +1,13 @@
+{
+  "pageTitle": "Kuhusu",
+  "heading": "Kuhusu BicycleRepairStations.com",
+  "intro": "Chombo cha bure, chanzo-wazi cha kutafuta vituo vya umma vya kutengeneza baiskeli duniani kote. Kimeundwa kwa waendesha baiskeli wanaohitaji pampu, zana, au stendi ya kutengeneza wakiwa njiani.",
+  "openSourceTitle": "Chanzo Wazi",
+  "openSource": "Mradi huu ni wa chanzo wazi na unapatikana kwenye <githubLink>GitHub</githubLink>. Michango, ripoti za hitilafu, na maombi ya vipengele vinakaribishwa.",
+  "dataTitle": "Data",
+  "data": "Data ya vituo inatoka <osmLink>OpenStreetMap</osmLink>, ramani ya bure ya ushirikiano ya ulimwengu. Ukipata kituo kinachokosekana au kisicho sahihi, unaweza kukirekebisha moja kwa moja kwenye OpenStreetMap na kitaonekana hapa.",
+  "privacyTitle": "Faragha",
+  "privacy": "Tunaheshimu faragha yako. Programu hii haitumii vidakuzi, haina usajili, na haikusanyi data yoyote ya kibinafsi. Eneo lako linatumika tu ndani ya kivinjari chako na halitumwi kamwe kwa seva zetu.",
+  "donateTitle": "Unga Mkono Mradi",
+  "donate": "Ikiwa chombo hiki kinakufaa, tafadhali fikiria <donateLink>kutoa mchango mdogo</donateLink> kusaidia kugharamia gharama za mwenyeji na kuweka mradi ukiendelea."
+}

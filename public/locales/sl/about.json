@@ -1,0 +1,15 @@
+{
+  "pageTitle": "O aplikaciji",
+  "tagline": "Poiščite javne kolesarske servisne postaje v bližini.",
+  "dataCredits": "Podatki in zasluge",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — interaktivni zemljevidi",
+  "cartoTiles": "CARTO — ploščice zemljevidov",
+  "overpassData": "Overpass API — podatki o postajah",
+  "contribute": "Prispevajte",
+  "addMissingStation": "Dodajte manjkajočo postajo na OSM",
+  "reportBug": "Prijavite napako",
+  "supportDonation": "Podprite z donacijo",
+  "shareThisApp": "Delite to aplikacijo",
+  "legal": "Pravne informacije"
+}

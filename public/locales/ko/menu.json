@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "메뉴 닫기",
+  "findStations": "스테이션 찾기",
+  "repairGuides": "수리 가이드",
+  "about": "소개",
+  "reportBug": "버그 신고",
+  "donate": "후원하기",
+  "addMissingStation": "누락된 스테이션 추가",
+  "shareThisApp": "이 앱 공유",
+  "theme": "테마",
+  "themeLight": "라이트",
+  "themeDark": "다크",
+  "themeSystem": "시스템",
+  "distance": "거리",
+  "language": "언어"
+}

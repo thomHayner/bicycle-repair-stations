@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Ibyerekeye",
+  "tagline": "Shaka sitasiyo rusange zo gusana amagare hafi yawe.",
+  "dataCredits": "Amakuru & Ishimwe",
+  "osmContributors": "© OpenStreetMap abafatanyabikorwa",
+  "leafletMaps": "Leaflet — amakarita akoranabuhanga",
+  "cartoTiles": "CARTO — ibice by'ikarita",
+  "overpassData": "Overpass API — amakuru ya sitasiyo",
+  "contribute": "Gufatanya",
+  "addMissingStation": "Ongeraho sitasiyo ibura kuri OSM",
+  "reportBug": "Menyesha ikosa",
+  "supportDonation": "Shyigikira ukoresheje impano",
+  "shareThisApp": "Sangira iyi porogaramu",
+  "legal": "Amategeko"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Энэ аппыг хуваалцах",
+  "subtitle": "Зөвхөн хувийн хуваалцалт: X, Facebook, имэйл, эсвэл холбоосыг хуулах.",
+  "nativeShare": "Бусад аппууд (суулгасан бол Instagram/Nextdoor)",
+  "shareOnX": "X дээр хуваалцах",
+  "shareOnFacebook": "Facebook дээр хуваалцах",
+  "shareByEmail": "Имэйлээр хуваалцах",
+  "copyLink": "Холбоосыг хуулах",
+  "linkCopied": "Холбоос clipboard-д хуулагдлаа.",
+  "copyFailed": "Энэ хөтөч дээр холбоосыг хуулж чадсангүй."
+}

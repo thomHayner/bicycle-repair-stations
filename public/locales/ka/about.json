@@ -1,0 +1,15 @@
+{
+  "pageTitle": "შესახებ",
+  "tagline": "იპოვეთ საჯარო ველოსიპედის სარემონტო სადგურები თქვენ ახლოს.",
+  "dataCredits": "მონაცემები და კრედიტები",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — ინტერაქტიული რუკები",
+  "cartoTiles": "CARTO — რუკის ფილები",
+  "overpassData": "Overpass API — სადგურის მონაცემები",
+  "contribute": "წვლილის შეტანა",
+  "addMissingStation": "OSM-ზე გამოტოვებული სადგურის დამატება",
+  "reportBug": "შეცდომის შეტყობინება",
+  "supportDonation": "მხარდაჭერა შემოწირულობით",
+  "shareThisApp": "გაუზიარეთ ეს აპლიკაცია",
+  "legal": "სამართლებრივი"
+}

@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Bağış Yap",
+  "heroTitle": "BicycleRepairStations'ı Destekle",
+  "heroText": "Site bir istasyon bulmanıza veya yola devam etmenize yardımcı oldu mu? Diğer bisikletçiler için ücretsiz kalmasına yardımcı olmak ister misiniz? Her miktar barındırma ve geliştirme maliyetlerini karşılamaya yardımcı olur.",
+  "chooseAmount": "Bir miktar seçin",
+  "customAmount": "Veya özel bir miktar girin",
+  "redirecting": "Yönlendiriliyor…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD Bağış Yap",
+  "donateButton": "Bağış Yap",
+  "somethingWentWrong": "Bir şeyler yanlış gitti.",
+  "stripeNotice": "Stripe aracılığıyla güvenli ödeme (USD). Bu uygulama kart bilgilerini saklamaz.",
+  "whereItGoes": "Bağışınız nereye gidiyor",
+  "serverCosts": "Sunucu ve barındırma maliyetleri",
+  "apiUsage": "Harita döşemesi ve API kullanımı",
+  "keepingFree": "Uygulamayı ücretsiz ve bakımlı tutmak",
+  "successTitle": "Bağış Tamamlandı",
+  "thankYou": "Teşekkür ederiz!",
+  "successMessage": "Bağışınız BicycleRepairStations'ın her yerdeki bisikletçiler için ücretsiz ve bakımlı kalmasına yardımcı olur.",
+  "backToMap": "Haritaya geri dön"
+}

@@ -1,3 +1,4 @@
+import "./i18n"; // i18n must be initialized before any component renders
 import "./lib/leafletConfig"; // Must be imported before any Leaflet usage
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";

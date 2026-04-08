@@ -1,0 +1,15 @@
+{
+  "pageTitle": "O aplikaciji",
+  "tagline": "Pronađite javne stanice za popravku bicikla u blizini.",
+  "dataCredits": "Podaci i zahvalnosti",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — interaktivne mape",
+  "cartoTiles": "CARTO — pločice mape",
+  "overpassData": "Overpass API — podaci o stanicama",
+  "contribute": "Doprinesite",
+  "addMissingStation": "Dodajte nedostajuću stanicu na OSM",
+  "reportBug": "Prijavite grešku",
+  "supportDonation": "Podržite donacijom",
+  "shareThisApp": "Podijelite ovu aplikaciju",
+  "legal": "Pravno"
+}

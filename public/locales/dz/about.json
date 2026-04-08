@@ -1,0 +1,15 @@
+{
+  "pageTitle": "སྐོར་ལས",
+  "tagline": "ཁྱོད་ཀྱི་ཉེ་འདབས་ལུ་མི་མང་བའི་སི་ཀེལ་བཅོས་སྒྲིག་སྟེ་ཤན་ཚུ་འཚོལ།",
+  "dataCredits": "གཞི་གྲངས་དང་བཀའ་དྲིན་དགོངས་འཛིན",
+  "osmContributors": "\u00a9 OpenStreetMap འབྱུང་ལས་བཀོད་མཁན་ཚུ",
+  "leafletMaps": "Leaflet — འབྲེལ་མཐུད་ས་ཁྲ",
+  "cartoTiles": "CARTO — ས་ཁྲའི་ཁབ་ལེན",
+  "overpassData": "Overpass API — སྟེ་ཤན་གཞི་གྲངས",
+  "contribute": "ཞབས་ཏོག",
+  "addMissingStation": "OSM གུ་མེད་མི་སྟེ་ཤན་ཁ་སྐོང་འབད",
+  "reportBug": "འཛོལ་བ་སྙན་ཞུ་འབད",
+  "supportDonation": "བསྔོ་བ་ཐོག་ལས་རྒྱབ་སྐྱོར་འབད",
+  "shareThisApp": "ཨེཔ་འདི་མཉམ་སྤྱོད་འབད",
+  "legal": "ཁྲིམས་ལུགས"
+}

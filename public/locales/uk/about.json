@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Про додаток",
+  "tagline": "Знайдіть публічні велосипедні ремонтні станції поблизу.",
+  "dataCredits": "Дані та подяки",
+  "osmContributors": "© учасники OpenStreetMap",
+  "leafletMaps": "Leaflet — інтерактивні карти",
+  "cartoTiles": "CARTO — картографічні тайли",
+  "overpassData": "Overpass API — дані про станції",
+  "contribute": "Зробити внесок",
+  "addMissingStation": "Додати відсутню станцію на OSM",
+  "reportBug": "Повідомити про помилку",
+  "supportDonation": "Підтримати пожертвою",
+  "shareThisApp": "Поділитися цим додатком",
+  "legal": "Правові відомості"
+}

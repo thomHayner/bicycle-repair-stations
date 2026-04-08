@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Lahjoita",
+  "heroTitle": "Tue BicycleRepairStations",
+  "heroText": "Auttoiko sivusto sinua löytämään aseman tai pääsemään takaisin tielle? Haluatko auttaa pitämään sen ilmaisena muille pyöräilijöille? Mikä tahansa summa auttaa kattamaan hosting- ja kehityskustannuksia.",
+  "chooseAmount": "Valitse summa",
+  "customAmount": "Tai syötä oma summa",
+  "redirecting": "Uudelleenohjataan…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Lahjoita ${{amount}} USD",
+  "donateButton": "Lahjoita",
+  "somethingWentWrong": "Jotain meni pieleen.",
+  "stripeNotice": "Turvallinen maksu Stripe-palvelun kautta (USD). Sovellus ei tallenna korttitietoja.",
+  "whereItGoes": "Mihin lahjoituksesi menee",
+  "serverCosts": "Palvelin- ja hostingkustannukset",
+  "apiUsage": "Karttaruutujen ja API:n käyttö",
+  "keepingFree": "Sovelluksen pitäminen ilmaisena ja ylläpidettynä",
+  "successTitle": "Lahjoitus suoritettu",
+  "thankYou": "Kiitos!",
+  "successMessage": "Lahjoituksesi auttaa pitämään BicycleRepairStations ilmaisena ja ylläpidettynä pyöräilijöille kaikkialla.",
+  "backToMap": "Takaisin kartalle"
+}

@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Névjegy",
+  "tagline": "Találjon nyilvános kerékpárjavító állomásokat a közelében.",
+  "dataCredits": "Adatok és közreműködők",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — interaktív térképek",
+  "cartoTiles": "CARTO — térképcsempék",
+  "overpassData": "Overpass API — állomásadatok",
+  "contribute": "Közreműködés",
+  "addMissingStation": "Hiányzó állomás hozzáadása az OSM-en",
+  "reportBug": "Hiba bejelentése",
+  "supportDonation": "Támogatás adománnyal",
+  "shareThisApp": "Alkalmazás megosztása",
+  "legal": "Jogi információk"
+}

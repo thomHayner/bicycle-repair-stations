@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Мәзірді жабу",
+  "findStations": "Стансалар табу",
+  "repairGuides": "Жөндеу нұсқаулары",
+  "about": "Туралы",
+  "reportBug": "Қатені хабарлау",
+  "donate": "Қайырымдылық",
+  "addMissingStation": "Жетіспейтін стансаны қосу",
+  "shareThisApp": "Осы қолданбамен бөлісу",
+  "theme": "Тақырып",
+  "themeLight": "Ашық",
+  "themeDark": "Қараңғы",
+  "themeSystem": "Жүйе",
+  "distance": "Қашықтық",
+  "language": "Тіл"
+}

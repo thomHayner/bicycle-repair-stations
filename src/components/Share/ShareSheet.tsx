@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -84,6 +85,8 @@ export function ShareSheet({
     };
   }, [open, onClose]);
 
+  const { t } = useTranslation("share");
+
   return (
     <>
       <div
@@ -103,35 +106,35 @@ export function ShareSheet({
         ].join(" ")}
         role="dialog"
         aria-modal="true"
-        aria-label="Share this app"
+        aria-label={t("title")}
         aria-hidden={!open}
         {...(!open ? { inert: true } : {})}
         aria-labelledby="share-sheet-title"
       >
         <div className="mb-3 px-1">
-          <p id="share-sheet-title" className="text-sm font-bold text-slate-900 dark:text-slate-100">Share this app</p>
+          <p id="share-sheet-title" className="text-sm font-bold text-slate-900 dark:text-slate-100">{t("title")}</p>
           <p className="text-xs text-slate-500 dark:text-slate-400">
-            Personal sharing only: X, Facebook, email, or copy link.
+            {t("subtitle")}
           </p>
         </div>
 
         <div className="flex flex-col gap-2">
           {canUseNativeShare && (
             <ShareButton
-              label="More apps (Instagram/Nextdoor if installed)"
+              label={t("nativeShare")}
               onClick={onNativeShare}
             />
           )}
-          <ShareButton label="Share on X" onClick={onShareX} />
-          <ShareButton label="Share on Facebook" onClick={onShareFacebook} />
-          <ShareButton label="Share by Email" onClick={onShareEmail} />
-          <ShareButton label="Copy link" onClick={onCopyLink} />
+          <ShareButton label={t("shareOnX")} onClick={onShareX} />
+          <ShareButton label={t("shareOnFacebook")} onClick={onShareFacebook} />
+          <ShareButton label={t("shareByEmail")} onClick={onShareEmail} />
+          <ShareButton label={t("copyLink")} onClick={onCopyLink} />
           <button
             type="button"
             onClick={onClose}
             className="w-full rounded-xl px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 state-surface-strong focus-ring"
           >
-            Cancel
+            {t("common:cancel")}
           </button>
         </div>
       </div>

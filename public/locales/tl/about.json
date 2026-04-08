@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Tungkol",
+  "tagline": "Hanapin ang mga pampublikong istasyon ng pagkukumpuni ng bisikleta malapit sa iyo.",
+  "dataCredits": "Data at Mga Credit",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — mga interactive na mapa",
+  "cartoTiles": "CARTO — mga tile ng mapa",
+  "overpassData": "Overpass API — data ng istasyon",
+  "contribute": "Mag-ambag",
+  "addMissingStation": "Magdagdag ng nawawalang istasyon sa OSM",
+  "reportBug": "Mag-ulat ng bug",
+  "supportDonation": "Suportahan sa pamamagitan ng donasyon",
+  "shareThisApp": "I-share ang app na ito",
+  "legal": "Legal"
+}

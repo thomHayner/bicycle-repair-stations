@@ -1,0 +1,21 @@
+{
+  "pageTitle": "ບໍລິຈາກ",
+  "heroTitle": "ສະໜັບສະໜູນ BicycleRepairStations",
+  "heroText": "ເວັບໄຊຊ່ວຍໃຫ້ທ່ານຊອກຫາສະຖານີ ຫຼື ກັບຄືນໄດ້ບໍ? ຢາກຊ່ວຍໃຫ້ມັນຟຣີສຳລັບຜູ້ຂີ່ລົດຖີບຄົນອື່ນບໍ? ໃດກໍຕາມຊ່ວຍຄ່າໃຊ້ຈ່າຍໂຮດຕິ້ງ ແລະ ພັດທະນາ.",
+  "chooseAmount": "ເລືອກຈຳນວນ",
+  "customAmount": "ຫຼື ໃສ່ຈຳນວນທີ່ກຳໜົດເອງ",
+  "redirecting": "ກຳລັງໂອນ…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "ບໍລິຈາກ ${{amount}} USD",
+  "donateButton": "ບໍລິຈາກ",
+  "somethingWentWrong": "ມີບາງຢ່າງຜິດພາດ.",
+  "stripeNotice": "ການຊຳລະເງິນທີ່ປອດໄພຜ່ານ Stripe (USD). ຂໍ້ມູນບັດບໍ່ຖືກເກັບໄວ້ໂດຍແອັບນີ້.",
+  "whereItGoes": "ການບໍລິຈາກຂອງທ່ານໄປໃສ",
+  "serverCosts": "ຄ່າໃຊ້ຈ່າຍເຊີບເວີ ແລະ ໂຮດຕິ້ງ",
+  "apiUsage": "ການໃຊ້ກ້ອງແຜນທີ່ ແລະ API",
+  "keepingFree": "ຮັກສາແອັບໃຫ້ຟຣີ ແລະ ບຳລຸງຮັກສາ",
+  "successTitle": "ການບໍລິຈາກສຳເລັດ",
+  "thankYou": "ຂໍຂອບໃຈ!",
+  "successMessage": "ການບໍລິຈາກຂອງທ່ານຊ່ວຍຮັກສາ BicycleRepairStations ໃຫ້ຟຣີ ແລະ ບຳລຸງຮັກສາສຳລັບຜູ້ຂີ່ລົດຖີບທົ່ວໂລກ.",
+  "backToMap": "ກັບໄປຍັງແຜນທີ່"
+}

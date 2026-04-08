@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Darovat",
+  "heroTitle": "Podpořte BicycleRepairStations",
+  "heroText": "Pomohly vám stránky najít stanici nebo se vrátit na silnici? Chcete pomoci udržet je zdarma pro ostatní cyklisty? Jakákoli částka pomáhá pokrýt náklady na hosting a vývoj.",
+  "chooseAmount": "Zvolte částku",
+  "customAmount": "Nebo zadejte vlastní částku",
+  "redirecting": "Přesměrování…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Darovat ${{amount}} USD",
+  "donateButton": "Darovat",
+  "somethingWentWrong": "Něco se pokazilo.",
+  "stripeNotice": "Bezpečná platba přes Stripe (USD). Tato aplikace neuchovává údaje karty.",
+  "whereItGoes": "Kam jde váš dar",
+  "serverCosts": "Náklady na server a hosting",
+  "apiUsage": "Využití mapových dlaždic a API",
+  "keepingFree": "Udržování aplikace zdarma a spravované",
+  "successTitle": "Dar dokončen",
+  "thankYou": "Děkujeme!",
+  "successMessage": "Váš dar pomáhá udržovat BicycleRepairStations zdarma a spravované pro cyklisty všude.",
+  "backToMap": "Zpět na mapu"
+}

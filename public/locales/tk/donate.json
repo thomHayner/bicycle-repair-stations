@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Haýyr-sahawat",
+  "heading": "BicycleRepairStations.com-y goldaň",
+  "heroText": "Bu programma mugt, mahabat goldawly we açyk çeşmeli. Haýyr-sahawatlar hosting, karta plitalary we ösüş çykdajylaryny ýapmaga kömek edýär.",
+  "chooseAmount": "Mukdary saýlaň",
+  "donateAmount": "${{amount}} USD haýyr-sahawat et",
+  "customAmount": "Ýa-da başga mukdar giriziň",
+  "customPlaceholder": "Mukdar",
+  "redirecting": "Ugratma…",
+  "donateButton": "${{amount}} USD haýyr-sahawat et",
+  "somethingWentWrong": "Bir zat ýalňyş gitdi.",
+  "stripeNotice": "Tölegler Stripe arkaly USD-de howpsuz işlenýär.",
+  "whereItGoes": "Haýyr-sahawadyňyz nirä gidýär",
+  "infoHosting": "Serwer we hosting çykdajylary",
+  "infoTiles": "Karta plita hyzmatlary",
+  "infoDev": "Dowamly ösüş we tehniki hyzmat",
+  "backToMap": "Karta dolan",
+  "successTitle": "Haýyr-sahawat tamamlandy",
+  "thankYou": "Sag boluň!",
+  "successMessage": "Siziň sahawatly goşandyňyz BicycleRepairStations.com-y dünýädäki welosipedçiler üçin mugt saklamaga kömek edýär."
+}

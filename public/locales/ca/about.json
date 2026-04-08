@@ -1,0 +1,13 @@
+{
+  "pageTitle": "Sobre nosaltres",
+  "heading": "Sobre BicycleRepairStations.com",
+  "intro": "Una eina gratuïta i de codi obert per trobar estacions públiques de reparació de bicicletes a tot el món. Dissenyada per a ciclistes que necessiten un inflador, eines o un suport de reparació mentre són a la carretera.",
+  "openSourceTitle": "Codi obert",
+  "openSource": "Aquest projecte és de codi obert i està disponible a <githubLink>GitHub</githubLink>. Les contribucions, els informes d'errors i les sol·licituds de funcionalitats són benvingudes.",
+  "dataTitle": "Dades",
+  "data": "Les dades de les estacions provenen d'<osmLink>OpenStreetMap</osmLink>, un mapa lliure i col·laboratiu del món. Si trobeu una estació que falta o és incorrecta, podeu corregir-la directament a OpenStreetMap i apareixerà aquí.",
+  "privacyTitle": "Privadesa",
+  "privacy": "Respectem la vostra privadesa. Aquesta aplicació no utilitza galetes, no requereix registre i no recull dades personals. La vostra ubicació s'utilitza només al vostre navegador i mai no s'envia als nostres servidors.",
+  "donateTitle": "Donau suport al projecte",
+  "donate": "Si trobeu útil aquesta eina, considereu <donateLink>fer un petit donatiu</donateLink> per ajudar a cobrir les despeses d'allotjament i mantenir el projecte en funcionament."
+}

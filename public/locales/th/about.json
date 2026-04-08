@@ -1,0 +1,15 @@
+{
+  "pageTitle": "เกี่ยวกับ",
+  "tagline": "ค้นหาสถานีซ่อมจักรยานสาธารณะใกล้คุณ",
+  "dataCredits": "ข้อมูลและเครดิต",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — แผนที่แบบโต้ตอบ",
+  "cartoTiles": "CARTO — ไทล์แผนที่",
+  "overpassData": "Overpass API — ข้อมูลสถานี",
+  "contribute": "มีส่วนร่วม",
+  "addMissingStation": "เพิ่มสถานีที่หายไปใน OSM",
+  "reportBug": "รายงานข้อบกพร่อง",
+  "supportDonation": "สนับสนุนด้วยการบริจาค",
+  "shareThisApp": "แชร์แอปนี้",
+  "legal": "กฎหมาย"
+}

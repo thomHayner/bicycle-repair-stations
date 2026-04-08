@@ -1,0 +1,11 @@
+{
+  "title": "Distribuie această aplicație",
+  "subtitle": "Numai partajare personală: X, Facebook, email sau copiază link.",
+  "nativeShare": "Mai multe aplicații (Instagram/Nextdoor dacă sunt instalate)",
+  "shareOnX": "Distribuie pe X",
+  "shareOnFacebook": "Distribuie pe Facebook",
+  "shareByEmail": "Distribuie prin Email",
+  "copyLink": "Copiază link",
+  "linkCopied": "Link copiat în clipboard.",
+  "copyFailed": "Nu s-a putut copia link-ul în acest browser."
+}

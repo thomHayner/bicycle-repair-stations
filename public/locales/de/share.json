@@ -1,0 +1,11 @@
+{
+  "title": "App teilen",
+  "subtitle": "Nur persönliches Teilen: X, Facebook, E-Mail oder Link kopieren.",
+  "nativeShare": "Weitere Apps (Instagram/Nextdoor falls installiert)",
+  "shareOnX": "Auf X teilen",
+  "shareOnFacebook": "Auf Facebook teilen",
+  "shareByEmail": "Per E-Mail teilen",
+  "copyLink": "Link kopieren",
+  "linkCopied": "Link in die Zwischenablage kopiert.",
+  "copyFailed": "Link konnte in diesem Browser nicht kopiert werden."
+}

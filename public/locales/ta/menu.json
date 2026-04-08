@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "மெனுவை மூடு",
+  "findStations": "நிலையங்களைக் கண்டறி",
+  "repairGuides": "பழுதுபார்ப்பு வழிகாட்டிகள்",
+  "about": "பற்றி",
+  "reportBug": "பிழையைப் புகாரளி",
+  "donate": "நன்கொடை",
+  "addMissingStation": "விடுபட்ட நிலையத்தைச் சேர்",
+  "shareThisApp": "இந்தப் பயன்பாட்டைப் பகிர்",
+  "theme": "தீம்",
+  "themeLight": "ஒளி",
+  "themeDark": "இருள்",
+  "themeSystem": "கணினி",
+  "distance": "தூரம்",
+  "language": "மொழி"
+}

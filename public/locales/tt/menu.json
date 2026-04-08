@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Менюны ябу",
+  "findStations": "Станцияләрне табу",
+  "repairGuides": "Тамирлау кулланмалары",
+  "about": "Хакында",
+  "reportBug": "Хата турында хәбәр итү",
+  "donate": "Иганә итү",
+  "addMissingStation": "Булмаган станцияне өстәү",
+  "shareThisApp": "Бу кушымтаны уртаклашу",
+  "theme": "Тема",
+  "themeLight": "Ачык",
+  "themeDark": "Караңгы",
+  "themeSystem": "Система",
+  "distance": "Ераклык",
+  "language": "Тел"
+}

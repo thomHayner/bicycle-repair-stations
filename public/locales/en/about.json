@@ -1,0 +1,15 @@
+{
+  "pageTitle": "About",
+  "tagline": "Find public bicycle repair stations near you.",
+  "dataCredits": "Data & Credits",
+  "osmContributors": "\u00a9 OpenStreetMap contributors",
+  "leafletMaps": "Leaflet \u2014 interactive maps",
+  "cartoTiles": "CARTO \u2014 map tiles",
+  "overpassData": "Overpass API \u2014 station data",
+  "contribute": "Contribute",
+  "addMissingStation": "Add a missing station on OSM",
+  "reportBug": "Report a bug",
+  "supportDonation": "Support with a donation",
+  "shareThisApp": "Share this app",
+  "legal": "Legal"
+}

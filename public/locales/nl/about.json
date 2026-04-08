@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Over",
+  "tagline": "Vind openbare fietsreparatiestations bij jou in de buurt.",
+  "dataCredits": "Gegevens en credits",
+  "osmContributors": "© OpenStreetMap-bijdragers",
+  "leafletMaps": "Leaflet — interactieve kaarten",
+  "cartoTiles": "CARTO — kaarttegels",
+  "overpassData": "Overpass API — stationsgegevens",
+  "contribute": "Bijdragen",
+  "addMissingStation": "Ontbrekend station toevoegen op OSM",
+  "reportBug": "Bug melden",
+  "supportDonation": "Steunen met een donatie",
+  "shareThisApp": "Deze app delen",
+  "legal": "Juridisch"
+}

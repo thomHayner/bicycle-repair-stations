@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Anneta",
+  "heroTitle": "Toeta BicycleRepairStationi",
+  "heroText": "Kas sait veebisaidi abil jaama leida või teele tagasi jõuda? Soovid aidata hoida seda teiste jalgratturite jaoks tasuta? Iga summa aitab katta majutus- ja arenduskulusid.",
+  "chooseAmount": "Vali summa",
+  "customAmount": "Või sisesta kohandatud summa",
+  "redirecting": "Ümbersuunamine…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Anneta ${{amount}} USD",
+  "donateButton": "Anneta",
+  "somethingWentWrong": "Midagi läks valesti.",
+  "stripeNotice": "Turvaline makse Stripe kaudu (USD). Selles rakenduses ei salvestata ühtki kaardiandmeid.",
+  "whereItGoes": "Kuhu su annetus läheb",
+  "serverCosts": "Serveri ja majutuse kulud",
+  "apiUsage": "Kaardikihtide ja API kasutus",
+  "keepingFree": "Rakenduse tasuta hoidmine ja hooldamine",
+  "successTitle": "Annetus tehtud",
+  "thankYou": "Tänan!",
+  "successMessage": "Sinu annetus aitab hoida BicycleRepairStationi kõikjal jalgratturitele tasuta ja hooldatuna.",
+  "backToMap": "Tagasi kaardile"
+}

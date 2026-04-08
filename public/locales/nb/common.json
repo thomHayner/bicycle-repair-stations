@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "App for sykkelreparasjonsstasjoner",
+  "back": "Tilbake",
+  "goBack": "Gå tilbake",
+  "cancel": "Avbryt",
+  "dismiss": "Lukk",
+  "findingLocation": "Finner posisjonen din…",
+  "advertisement": "Annonse",
+  "findDescription": "Finn offentlige sykkelreparasjonsstasjoner i nærheten av deg."
+}

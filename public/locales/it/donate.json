@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Dona",
+  "heroTitle": "Supporta BicycleRepairStations",
+  "heroText": "Il sito ti ha aiutato a trovare una stazione o a tornare in strada? Vuoi aiutare a mantenerlo gratuito per altri ciclisti? Qualsiasi importo aiuta a coprire i costi di hosting e sviluppo.",
+  "chooseAmount": "Scegli un importo",
+  "customAmount": "Oppure inserisci un importo personalizzato",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Dona ${{amount}} USD",
+  "donateButton": "Dona",
+  "redirecting": "Reindirizzamento…",
+  "somethingWentWrong": "Qualcosa è andato storto.",
+  "stripeNotice": "Pagamento sicuro tramite Stripe (USD). Nessun dato della carta viene memorizzato da questa app.",
+  "whereItGoes": "Dove va la tua donazione",
+  "serverCosts": "Costi di server e hosting",
+  "apiUsage": "Tasselli mappa e utilizzo API",
+  "keepingFree": "Mantenere l'app gratuita e aggiornata",
+  "successTitle": "Donazione completata",
+  "thankYou": "Grazie!",
+  "successMessage": "La tua donazione aiuta a mantenere BicycleRepairStations gratuito e aggiornato per i ciclisti di tutto il mondo.",
+  "backToMap": "Torna alla mappa"
+}

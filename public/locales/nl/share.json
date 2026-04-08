@@ -1,0 +1,11 @@
+{
+  "title": "Deze app delen",
+  "subtitle": "Alleen persoonlijk delen: X, Facebook, e-mail of link kopiëren.",
+  "nativeShare": "Meer apps (Instagram/Nextdoor indien geïnstalleerd)",
+  "shareOnX": "Delen op X",
+  "shareOnFacebook": "Delen op Facebook",
+  "shareByEmail": "Delen via e-mail",
+  "copyLink": "Link kopiëren",
+  "linkCopied": "Link gekopieerd naar klembord.",
+  "copyFailed": "Kan link niet kopiëren in deze browser."
+}

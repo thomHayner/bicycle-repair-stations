@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Fer un donatiu",
+  "heading": "Donau suport a BicycleRepairStations.com",
+  "heroText": "Aquesta aplicació és gratuïta, amb publicitat i de codi obert. Els donatius ajuden a cobrir l'allotjament, les capes del mapa i el desenvolupament.",
+  "chooseAmount": "Trieu un import",
+  "donateAmount": "Donar ${{amount}} USD",
+  "customAmount": "O introduïu un import personalitzat",
+  "customPlaceholder": "Import",
+  "redirecting": "Redirigint\u2026",
+  "donateButton": "Donar ${{amount}} USD",
+  "somethingWentWrong": "Alguna cosa ha anat malament.",
+  "stripeNotice": "Pagaments processats de manera segura per Stripe en USD.",
+  "whereItGoes": "On va el vostre donatiu",
+  "infoHosting": "Costos de servidor i allotjament",
+  "infoTiles": "Serveis de capes del mapa",
+  "infoDev": "Desenvolupament i manteniment continu",
+  "backToMap": "Tornar al mapa",
+  "successTitle": "Donatiu completat",
+  "thankYou": "Gràcies!",
+  "successMessage": "La vostra generosa contribució ajuda a mantenir BicycleRepairStations.com gratuït per a ciclistes de tot arreu."
+}

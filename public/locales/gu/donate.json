@@ -1,0 +1,21 @@
+{
+  "pageTitle": "દાન કરો",
+  "heroTitle": "BicycleRepairStations ને સહાય કરો",
+  "heroText": "શું સાઈટે તમને સ્ટેશન શોધવામાં અથવા ફરી રસ્તા પર આવવામાં મદદ કરી? અન્ય સાઈકલ સવારો માટે તેને મફત રાખવામાં મદદ કરવા માંગો છો? કોઈપણ રકમ હોસ્ટિંગ અને ડેવલપમેન્ટ ખર્ચને આવરવામાં મદદ કરે છે.",
+  "chooseAmount": "રકમ પસંદ કરો",
+  "customAmount": "અથવા કસ્ટમ રકમ દાખલ કરો",
+  "redirecting": "રીડાયરેક્ટ થઈ રહ્યું છે…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD દાન કરો",
+  "donateButton": "દાન કરો",
+  "somethingWentWrong": "કંઈક ખોટું થયું.",
+  "stripeNotice": "Stripe દ્વારા સુરક્ષિત ચુકવણી (USD). આ એપ દ્વારા કોઈ કાર્ડ વિગતો સંગ્રહિત કરવામાં આવતી નથી.",
+  "whereItGoes": "તમારું દાન ક્યાં જાય છે",
+  "serverCosts": "સર્વર અને હોસ્ટિંગ ખર્ચ",
+  "apiUsage": "નકશા ટાઈલ અને API વપરાશ",
+  "keepingFree": "એપને મફત અને જાળવણી હેઠળ રાખવું",
+  "successTitle": "દાન પૂર્ણ",
+  "thankYou": "આભાર!",
+  "successMessage": "તમારું દાન BicycleRepairStations ને દરેક જગ્યાએ સાઈકલ સવારો માટે મફત અને જાળવણી હેઠળ રાખવામાં મદદ કરે છે.",
+  "backToMap": "નકશા પર પાછા જાઓ"
+}

@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Paaukoti",
+  "heroTitle": "Remkite BicycleRepairStations",
+  "heroText": "Ar svetainė padėjo jums rasti stotelę ar grįžti į kelią? Norite padėti išlaikyti ją nemokamą kitiems dviratininkams? Bet kokia suma padeda padengti prieglobos ir plėtros išlaidas.",
+  "chooseAmount": "Pasirinkite sumą",
+  "customAmount": "Arba įveskite pasirinktinę sumą",
+  "redirecting": "Peradresuojama…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Paaukoti ${{amount}} USD",
+  "donateButton": "Paaukoti",
+  "somethingWentWrong": "Kažkas nepavyko.",
+  "stripeNotice": "Saugus mokėjimas per Stripe (USD). Ši programa nesaugo kortelės duomenų.",
+  "whereItGoes": "Kur eina jūsų auka",
+  "serverCosts": "Serverio ir prieglobos išlaidos",
+  "apiUsage": "Žemėlapio plytelių ir API naudojimas",
+  "keepingFree": "Programos išlaikymas nemokamą ir prižiūrimą",
+  "successTitle": "Auka atlikta",
+  "thankYou": "Ačiū!",
+  "successMessage": "Jūsų auka padeda išlaikyti BicycleRepairStations nemokamą ir prižiūrimą dviratininkams visur.",
+  "backToMap": "Grįžti į žemėlapį"
+}

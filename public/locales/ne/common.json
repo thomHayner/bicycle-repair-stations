@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "साइकल मर्मत स्टेशन एप",
+  "back": "पछाडि",
+  "goBack": "पछाडि जानुहोस्",
+  "cancel": "रद्द गर्नुहोस्",
+  "dismiss": "बन्द गर्नुहोस्",
+  "findingLocation": "तपाईंको स्थान खोजिँदैछ…",
+  "advertisement": "विज्ञापन",
+  "findDescription": "तपाईंको नजिकका सार्वजनिक साइकल मर्मत स्टेशनहरू खोज्नुहोस्।"
+}

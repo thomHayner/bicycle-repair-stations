@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Maidir Linn",
+  "tagline": "Aimsigh stáisiúin phoiblí deisiúcháin rothar in aice leat.",
+  "dataCredits": "Sonraí & Creidiúintí",
+  "osmContributors": "© OpenStreetMap rannchuiditheoirí",
+  "leafletMaps": "Leaflet — léarscáileanna idirghníomhacha",
+  "cartoTiles": "CARTO — tíleanna léarscáile",
+  "overpassData": "Overpass API — sonraí stáisiún",
+  "contribute": "Cuir Leis",
+  "addMissingStation": "Cuir stáisiún ar iarraidh leis ar OSM",
+  "reportBug": "Tuairiscigh fabht",
+  "supportDonation": "Tacaigh le síntiús",
+  "shareThisApp": "Roinn an aip seo",
+  "legal": "Dlíthiúil"
+}

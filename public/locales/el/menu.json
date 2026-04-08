@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Κλείσιμο μενού",
+  "findStations": "Εύρεση σταθμών",
+  "repairGuides": "Οδηγοί επισκευής",
+  "about": "Σχετικά",
+  "reportBug": "Αναφορά σφάλματος",
+  "donate": "Δωρεά",
+  "addMissingStation": "Προσθήκη λείπου σταθμού",
+  "shareThisApp": "Κοινοποίηση αυτής της εφαρμογής",
+  "theme": "Θέμα",
+  "themeLight": "Φωτεινό",
+  "themeDark": "Σκοτεινό",
+  "themeSystem": "Σύστημα",
+  "distance": "Απόσταση",
+  "language": "Γλώσσα"
+}

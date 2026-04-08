@@ -1,0 +1,15 @@
+{
+  "pageTitle": "O aplikácii",
+  "tagline": "Nájdite verejné stanice opravy bicyklov vo vašom okolí.",
+  "dataCredits": "Dáta a poďakovania",
+  "osmContributors": "© Prispievatelia OpenStreetMap",
+  "leafletMaps": "Leaflet — interaktívne mapy",
+  "cartoTiles": "CARTO — mapové dlaždice",
+  "overpassData": "Overpass API — dáta staníc",
+  "contribute": "Prispieť",
+  "addMissingStation": "Pridať chýbajúcu stanicu na OSM",
+  "reportBug": "Nahlásiť chybu",
+  "supportDonation": "Podporiť darovaním",
+  "shareThisApp": "Zdieľať túto aplikáciu",
+  "legal": "Právne informácie"
+}

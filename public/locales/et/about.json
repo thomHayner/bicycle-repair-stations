@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Teave",
+  "tagline": "Leia lähedal asuvad avalikud jalgratta remondijaamad.",
+  "dataCredits": "Andmed ja autorid",
+  "osmContributors": "© OpenStreetMap kaastöötajad",
+  "leafletMaps": "Leaflet — interaktiivsed kaardid",
+  "cartoTiles": "CARTO — kaardikaardid",
+  "overpassData": "Overpass API — jaamaandmed",
+  "contribute": "Panusta",
+  "addMissingStation": "Lisa puuduv jaam OSM-i",
+  "reportBug": "Teata veast",
+  "supportDonation": "Toeta annetusega",
+  "shareThisApp": "Jaga seda rakendust",
+  "legal": "Õiguslik teave"
+}

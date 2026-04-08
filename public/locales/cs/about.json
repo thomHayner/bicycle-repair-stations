@@ -1,0 +1,15 @@
+{
+  "pageTitle": "O aplikaci",
+  "tagline": "Najděte veřejné opravny kol ve vašem okolí.",
+  "dataCredits": "Data a poděkování",
+  "osmContributors": "© Přispěvatelé OpenStreetMap",
+  "leafletMaps": "Leaflet — interaktivní mapy",
+  "cartoTiles": "CARTO — mapové dlaždice",
+  "overpassData": "Overpass API — data stanic",
+  "contribute": "Přispět",
+  "addMissingStation": "Přidat chybějící stanici na OSM",
+  "reportBug": "Nahlásit chybu",
+  "supportDonation": "Podpořit darováním",
+  "shareThisApp": "Sdílet tuto aplikaci",
+  "legal": "Právní informace"
+}

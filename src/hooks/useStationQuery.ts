@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import i18n from "../i18n";
 import type { OverpassNode } from "../types/overpass";
 import { fetchStations } from "../lib/overpass";
 import { ENV } from "../lib/env";
@@ -17,19 +18,20 @@ export type StationQueryResult = StationQueryState & {
 };
 
 function errorMessage(err: Error): string {
+  const t = i18n.t.bind(i18n);
   if (err.message.includes("429"))
-    return "Too many requests — please wait a moment and try again.";
+    return t("map:errorTooManyRequests");
   if (
     err.message.includes("504") ||
     err.message.includes("502") ||
     err.message.includes("503")
   )
-    return "The map server is busy — please try again in a moment.";
+    return t("map:errorServerBusy");
   if (err.message.includes("server timeout"))
-    return "Search timed out — try a smaller area or try again.";
+    return t("map:errorTimeout");
   if (err instanceof TypeError)
-    return "Network error — check your connection and try again.";
-  return err.message || "Failed to load stations. Check your connection.";
+    return t("map:errorNetwork");
+  return err.message || t("map:errorGeneric");
 }
 
 /**

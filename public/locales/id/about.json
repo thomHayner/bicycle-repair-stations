@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Tentang",
+  "tagline": "Temukan stasiun perbaikan sepeda umum di dekat Anda.",
+  "dataCredits": "Data & Kredit",
+  "osmContributors": "© Kontributor OpenStreetMap",
+  "leafletMaps": "Leaflet — peta interaktif",
+  "cartoTiles": "CARTO — tile peta",
+  "overpassData": "Overpass API — data stasiun",
+  "contribute": "Berkontribusi",
+  "addMissingStation": "Tambahkan stasiun yang hilang di OSM",
+  "reportBug": "Laporkan bug",
+  "supportDonation": "Dukung dengan donasi",
+  "shareThisApp": "Bagikan aplikasi ini",
+  "legal": "Hukum"
+}

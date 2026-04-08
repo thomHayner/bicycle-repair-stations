@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "മെനു അടയ്ക്കുക",
+  "findStations": "സ്റ്റേഷനുകൾ കണ്ടെത്തുക",
+  "repairGuides": "റിപ്പയർ ഗൈഡുകൾ",
+  "about": "കുറിച്ച്",
+  "reportBug": "ഒരു ബഗ് റിപ്പോർട്ട് ചെയ്യുക",
+  "donate": "സംഭാവന ചെയ്യുക",
+  "addMissingStation": "കാണാതായ സ്റ്റേഷൻ ചേർക്കുക",
+  "shareThisApp": "ഈ ആപ്പ് പങ്കിടുക",
+  "theme": "തീം",
+  "themeLight": "ലൈറ്റ്",
+  "themeDark": "ഡാർക്ക്",
+  "themeSystem": "സിസ്റ്റം",
+  "distance": "ദൂരം",
+  "language": "ഭാഷ"
+}

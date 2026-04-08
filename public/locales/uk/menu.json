@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Закрити меню",
+  "findStations": "Знайти станції",
+  "repairGuides": "Посібники з ремонту",
+  "about": "Про додаток",
+  "reportBug": "Повідомити про помилку",
+  "donate": "Підтримати",
+  "addMissingStation": "Додати відсутню станцію",
+  "shareThisApp": "Поділитися цим додатком",
+  "theme": "Тема",
+  "themeLight": "Світла",
+  "themeDark": "Темна",
+  "themeSystem": "Системна",
+  "distance": "Відстань",
+  "language": "Мова"
+}

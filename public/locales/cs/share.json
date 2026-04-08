@@ -1,0 +1,11 @@
+{
+  "title": "Sdílet tuto aplikaci",
+  "subtitle": "Pouze osobní sdílení: X, Facebook, e-mail nebo kopírovat odkaz.",
+  "nativeShare": "Další aplikace (Instagram/Nextdoor, pokud jsou nainstalované)",
+  "shareOnX": "Sdílet na X",
+  "shareOnFacebook": "Sdílet na Facebook",
+  "shareByEmail": "Sdílet e-mailem",
+  "copyLink": "Kopírovat odkaz",
+  "linkCopied": "Odkaz zkopírován do schránky.",
+  "copyFailed": "Nepodařilo se zkopírovat odkaz v tomto prohlížeči."
+}

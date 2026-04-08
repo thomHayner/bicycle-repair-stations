@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Nye onyinye",
+  "heroTitle": "Kwado BicycleRepairStations",
+  "heroText": "Saịtị a nyeere gị aka ịchọta ebe nrụzi ma ọ bụ laghachi n'ụzọ? Ị chọrọ inyere aka ịme ka ọ bụrụ n'efu maka ndị ọzọ na-agba igwe kwụ ọtọ? Ego ọ bụla na-enyere aka ịkwụ ụgwọ nnọchibido na mmepe.",
+  "chooseAmount": "Họrọ ego",
+  "customAmount": "Ma ọ bụ tinye ego ị chọrọ",
+  "redirecting": "Na-ebugharị…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Nye ${{amount}} USD",
+  "donateButton": "Nye onyinye",
+  "somethingWentWrong": "Ihe adịghị mma mere.",
+  "stripeNotice": "Ụgwọ nchekwa site na Stripe (USD). Ngwa a anaghị echekwa nkọwa kaadị.",
+  "whereItGoes": "Ebe onyinye gị na-aga",
+  "serverCosts": "Ụgwọ sava na nnọchibido",
+  "apiUsage": "Ojiji taịlụ maapụ na API",
+  "keepingFree": "Ịme ka ngwa a bụrụ n'efu ma na-elekọta ya",
+  "successTitle": "Onyinye Agwụchara",
+  "thankYou": "Daalụ!",
+  "successMessage": "Onyinye gị na-enyere aka ịme ka BicycleRepairStations dịrị n'efu ma na-elekọtara ndị na-agba igwe kwụ ọtọ n'ebe niile.",
+  "backToMap": "Laghachi na maapụ"
+}

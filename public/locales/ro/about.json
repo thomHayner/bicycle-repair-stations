@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Despre",
+  "tagline": "Găsește stații publice de reparare biciclete din apropierea ta.",
+  "dataCredits": "Date și credite",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — hărți interactive",
+  "cartoTiles": "CARTO — plăci de hartă",
+  "overpassData": "Overpass API — date despre stații",
+  "contribute": "Contribuie",
+  "addMissingStation": "Adaugă o stație lipsă pe OSM",
+  "reportBug": "Raportează o eroare",
+  "supportDonation": "Susține cu o donație",
+  "shareThisApp": "Distribuie această aplicație",
+  "legal": "Legal"
+}

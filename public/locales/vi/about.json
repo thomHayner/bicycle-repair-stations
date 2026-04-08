@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Giới thiệu",
+  "tagline": "Tìm các trạm sửa chữa xe đạp công cộng gần bạn.",
+  "dataCredits": "Dữ liệu & Tín dụng",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — bản đồ tương tác",
+  "cartoTiles": "CARTO — ô bản đồ",
+  "overpassData": "Overpass API — dữ liệu trạm",
+  "contribute": "Đóng góp",
+  "addMissingStation": "Thêm trạm còn thiếu trên OSM",
+  "reportBug": "Báo cáo lỗi",
+  "supportDonation": "Hỗ trợ bằng quyên góp",
+  "shareThisApp": "Chia sẻ ứng dụng này",
+  "legal": "Pháp lý"
+}

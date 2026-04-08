@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Hakkında",
+  "tagline": "Yakınızda bulunan halka açık bisiklet tamir istasyonlarını bulun.",
+  "dataCredits": "Veri ve Katkılar",
+  "osmContributors": "© OpenStreetMap katkıcıları",
+  "leafletMaps": "Leaflet — etkileşimli haritalar",
+  "cartoTiles": "CARTO — harita döşemeleri",
+  "overpassData": "Overpass API — istasyon verileri",
+  "contribute": "Katkıda Bulun",
+  "addMissingStation": "OSM'de eksik istasyon ekle",
+  "reportBug": "Hata bildir",
+  "supportDonation": "Bağış ile destek ol",
+  "shareThisApp": "Bu uygulamayı paylaş",
+  "legal": "Yasal"
+}

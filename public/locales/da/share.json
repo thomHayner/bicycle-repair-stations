@@ -1,0 +1,11 @@
+{
+  "title": "Del denne app",
+  "subtitle": "Kun personlig deling: X, Facebook, e-mail eller kopiér link.",
+  "nativeShare": "Flere apps (Instagram/Nextdoor, hvis installeret)",
+  "shareOnX": "Del på X",
+  "shareOnFacebook": "Del på Facebook",
+  "shareByEmail": "Del via e-mail",
+  "copyLink": "Kopiér link",
+  "linkCopied": "Link kopieret til udklipsholder.",
+  "copyFailed": "Kunne ikke kopiere link i denne browser."
+}

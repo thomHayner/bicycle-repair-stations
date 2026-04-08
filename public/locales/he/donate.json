@@ -1,0 +1,21 @@
+{
+  "pageTitle": "תרומה",
+  "heroTitle": "תמוך ב-BicycleRepairStations",
+  "heroText": "האתר עזר לך למצוא תחנה או לחזור לדרך? רוצה לעזור לשמור אותו חינמי לרוכבים אחרים? כל סכום עוזר לכסות עלויות אירוח ופיתוח.",
+  "chooseAmount": "בחר סכום",
+  "customAmount": "או הזן סכום מותאם אישית",
+  "redirecting": "מפנה…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "תרום ${{amount}} USD",
+  "donateButton": "תרום",
+  "somethingWentWrong": "משהו השתבש.",
+  "stripeNotice": "תשלום מאובטח דרך Stripe (USD). פרטי כרטיס אינם נשמרים על ידי אפליקציה זו.",
+  "whereItGoes": "לאן הולכת התרומה שלך",
+  "serverCosts": "עלויות שרת ואירוח",
+  "apiUsage": "שימוש באריחי מפה ו-API",
+  "keepingFree": "שמירת האפליקציה חינמית ומתוחזקת",
+  "successTitle": "התרומה הושלמה",
+  "thankYou": "תודה רבה!",
+  "successMessage": "התרומה שלך עוזרת לשמור על BicycleRepairStations חינמי ומתוחזק עבור רוכבים בכל מקום.",
+  "backToMap": "חזור למפה"
+}

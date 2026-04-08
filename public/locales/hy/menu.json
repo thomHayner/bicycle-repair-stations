@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Փակել ընտրացանկը",
+  "findStations": "Գտնել կայարաններ",
+  "repairGuides": "Վերանորոգման ուղեցույցներ",
+  "about": "Մասին",
+  "reportBug": "Հաղորդել սխալի մասին",
+  "donate": "Նվիրատվություն",
+  "addMissingStation": "Ավելացնել բացակայող կայարան",
+  "shareThisApp": "Կիսվել այս հավելվածով",
+  "theme": "Թեմա",
+  "themeLight": "Բաց",
+  "themeDark": "Մուգ",
+  "themeSystem": "Համակարգ",
+  "distance": "Հեռավորություն",
+  "language": "Լեզու"
+}
