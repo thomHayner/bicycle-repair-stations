@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Tabhair Síntiús",
+  "heroTitle": "Tacaigh le BicycleRepairStations",
+  "heroText": "Ar chabhraigh an suíomh leat stáisiún a aimsiú nó filleadh ar an mbóthar? Ar mhaith leat cabhrú é a choinneáil saor in aisce do rothaithe eile? Cabhraíonn aon mhéid le costais óstála agus forbartha a chlúdach.",
+  "chooseAmount": "Roghnaigh méid",
+  "customAmount": "Nó cuir isteach méid saincheaptha",
+  "redirecting": "Ag atreorú…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Tabhair ${{amount}} USD",
+  "donateButton": "Tabhair Síntiús",
+  "somethingWentWrong": "Chuaigh rud éigin mícheart.",
+  "stripeNotice": "Íocaíocht shlán trí Stripe (USD). Ní stórálann an aip seo sonraí cárta ar bith.",
+  "whereItGoes": "Cá dtéann do shíntiús",
+  "serverCosts": "Costais fhreastalaí agus óstála",
+  "apiUsage": "Úsáid tíleanna léarscáile agus API",
+  "keepingFree": "An aip a choinneáil saor in aisce agus á cothabháil",
+  "successTitle": "Síntiús Curtha i gCrích",
+  "thankYou": "Go raibh maith agat!",
+  "successMessage": "Cabhraíonn do shíntiús le BicycleRepairStations a choinneáil saor in aisce agus á cothabháil do rothaithe i ngach áit.",
+  "backToMap": "Ar ais go dtí an léarscáil"
+}
