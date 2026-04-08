@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Donează",
+  "heroTitle": "Susține BicycleRepairStations",
+  "heroText": "Te-a ajutat site-ul să găsești o stație sau să te întorci pe drum? Vrei să îl menții gratuit pentru alți cicliști? Orice sumă ajută la acoperirea costurilor de găzduire și dezvoltare.",
+  "chooseAmount": "Alege o sumă",
+  "customAmount": "Sau introdu o sumă personalizată",
+  "redirecting": "Se redirecționează…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Donează ${{amount}} USD",
+  "donateButton": "Donează",
+  "somethingWentWrong": "Ceva nu a mers bine.",
+  "stripeNotice": "Plată securizată prin Stripe (USD). Datele cardului nu sunt stocate de această aplicație.",
+  "whereItGoes": "Unde se duce donația ta",
+  "serverCosts": "Costuri de server și găzduire",
+  "apiUsage": "Utilizare plăci de hartă și API",
+  "keepingFree": "Menținerea aplicației gratuită și întreținută",
+  "successTitle": "Donație finalizată",
+  "thankYou": "Îți mulțumim!",
+  "successMessage": "Donația ta ajută la menținerea BicycleRepairStations gratuită și întreținută pentru cicliști de pretutindeni.",
+  "backToMap": "Înapoi la hartă"
+}
