@@ -186,6 +186,7 @@ export default function MapPage() {
   const autoRadiusLocationRef = useRef<{ lat: number; lng: number } | null>(null);
   useEffect(() => {
     if (userSelectedDist) return; // user picked a radius — don't override
+    if (!initialFlyComplete) return; // wait for initial map animation to finish
     if (query.status !== "success") return;
     if (!givenLocation || allStations.length === 0) return;
 
@@ -221,7 +222,7 @@ export default function MapPage() {
       ],
       { padding: [40, 40], maxZoom: 16 }
     );
-  }, [userSelectedDist, query.status, allStations, givenLocation, unit, programmaticFitBounds]);
+  }, [userSelectedDist, initialFlyComplete, query.status, allStations, givenLocation, unit, programmaticFitBounds]);
 
   // Map pan updates the filter anchor (used only when no givenLocation)
   const handleMoveEnd = useCallback((center: LatLng) => {
