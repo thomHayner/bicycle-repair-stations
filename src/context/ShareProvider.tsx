@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, type ReactNode } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo, type ReactNode } from "react";
 import { Ctx, type ShareEntryPoint } from "./shareCtx";
 import { ShareSheet } from "../components/Share/ShareSheet";
 import {
@@ -28,11 +28,11 @@ export function ShareProvider({ children }: { children: ReactNode }) {
     noticeTimeout.current = setTimeout(() => setShareNotice(null), 2600);
   };
 
-  const openShare = (entryPoint: ShareEntryPoint) => {
+  const openShare = useCallback((entryPoint: ShareEntryPoint) => {
     setShareEntryPoint(entryPoint);
     trackEvent("share_opened", { entryPoint, mode: "sheet" });
     setShareOpen(true);
-  };
+  }, []);
 
   const closeShare = useCallback(() => setShareOpen(false), []);
 
@@ -77,8 +77,10 @@ export function ShareProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const ctxValue = useMemo(() => ({ openShare, closeShare }), [openShare, closeShare]);
+
   return (
-    <Ctx.Provider value={{ openShare, closeShare }}>
+    <Ctx.Provider value={ctxValue}>
       {children}
 
       <ShareSheet

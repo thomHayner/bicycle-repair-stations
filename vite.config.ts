@@ -1,9 +1,16 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: ["./src/test/setup.ts"],
+    css: false,
+  },
   plugins: [
     react(),
     tailwindcss(),
@@ -15,12 +22,37 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,png,svg,ico}"],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/[a-z]\.tile\.openstreetmap\.org\/.*/,
+            // CARTO tiles (Voyager, Positron, Dark Matter, labels-only)
+            urlPattern: /^https:\/\/[a-d]\.basemaps\.cartocdn\.com\/.*/,
             handler: "CacheFirst",
             options: {
-              cacheName: "osm-tiles",
+              cacheName: "carto-tiles",
               expiration: {
-                maxEntries: 500,
+                maxEntries: 800,
+                maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
+              },
+            },
+          },
+          {
+            // ESRI World Imagery (satellite layer)
+            urlPattern: /^https:\/\/server\.arcgisonline\.com\/.*/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "esri-tiles",
+              expiration: {
+                maxEntries: 300,
+                maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
+              },
+            },
+          },
+          {
+            // Waymarked Trails overlays (cycling + MTB routes)
+            urlPattern: /^https:\/\/tile\.waymarkedtrails\.org\/.*/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "waymarked-tiles",
+              expiration: {
+                maxEntries: 400,
                 maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
               },
             },

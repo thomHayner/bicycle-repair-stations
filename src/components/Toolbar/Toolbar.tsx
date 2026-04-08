@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { memo, useCallback, useRef, useState } from "react";
 import type { Map as LeafletMap } from "leaflet";
 import { LAYERS, type LayerId } from "../../lib/layers";
 import { MenuDrawer } from "../Menu/MenuDrawer";
@@ -17,20 +17,62 @@ interface Props {
   onUnitChange: (unit: Unit) => void;
 }
 
-async function geocode(query: string): Promise<{ lat: number; lng: number } | null> {
-  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
-  const res = await fetch(url, { headers: { "Accept-Language": "en" } });
-  if (!res.ok) return null;
-  const results = await res.json();
-  if (!results[0]) return null;
-  return { lat: Number(results[0].lat), lng: Number(results[0].lon) };
+const GEOCODE_CACHE_KEY = "brs_geocode";
+const GEOCODE_TTL_MS = 7 * 86_400_000; // 7 days
+const GEOCODE_MAX_ENTRIES = 50;
+
+interface GeocodeCache {
+  [query: string]: { lat: number; lng: number; ts: number };
 }
 
-export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
+function readGeocodeCache(): GeocodeCache {
+  try {
+    return JSON.parse(localStorage.getItem(GEOCODE_CACHE_KEY) ?? "{}") as GeocodeCache;
+  } catch {
+    return {};
+  }
+}
+
+function writeGeocodeCache(cache: GeocodeCache): void {
+  try {
+    localStorage.setItem(GEOCODE_CACHE_KEY, JSON.stringify(cache));
+  } catch { /* full or unavailable */ }
+}
+
+async function geocode(query: string): Promise<{ lat: number; lng: number } | null> {
+  const key = query.toLowerCase().trim();
+  const cache = readGeocodeCache();
+  const hit = cache[key];
+  if (hit && Date.now() - hit.ts < GEOCODE_TTL_MS) {
+    return { lat: hit.lat, lng: hit.lng };
+  }
+
+  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
+  const res = await fetch(url, { headers: { "Accept-Language": "en" } });
+  if (!res.ok) throw new Error(`Geocode HTTP ${res.status}`);
+  const results = await res.json();
+  if (!results[0]) return null;
+  const result = { lat: Number(results[0].lat), lng: Number(results[0].lon) };
+
+  // Evict oldest entries if cache is full
+  const entries = Object.entries(cache);
+  if (entries.length >= GEOCODE_MAX_ENTRIES) {
+    entries.sort((a, b) => a[1].ts - b[1].ts);
+    for (const [old] of entries.slice(0, entries.length - GEOCODE_MAX_ENTRIES + 1)) {
+      delete cache[old];
+    }
+  }
+  cache[key] = { ...result, ts: Date.now() };
+  writeGeocodeCache(cache);
+
+  return result;
+}
+
+export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
   const { openShare } = useShare();
   const [query, setQuery] = useState("");
   const [isGeocoding, setIsGeocoding] = useState(false);
-  const [locationNotFound, setLocationNotFound] = useState(false);
+  const [geocodeError, setGeocodeError] = useState<"not-found" | "network" | null>(null);
   const [layerPickerOpen, setLayerPickerOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -50,7 +92,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
       if (center) onLocationFound({ lat: center.lat, lng: center.lng }, 16);
       return;
     }
-    setLocationNotFound(false);
+    setGeocodeError(null);
     setIsGeocoding(true);
     try {
       const pos = await geocode(q);
@@ -58,23 +100,23 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
         onLocationFound(pos);
         inputRef.current?.blur();
       } else {
-        setLocationNotFound(true);
+        setGeocodeError("not-found");
       }
     } catch {
-      setLocationNotFound(true);
+      setGeocodeError("network");
     } finally {
       setIsGeocoding(false);
     }
   };
 
-  const bannerHeight = locationNotFound || locationDenied ? 32 : 0;
+  const bannerHeight = geocodeError !== null || locationDenied ? 32 : 0;
   const fabTop = 12 + 56 + bannerHeight + 8;
 
   return (
     <>
       <header
         className="fixed top-3 left-3 right-3 z-[1000] bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 rounded-2xl overflow-hidden"
-        style={{ height: locationDenied || locationNotFound ? "auto" : 56 }}
+        style={{ height: locationDenied || geocodeError !== null ? "auto" : 56 }}
       >
         <div className="flex items-center px-3 gap-2" style={{ height: 56 }}>
           {/* Hamburger */}
@@ -109,7 +151,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
           <form onSubmit={handleSearch} className="flex-1 flex items-center">
             <div className={[
               "flex items-center w-full rounded-full border transition-colors",
-              locationNotFound
+              geocodeError !== null
                 ? "border-red-400 bg-red-50 dark:bg-red-950/30 dark:border-red-800"
                 : "border-[var(--color-border-search)] bg-[var(--color-surface-search)] focus-within:border-[var(--color-primary)] focus-within:bg-[var(--color-surface)]",
             ].join(" ")}>
@@ -117,7 +159,7 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
                 ref={inputRef}
                 type="search"
                 value={query}
-                onChange={(e) => { setQuery(e.target.value); setLocationNotFound(false); }}
+                onChange={(e) => { setQuery(e.target.value); setGeocodeError(null); }}
                 placeholder="Search location…"
                 aria-label="Search location"
                 className="flex-1 bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 px-4 py-2 min-h-[44px] outline-none min-w-0"
@@ -145,13 +187,19 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
 
         </div>
 
-        {locationNotFound && (
+        {geocodeError === "not-found" && (
           <div className="bg-red-50 dark:bg-red-950/40 border-t border-red-200 dark:border-red-900 px-4 py-1.5 text-xs text-red-700 dark:text-red-400 text-center">
             Location not found — try a different search term.
           </div>
         )}
 
-        {locationDenied && !locationNotFound && (
+        {geocodeError === "network" && (
+          <div className="bg-red-50 dark:bg-red-950/40 border-t border-red-200 dark:border-red-900 px-4 py-1.5 text-xs text-red-700 dark:text-red-400 text-center">
+            Search failed — check your connection and try again.
+          </div>
+        )}
+
+        {locationDenied && geocodeError === null && (
           <div className="bg-amber-50 dark:bg-amber-950/30 border-t border-amber-200 dark:border-amber-900 px-4 py-1.5 text-xs text-amber-800 dark:text-amber-400 text-center">
             Location access denied — search above or enable location to find stations near you.
           </div>
@@ -270,4 +318,4 @@ export function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, loc
       />
     </>
   );
-}
+});

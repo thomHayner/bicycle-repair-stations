@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useRef } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import { MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import type { Map as LeafletMap, LatLng } from "leaflet";
@@ -179,6 +179,7 @@ interface Props {
   userDistances: Map<number, number> | null;
   stations: OverpassNode[];
   filteredStationIds: Set<number>;
+  showMutedMarkers: boolean;
   onMoveEnd: (center: LatLng) => void;
   onUserMove: () => void;
   onProgrammaticMoveEnd: () => void;
@@ -194,7 +195,7 @@ interface Props {
   onInitialFlyComplete?: () => void;
 }
 
-export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, onMoveEnd, onUserMove, onProgrammaticMoveEnd, mapRef, programmaticMoveRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, onInitialFlyComplete }: Props) {
+export const MapView = memo(function MapView({ userPosition, userDistances, stations, filteredStationIds, showMutedMarkers, onMoveEnd, onUserMove, onProgrammaticMoveEnd, mapRef, programmaticMoveRef, selectedStationId, onStationSelect, onStationDeselect, onMapInteraction, searchedLocation, activeLayer, onInitialFlyComplete }: Props) {
   const { resolvedTheme } = useSettings();
   const dark = resolvedTheme === "dark";
   // Background shown behind tiles while they load.
@@ -206,6 +207,19 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
   const initialCenter = userPosition
     ? ([userPosition.lat, userPosition.lng] as [number, number])
     : ([51.505, -0.09] as [number, number]);
+
+  const handleZoomIn = useCallback(() => mapRef.current?.zoomIn(), [mapRef]);
+  const handleZoomOut = useCallback(() => mapRef.current?.zoomOut(), [mapRef]);
+
+  const { inRadiusStations, outOfRadiusStations } = useMemo(() => {
+    const inRadius = stations.filter((s) => filteredStationIds.has(s.id));
+    return {
+      inRadiusStations: inRadius,
+      outOfRadiusStations: showMutedMarkers
+        ? stations.filter((s) => !filteredStationIds.has(s.id))
+        : [],
+    };
+  }, [stations, filteredStationIds, showMutedMarkers]);
 
   // Fly to user position once it resolves; signal completion so the splash screen can dismiss
   const didFlyRef = useRef(false);
@@ -249,7 +263,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
           type="button"
           aria-label="Zoom in"
           title="Zoom in"
-          onClick={() => mapRef.current?.zoomIn()}
+          onClick={handleZoomIn}
           className="w-11 h-11 flex items-center justify-center text-[var(--color-text-secondary)] state-surface transition-colors focus-ring-inset"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -261,7 +275,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
           type="button"
           aria-label="Zoom out"
           title="Zoom out"
-          onClick={() => mapRef.current?.zoomOut()}
+          onClick={handleZoomOut}
           className="w-11 h-11 flex items-center justify-center text-[var(--color-text-secondary)] state-surface transition-colors focus-ring-inset"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -273,7 +287,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
       <MapContainer
         center={initialCenter}
         zoom={16}
-        minZoom={10}
+        minZoom={6}
         maxZoom={18}
         style={{ width: "100%", height: "100%", background: tileBg }}
         zoomControl={false}
@@ -310,7 +324,7 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
           animate={true}
           chunkedLoading={true}
         >
-          {stations.filter((s) => filteredStationIds.has(s.id)).map((station) => (
+          {inRadiusStations.map((station) => (
             <StationMarker
               key={station.id}
               station={station}
@@ -322,29 +336,31 @@ export const MapView = memo(function MapView({ userPosition, userDistances, stat
             />
           ))}
         </MarkerClusterGroup>
-        {/* Out-of-radius cached stations — small muted clusters, no count */}
-        <MarkerClusterGroup
-          maxClusterRadius={60}
-          disableClusteringAtZoom={16}
-          iconCreateFunction={createMutedClusterIcon}
-          zoomToBoundsOnClick={true}
-          spiderfyOnMaxZoom={false}
-          showCoverageOnHover={false}
-          animate={true}
-          chunkedLoading={true}
-        >
-          {stations.filter((s) => !filteredStationIds.has(s.id)).map((station) => (
-            <StationMarker
-              key={station.id}
-              station={station}
-              isSelected={station.id === selectedStationId}
-              isInRadius={false}
-              onSelect={onStationSelect}
-              onDeselect={onStationDeselect}
-              userDistances={userDistances}
-            />
-          ))}
-        </MarkerClusterGroup>
+        {/* Out-of-radius stations — small muted clusters, only shown for wide searches */}
+        {showMutedMarkers && (
+          <MarkerClusterGroup
+            maxClusterRadius={60}
+            disableClusteringAtZoom={16}
+            iconCreateFunction={createMutedClusterIcon}
+            zoomToBoundsOnClick={true}
+            spiderfyOnMaxZoom={false}
+            showCoverageOnHover={false}
+            animate={true}
+            chunkedLoading={true}
+          >
+            {outOfRadiusStations.map((station) => (
+              <StationMarker
+                key={station.id}
+                station={station}
+                isSelected={station.id === selectedStationId}
+                isInRadius={false}
+                onSelect={onStationSelect}
+                onDeselect={onStationDeselect}
+                userDistances={userDistances}
+              />
+            ))}
+          </MarkerClusterGroup>
+        )}
       </MapContainer>
     </div>
   );

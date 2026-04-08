@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { OverpassNode } from "../types/overpass";
 import { fetchStations } from "../lib/overpass";
 import { ENV } from "../lib/env";
@@ -11,6 +11,11 @@ export type StationQueryState =
   | { status: "none" }
   | { status: "error"; message: string };
 
+export type StationQueryResult = StationQueryState & {
+  /** Increment to re-run the fetch at the same coordinates (retry after error). */
+  retry: () => void;
+};
+
 function errorMessage(err: Error): string {
   if (err.message.includes("429"))
     return "Too many requests — please wait a moment and try again.";
@@ -20,27 +25,37 @@ function errorMessage(err: Error): string {
     err.message.includes("503")
   )
     return "The map server is busy — please try again in a moment.";
+  if (err.message.includes("server timeout"))
+    return "Search timed out — try a smaller area or try again.";
+  if (err instanceof TypeError)
+    return "Network error — check your connection and try again.";
   return err.message || "Failed to load stations. Check your connection.";
 }
 
 /**
  * Single hook that owns the full station-fetch lifecycle:
  *
- * idle → loading → success (stations found within 25 mi)
- *                → none    (nothing found within 25 mi)
+ * idle → loading → success (stations found within fetch radius)
+ *                → none    (nothing found within fetch radius)
  *       error
  *
  * Results are cached in localStorage ("brs_v3") for 24 hours.
+ * The caller controls the fetch radius (defaults to 25 mi / FETCH_RADIUS_KM).
  */
 export function useStationQuery(
   lat: number | null,
   lng: number | null,
-): StationQueryState {
+  fetchRadiusKm: number = FETCH_RADIUS_KM,
+): StationQueryResult {
   const [state, setState] = useState<StationQueryState>(() => {
     const cached = readCache();
     if (!cached) return { status: "idle" };
     return { status: "success", stations: cached.stations };
   });
+
+  // Incrementing retryTick re-runs the fetch even at the same coordinates.
+  const [retryTick, setRetryTick] = useState(0);
+  const retry = useCallback(() => setRetryTick((t) => t + 1), []);
 
   const abortRef = useRef<AbortController | null>(null);
 
@@ -53,7 +68,7 @@ export function useStationQuery(
     const coordsChanged = !prevCoords || prevCoords.lat !== lat || prevCoords.lng !== lng;
     if (coordsChanged) {
       const cached = readCache();
-      if (cached && isCovered(lat, lng, cached)) {
+      if (cached && isCovered(lat, lng, cached, fetchRadiusKm)) {
         // Cache covers new coords — serve immediately, no stale frame
         setPrevCoords({ lat, lng });
         if (state.status !== "success" || state.stations !== cached.stations) {
@@ -72,23 +87,24 @@ export function useStationQuery(
 
     // Cache hit — serve immediately
     const cached = readCache();
-    if (cached && isCovered(lat, lng, cached)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: latch cached data synchronously
+    if (cached && isCovered(lat, lng, cached, fetchRadiusKm)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- early return: cache hit avoids fetch
       setState({ status: "success", stations: cached.stations });
       return;
     }
 
-    // Cache miss — fetch 25-mile radius
+    // Cache miss — fetch requested radius
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
 
     setState({ status: "loading" });
 
-    fetchStations(lat, lng, FETCH_RADIUS_KM, ENV.OVERPASS_ENDPOINT, controller.signal)
+    const timeoutS = Math.min(90, Math.max(25, Math.round(fetchRadiusKm / FETCH_RADIUS_KM * 25)));
+    fetchStations(lat, lng, fetchRadiusKm, ENV.OVERPASS_ENDPOINT, controller.signal, timeoutS)
       .then((stations) => {
         if (stations.length > 0) {
-          writeCache({ center: { lat, lng }, radiusKm: FETCH_RADIUS_KM, stations, fetchedAt: Date.now() });
+          writeCache({ center: { lat, lng }, radiusKm: fetchRadiusKm, stations, fetchedAt: Date.now() });
           setState({ status: "success", stations });
         } else {
           setState({ status: "none" });
@@ -98,11 +114,11 @@ export function useStationQuery(
         if (err.name === "AbortError") return;
         setState({ status: "error", message: errorMessage(err) });
       });
-  }, [lat, lng]);
+  }, [lat, lng, fetchRadiusKm, retryTick]);
 
   useEffect(() => {
     return () => { abortRef.current?.abort(); };
   }, []);
 
-  return state;
+  return { ...state, retry };
 }
