@@ -61,6 +61,17 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     if (ogMeta) ogMeta.setAttribute("content", toOgLocale(l));
   }, []);
 
+  // Sync html[lang], html[dir], and og:locale to the persisted locale on mount.
+  // locale is intentionally omitted from deps — this is a mount-only sync;
+  // subsequent changes are handled synchronously inside setLocale().
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.documentElement.dir = isRTL(locale) ? "rtl" : "ltr";
+    const ogMeta = document.querySelector('meta[property="og:locale"]');
+    if (ogMeta) ogMeta.setAttribute("content", toOgLocale(locale));
+    if (i18n.language !== locale) void i18n.changeLanguage(locale);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Apply theme on mount + listen for system preference changes.
   // setResolvedTheme is intentionally omitted here — it's handled synchronously in
   // setTheme() and initialised correctly by useState(), so no effect-based sync needed.

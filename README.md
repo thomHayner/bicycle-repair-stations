@@ -45,7 +45,7 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 - **Menu drawer** — slide-in navigation with theme toggle (Light / Dark / System), unit toggle, language selector, and Share action
 
 ### Internationalization (i18n)
-- **8 languages** — English, German, French, Spanish, Italian, Dutch, Portuguese, and Arabic
+- **80+ languages** — including English, German, French, Spanish, Italian, Dutch, Portuguese, Arabic, Chinese (Simplified & Traditional), Japanese, Korean, Russian, Hindi, and many more
 - **Language selector** — dropdown in the menu drawer; persisted to `localStorage`
 - **First-visit language prompt** — detects country via IP geolocation; if a supported non-English locale is detected, shows a two-button language choice on the splash screen
 - **IP geolocation fallback** — when GPS is denied, a Vercel edge function approximates the user's location from their IP address (no IPs stored); falls back to Boulder, CO if the API is unavailable

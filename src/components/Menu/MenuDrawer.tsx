@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useSettings } from "../../context/useSettings";
@@ -40,6 +40,16 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
   const navigate = useNavigate();
   const { theme, setTheme, locale, setLocale } = useSettings();
   const panelRef = useRef<HTMLDivElement>(null);
+
+  // Derived state: announce language changes to screen readers via the live region below.
+  // Using the React "derived state during render" pattern avoids an effect and keeps
+  // the region empty on initial mount (aria-live only fires on content *changes*).
+  const [prevLocale, setPrevLocale] = useState(locale);
+  const [langAnnouncement, setLangAnnouncement] = useState("");
+  if (prevLocale !== locale) {
+    setPrevLocale(locale);
+    setLangAnnouncement(SUPPORTED_LOCALES.find((l) => l.code === locale)?.nativeName ?? "");
+  }
 
   useEffect(() => {
     if (!open) return;
@@ -220,8 +230,9 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
 
           {/* Language */}
           <div className="flex items-center justify-between gap-3">
-            <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide shrink-0">{t("language")}</span>
+            <span id="language-select-label" className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide shrink-0">{t("language")}</span>
             <select
+              aria-labelledby="language-select-label"
               value={locale}
               onChange={(e) => setLocale(e.target.value)}
               className="text-xs font-semibold px-3 py-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-container)] text-slate-600 dark:text-slate-300 focus-ring-inset transition-colors"
@@ -230,6 +241,11 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
                 <option key={l.code} value={l.code}>{l.nativeName}</option>
               ))}
             </select>
+          </div>
+
+          {/* Screen-reader announcement for language changes */}
+          <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+            {langAnnouncement}
           </div>
         </div>
       </div>
