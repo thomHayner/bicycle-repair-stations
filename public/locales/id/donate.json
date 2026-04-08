@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Donasi",
+  "heroTitle": "Dukung BicycleRepairStations",
+  "heroText": "Apakah situs ini membantu Anda menemukan stasiun atau kembali ke jalan? Ingin membantu agar tetap gratis untuk pengendara sepeda lainnya? Jumlah berapa pun membantu menutup biaya hosting dan pengembangan.",
+  "chooseAmount": "Pilih jumlah",
+  "customAmount": "Atau masukkan jumlah khusus",
+  "redirecting": "Mengalihkan…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Donasi ${{amount}} USD",
+  "donateButton": "Donasi",
+  "somethingWentWrong": "Terjadi kesalahan.",
+  "stripeNotice": "Pembayaran aman melalui Stripe (USD). Tidak ada detail kartu yang disimpan oleh aplikasi ini.",
+  "whereItGoes": "Ke mana donasi Anda pergi",
+  "serverCosts": "Biaya server dan hosting",
+  "apiUsage": "Penggunaan tile peta dan API",
+  "keepingFree": "Menjaga aplikasi tetap gratis dan terpelihara",
+  "successTitle": "Donasi Selesai",
+  "thankYou": "Terima kasih!",
+  "successMessage": "Donasi Anda membantu menjaga BicycleRepairStations tetap gratis dan terpelihara untuk pengendara sepeda di seluruh dunia.",
+  "backToMap": "Kembali ke peta"
+}

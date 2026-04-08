@@ -1,0 +1,11 @@
+{
+  "title": "Bagikan aplikasi ini",
+  "subtitle": "Berbagi pribadi saja: X, Facebook, email, atau salin tautan.",
+  "nativeShare": "Aplikasi lainnya (Instagram/Nextdoor jika terpasang)",
+  "shareOnX": "Bagikan di X",
+  "shareOnFacebook": "Bagikan di Facebook",
+  "shareByEmail": "Bagikan lewat Email",
+  "copyLink": "Salin tautan",
+  "linkCopied": "Tautan disalin ke clipboard.",
+  "copyFailed": "Tidak dapat menyalin tautan di browser ini."
+}
