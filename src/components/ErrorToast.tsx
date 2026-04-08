@@ -42,7 +42,7 @@ export function ErrorToast({ message, onDismiss }: Props) {
       <span>{message}</span>
       <button
         onClick={() => { setVisible(false); setTimeout(onDismiss, 300); }}
-        className="ml-1 min-w-[32px] min-h-[32px] flex items-center justify-center rounded-full hover:bg-black/10 active:bg-black/20 focus-ring-contrast transition-colors"
+        className="ml-1 min-w-[48px] min-h-[48px] -mr-2 flex items-center justify-center rounded-full hover:bg-black/10 active:bg-black/20 focus-ring-contrast transition-colors"
         aria-label="Dismiss"
         title="Dismiss"
       >
