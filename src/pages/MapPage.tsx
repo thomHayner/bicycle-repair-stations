@@ -148,12 +148,17 @@ export default function MapPage() {
     [queryStations]
   );
 
+  // Track whether the user has manually selected a radius this session.
+  // When true, auto-radius is skipped so searches don't override the user's choice.
+  // Resets naturally on page refresh (state, not persisted).
+  const [userSelectedDist, setUserSelectedDist] = useState(false);
+
   // Auto-step-up: on each new givenLocation (with data loaded), find the smallest
   // radius ≥ 2 mi (5 km) that has at least 1 station, set it, and fitBounds.
   // Runs once per unique givenLocation; manual pill changes are never overridden.
   const autoRadiusLocationRef = useRef<{ lat: number; lng: number } | null>(null);
   useEffect(() => {
-    if (userSelectedDistRef.current) return; // user picked a radius — don't override
+    if (userSelectedDist) return; // user picked a radius — don't override
     if (query.status !== "success") return;
     if (!givenLocation || allStations.length === 0) return;
 
@@ -189,7 +194,7 @@ export default function MapPage() {
       ],
       { padding: [40, 40], maxZoom: 16 }
     );
-  }, [query.status, allStations, givenLocation, unit, programmaticFitBounds]);
+  }, [userSelectedDist, query.status, allStations, givenLocation, unit, programmaticFitBounds]);
 
   // Map pan updates the filter anchor (used only when no givenLocation)
   const handleMoveEnd = useCallback((center: LatLng) => {
@@ -230,14 +235,9 @@ export default function MapPage() {
 
   const handleMapInteraction = useCallback(() => setListExpanded(false), []);
 
-  // Track whether the user has manually selected a radius this session.
-  // When true, auto-radius is skipped so searches don't override the user's choice.
-  // Resets naturally on page refresh (ref, not persisted).
-  const userSelectedDistRef = useRef(false);
-
   // Distance pill selected manually by the user
   const handleDistChange = useCallback((dist: number) => {
-    userSelectedDistRef.current = true;
+    setUserSelectedDist(true);
     setSelectedDist(dist);
   }, []);
 
