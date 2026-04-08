@@ -1,0 +1,15 @@
+{
+  "pageTitle": "په اړه",
+  "tagline": "خپل نږدې عامه بایسکل ترمیم سټیشنونه ومومئ.",
+  "dataCredits": "معلومات او کریډیټونه",
+  "osmContributors": "\u00a9 OpenStreetMap مرسته کوونکي",
+  "leafletMaps": "Leaflet \u2014 متقابل نقشې",
+  "cartoTiles": "CARTO \u2014 د نقشې ټایلونه",
+  "overpassData": "Overpass API \u2014 د سټیشنونو معلومات",
+  "contribute": "مرسته وکړئ",
+  "addMissingStation": "په OSM کې ورک سټیشن اضافه کړئ",
+  "reportBug": "ستونزه راپور ورکړئ",
+  "supportDonation": "د مرستې ورکولو سره ملاتړ وکړئ",
+  "shareThisApp": "دا اپلیکیشن شریک کړئ",
+  "legal": "قانوني"
+}
