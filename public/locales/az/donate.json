@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Bağış et",
+  "heroTitle": "BicycleRepairStations-ı dəstəklə",
+  "heroText": "Sayt sizə stansiya tapmağa və ya yola davam etməyə kömək etdi? Digər velosipedçilər üçün pulsuz saxlamağa kömək etmək istərdinizmi? Hər hansı bir məbləğ hostinq və inkişaf xərclərini ödəməyə kömək edir.",
+  "chooseAmount": "Məbləğ seçin",
+  "customAmount": "Və ya xüsusi məbləğ daxil edin",
+  "redirecting": "Yönləndirilir…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD bağışla",
+  "donateButton": "Bağış et",
+  "somethingWentWrong": "Bir şey səhv getdi.",
+  "stripeNotice": "Stripe vasitəsilə təhlükəsiz ödəniş (USD). Bu tətbiq kart məlumatlarını saxlamır.",
+  "whereItGoes": "Bağışınız nə üçün istifadə olunur",
+  "serverCosts": "Server və hostinq xərcləri",
+  "apiUsage": "Xəritə plitəsi və API istifadəsi",
+  "keepingFree": "Tətbiqi pulsuz və qorunmuş saxlamaq",
+  "successTitle": "Bağış Tamamlandı",
+  "thankYou": "Təşəkkür edirik!",
+  "successMessage": "Bağışınız BicycleRepairStations-ın hər yerdəki velosipedçilər üçün pulsuz və qorunmuş saxlanmasına kömək edir.",
+  "backToMap": "Xəritəyə qayıt"
+}
