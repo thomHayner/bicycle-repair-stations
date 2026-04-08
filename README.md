@@ -25,6 +25,7 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 - **User-selected radius persistence** — manually tapping a pill locks that selection across subsequent searches until page refresh
 - **Unit toggle** — switch between miles and kilometres; persisted to `localStorage`; large selections snap to the closest pill in the new unit
 - **Amenity filters** — AND-logic filter pills for Pump, Tools, and Repair; combinable with a single-tap Clear
+- **Progressive list loading** — renders 20 stations at a time; scrolling near the bottom loads the next batch automatically, keeping DOM size small even for wide-area searches
 - **Loading indicator** — FAB shows "Loading stations…" or "Searching wider area…"; station list keeps previous results visible with a pulsing header during refresh
 
 ### Map Controls
@@ -48,7 +49,7 @@ A mobile-first **Progressive Web App** that helps cyclists instantly locate publ
 - **Offline tile caching** — Workbox CacheFirst strategy, 7-day TTL, 500 tile cap
 - **Dark mode** — class-based Tailwind dark mode following system preference; overridable to Light or Dark
 - **WCAG AA contrast** — all text/background combinations verified; primary interactive elements meet AAA (7 : 1)
-- **Touch targets** — all buttons and links ≥ 44 × 44 px
+- **Touch targets** — all buttons and links ≥ 44 × 44 px (48 × 48 px on toast dismiss per MD3)
 - **Intentional ARIA semantics** — app shell uses landmarks (`main`, complementary ad region), icon-only controls have accessible names, and map markers expose meaningful names
 - **Intentional modal keyboard behavior** — share sheet and menu drawer are true dialogs with focus trap, Escape-to-close, and focus return
 - **Automated accessibility checks** — axe-core scans are part of release hygiene and run against key routes
@@ -252,7 +253,8 @@ Leaflet is an imperative DOM library; `react-leaflet` wraps it in React context.
 - Results are written to `localStorage` (`brs_v3` key) with a 24-hour TTL; a new fetch fires only when the user moves beyond 20% of the fetch radius from the cache centre, or selects a pill wider than what the cache covers
 - Cache downgrades are free: a 100 mi cache covers any request ≤ 100 mi without re-fetching
 - Overpass timeout scales with fetch radius: 25 s for 25 mi, ~31 s for 50 mi, ~62 s for 100 mi, capped at 90 s
-- Three Overpass mirrors are tried in sequence on HTTP 429 / 5xx errors
+- Three Overpass mirrors are tried in sequence on HTTP 429 / 5xx errors, network failures (`TypeError`), and server-side timeouts (detected via `remark` field in HTTP 200 responses)
+- On error, previous stations remain visible (stale data preserved) and the "Search this area" FAB reappears as a retry affordance; if the distance pill was changed, it reverts to the last successful value
 
 ### Dark Mode Tile Inversion
 
@@ -387,6 +389,7 @@ Cyclists who are on the road, have a mechanical issue, and need a public repair 
 | F-12 | **Unit toggle** | Switch between miles and kilometres. Persisted in `localStorage`. |
 | F-13 | **Amenity filters** | AND-logic filter buttons for Pump, Tools, and Repair service tags. Can be combined. "Clear" resets all. |
 | F-14 | **Loading state** | While a query is in flight, the floating pill shows "Loading stations…" or "Searching wider area…" (for > 25 mi fetches). The station list preserves previous results with a pulsing header count (Google/Apple Maps pattern) — no flash-to-empty. When no prior results exist, the list header shows "Searching nearby…". |
+| F-14b | **Progressive list loading** | Station list renders 20 items at a time. Scrolling near the bottom loads the next 20 automatically. Resets to the first page on new search or filter change. A "Showing N of M — scroll for more" hint appears at the bottom when there are more results. |
 
 ### 2.3 Map Controls
 
@@ -719,7 +722,7 @@ This project is a **consumer** of open, unauthenticated map/data APIs. No API ke
 
 **Primary endpoint**: `https://overpass-api.de/api/interpreter`
 
-**Fallback mirrors** (tried in order on HTTP 429 / 502 / 503 / 504):
+**Fallback mirrors** (tried in order on HTTP 429 / 5xx / network errors / server timeouts):
 1. `https://overpass.kumi.systems/api/interpreter`
 2. `https://overpass.openstreetmap.ru/api/interpreter`
 
@@ -759,7 +762,7 @@ out body;
 }
 ```
 
-**Error handling**: HTTP 4xx/5xx triggers fallback mirror cascade. `AbortError` is silently swallowed. All other errors surface a dismissible `ErrorToast`.
+**Error handling**: HTTP 429/5xx, `TypeError` (network failures), and server-side timeouts (HTTP 200 with `remark` field) all trigger the fallback mirror cascade. `AbortError` is silently swallowed. All other errors surface a dismissible `ErrorToast` with type-specific messages (rate limit, server busy, timeout, network error). On error, previous stations remain visible and the "Search this area" FAB reappears as a retry affordance.
 
 ---
 
@@ -776,6 +779,8 @@ Headers: Accept-Language: en
 ```
 
 **Response**: Array of results; only `results[0].lat` and `results[0].lon` are consumed.
+
+**Error handling**: Distinct toolbar banners for "Location not found" (no results) vs "Search failed — check your connection" (network/HTTP error).
 
 **Rate limiting**: No key required. One request fires per user-initiated search; no polling.
 
@@ -825,7 +830,8 @@ All tile requests are made directly from the user's browser. No API keys. No pro
 
 | Key | Contents | TTL |
 |-----|----------|-----|
-| `brs_v2` | `StationCache` JSON (center, radiusKm, stations[], fetchedAt) | 24 hours |
+| `brs_v3` | `StationCache` JSON (center, radiusKm, stations[], fetchedAt) | 24 hours |
+| `brs_geocode` | Geocode cache — `{ [query]: { lat, lng, ts } }` (max 50 entries) | 7 days per entry |
 | `brs-theme` | `"light" \| "dark" \| "system"` | Permanent (user preference) |
 | `brs-unit` | `"mi" \| "km"` | Permanent (user preference) |
 
@@ -845,6 +851,8 @@ All tile requests are made directly from the user's browser. No API keys. No pro
 | **Surface edges** | All shadow-only surfaces in dark mode given explicit `border border-[#1e2a3a]` — shadows are invisible on near-black backgrounds. |
 | **Repair guide videos** | All Park Tool video IDs verified via HTTP against `i.ytimg.com`. |
 | **Wide-area search** | `useStationQuery` accepts a `fetchRadiusKm` parameter that scales with the selected pill. Pills 1–25 mi use the standard 25 mi fetch; pills 50/100/250 mi trigger on-demand wider fetches with proportionally scaled Overpass timeouts (25 s – 90 s). Cache is radius-aware: a wider cache covers all smaller requests. Auto-radius never escalates beyond 25 mi. |
+| **Search error handling** | Network errors (`TypeError`) now retry all 3 Overpass mirrors. Server-side timeouts detected via `remark` field in HTTP 200 responses. Distinct error messages for rate limits, server busy, timeouts, and network failures. "Search this area" FAB reappears after errors as retry. Stale stations preserved on error. Distance pill reverts on failed wider search. Geocode errors distinguished: "not found" vs "network error" with separate toolbar banners. 15 s safety timeout on LoadingOverlay. |
+| **Station list pagination** | Station list renders in batches of 20 with progressive scroll loading. Resets on new search or filter change. Prevents large DOM from 250 mi urban searches. |
 | **CI / CD** | GitHub Actions `Lint & Build` workflow runs on every PR and push to `main`. Deploy handled by Vercel GitHub integration — no CLI tokens or deploy step in CI. |
 | **SettingsContext split** | Context split into `SettingsContext.tsx` (provider), `settingsCtx.ts` (context object), and `useSettings.ts` (hook) to satisfy ESLint fast-refresh rules. |
 
@@ -853,8 +861,8 @@ All tile requests are made directly from the user's browser. No API keys. No pro
 | Item | Detail |
 |------|--------|
 | **Ad slot height** | The current ad banner is 50 px — fits a 320 × 50 Mobile Banner but not a 320 × 100 Large Mobile Banner (higher CPM). Increasing to 100 px requires changing `style={{ height: 50 }}` in `AdBanner.tsx` and updating `StationListView` from `bottom-[65px]` to `bottom-[115px]`. |
-| **Overpass rate limits** | All three mirrors may be slow during peak hours. No retry back-off beyond the mirror cascade. |
-| **Wide-area query size** | A 250 mi (402 km) radius Overpass query can return many stations in densely-mapped regions. No client-side cap; all results are cached and filtered by the selected pill radius. |
+| **Overpass rate limits** | All three mirrors may be slow during peak hours. No retry back-off beyond the mirror cascade; the "Search this area" FAB serves as a manual retry. |
+| **Wide-area query size** | A 250 mi (402 km) radius Overpass query can return many stations in densely-mapped regions. The station list paginates at 20 per batch to keep DOM size manageable; all results are cached and filtered by the selected pill radius. |
 | **Settings page** | Distance unit and colour theme are currently only accessible via the Menu Drawer. The dedicated Settings page is a placeholder. |
 | **Tile caching scope** | The Workbox runtime cache targets the OSM tile domain pattern only. CARTO, ESRI, and WaymarkedTrails tiles are not currently cached offline. |
 
@@ -865,7 +873,6 @@ All tile requests are made directly from the user's browser. No API keys. No pro
 | High | Implement Settings page (distance unit, default radius, theme — persisted preferences) |
 | High | Expand Workbox runtime caching to cover CARTO, ESRI, and WaymarkedTrails tile domains |
 | High | Increase ad slot to 100 px for 320 × 100 Large Mobile Banner support |
-| Medium | Overpass query retry back-off with exponential delay |
 | Medium | Cluster markers at low zoom levels (currently all markers render individually) |
 | Medium | Internationalisation (i18n) — English, Spanish, French UI strings |
 | Low | Service Worker background sync to refresh station cache while offline |
