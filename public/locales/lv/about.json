@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Par",
+  "tagline": "Atrodiet tuvākās publiskās velosipēdu remonta stacijas.",
+  "dataCredits": "Dati un kredīti",
+  "osmContributors": "© OpenStreetMap līdzautori",
+  "leafletMaps": "Leaflet — interaktīvās kartes",
+  "cartoTiles": "CARTO — karšu flīzes",
+  "overpassData": "Overpass API — staciju dati",
+  "contribute": "Piedalīties",
+  "addMissingStation": "Pievienot trūkstošu staciju OSM",
+  "reportBug": "Ziņot par kļūdu",
+  "supportDonation": "Atbalstīt ar ziedojumu",
+  "shareThisApp": "Kopīgot šo lietotni",
+  "legal": "Juridiskā informācija"
+}

@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Ziedot",
+  "heroTitle": "Atbalstiet BicycleRepairStations",
+  "heroText": "Vai vietne palīdzēja jums atrast staciju vai atgriezties uz ceļa? Vēlaties palīdzēt to saglabāt bezmaksas citiem riteņbraucējiem? Jebkura summa palīdz segt mitināšanas un izstrādes izmaksas.",
+  "chooseAmount": "Izvēlieties summu",
+  "customAmount": "Vai ievadiet pielāgotu summu",
+  "redirecting": "Novirza…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Ziedot ${{amount}} USD",
+  "donateButton": "Ziedot",
+  "somethingWentWrong": "Kaut kas nogāja greizi.",
+  "stripeNotice": "Droši maksājumi caur Stripe (USD). Šī lietotne neglabā kartes datus.",
+  "whereItGoes": "Kur aiziet jūsu ziedojums",
+  "serverCosts": "Servera un mitināšanas izmaksas",
+  "apiUsage": "Karšu flīžu un API izmantošana",
+  "keepingFree": "Lietotnes saglabāšana bezmaksas un uzturēta",
+  "successTitle": "Ziedojums pabeigts",
+  "thankYou": "Paldies!",
+  "successMessage": "Jūsu ziedojums palīdz saglabāt BicycleRepairStations bezmaksas un uzturētu riteņbraucējiem visur.",
+  "backToMap": "Atpakaļ uz karti"
+}
