@@ -1,0 +1,12 @@
+{
+  "shareApp": "መተግበሪ ኣካፍል",
+  "shareStation": "መደበር ኣካፍል",
+  "shareAppMessage": "ኣብ ጥቓኻ ዝርከባ ናይ ህዝቢ ብሽክለታ ጽገና መደበራት ብ BicycleRepairStations.com ርኸብ!",
+  "shareStationMessage": "እዚ ናይ ብሽክለታ ጽገና መደበር ርአ: {{name}}",
+  "copyLink": "ሊንክ ቅዳሕ",
+  "linkCopied": "ሊንክ ተቐዲሑ!",
+  "email": "ኢመይል",
+  "emailSubjectApp": "ኣብ ጥቓኻ ዝርከባ ናይ ብሽክለታ ጽገና መደበራት",
+  "emailSubjectStation": "ናይ ብሽክለታ ጽገና መደበር: {{name}}",
+  "shareVia": "ብ {{platform}} ኣካፍል"
+}

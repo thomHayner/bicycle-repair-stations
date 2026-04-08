@@ -1,0 +1,21 @@
+{
+  "pageTitle": "ወፈያ",
+  "heading": "BicycleRepairStations.com ደግፍ",
+  "heroText": "እዚ መተግበሪ ነጻ፡ ብማስታወቂያ ዝድገፍ፡ ከምኡ'ውን ክፉት ምንጪ እዩ። ወፈያታት ናይ ሆስቲንግ፡ ካርታ ታይልስ፡ ከምኡ'ውን ልምዓት ወጻኢታት ንምሽፋን ይሕግዙ።",
+  "chooseAmount": "መጠን ምረጽ",
+  "donateAmount": "${{amount}} USD ወፍዪ",
+  "customAmount": "ወይ ናይ ባዕልኻ መጠን ኣእቱ",
+  "customPlaceholder": "መጠን",
+  "redirecting": "ይመሓላለፍ ኣሎ\u2026",
+  "donateButton": "${{amount}} USD ወፍዪ",
+  "somethingWentWrong": "ገለ ጸገም ተፈጢሩ።",
+  "stripeNotice": "ክፍሊታት ብ Stripe ብ USD ብውሕስነት ይስራሕ።",
+  "whereItGoes": "ወፈያኻ ናበይ ይኸይድ",
+  "infoHosting": "ናይ ሰርቨርን ሆስቲንግን ወጻኢታት",
+  "infoTiles": "ናይ ካርታ ታይል ኣገልግሎታት",
+  "infoDev": "ቀጻሊ ልምዓትን ጽገናን",
+  "backToMap": "ናብ ካርታ ተመለስ",
+  "successTitle": "ወፈያ ተዛዚሙ",
+  "thankYou": "የቐንየልና!",
+  "successMessage": "ልግስኻ BicycleRepairStations.com ንኹሎም ተሽክለታ ዝጎዓዙ ነጻ ኮይኑ ክቕጽል ይሕግዝ።"
+}
