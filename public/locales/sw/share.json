@@ -1,0 +1,12 @@
+{
+  "shareApp": "Shiriki Programu",
+  "shareStation": "Shiriki Kituo",
+  "shareAppMessage": "Tafuta vituo vya umma vya kutengeneza baiskeli karibu nawe na BicycleRepairStations.com!",
+  "shareStationMessage": "Angalia kituo hiki cha kutengeneza baiskeli: {{name}}",
+  "copyLink": "Nakili Kiungo",
+  "linkCopied": "Kiungo kimenakiliwa!",
+  "email": "Barua pepe",
+  "emailSubjectApp": "Vituo vya Kutengeneza Baiskeli Karibu Nawe",
+  "emailSubjectStation": "Kituo cha Kutengeneza Baiskeli: {{name}}",
+  "shareVia": "Shiriki kupitia {{platform}}"
+}
