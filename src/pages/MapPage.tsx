@@ -98,6 +98,7 @@ export default function MapPage() {
     if (isFirstVisit) {
       const detected = COUNTRY_TO_LOCALE[country];
       if (detected && detected !== "en") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: one-time prompt set on first visit detection
         setLanguagePromptLocale(detected);
       }
     }

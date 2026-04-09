@@ -31,11 +31,11 @@ export function useGeolocation(): GeolocationState {
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- correct pattern: set denied on unavailable API
       fallbackWithIpGeo(setState);
       return;
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: set loading synchronously before watchPosition to avoid a no-status flash
     setState({ status: "loading" });
 
     const watchId = navigator.geolocation.watchPosition(

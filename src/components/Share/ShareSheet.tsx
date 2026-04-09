@@ -105,11 +105,10 @@ export function ShareSheet({
         ].join(" ")}
         role="dialog"
         aria-modal="true"
-        aria-label={t("title")}
+        aria-labelledby="share-sheet-title"
         aria-hidden={!open}
         tabIndex={-1}
         {...(!open ? { inert: true } : {})}
-        aria-labelledby="share-sheet-title"
       >
         <div className="mb-3 px-1">
           <p id="share-sheet-title" className="text-sm font-bold text-slate-900 dark:text-slate-100">{t("title")}</p>
