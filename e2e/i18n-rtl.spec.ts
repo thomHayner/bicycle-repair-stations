@@ -30,8 +30,8 @@ test.describe("i18n / RTL", () => {
     await expect(page.locator("html")).toHaveAttribute("lang", "fr");
 
     await page.reload();
-    // After reload the APIs need to be re-mocked (route mocking is page-level)
-    await mockApis(page);
+    // Route handlers registered with page.route() persist across reloads,
+    // so no re-mocking is needed here.
     await expect(page.locator("html")).toHaveAttribute("lang", "fr", {
       timeout: 5_000,
     });

@@ -19,7 +19,7 @@ describe("GET /api/geo", () => {
     expect(data.country).toBe("GB");
   });
 
-  it("falls back to Denver coords when lat/lng headers are missing", async () => {
+  it("falls back to Boulder, CO default coords when lat/lng headers are missing", async () => {
     const req = makeRequest({});
     const res = await handler(req);
     const data = await res.json() as Record<string, unknown>;
@@ -27,7 +27,7 @@ describe("GET /api/geo", () => {
     expect(data.lng).toBe(-105.2705);
   });
 
-  it("falls back to Denver coords when lat/lng headers are non-numeric", async () => {
+  it("falls back to Boulder, CO default coords when lat/lng headers are non-numeric", async () => {
     const req = makeRequest({
       "x-vercel-ip-latitude": "not-a-number",
       "x-vercel-ip-longitude": "also-not-a-number",
