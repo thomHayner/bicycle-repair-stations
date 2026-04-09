@@ -7,7 +7,7 @@
   "customAmount": "或輸入自訂金額",
   "customPlaceholder": "金額",
   "redirecting": "正在跳轉…",
-  "donateButton": "捐款 ${{amount}} USD",
+  "donateButton": "捐款",
   "somethingWentWrong": "發生了一些問題。",
   "stripeNotice": "付款由 Stripe 以 USD 安全處理。",
   "whereItGoes": "您的捐款用途",

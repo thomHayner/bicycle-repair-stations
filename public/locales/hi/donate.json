@@ -7,7 +7,7 @@
   "customAmount": "या एक कस्टम राशि दर्ज करें",
   "customPlaceholder": "राशि",
   "redirecting": "रीडायरेक्ट हो रहा है…",
-  "donateButton": "${{amount}} USD दान करें",
+  "donateButton": "दान करें",
   "somethingWentWrong": "कुछ गलत हो गया।",
   "stripeNotice": "भुगतान Stripe द्वारा USD में सुरक्षित रूप से प्रोसेस किए जाते हैं।",
   "whereItGoes": "आपका दान कहाँ जाता है",

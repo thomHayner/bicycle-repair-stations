@@ -7,7 +7,7 @@
   "customAmount": "O introduïu un import personalitzat",
   "customPlaceholder": "Import",
   "redirecting": "Redirigint…",
-  "donateButton": "Donar ${{amount}} USD",
+  "donateButton": "Donar",
   "somethingWentWrong": "Alguna cosa ha anat malament.",
   "stripeNotice": "Pagaments processats de manera segura per Stripe en USD.",
   "whereItGoes": "On va el vostre donatiu",

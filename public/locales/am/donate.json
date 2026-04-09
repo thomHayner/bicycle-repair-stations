@@ -7,7 +7,7 @@
   "customAmount": "ወይም ብጁ መጠን ያስገቡ",
   "customPlaceholder": "መጠን",
   "redirecting": "በማዘዋወር ላይ…",
-  "donateButton": "${{amount}} USD ለግስ",
+  "donateButton": "ለግስ",
   "somethingWentWrong": "የሆነ ችግር ተከስቷል።",
   "stripeNotice": "ክፍያዎች በStripe በUSD ደህንነቱ በተጠበቀ ሁኔታ ይከናወናሉ።",
   "whereItGoes": "ልገሳዎ የሚሄድበት",

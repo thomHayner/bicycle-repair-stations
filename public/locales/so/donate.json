@@ -7,7 +7,7 @@
   "customAmount": "Ama geli lacag aad dooratay",
   "customPlaceholder": "Lacagta",
   "redirecting": "Waa la dib-u-jiheynayaa…",
-  "donateButton": "Ku deeq ${{amount}} USD",
+  "donateButton": "Ku deeq",
   "somethingWentWrong": "Wax baa qalday.",
   "stripeNotice": "Lacag-bixintu si ammaan ah ayay ugu socotaa Stripe oo USD ah.",
   "whereItGoes": "Meesha deeqda ay u socoto",

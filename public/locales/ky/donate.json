@@ -7,7 +7,7 @@
   "customAmount": "Же өзүңүздүн сумманы киргизиңиз",
   "customPlaceholder": "Сумма",
   "redirecting": "Багытталууда…",
-  "donateButton": "${{amount}} USD кайрымдуулук кылуу",
+  "donateButton": "кайрымдуулук кылуу",
   "somethingWentWrong": "Бир нерсе туура эмес болду.",
   "stripeNotice": "Төлөмдөр Stripe аркылуу USD менен коопсуз иштетилет.",
   "whereItGoes": "Кайрымдуулугуңуз кайда кетет",

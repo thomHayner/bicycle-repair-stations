@@ -7,7 +7,7 @@
   "customAmount": "Au ingiza kiasi maalum",
   "customPlaceholder": "Kiasi",
   "redirecting": "Inaelekeza…",
-  "donateButton": "Changia ${{amount}} USD",
+  "donateButton": "Changia",
   "somethingWentWrong": "Kuna kitu kimekwenda vibaya.",
   "stripeNotice": "Malipo yanashughulikiwa kwa usalama na Stripe katika USD.",
   "whereItGoes": "Mchango wako unaenda wapi",

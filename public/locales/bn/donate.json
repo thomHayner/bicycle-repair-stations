@@ -7,7 +7,7 @@
   "customAmount": "অথবা একটি কাস্টম পরিমাণ লিখুন",
   "customPlaceholder": "পরিমাণ",
   "redirecting": "পুনঃনির্দেশ করা হচ্ছে…",
-  "donateButton": "${{amount}} USD দান করুন",
+  "donateButton": "দান করুন",
   "somethingWentWrong": "কিছু ভুল হয়েছে।",
   "stripeNotice": "Stripe দ্বারা USD-তে নিরাপদে পেমেন্ট প্রক্রিয়া করা হয়।",
   "whereItGoes": "আপনার দান কোথায় যায়",

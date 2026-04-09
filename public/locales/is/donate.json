@@ -7,7 +7,7 @@
   "customAmount": "Eða sláðu inn sérsniðna upphæð",
   "customPlaceholder": "Upphæð",
   "redirecting": "Beini áfram…",
-  "donateButton": "Gefa ${{amount}} USD",
+  "donateButton": "Gefa",
   "somethingWentWrong": "Eitthvað fór úrskeiðis.",
   "stripeNotice": "Greiðslur eru örugglega unnar af Stripe í USD.",
   "whereItGoes": "Hvert framlag þitt fer",

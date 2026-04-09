@@ -18,12 +18,12 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: "mobile-safari",
+      name: "mobile-chromium",
       use: { ...devices["iPhone 14"] },
     },
   ],
   webServer: {
-    command: "npm run dev",
+    command: "npm run dev -- --port 5173 --strictPort",
     url: "http://localhost:5173",
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,

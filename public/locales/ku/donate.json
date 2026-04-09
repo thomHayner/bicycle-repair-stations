@@ -7,7 +7,7 @@
   "customAmount": "An mîqdarek taybet binivîse",
   "customPlaceholder": "Mîqdar",
   "redirecting": "Tê veguhastin…",
-  "donateButton": "Bexşa ${{amount}} USD",
+  "donateButton": "Bexşa",
   "somethingWentWrong": "Tiştek çewt çû.",
   "stripeNotice": "Pere bi ewlehî ji hêla Stripe ve bi USD tên pêvajokirin.",
   "whereItGoes": "Bexşa te diçe ku derê",

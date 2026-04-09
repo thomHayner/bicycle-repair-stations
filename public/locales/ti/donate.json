@@ -7,7 +7,7 @@
   "customAmount": "ወይ ናይ ባዕልኻ መጠን ኣእቱ",
   "customPlaceholder": "መጠን",
   "redirecting": "ይመሓላለፍ ኣሎ…",
-  "donateButton": "${{amount}} USD ወፍዪ",
+  "donateButton": "ወፍዪ",
   "somethingWentWrong": "ገለ ጸገም ተፈጢሩ።",
   "stripeNotice": "ክፍሊታት ብ Stripe ብ USD ብውሕስነት ይስራሕ።",
   "whereItGoes": "ወፈያኻ ናበይ ይኸይድ",

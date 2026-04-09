@@ -7,7 +7,7 @@
   "customAmount": "Of voer 'n pasgemaakte bedrag in",
   "customPlaceholder": "Bedrag",
   "redirecting": "Herlei tans…",
-  "donateButton": "Skenk ${{amount}} USD",
+  "donateButton": "Skenk",
   "somethingWentWrong": "Iets het verkeerd gegaan.",
   "stripeNotice": "Betalings word veilig deur Stripe in USD verwerk.",
   "whereItGoes": "Waarheen jou skenking gaan",

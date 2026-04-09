@@ -7,7 +7,7 @@
   "customAmount": "Ko shigar da adadin kuɗin ku",
   "customPlaceholder": "Adadi",
   "redirecting": "Ana tura ku…",
-  "donateButton": "Ba da gudummawa ${{amount}} USD",
+  "donateButton": "Ba da gudummawa",
   "somethingWentWrong": "Wani abu ya samu kuskure.",
   "stripeNotice": "Ana sarrafa biyan kuɗi cikin aminci ta Stripe a cikin USD.",
   "whereItGoes": "Inda gudummawar ku ke tafiya",
