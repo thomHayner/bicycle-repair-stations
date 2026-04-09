@@ -32,7 +32,7 @@ export const LoadingOverlay = memo(function LoadingOverlay({
         'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
       )];
 
-    getFocusable()[0]?.focus();
+    panel.focus();
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -78,9 +78,10 @@ export const LoadingOverlay = memo(function LoadingOverlay({
     <div
       ref={panelRef}
       {...dialogProps}
+      tabIndex={isDialog ? -1 : undefined}
       className={[
         "fixed inset-0 z-[2000] flex flex-col items-center justify-center bg-white dark:bg-[#080c14]",
-        "transition-opacity duration-300",
+        "transition-opacity duration-300 outline-none",
         "opacity-100 pointer-events-auto",
       ].join(" ")}
     >

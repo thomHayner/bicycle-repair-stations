@@ -48,8 +48,7 @@ export function ShareSheet({
         'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
       )];
 
-    const initial = getFocusable()[0];
-    initial?.focus();
+    panel.focus();
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -100,7 +99,7 @@ export function ShareSheet({
       <div
         ref={panelRef}
         className={[
-          "fixed left-3 right-3 bottom-3 z-[2700] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-container)] p-3 elevation-3",
+          "fixed left-3 right-3 bottom-3 z-[2700] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-container)] p-3 elevation-3 outline-none",
           "transition-transform duration-200",
           open ? "translate-y-0" : "translate-y-[120%]",
         ].join(" ")}
@@ -108,6 +107,7 @@ export function ShareSheet({
         aria-modal="true"
         aria-label={t("title")}
         aria-hidden={!open}
+        tabIndex={-1}
         {...(!open ? { inert: true } : {})}
         aria-labelledby="share-sheet-title"
       >
