@@ -16,7 +16,7 @@
   "searchingNearby": "Ойролцоо хайгдаж байна…",
   "stationCount_one": "{{distance}} {{unit}} дотор {{count}} станц",
   "stationCount_other": "{{distance}} {{unit}} дотор {{count}} станц",
-  "stationCountFiltered": "{{distance}} {{unit}} дотор {{total}}-аас {{shown}} станц",
+  "stationCountFiltered_one": "{{distance}} {{unit}} дотор {{total}}-аас {{shown}} станц",
   "stationCountFiltered_other": "{{distance}} {{unit}} дотор {{total}}-аас {{shown}} станц",
   "noStationsFound": "Станц олдсонгүй",
   "noStationsArea": "Энэ нутагт станц байхгүй.",

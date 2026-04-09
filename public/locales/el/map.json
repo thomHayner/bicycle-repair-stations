@@ -16,7 +16,7 @@
   "searchingNearby": "Αναζήτηση στην περιοχή…",
   "stationCount_one": "{{count}} σταθμός εντός {{distance}} {{unit}}",
   "stationCount_other": "{{count}} σταθμοί εντός {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} από {{total}} σταθμό εντός {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} από {{total}} σταθμό εντός {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} από {{total}} σταθμούς εντός {{distance}} {{unit}}",
   "noStationsFound": "Δεν βρέθηκαν σταθμοί",
   "noStationsArea": "Δεν υπάρχουν σταθμοί σε αυτή την περιοχή.",

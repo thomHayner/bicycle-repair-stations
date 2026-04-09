@@ -16,7 +16,7 @@
   "searchingNearby": "Haetaan lähistöltä…",
   "stationCount_one": "{{count}} asema {{distance}} {{unit}} säteellä",
   "stationCount_other": "{{count}} asemaa {{distance}} {{unit}} säteellä",
-  "stationCountFiltered": "{{shown}} / {{total}} asema {{distance}} {{unit}} säteellä",
+  "stationCountFiltered_one": "{{shown}} / {{total}} asema {{distance}} {{unit}} säteellä",
   "stationCountFiltered_other": "{{shown}} / {{total}} asemaa {{distance}} {{unit}} säteellä",
   "noStationsFound": "Asemia ei löydy",
   "noStationsArea": "Tällä alueella ei ole asemia.",

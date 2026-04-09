@@ -17,7 +17,7 @@
   "stationCount_one": "{{count}} stație în {{distance}} {{unit}}",
   "stationCount_few": "{{count}} stații în {{distance}} {{unit}}",
   "stationCount_other": "{{count}} de stații în {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} din {{total}} stație în {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} din {{total}} stație în {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} din {{total}} de stații în {{distance}} {{unit}}",
   "noStationsFound": "Nu s-au găsit stații",
   "noStationsArea": "Nu există stații în această zonă.",

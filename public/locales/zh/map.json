@@ -15,6 +15,7 @@
   "searchThisArea": "搜索此区域",
   "searchingNearby": "正在搜索附近…",
   "stationCount_other": "{{distance}} {{unit}} 范围内有 {{count}} 个维修站",
+  "stationCountFiltered_one": "{{distance}} {{unit}} 范围内共 {{total}} 个维修站，显示 {{shown}} 个",
   "stationCountFiltered_other": "{{distance}} {{unit}} 范围内共 {{total}} 个维修站，显示 {{shown}} 个",
   "noStationsFound": "未找到维修站",
   "noStationsArea": "此区域没有维修站。",

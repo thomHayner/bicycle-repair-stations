@@ -17,7 +17,7 @@
   "stationCount_one": "{{count}} станица у {{distance}} {{unit}}",
   "stationCount_few": "{{count}} станице у {{distance}} {{unit}}",
   "stationCount_other": "{{count}} станица у {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} од {{total}} станице у {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} од {{total}} станице у {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} од {{total}} станица у {{distance}} {{unit}}",
   "noStationsFound": "Нема пронађених станица",
   "noStationsArea": "Нема станица у овом подручју.",

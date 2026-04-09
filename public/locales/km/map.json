@@ -15,7 +15,7 @@
   "searchThisArea": "ស្វែងរកតំបន់នេះ",
   "searchingNearby": "កំពុងស្វែងរកនៅជិតៗ…",
   "stationCount_other": "{{count}} ស្ថានីយ៍ក្នុងចម្ងាយ {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} ក្នុង {{total}} ស្ថានីយ៍ក្នុងចម្ងាយ {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} ក្នុង {{total}} ស្ថានីយ៍ក្នុងចម្ងាយ {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} ក្នុង {{total}} ស្ថានីយ៍ក្នុងចម្ងាយ {{distance}} {{unit}}",
   "noStationsFound": "រកមិនឃើញស្ថានីយ៍",
   "noStationsArea": "មិនមានស្ថានីយ៍ក្នុងតំបន់នេះទេ។",

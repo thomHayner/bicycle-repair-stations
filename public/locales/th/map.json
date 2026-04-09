@@ -15,6 +15,7 @@
   "searchThisArea": "ค้นหาในพื้นที่นี้",
   "searchingNearby": "กำลังค้นหาในบริเวณใกล้เคียง…",
   "stationCount_other": "{{count}} สถานีในรัศมี {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} จาก {{total}} สถานีในรัศมี {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} จาก {{total}} สถานีในรัศมี {{distance}} {{unit}}",
   "noStationsFound": "ไม่พบสถานี",
   "noStationsArea": "ไม่มีสถานีในพื้นที่นี้",

@@ -16,7 +16,7 @@
   "searchingNearby": "Ҷустуҷӯ дар наздикӣ…",
   "stationCount_one": "{{count}} истгоҳ дар масофаи {{distance}} {{unit}}",
   "stationCount_other": "{{count}} истгоҳ дар масофаи {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} аз {{total}} истгоҳ дар масофаи {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} аз {{total}} истгоҳ дар масофаи {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} аз {{total}} истгоҳ дар масофаи {{distance}} {{unit}}",
   "noStationsFound": "Ягон истгоҳ ёфт нашуд",
   "noStationsArea": "Дар ин минтақа истгоҳ нест.",

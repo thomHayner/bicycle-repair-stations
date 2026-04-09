@@ -16,7 +16,7 @@
   "searchingNearby": "ཉེ་འདབས་ནང་འཚོལ་བཞིན་པ…",
   "stationCount_one": "{{distance}} {{unit}} ནང་ལུ་སྟེ་ཤན་ {{count}} ཡོད",
   "stationCount_other": "{{distance}} {{unit}} ནང་ལུ་སྟེ་ཤན་ {{count}} ཡོད",
-  "stationCountFiltered": "{{distance}} {{unit}} ནང་ལུ་སྟེ་ཤན་ {{total}} ལས་ {{shown}} སྟོན་བཞིན་པ",
+  "stationCountFiltered_one": "{{distance}} {{unit}} ནང་ལུ་སྟེ་ཤན་ {{total}} ལས་ {{shown}} སྟོན་བཞིན་པ",
   "stationCountFiltered_other": "{{distance}} {{unit}} ནང་ལུ་སྟེ་ཤན་ {{total}} ལས་ {{shown}} སྟོན་བཞིན་པ",
   "noStationsFound": "སྟེ་ཤན་མ་ཐོབ",
   "noStationsArea": "ས་ཁོངས་འདི་ནང་སྟེ་ཤན་མེད།",

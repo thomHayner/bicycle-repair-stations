@@ -24,7 +24,7 @@ const OVERPASS_RESPONSE = {
  * offline and deterministically.
  */
 export async function mockApis(page: Page) {
-  await page.route("/api/geo", (route) =>
+  await page.route("**/api/geo", (route) =>
     route.fulfill({
       contentType: "application/json",
       body: JSON.stringify(DENVER_GEO),

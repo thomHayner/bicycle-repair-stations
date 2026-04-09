@@ -16,7 +16,7 @@
   "searchingNearby": "Yaxınlıqda axtarılır…",
   "stationCount_one": "{{distance}} {{unit}} ərzində {{count}} stansiya",
   "stationCount_other": "{{distance}} {{unit}} ərzində {{count}} stansiya",
-  "stationCountFiltered": "{{distance}} {{unit}} ərzindəki {{total}} stansiyadan {{shown}}-i",
+  "stationCountFiltered_one": "{{distance}} {{unit}} ərzindəki {{total}} stansiyadan {{shown}}-i",
   "stationCountFiltered_other": "{{distance}} {{unit}} ərzindəki {{total}} stansiyadan {{shown}}-i",
   "noStationsFound": "Stansiya tapılmadı",
   "noStationsArea": "Bu ərazidə stansiya yoxdur.",

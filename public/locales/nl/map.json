@@ -16,7 +16,7 @@
   "searchingNearby": "In de buurt zoeken…",
   "stationCount_one": "{{count}} station binnen {{distance}} {{unit}}",
   "stationCount_other": "{{count}} stations binnen {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} van {{total}} station binnen {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} van {{total}} station binnen {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} van {{total}} stations binnen {{distance}} {{unit}}",
   "noStationsFound": "Geen stations gevonden",
   "noStationsArea": "Geen stations in dit gebied.",

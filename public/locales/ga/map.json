@@ -16,7 +16,7 @@
   "searchingNearby": "Cóngaracht á cuardach…",
   "stationCount_one": "{{count}} stáisiún laistigh de {{distance}} {{unit}}",
   "stationCount_other": "{{count}} stáisiún laistigh de {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} as {{total}} stáisiún laistigh de {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} as {{total}} stáisiún laistigh de {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} as {{total}} stáisiún laistigh de {{distance}} {{unit}}",
   "noStationsFound": "Níor aimsíodh aon stáisiún",
   "noStationsArea": "Níl aon stáisiún sa limistéar seo.",

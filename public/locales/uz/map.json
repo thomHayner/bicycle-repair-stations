@@ -16,7 +16,7 @@
   "searchingNearby": "Yaqin atrofda qidirilmoqda…",
   "stationCount_one": "{{distance}} {{unit}} ichida {{count}} ta stansiya",
   "stationCount_other": "{{distance}} {{unit}} ichida {{count}} ta stansiya",
-  "stationCountFiltered": "{{distance}} {{unit}} ichida {{total}} tadan {{shown}} ta stansiya",
+  "stationCountFiltered_one": "{{distance}} {{unit}} ichida {{total}} tadan {{shown}} ta stansiya",
   "stationCountFiltered_other": "{{distance}} {{unit}} ichida {{total}} tadan {{shown}} ta stansiya",
   "noStationsFound": "Stansiyalar topilmadi",
   "noStationsArea": "Bu hududda stansiyalar yo'q.",

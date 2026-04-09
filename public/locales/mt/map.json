@@ -16,7 +16,7 @@
   "searchingNearby": "Qed infittxu fil-qrib…",
   "stationCount_one": "{{count}} stazzjon fi ħdan {{distance}} {{unit}}",
   "stationCount_other": "{{count}} stazzjonijiet fi ħdan {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} minn {{total}} stazzjon fi ħdan {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} minn {{total}} stazzjon fi ħdan {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} minn {{total}} stazzjonijiet fi ħdan {{distance}} {{unit}}",
   "noStationsFound": "L-ebda stazzjonijiet instab",
   "noStationsArea": "L-ebda stazzjonijiet f'din iż-żona.",

@@ -16,7 +16,7 @@
   "searchingNearby": "ନିକଟରେ ସନ୍ଧାନ ହେଉଛି…",
   "stationCount_one": "{{distance}} {{unit}} ମଧ୍ୟରେ {{count}} ଷ୍ଟେସନ",
   "stationCount_other": "{{distance}} {{unit}} ମଧ୍ୟରେ {{count}} ଷ୍ଟେସନ",
-  "stationCountFiltered": "{{distance}} {{unit}} ମଧ୍ୟରେ {{total}} ଷ୍ଟେସନ ମଧ୍ୟରୁ {{shown}}",
+  "stationCountFiltered_one": "{{distance}} {{unit}} ମଧ୍ୟରେ {{total}} ଷ୍ଟେସନ ମଧ୍ୟରୁ {{shown}}",
   "stationCountFiltered_other": "{{distance}} {{unit}} ମଧ୍ୟରେ {{total}} ଷ୍ଟେସନ ମଧ୍ୟରୁ {{shown}}",
   "noStationsFound": "କୌଣସି ଷ୍ଟେସନ ମିଳିଲା ନାହିଁ",
   "noStationsArea": "ଏହି କ୍ଷେତ୍ରରେ କୌଣସି ଷ୍ଟେସନ ନାହିଁ।",

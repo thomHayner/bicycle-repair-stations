@@ -15,7 +15,7 @@
   "searchThisArea": "このエリアを検索",
   "searchingNearby": "近くを検索中…",
   "stationCount_other": "{{distance}} {{unit}} 以内に {{count}} 件のステーション",
-  "stationCountFiltered": "{{distance}} {{unit}} 以内の {{total}} 件中 {{shown}} 件を表示",
+  "stationCountFiltered_one": "{{distance}} {{unit}} 以内の {{total}} 件中 {{shown}} 件を表示",
   "stationCountFiltered_other": "{{distance}} {{unit}} 以内の {{total}} 件中 {{shown}} 件を表示",
   "noStationsFound": "ステーションが見つかりません",
   "noStationsArea": "このエリアにステーションはありません。",

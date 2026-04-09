@@ -16,7 +16,7 @@
   "searchingNearby": "സമീപത്ത് തിരയുന്നു…",
   "stationCount_one": "{{distance}} {{unit}}-ൽ {{count}} സ്റ്റേഷൻ",
   "stationCount_other": "{{distance}} {{unit}}-ൽ {{count}} സ്റ്റേഷനുകൾ",
-  "stationCountFiltered": "{{distance}} {{unit}}-ൽ {{total}} സ്റ്റേഷനിൽ {{shown}} എണ്ണം",
+  "stationCountFiltered_one": "{{distance}} {{unit}}-ൽ {{total}} സ്റ്റേഷനിൽ {{shown}} എണ്ണം",
   "stationCountFiltered_other": "{{distance}} {{unit}}-ൽ {{total}} സ്റ്റേഷനുകളിൽ {{shown}} എണ്ണം",
   "noStationsFound": "സ്റ്റേഷനുകൾ കണ്ടെത്തിയില്ല",
   "noStationsArea": "ഈ പ്രദേശത്ത് സ്റ്റേഷനുകളില്ല.",

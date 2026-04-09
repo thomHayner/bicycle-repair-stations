@@ -15,7 +15,7 @@
   "searchThisArea": "ဤဧရိယာကို ရှာဖွေရန်",
   "searchingNearby": "အနီးအနားကို ရှာဖွေနေသည်…",
   "stationCount_other": "{{distance}} {{unit}} အတွင်း စခန်း {{count}} ခု",
-  "stationCountFiltered": "{{distance}} {{unit}} အတွင်း စခန်း {{total}} ခုမှ {{shown}} ခု",
+  "stationCountFiltered_one": "{{distance}} {{unit}} အတွင်း စခန်း {{total}} ခုမှ {{shown}} ခု",
   "stationCountFiltered_other": "{{distance}} {{unit}} အတွင်း စခန်း {{total}} ခုမှ {{shown}} ခု",
   "noStationsFound": "စခန်း မတွေ့ပါ",
   "noStationsArea": "ဤဧရိယာတွင် စခန်း မရှိပါ။",

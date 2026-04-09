@@ -16,7 +16,7 @@
   "searchingNearby": "Ap chèche pre ou…",
   "stationCount_one": "{{count}} estasyon nan {{distance}} {{unit}}",
   "stationCount_other": "{{count}} estasyon nan {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} nan {{total}} estasyon nan {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} nan {{total}} estasyon nan {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} nan {{total}} estasyon nan {{distance}} {{unit}}",
   "noStationsFound": "Pa gen estasyon jwenn",
   "noStationsArea": "Pa gen estasyon nan zòn sa.",

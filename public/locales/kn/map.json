@@ -16,7 +16,7 @@
   "searchingNearby": "ಹತ್ತಿರದಲ್ಲಿ ಹುಡುಕುತ್ತಿದೆ…",
   "stationCount_one": "{{distance}} {{unit}} ಒಳಗೆ {{count}} ಕೇಂದ್ರ",
   "stationCount_other": "{{distance}} {{unit}} ಒಳಗೆ {{count}} ಕೇಂದ್ರಗಳು",
-  "stationCountFiltered": "{{distance}} {{unit}} ಒಳಗೆ {{total}} ರಲ್ಲಿ {{shown}} ಕೇಂದ್ರ",
+  "stationCountFiltered_one": "{{distance}} {{unit}} ಒಳಗೆ {{total}} ರಲ್ಲಿ {{shown}} ಕೇಂದ್ರ",
   "stationCountFiltered_other": "{{distance}} {{unit}} ಒಳಗೆ {{total}} ರಲ್ಲಿ {{shown}} ಕೇಂದ್ರಗಳು",
   "noStationsFound": "ಯಾವುದೇ ಕೇಂದ್ರಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
   "noStationsArea": "ಈ ಪ್ರದೇಶದಲ್ಲಿ ಯಾವುದೇ ಕೇಂದ್ರಗಳಿಲ್ಲ.",

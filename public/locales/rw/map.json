@@ -16,7 +16,7 @@
   "searchingNearby": "Gushakisha hafi…",
   "stationCount_one": "sitasiyo {{count}} mu ntera ya {{distance}} {{unit}}",
   "stationCount_other": "sitasiyo {{count}} mu ntera ya {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} muri {{total}} sitasiyo mu ntera ya {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} muri {{total}} sitasiyo mu ntera ya {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} muri {{total}} sitasiyo mu ntera ya {{distance}} {{unit}}",
   "noStationsFound": "Nta sitasiyo zabonetse",
   "noStationsArea": "Nta sitasiyo muri aha hantu.",

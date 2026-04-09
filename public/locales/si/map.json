@@ -16,7 +16,7 @@
   "searchingNearby": "ආසන්නව සොයමින්…",
   "stationCount_one": "{{distance}} {{unit}} ඇතුළත ස්ථාන {{count}} ක්",
   "stationCount_other": "{{distance}} {{unit}} ඇතුළත ස්ථාන {{count}} ක්",
-  "stationCountFiltered": "{{distance}} {{unit}} ඇතුළත ස්ථාන {{total}} න් {{shown}} ක්",
+  "stationCountFiltered_one": "{{distance}} {{unit}} ඇතුළත ස්ථාන {{total}} න් {{shown}} ක්",
   "stationCountFiltered_other": "{{distance}} {{unit}} ඇතුළත ස්ථාන {{total}} න් {{shown}} ක්",
   "noStationsFound": "ස්ථාන හමු නොවීය",
   "noStationsArea": "මෙම ප්‍රදේශයේ ස්ථාන නැත.",

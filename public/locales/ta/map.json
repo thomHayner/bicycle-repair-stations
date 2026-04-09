@@ -16,7 +16,7 @@
   "searchingNearby": "அருகில் தேடுகிறது…",
   "stationCount_one": "{{distance}} {{unit}} க்குள் {{count}} நிலையம்",
   "stationCount_other": "{{distance}} {{unit}} க்குள் {{count}} நிலையங்கள்",
-  "stationCountFiltered": "{{distance}} {{unit}} க்குள் {{total}} நிலையத்தில் {{shown}}",
+  "stationCountFiltered_one": "{{distance}} {{unit}} க்குள் {{total}} நிலையத்தில் {{shown}}",
   "stationCountFiltered_other": "{{distance}} {{unit}} க்குள் {{total}} நிலையங்களில் {{shown}}",
   "noStationsFound": "நிலையங்கள் எதுவும் கிடைக்கவில்லை",
   "noStationsArea": "இந்தப் பகுதியில் நிலையங்கள் இல்லை.",

@@ -15,7 +15,7 @@
   "searchThisArea": "Cari area ini",
   "searchingNearby": "Mencari di sekitar…",
   "stationCount_other": "{{count}} stasiun dalam {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} dari {{total}} stasiun dalam {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} dari {{total}} stasiun dalam {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} dari {{total}} stasiun dalam {{distance}} {{unit}}",
   "noStationsFound": "Tidak ada stasiun ditemukan",
   "noStationsArea": "Tidak ada stasiun di area ini.",

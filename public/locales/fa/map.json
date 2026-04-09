@@ -16,7 +16,7 @@
   "searchingNearby": "در حال جستجو در نزدیکی…",
   "stationCount_one": "{{count}} ایستگاه در فاصله {{distance}} {{unit}}",
   "stationCount_other": "{{count}} ایستگاه در فاصله {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} از {{total}} ایستگاه در فاصله {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} از {{total}} ایستگاه در فاصله {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} از {{total}} ایستگاه در فاصله {{distance}} {{unit}}",
   "noStationsFound": "هیچ ایستگاهی پیدا نشد",
   "noStationsArea": "هیچ ایستگاهی در این ناحیه وجود ندارد.",

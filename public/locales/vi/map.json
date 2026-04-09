@@ -15,6 +15,7 @@
   "searchThisArea": "Tìm kiếm khu vực này",
   "searchingNearby": "Đang tìm kiếm gần đây…",
   "stationCount_other": "{{count}} trạm trong phạm vi {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} trong {{total}} trạm trong phạm vi {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} trong {{total}} trạm trong phạm vi {{distance}} {{unit}}",
   "noStationsFound": "Không tìm thấy trạm nào",
   "noStationsArea": "Không có trạm nào trong khu vực này.",

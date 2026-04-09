@@ -17,7 +17,7 @@
   "stationCount_one": "{{count}} stanica unutar {{distance}} {{unit}}",
   "stationCount_few": "{{count}} stanice unutar {{distance}} {{unit}}",
   "stationCount_other": "{{count}} stanica unutar {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} od {{total}} stanice unutar {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} od {{total}} stanice unutar {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} od {{total}} stanica unutar {{distance}} {{unit}}",
   "noStationsFound": "Nisu pronađene stanice",
   "noStationsArea": "Nema stanica u ovoj oblasti.",

@@ -16,7 +16,7 @@
   "searchingNearby": "Söker i närheten…",
   "stationCount_one": "{{count}} station inom {{distance}} {{unit}}",
   "stationCount_other": "{{count}} stationer inom {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} av {{total}} station inom {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} av {{total}} station inom {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} av {{total}} stationer inom {{distance}} {{unit}}",
   "noStationsFound": "Inga stationer hittades",
   "noStationsArea": "Inga stationer i det här området.",

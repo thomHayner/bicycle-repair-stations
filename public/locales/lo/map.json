@@ -15,7 +15,7 @@
   "searchThisArea": "ຄົ້ນຫາໃນພື້ນທີ່ນີ້",
   "searchingNearby": "ກຳລັງຄົ້ນຫາໃກ້ໆ…",
   "stationCount_other": "{{count}} ສະຖານີໃນໄລຍະ {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} ຈາກ {{total}} ສະຖານີໃນໄລຍະ {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} ຈາກ {{total}} ສະຖານີໃນໄລຍະ {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} ຈາກ {{total}} ສະຖານີໃນໄລຍະ {{distance}} {{unit}}",
   "noStationsFound": "ບໍ່ພົບສະຖານີ",
   "noStationsArea": "ບໍ່ມີສະຖານີໃນພື້ນທີ່ນີ້.",

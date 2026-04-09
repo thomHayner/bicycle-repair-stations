@@ -16,7 +16,7 @@
   "searchingNearby": "An der Géigend gëtt gesicht…",
   "stationCount_one": "{{count}} Statioun bannent {{distance}} {{unit}}",
   "stationCount_other": "{{count}} Statiounen bannent {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} vun {{total}} Statioun bannent {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} vun {{total}} Statioun bannent {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} vun {{total}} Statiounen bannent {{distance}} {{unit}}",
   "noStationsFound": "Keng Statiounen fonnt",
   "noStationsArea": "Keng Statiounen an dësem Gebitt.",

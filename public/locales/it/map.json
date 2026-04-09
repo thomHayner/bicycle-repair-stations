@@ -16,7 +16,7 @@
   "searchingNearby": "Ricerca nelle vicinanze…",
   "stationCount_one": "{{count}} stazione entro {{distance}} {{unit}}",
   "stationCount_other": "{{count}} stazioni entro {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} di {{total}} stazione entro {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} di {{total}} stazione entro {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} di {{total}} stazioni entro {{distance}} {{unit}}",
   "noStationsFound": "Nessuna stazione trovata",
   "noStationsArea": "Nessuna stazione in quest'area.",

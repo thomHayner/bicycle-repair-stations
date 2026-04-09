@@ -16,7 +16,7 @@
   "searchingNearby": "ახლომდებარე ტერიტორია მოიძებნება…",
   "stationCount_one": "{{count}} სადგური {{distance}} {{unit}} რადიუსში",
   "stationCount_other": "{{count}} სადგური {{distance}} {{unit}} რადიუსში",
-  "stationCountFiltered": "{{total}}-დან {{shown}} სადგური {{distance}} {{unit}} რადიუსში",
+  "stationCountFiltered_one": "{{total}}-დან {{shown}} სადგური {{distance}} {{unit}} რადიუსში",
   "stationCountFiltered_other": "{{total}}-დან {{shown}} სადგური {{distance}} {{unit}} რადიუსში",
   "noStationsFound": "სადგურები ვერ მოიძებნა",
   "noStationsArea": "ამ ტერიტორიაზე სადგურები არ არის.",

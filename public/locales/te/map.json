@@ -16,7 +16,7 @@
   "searchingNearby": "సమీపంలో శోధిస్తోంది…",
   "stationCount_one": "{{distance}} {{unit}} లోపల {{count}} స్టేషన్",
   "stationCount_other": "{{distance}} {{unit}} లోపల {{count}} స్టేషన్లు",
-  "stationCountFiltered": "{{distance}} {{unit}} లోపల {{total}} లో {{shown}} స్టేషన్",
+  "stationCountFiltered_one": "{{distance}} {{unit}} లోపల {{total}} లో {{shown}} స్టేషన్",
   "stationCountFiltered_other": "{{distance}} {{unit}} లోపల {{total}} లో {{shown}} స్టేషన్లు",
   "noStationsFound": "స్టేషన్లు కనుగొనబడలేదు",
   "noStationsArea": "ఈ ప్రాంతంలో స్టేషన్లు లేవు.",

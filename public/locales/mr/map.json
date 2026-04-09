@@ -16,7 +16,7 @@
   "searchingNearby": "जवळपास शोधत आहे…",
   "stationCount_one": "{{distance}} {{unit}} अंतरात {{count}} स्टेशन",
   "stationCount_other": "{{distance}} {{unit}} अंतरात {{count}} स्टेशन",
-  "stationCountFiltered": "{{distance}} {{unit}} अंतरात {{total}} पैकी {{shown}} स्टेशन",
+  "stationCountFiltered_one": "{{distance}} {{unit}} अंतरात {{total}} पैकी {{shown}} स्टेशन",
   "stationCountFiltered_other": "{{distance}} {{unit}} अंतरात {{total}} पैकी {{shown}} स्टेशन",
   "noStationsFound": "कोणतेही स्टेशन सापडले नाही",
   "noStationsArea": "या क्षेत्रात कोणतेही स्टेशन नाहीत.",

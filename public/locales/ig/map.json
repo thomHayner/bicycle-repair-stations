@@ -16,7 +16,7 @@
   "searchingNearby": "Na-achọ nso…",
   "stationCount_one": "{{count}} ebe nrụzi n'ime {{distance}} {{unit}}",
   "stationCount_other": "{{count}} ebe nrụzi n'ime {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} n'ime {{total}} ebe nrụzi n'ime {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} n'ime {{total}} ebe nrụzi n'ime {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} n'ime {{total}} ebe nrụzi n'ime {{distance}} {{unit}}",
   "noStationsFound": "Ahụghị ebe nrụzi",
   "noStationsArea": "Enweghị ebe nrụzi na mpaghara a.",

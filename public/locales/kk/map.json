@@ -16,7 +16,7 @@
   "searchingNearby": "Жақын жерден іздеу…",
   "stationCount_one": "{{distance}} {{unit}} ішінде {{count}} стансa",
   "stationCount_other": "{{distance}} {{unit}} ішінде {{count}} стансa",
-  "stationCountFiltered": "{{distance}} {{unit}} ішінде {{total}} ішінен {{shown}} стансa",
+  "stationCountFiltered_one": "{{distance}} {{unit}} ішінде {{total}} ішінен {{shown}} стансa",
   "stationCountFiltered_other": "{{distance}} {{unit}} ішінде {{total}} ішінен {{shown}} стансa",
   "noStationsFound": "Стансалар табылмады",
   "noStationsArea": "Бұл аймақта стансалар жоқ.",

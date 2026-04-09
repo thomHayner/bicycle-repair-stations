@@ -16,7 +16,7 @@
   "searchingNearby": "Naghahanap sa malapit…",
   "stationCount_one": "{{count}} istasyon sa loob ng {{distance}} {{unit}}",
   "stationCount_other": "{{count}} na istasyon sa loob ng {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} sa {{total}} na istasyon sa loob ng {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} sa {{total}} na istasyon sa loob ng {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} sa {{total}} na istasyon sa loob ng {{distance}} {{unit}}",
   "noStationsFound": "Walang nahanap na istasyon",
   "noStationsArea": "Walang istasyon sa lugar na ito.",

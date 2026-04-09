@@ -16,7 +16,7 @@
   "searchingNearby": "Մոտակայքը որոնվում է…",
   "stationCount_one": "{{count}} կայարան {{distance}} {{unit}} շրջանում",
   "stationCount_other": "{{count}} կայարան {{distance}} {{unit}} շրջանում",
-  "stationCountFiltered": "{{total}}-ից {{shown}} կայարան {{distance}} {{unit}} շրջանում",
+  "stationCountFiltered_one": "{{total}}-ից {{shown}} կայարան {{distance}} {{unit}} շրջանում",
   "stationCountFiltered_other": "{{total}}-ից {{shown}} կայարան {{distance}} {{unit}} շրջանում",
   "noStationsFound": "Կայարաններ չեն գտնվել",
   "noStationsArea": "Այս տարածքում կայարաններ չկան:",

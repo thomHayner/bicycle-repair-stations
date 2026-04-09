@@ -16,7 +16,7 @@
   "searchingNearby": "Търсене наблизо…",
   "stationCount_one": "{{count}} станция в радиус от {{distance}} {{unit}}",
   "stationCount_other": "{{count}} станции в радиус от {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} от {{total}} станция в радиус от {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} от {{total}} станция в радиус от {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} от {{total}} станции в радиус от {{distance}} {{unit}}",
   "noStationsFound": "Не са намерени станции",
   "noStationsArea": "Няма станции в тази зона.",

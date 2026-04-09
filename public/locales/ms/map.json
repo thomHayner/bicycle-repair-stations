@@ -15,7 +15,7 @@
   "searchThisArea": "Cari kawasan ini",
   "searchingNearby": "Mencari berhampiran…",
   "stationCount_other": "{{count}} stesen dalam {{distance}} {{unit}}",
-  "stationCountFiltered": "{{shown}} daripada {{total}} stesen dalam {{distance}} {{unit}}",
+  "stationCountFiltered_one": "{{shown}} daripada {{total}} stesen dalam {{distance}} {{unit}}",
   "stationCountFiltered_other": "{{shown}} daripada {{total}} stesen dalam {{distance}} {{unit}}",
   "noStationsFound": "Tiada stesen ditemui",
   "noStationsArea": "Tiada stesen di kawasan ini.",
