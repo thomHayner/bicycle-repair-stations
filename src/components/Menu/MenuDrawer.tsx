@@ -63,8 +63,13 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
         'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
       )];
 
-    const initial = getFocusable()[0];
-    initial?.focus();
+    // Focus the panel container rather than the first child button.
+    // Programmatic focus on a tabIndex="-1" element does not trigger
+    // :focus-visible, which prevents the close button from showing its
+    // focus ring on pointer-driven opens (especially on first page load
+    // before any click has occurred). The focus trap below still moves
+    // Tab to the first interactive element, keeping keyboard UX intact.
+    panel.focus();
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -125,6 +130,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
         aria-modal="true"
         aria-labelledby="menu-drawer-title"
         aria-hidden={!open}
+        tabIndex={-1}
         {...(!open ? { inert: true } : {})}
       >
         {/* Header */}
