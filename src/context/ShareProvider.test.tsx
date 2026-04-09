@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent, waitFor, within } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useContext } from "react";
 import { ShareProvider } from "./ShareProvider";
 import { Ctx } from "./shareCtx";
@@ -46,7 +46,7 @@ beforeEach(() => {
     configurable: true,
     writable: true,
   });
-  const nav = navigator as Record<string, unknown>;
+  const nav = navigator as unknown as Record<string, unknown>;
   delete nav.share;
 });
 

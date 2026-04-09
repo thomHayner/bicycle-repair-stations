@@ -101,7 +101,7 @@ describe("useStationQuery", () => {
     setupRealisticCache(null);
     mockFetchStations.mockResolvedValue([station]);
 
-    const { result } = renderHook(() => useStationQuery(51.5, -0.1));
+    renderHook(() => useStationQuery(51.5, -0.1));
     await waitFor(() => expect(mockWriteCache).toHaveBeenCalledOnce());
 
     const [writeArg] = mockWriteCache.mock.calls[0] as [StationCache];

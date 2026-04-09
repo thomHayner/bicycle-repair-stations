@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import {
   isNativeShareSupported,
   buildChannelShareUrl,
@@ -17,7 +17,7 @@ const payload: SharePayload = {
 afterEach(() => {
   vi.restoreAllMocks();
   // Remove navigator.share if it was added
-  const nav = navigator as Record<string, unknown>;
+  const nav = navigator as unknown as Record<string, unknown>;
   delete nav.share;
   // Reset clipboard
   Object.defineProperty(navigator, "clipboard", {
