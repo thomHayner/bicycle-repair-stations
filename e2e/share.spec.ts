@@ -58,7 +58,7 @@ test.describe("Share sheet", () => {
       page.getByRole("button", { name: "Share on X" }).click(),
     ]);
     // The share URL uses x.com (Twitter's current domain)
-    await expect(newPage.url()).toContain("x.com");
+    await expect(newPage).toHaveURL(/x\.com/);
     await newPage.close();
   });
 });
