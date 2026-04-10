@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Цэс хаах",
+  "findStations": "Станцууд хайх",
+  "repairGuides": "Засварын гарын авлага",
+  "about": "Тухай",
+  "reportBug": "Алдаа мэдэгдэх",
+  "donate": "Хандив өгөх",
+  "addMissingStation": "Дутуу станц нэмэх",
+  "shareThisApp": "Энэ аппыг хуваалцах",
+  "theme": "Сэдэв",
+  "themeLight": "Цайвар",
+  "themeDark": "Харанхуй",
+  "themeSystem": "Систем",
+  "distance": "Зай",
+  "language": "Хэл"
+}

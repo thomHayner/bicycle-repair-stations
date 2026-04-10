@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Donér",
+  "heroTitle": "Støt BicycleRepairStations",
+  "heroText": "Hjalp siden dig med at finde en station eller komme tilbage på vejen? Vil du hjælpe med at holde den gratis for andre cyklister? Ethvert beløb hjælper med at dække hosting- og udviklingsomkostninger.",
+  "chooseAmount": "Vælg et beløb",
+  "customAmount": "Eller indtast et brugerdefineret beløb",
+  "redirecting": "Omdirigerer…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Donér ${{amount}} USD",
+  "donateButton": "Donér",
+  "somethingWentWrong": "Noget gik galt.",
+  "stripeNotice": "Sikker betaling via Stripe (USD). Ingen kortoplysninger gemmes af denne app.",
+  "whereItGoes": "Hvor din donation går hen",
+  "serverCosts": "Server- og hostingomkostninger",
+  "apiUsage": "Brug af kortfliser og API",
+  "keepingFree": "Holde appen gratis og vedligeholdt",
+  "successTitle": "Donation gennemført",
+  "thankYou": "Tak!",
+  "successMessage": "Din donation hjælper med at holde BicycleRepairStations gratis og vedligeholdt for cyklister overalt.",
+  "backToMap": "Tilbage til kortet"
+}

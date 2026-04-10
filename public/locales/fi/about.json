@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Tietoa",
+  "tagline": "Löydä julkiset pyörän korjausasemat läheltäsi.",
+  "dataCredits": "Data ja tekijät",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — interaktiiviset kartat",
+  "cartoTiles": "CARTO — karttaruudut",
+  "overpassData": "Overpass API — asemadata",
+  "contribute": "Osallistu",
+  "addMissingStation": "Lisää puuttuva asema OSM:ään",
+  "reportBug": "Ilmoita virheestä",
+  "supportDonation": "Tue lahjoituksella",
+  "shareThisApp": "Jaa tämä sovellus",
+  "legal": "Oikeudelliset tiedot"
+}

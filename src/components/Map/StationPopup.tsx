@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import type { OverpassNode } from "../../types/overpass";
 import { getDirectionsUrl } from "../../lib/directions";
 import { KM_PER_MILE } from "../../lib/units";
 import { useSettings } from "../../context/useSettings";
+import { formatDistance } from "../../lib/formatNumber";
 
 interface Props {
   station: OverpassNode;
@@ -9,9 +11,10 @@ interface Props {
 }
 
 export function StationPopup({ station, distMi }: Props) {
+  const { t, i18n } = useTranslation("map");
   const { unit } = useSettings();
   const { tags } = station;
-  const name = tags.name ?? "Bicycle Repair Station";
+  const name = tags.name ?? t("defaultStationName");
   const hasTools = tags["service:bicycle:tools"] === "yes";
   const hasPump = tags["service:bicycle:pump"] === "yes";
   const hasRepair = tags["service:bicycle:repair"] === "yes";
@@ -30,7 +33,7 @@ export function StationPopup({ station, distMi }: Props) {
 
       {tags.operator && (
         <p className="text-[13px] text-[var(--color-text-secondary)] mb-1.5">
-          <span className="font-semibold">Operator: </span>{tags.operator}
+          <span className="font-semibold">{t("operator")} </span>{tags.operator}
         </p>
       )}
 
@@ -38,17 +41,17 @@ export function StationPopup({ station, distMi }: Props) {
         <div className="flex flex-wrap gap-1 mb-3">
           {hasTools && (
             <span className="bg-[var(--color-primary-container)] text-[var(--color-on-primary-container)] text-[12px] px-2 py-0.5 rounded-full font-semibold">
-              🔧 Tools
+              {t("tools")}
             </span>
           )}
           {hasPump && (
             <span className="bg-[var(--color-secondary-container)] text-[var(--color-on-secondary-container)] text-[12px] px-2 py-0.5 rounded-full font-semibold">
-              💨 Pump
+              {t("pump")}
             </span>
           )}
           {hasRepair && (
             <span className="bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 text-[12px] px-2 py-0.5 rounded-full font-semibold">
-              🛠 Repair
+              {t("repair")}
             </span>
           )}
         </div>
@@ -65,7 +68,7 @@ export function StationPopup({ station, distMi }: Props) {
         const distDisplay = unit === "km" ? distMi * KM_PER_MILE : distMi;
         return (
           <p className="text-[12px] text-[var(--color-text-muted)] mb-2">
-            {distDisplay < 0.1 ? "<0.1" : distDisplay.toFixed(1)} {unit} away
+            {t("distanceAway", { distance: formatDistance(distDisplay, i18n.language), unit })}
           </p>
         );
       })()}
@@ -80,7 +83,7 @@ export function StationPopup({ station, distMi }: Props) {
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M21.71 11.29l-9-9a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l9 9a1 1 0 0 0 1.42 0l9-9a1 1 0 0 0 0-1.42zM13 16.17V13H9v-2h4V7.83l4.17 4.17L13 16.17z"/>
         </svg>
-        Get Directions
+        {t("getDirections")}
       </a>
     </div>
   );

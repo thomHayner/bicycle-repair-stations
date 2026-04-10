@@ -1,0 +1,15 @@
+{
+  "pageTitle": "حول",
+  "tagline": "ابحث عن محطات إصلاح الدراجات العامة بالقرب منك.",
+  "dataCredits": "البيانات والاعتمادات",
+  "osmContributors": "© مساهمو OpenStreetMap",
+  "leafletMaps": "Leaflet — خرائط تفاعلية",
+  "cartoTiles": "CARTO — مربعات الخريطة",
+  "overpassData": "Overpass API — بيانات المحطات",
+  "contribute": "المساهمة",
+  "addMissingStation": "إضافة محطة مفقودة على OSM",
+  "reportBug": "الإبلاغ عن خطأ",
+  "supportDonation": "الدعم بتبرع",
+  "shareThisApp": "مشاركة هذا التطبيق",
+  "legal": "قانوني"
+}

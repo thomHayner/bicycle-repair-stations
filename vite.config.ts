@@ -10,6 +10,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./src/test/setup.ts"],
     css: false,
+    exclude: ["**/node_modules/**", "**/e2e/**"],
   },
   plugins: [
     react(),
@@ -57,6 +58,18 @@ export default defineConfig({
               },
             },
           },
+          {
+            // i18n translation files (non-English locales loaded at runtime)
+            urlPattern: /\/locales\/.*\.json$/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "i18n-translations",
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+              },
+            },
+          },
         ],
       },
     }),
@@ -68,6 +81,9 @@ export default defineConfig({
         manualChunks(id) {
           if (id.includes("leaflet") || id.includes("react-leaflet")) {
             return "leaflet";
+          }
+          if (id.includes("i18next") || id.includes("react-i18next")) {
+            return "i18n";
           }
         },
       },

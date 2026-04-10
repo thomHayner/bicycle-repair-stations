@@ -1,0 +1,11 @@
+{
+  "title": "Del denne appen",
+  "subtitle": "Kun personlig deling: X, Facebook, e-post eller kopier lenke.",
+  "nativeShare": "Flere apper (Instagram/Nextdoor hvis installert)",
+  "shareOnX": "Del på X",
+  "shareOnFacebook": "Del på Facebook",
+  "shareByEmail": "Del via e-post",
+  "copyLink": "Kopier lenke",
+  "linkCopied": "Lenke kopiert til utklippstavlen.",
+  "copyFailed": "Kunne ikke kopiere lenke i denne nettleseren."
+}

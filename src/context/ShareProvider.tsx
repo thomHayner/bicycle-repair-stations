@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback, useMemo, type ReactNode } from "react";
+import i18n from "../i18n";
 import { Ctx, type ShareEntryPoint } from "./shareCtx";
 import { ShareSheet } from "../components/Share/ShareSheet";
 import {
@@ -70,10 +71,10 @@ export function ShareProvider({ children }: { children: ReactNode }) {
       await copyShareLink(getDefaultSharePayload());
       trackEvent("share_copy_link", { result: "success", entryPoint: shareEntryPoint });
       setShareOpen(false);
-      showShareNotice("Link copied to clipboard.");
+      showShareNotice(i18n.t("share:linkCopied"));
     } catch {
       trackEvent("share_copy_link", { result: "failed", entryPoint: shareEntryPoint });
-      showShareNotice("Could not copy link on this browser.");
+      showShareNotice(i18n.t("share:copyFailed"));
     }
   };
 

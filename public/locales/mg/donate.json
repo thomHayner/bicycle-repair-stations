@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Hanome fanomezana",
+  "heroTitle": "Tohano ny BicycleRepairStations",
+  "heroText": "Nanampy anao hahita toeram-panamboarana na hiverina an-dalana ve ny tranokala? Te-hanampy hanaparitaka azy maimaim-poana ho an'ny mpandeha bisikileta hafa? Na inona na inona vola omenao dia manampy amin'ny sarany fampiantranoana sy fampandrosoana.",
+  "chooseAmount": "Misafidiana vola",
+  "customAmount": "Na ampidiro ny vola tianao",
+  "redirecting": "Mamindra\u2026",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Hanome ${{amount}} USD",
+  "donateButton": "Hanome",
+  "somethingWentWrong": "Nisy zavatra tsy nety.",
+  "stripeNotice": "Fandoavana azo antoka amin'ny alalan'ny Stripe ($USD). Tsy misy mombamomba ny karatra tehirizin'ity rindran-tranonkala ity.",
+  "whereItGoes": "Aiza no alehan'ny fanomezanao",
+  "serverCosts": "Sarany mpizara sy fampiantranoana",
+  "apiUsage": "Fampiasana taila saritany sy API",
+  "keepingFree": "Fitazonana ny rindran-tranonkala ho maimaim-poana sy voakojakoja",
+  "successTitle": "Vita ny fanomezana",
+  "thankYou": "Misaotra anao!",
+  "successMessage": "Ny fanomezanao dia manampy hanaparitaka ny BicycleRepairStations maimaim-poana sy voakojakoja ho an'ny mpandeha bisikileta rehetra.",
+  "backToMap": "Hiverina amin'ny saritany"
+}

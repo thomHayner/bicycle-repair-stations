@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Тухай",
+  "tagline": "Таны ойролцоох нийтийн дугуйн засварын станцуудыг олоорой.",
+  "dataCredits": "Өгөгдөл ба авторууд",
+  "osmContributors": "© OpenStreetMap contributors",
+  "leafletMaps": "Leaflet — интерактив газрын зураг",
+  "cartoTiles": "CARTO — газрын зургийн хавтан",
+  "overpassData": "Overpass API — станцын өгөгдөл",
+  "contribute": "Хувь нэмэр оруулах",
+  "addMissingStation": "OSM дээр дутуу станц нэмэх",
+  "reportBug": "Алдаа мэдэгдэх",
+  "supportDonation": "Хандивын дэмжлэг",
+  "shareThisApp": "Энэ аппыг хуваалцах",
+  "legal": "Хуулийн"
+}

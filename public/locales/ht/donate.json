@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Fè Don",
+  "heroTitle": "Sipòte BicycleRepairStations",
+  "heroText": "Èske sit la te ede ou jwenn yon estasyon oswa retounen sou wout la? Ou vle ede kenbe l gratis pou lòt siklès? Nenpòt montan ede kouvri depans eèbèjman ak devlopman.",
+  "chooseAmount": "Chwazi yon montan",
+  "customAmount": "Oswa antre yon montan pèsonalize",
+  "redirecting": "Ap redirijye…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Fè don ${{amount}} USD",
+  "donateButton": "Fè Don",
+  "somethingWentWrong": "Yon bagay mal pase.",
+  "stripeNotice": "Peman sekirize via Stripe (USD). Pa gen enfòmasyon kat ki estoke pa aplikasyon sa.",
+  "whereItGoes": "Ki kote don ou ale",
+  "serverCosts": "Depans sèvè ak eèbèjman",
+  "apiUsage": "Itilizasyon fich kat ak API",
+  "keepingFree": "Kenbe aplikasyon an gratis ak antreteni",
+  "successTitle": "Don Konplè",
+  "thankYou": "Mèsi!",
+  "successMessage": "Don ou ede kenbe BicycleRepairStations gratis ak antreteni pou siklès toupatou.",
+  "backToMap": "Retounen nan kat"
+}

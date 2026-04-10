@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Changia",
+  "heroTitle": "Unga Mkono BicycleRepairStations.com",
+  "heroText": "Programu hii ni ya bure, inayoungwa mkono na matangazo, na ya chanzo wazi. Michango husaidia kugharamia mwenyeji, vigae vya ramani, na maendeleo.",
+  "chooseAmount": "Chagua kiasi",
+  "donateAmount": "Changia ${{amount}} USD",
+  "customAmount": "Au ingiza kiasi maalum",
+  "customPlaceholder": "Kiasi",
+  "redirecting": "Inaelekeza…",
+  "donateButton": "Changia",
+  "somethingWentWrong": "Kuna kitu kimekwenda vibaya.",
+  "stripeNotice": "Malipo yanashughulikiwa kwa usalama na Stripe katika USD.",
+  "whereItGoes": "Mchango wako unaenda wapi",
+  "serverCosts": "Gharama za seva na mwenyeji",
+  "apiUsage": "Huduma za vigae vya ramani",
+  "keepingFree": "Maendeleo na matengenezo yanayoendelea",
+  "backToMap": "Rudi kwenye ramani",
+  "successTitle": "Mchango Umekamilika",
+  "thankYou": "Asante!",
+  "successMessage": "Mchango wako wa ukarimu husaidia kuweka BicycleRepairStations.com bila malipo kwa waendesha baiskeli kila mahali."
+}

@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Tanga Impano",
+  "heroTitle": "Shyigikira BicycleRepairStations",
+  "heroText": "Urubuga rwagufashije gushaka sitasiyo cyangwa gusubira mu nzira? Urashaka gufasha kubigumisha ku buntu ku batwara amagare bandi? Umubare uwo ari wo wose ufasha kwishyura ububiko n'iterambere.",
+  "chooseAmount": "Hitamo umubare",
+  "customAmount": "Cyangwa andika umubare wifuza",
+  "redirecting": "Kwohereza…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Tanga ${{amount}} USD",
+  "donateButton": "Tanga impano",
+  "somethingWentWrong": "Habaye ikibazo.",
+  "stripeNotice": "Kwishyura gukomeye binyuze muri Stripe (USD). Nta makuru y'ikarite abikwa n'iyi porogaramu.",
+  "whereItGoes": "Aho impano yawe ijya",
+  "serverCosts": "Ikiguzi cya seriveri n'ububiko",
+  "apiUsage": "Ibice by'ikarita n'imikoreshereze ya API",
+  "keepingFree": "Kugumisha porogaramu ku buntu no kubungabunga",
+  "successTitle": "Impano Irarangiye",
+  "thankYou": "Urakoze!",
+  "successMessage": "Impano yawe ifasha kugumisha BicycleRepairStations ku buntu no kubungabungwa ku batwara amagare hose.",
+  "backToMap": "Subira ku ikarita"
+}

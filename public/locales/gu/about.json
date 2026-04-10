@@ -1,0 +1,15 @@
+{
+  "pageTitle": "વિશે",
+  "tagline": "તમારી નજીકના જાહેર સાઈકલ રિપેર સ્ટેશનો શોધો.",
+  "dataCredits": "ડેટા અને ક્રેડિટ્સ",
+  "osmContributors": "© OpenStreetMap યોગદાનકર્તાઓ",
+  "leafletMaps": "Leaflet — ઇન્ટરેક્ટિવ નકશા",
+  "cartoTiles": "CARTO — નકશા ટાઈલ્સ",
+  "overpassData": "Overpass API — સ્ટેશન ડેટા",
+  "contribute": "યોગદાન આપો",
+  "addMissingStation": "OSM પર ખૂટતું સ્ટેશન ઉમેરો",
+  "reportBug": "બગ રિપોર્ટ કરો",
+  "supportDonation": "દાન દ્વારા સહાય કરો",
+  "shareThisApp": "આ એપ શેર કરો",
+  "legal": "કાનૂની"
+}

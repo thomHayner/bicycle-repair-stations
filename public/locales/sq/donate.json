@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Dhuron",
+  "heroTitle": "Mbështet BicycleRepairStations",
+  "heroText": "A ju ndihmoi faqja të gjeni një stacion ose të ktheheni në rrugë? Dëshironi të ndihmoni ta mbani falas për çiklistët e tjerë? Çdo shumë ndihmon të mbulojë kostot e pritjes dhe zhvillimit.",
+  "chooseAmount": "Zgjidhni një shumë",
+  "customAmount": "Ose vendosni një shumë të personalizuar",
+  "redirecting": "Po ridrejton…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Dhuroni ${{amount}} USD",
+  "donateButton": "Dhuroni",
+  "somethingWentWrong": "Diçka shkoi keq.",
+  "stripeNotice": "Pagesë e sigurt nëpërmjet Stripe (USD). Asnjë detaj karte nuk ruhet nga ky aplikacion.",
+  "whereItGoes": "Ku shkon donacioni juaj",
+  "serverCosts": "Kostot e serverit dhe pritjes",
+  "apiUsage": "Përdorimi i pllakave të hartës dhe API-t",
+  "keepingFree": "Mbajtja e aplikacionit falas dhe të mirëmbajtur",
+  "successTitle": "Donacioni u krye",
+  "thankYou": "Faleminderit!",
+  "successMessage": "Donacioni juaj ndihmon të mbajë BicycleRepairStations falas dhe të mirëmbajtur për çiklistët kudo.",
+  "backToMap": "Kthehu te harta"
+}

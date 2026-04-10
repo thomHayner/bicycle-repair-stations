@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "Aplikacja do wyszukiwania stacji naprawy rowerów",
+  "back": "Wstecz",
+  "goBack": "Wróć",
+  "cancel": "Anuluj",
+  "dismiss": "Zamknij",
+  "findingLocation": "Wyszukiwanie lokalizacji…",
+  "advertisement": "Reklama",
+  "findDescription": "Znajdź publiczne stacje naprawy rowerów w pobliżu."
+}

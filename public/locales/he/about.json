@@ -1,0 +1,15 @@
+{
+  "pageTitle": "אודות",
+  "tagline": "מצא תחנות תיקון אופניים ציבוריות בקרבתך.",
+  "dataCredits": "נתונים וקרדיטים",
+  "osmContributors": "© תורמי OpenStreetMap",
+  "leafletMaps": "Leaflet — מפות אינטראקטיביות",
+  "cartoTiles": "CARTO — אריחי מפה",
+  "overpassData": "Overpass API — נתוני תחנות",
+  "contribute": "תרום",
+  "addMissingStation": "הוסף תחנה חסרה ב-OSM",
+  "reportBug": "דווח על באג",
+  "supportDonation": "תמוך בתרומה",
+  "shareThisApp": "שתף אפליקציה זו",
+  "legal": "משפטי"
+}

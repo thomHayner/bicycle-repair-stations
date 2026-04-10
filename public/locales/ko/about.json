@@ -1,0 +1,15 @@
+{
+  "pageTitle": "소개",
+  "tagline": "가까운 공공 자전거 수리 스테이션을 찾아보세요.",
+  "dataCredits": "데이터 및 크레딧",
+  "osmContributors": "© OpenStreetMap 기여자",
+  "leafletMaps": "Leaflet — 인터랙티브 지도",
+  "cartoTiles": "CARTO — 지도 타일",
+  "overpassData": "Overpass API — 스테이션 데이터",
+  "contribute": "기여하기",
+  "addMissingStation": "OSM에 누락된 스테이션 추가",
+  "reportBug": "버그 신고",
+  "supportDonation": "후원으로 지원",
+  "shareThisApp": "이 앱 공유",
+  "legal": "법적 고지"
+}

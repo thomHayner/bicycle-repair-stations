@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Haqida",
+  "tagline": "Yaqingingizdagi ommaviy velosiped ta'mirlash stansiyalarini toping.",
+  "dataCredits": "Ma'lumotlar va mualliflik",
+  "osmContributors": "© OpenStreetMap hissadorlari",
+  "leafletMaps": "Leaflet — interaktiv xaritalar",
+  "cartoTiles": "CARTO — xarita plitkalar",
+  "overpassData": "Overpass API — stansiya ma'lumotlari",
+  "contribute": "Hissa qo'shish",
+  "addMissingStation": "OSM da etishmayotgan stansiyani qo'shish",
+  "reportBug": "Xatoni bildirish",
+  "supportDonation": "Xayriya orqali qo'llab-quvvatlash",
+  "shareThisApp": "Bu ilovani ulashish",
+  "legal": "Huquqiy"
+}

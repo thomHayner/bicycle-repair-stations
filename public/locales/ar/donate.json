@@ -1,0 +1,21 @@
+{
+  "pageTitle": "تبرع",
+  "heroTitle": "ادعم BicycleRepairStations",
+  "heroText": "هل ساعدك الموقع في العثور على محطة أو العودة إلى الطريق؟ هل تريد المساعدة في إبقائه مجانياً لراكبي الدراجات الآخرين؟ أي مبلغ يساعد في تغطية تكاليف الاستضافة والتطوير.",
+  "chooseAmount": "اختر مبلغاً",
+  "customAmount": "أو أدخل مبلغاً مخصصاً",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "تبرع بمبلغ ${{amount}} USD",
+  "donateButton": "تبرع",
+  "redirecting": "جارٍ إعادة التوجيه…",
+  "somethingWentWrong": "حدث خطأ ما.",
+  "stripeNotice": "دفع آمن عبر Stripe (بالدولار الأمريكي). لا يتم تخزين بيانات البطاقة بواسطة هذا التطبيق.",
+  "whereItGoes": "أين يذهب تبرعك",
+  "serverCosts": "تكاليف الخادم والاستضافة",
+  "apiUsage": "مربعات الخريطة واستخدام API",
+  "keepingFree": "الحفاظ على التطبيق مجانياً ومحدّثاً",
+  "successTitle": "تمت عملية التبرع",
+  "thankYou": "شكراً لك!",
+  "successMessage": "تبرعك يساعد في الحفاظ على BicycleRepairStations مجانياً ومحدّثاً لراكبي الدراجات في كل مكان.",
+  "backToMap": "العودة إلى الخريطة"
+}

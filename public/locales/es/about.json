@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Acerca de",
+  "tagline": "Encuentra estaciones públicas de reparación de bicicletas cerca de ti.",
+  "dataCredits": "Datos y créditos",
+  "osmContributors": "© Colaboradores de OpenStreetMap",
+  "leafletMaps": "Leaflet — mapas interactivos",
+  "cartoTiles": "CARTO — mosaicos de mapa",
+  "overpassData": "Overpass API — datos de estaciones",
+  "contribute": "Contribuir",
+  "addMissingStation": "Añadir estación faltante en OSM",
+  "reportBug": "Reportar un error",
+  "supportDonation": "Apoyar con una donación",
+  "shareThisApp": "Compartir esta aplicación",
+  "legal": "Legal"
+}

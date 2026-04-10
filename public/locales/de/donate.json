@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Spenden",
+  "heroTitle": "BicycleRepairStations unterstützen",
+  "heroText": "Hat dir die Seite geholfen, eine Station zu finden oder wieder in die Pedale zu treten? Möchtest du helfen, sie für andere Radfahrer kostenlos zu halten? Jeder Betrag hilft, Hosting- und Entwicklungskosten zu decken.",
+  "chooseAmount": "Betrag wählen",
+  "customAmount": "Oder einen eigenen Betrag eingeben",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD spenden",
+  "donateButton": "Spenden",
+  "redirecting": "Weiterleitung…",
+  "somethingWentWrong": "Etwas ist schief gelaufen.",
+  "stripeNotice": "Sichere Zahlung über Stripe (USD). Keine Kartendaten werden von dieser App gespeichert.",
+  "whereItGoes": "Wohin deine Spende geht",
+  "serverCosts": "Server- und Hosting-Kosten",
+  "apiUsage": "Kartenkacheln und API-Nutzung",
+  "keepingFree": "Die App kostenlos und gepflegt halten",
+  "successTitle": "Spende abgeschlossen",
+  "thankYou": "Vielen Dank!",
+  "successMessage": "Deine Spende hilft, BicycleRepairStations für Radfahrer überall kostenlos und gepflegt zu halten.",
+  "backToMap": "Zurück zur Karte"
+}

@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Apie",
+  "tagline": "Raskite artimiausias viešas dviračių remonto stoteles.",
+  "dataCredits": "Duomenys ir autorystė",
+  "osmContributors": "© OpenStreetMap bendraautoriai",
+  "leafletMaps": "Leaflet — interaktyvūs žemėlapiai",
+  "cartoTiles": "CARTO — žemėlapio plytelės",
+  "overpassData": "Overpass API — stotelių duomenys",
+  "contribute": "Prisidėti",
+  "addMissingStation": "Pridėti trūkstamą stotelę prie OSM",
+  "reportBug": "Pranešti apie klaidą",
+  "supportDonation": "Remti auka",
+  "shareThisApp": "Dalintis šia programa",
+  "legal": "Teisinė informacija"
+}

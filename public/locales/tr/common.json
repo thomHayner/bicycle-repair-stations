@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "Bisiklet tamir istasyonları uygulaması",
+  "back": "Geri",
+  "goBack": "Geri git",
+  "cancel": "İptal",
+  "dismiss": "Kapat",
+  "findingLocation": "Konumunuz bulunuyor…",
+  "advertisement": "Reklam",
+  "findDescription": "Yakınızda bulunan halka açık bisiklet tamir istasyonlarını bulun."
+}

@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "자전거 수리 스테이션 앱",
+  "back": "뒤로",
+  "goBack": "뒤로 가기",
+  "cancel": "취소",
+  "dismiss": "닫기",
+  "findingLocation": "위치를 찾는 중…",
+  "advertisement": "광고",
+  "findDescription": "가까운 공공 자전거 수리 스테이션을 찾아보세요."
+}

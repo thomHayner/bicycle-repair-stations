@@ -1,0 +1,21 @@
+{
+  "pageTitle": "مرسته ورکول",
+  "heroTitle": "د BicycleRepairStations ملاتړ وکړئ",
+  "heroText": "ایا سایټ تاسو سره د سټیشن موندلو یا بیرته سړک ته ختلو کې مرسته وکړه؟ غواړئ د نورو بایسکل سوارانو لپاره یې وړیا وساتئ؟ هره اندازه د هوسټینګ او پراختیا لګښتونو پوښلو کې مرسته کوي.",
+  "chooseAmount": "اندازه وټاکئ",
+  "customAmount": "یا خپله اندازه ولیکئ",
+  "redirecting": "لیږدول کیږي\u2026",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD مرسته ورکړئ",
+  "donateButton": "مرسته ورکول",
+  "somethingWentWrong": "یو څه غلط شو.",
+  "stripeNotice": "د Stripe له لارې خوندي تادیه (USD). هیڅ کارت معلومات د دې اپلیکیشن لخوا نه ساتل کیږي.",
+  "whereItGoes": "ستاسو مرسته چیرته ځي",
+  "serverCosts": "سرور او هوسټینګ لګښتونه",
+  "apiUsage": "د نقشې ټایل او API کارول",
+  "keepingFree": "اپلیکیشن وړیا او ساتل شوی ساتل",
+  "successTitle": "مرسته بشپړه شوه",
+  "thankYou": "مننه!",
+  "successMessage": "ستاسو مرسته د BicycleRepairStations په هر ځای کې د بایسکل سوارانو لپاره وړیا او ساتل شوی ساتلو کې مرسته کوي.",
+  "backToMap": "نقشې ته بیرته لاړ شه"
+}

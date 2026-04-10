@@ -1,0 +1,15 @@
+{
+  "pageTitle": "കുറിച്ച്",
+  "tagline": "നിങ്ങളുടെ സമീപത്തുള്ള പൊതു സൈക്കിൾ റിപ്പയർ സ്റ്റേഷനുകൾ കണ്ടെത്തുക.",
+  "dataCredits": "ഡാറ്റ & ക്രെഡിറ്റുകൾ",
+  "osmContributors": "© OpenStreetMap സംഭാവകർ",
+  "leafletMaps": "Leaflet — ഇന്ററാക്ടീവ് മാപ്പുകൾ",
+  "cartoTiles": "CARTO — മാപ്പ് ടൈലുകൾ",
+  "overpassData": "Overpass API — സ്റ്റേഷൻ ഡാറ്റ",
+  "contribute": "സംഭാവന ചെയ്യുക",
+  "addMissingStation": "OSM-ൽ ഒരു കാണാതായ സ്റ്റേഷൻ ചേർക്കുക",
+  "reportBug": "ഒരു ബഗ് റിപ്പോർട്ട് ചെയ്യുക",
+  "supportDonation": "സംഭാവന നൽകി പിന്തുണയ്ക്കുക",
+  "shareThisApp": "ഈ ആപ്പ് പങ്കിടുക",
+  "legal": "നിയമപരം"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Podijeli ovu aplikaciju",
+  "subtitle": "Samo lično dijeljenje: X, Facebook, e-mail ili kopiraj link.",
+  "nativeShare": "Više aplikacija (Instagram/Nextdoor ako su instalirane)",
+  "shareOnX": "Podijeli na X",
+  "shareOnFacebook": "Podijeli na Facebook",
+  "shareByEmail": "Podijeli e-mailom",
+  "copyLink": "Kopiraj link",
+  "linkCopied": "Link kopiran u međuspremnik.",
+  "copyFailed": "Nije moguće kopirati link u ovom pretraživaču."
+}

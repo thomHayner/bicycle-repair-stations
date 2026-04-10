@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, lazy, Suspense } from "react";
+import { useTranslation } from "react-i18next";
 import type { Map as LeafletMap, LatLng, LatLngBounds, FitBoundsOptions, ZoomPanOptions } from "leaflet";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useStationQuery } from "../hooks/useStationQuery";
@@ -14,6 +15,7 @@ import { FETCH_RADIUS_KM } from "../lib/stationCache";
 import { type LayerId } from "../lib/layers";
 import { useSettings } from "../context/useSettings";
 import type { OverpassNode } from "../types/overpass";
+import { COUNTRY_TO_LOCALE, getDefaultUnit, type LocaleCode } from "../i18n/locales";
 
 const MapView = lazy(() =>
   import("../components/Map/MapView").then((m) => ({ default: m.MapView }))
@@ -40,6 +42,7 @@ function boundsOverlapRatio(a: LatLngBounds, b: LatLngBounds): number {
 }
 
 export default function MapPage() {
+  const { t } = useTranslation("map");
   const geo = useGeolocation();
   const mapRef = useRef<LeafletMap | null>(null);
 
@@ -68,8 +71,44 @@ export default function MapPage() {
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number } | null>(null);
 
   // Distance filter — unit comes from global settings; selectedDist is local session state
-  const { unit, setUnit } = useSettings();
+  const { unit, setUnit, setLocale } = useSettings();
   const [selectedDist, setSelectedDist] = useState(() => unit === "km" ? 5 : 2);
+
+  // --- First-visit language prompt ---
+  const isFirstVisit = !localStorage.getItem("brs-locale");
+  const [languagePromptLocale, setLanguagePromptLocale] = useState<LocaleCode | null>(null);
+  const [languageChosen, setLanguageChosen] = useState(false);
+
+  // When geo resolves with a country on first visit, detect language + unit
+  const appliedCountryRef = useRef(false);
+  useEffect(() => {
+    if (appliedCountryRef.current) return;
+    if (geo.status !== "denied" || !("country" in geo) || !geo.country) return;
+    appliedCountryRef.current = true;
+
+    const country = geo.country;
+
+    // Auto-detect unit on first visit
+    if (!localStorage.getItem("brs-unit")) {
+      const detectedUnit = getDefaultUnit(country);
+      setUnit(detectedUnit);
+    }
+
+    // Determine if we should show a language prompt
+    if (isFirstVisit) {
+      const detected = COUNTRY_TO_LOCALE[country];
+      if (detected && detected !== "en") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: one-time prompt set on first visit detection
+        setLanguagePromptLocale(detected);
+      }
+    }
+  }, [geo, isFirstVisit, setUnit]);
+
+  const handleLocaleChosen = useCallback((locale: string) => {
+    setLocale(locale);
+    setLanguageChosen(true);
+    setLanguagePromptLocale(null);
+  }, [setLocale]);
   const displayMiles = unit === "mi" ? selectedDist : selectedDist / KM_PER_MILE;
 
   // Always show all pills (1–250 mi / 1–400 km)
@@ -310,7 +349,8 @@ export default function MapPage() {
   const showOverlay =
     geo.status === "idle" ||
     geo.status === "loading" ||
-    (geo.status === "resolved" && !initialFlyComplete);
+    (geo.status === "resolved" && !initialFlyComplete) ||
+    (languagePromptLocale !== null && !languageChosen);
 
   const showSearchHere = mapMovedSinceSearch;
 
@@ -419,7 +459,11 @@ export default function MapPage() {
 
   return (
     <>
-      <LoadingOverlay visible={showOverlay} />
+      <LoadingOverlay
+        visible={showOverlay}
+        suggestedLocale={languagePromptLocale}
+        onLocaleChosen={handleLocaleChosen}
+      />
 
       {showPill && (
         <div
@@ -435,7 +479,7 @@ export default function MapPage() {
               aria-hidden={showSearchHere}
             >
               <span className="inline-block w-3 h-3 border-2 border-green-600 border-t-transparent rounded-full animate-spin shrink-0" />
-              {isWideSearch ? "Searching wider area\u2026" : "Loading stations\u2026"}
+              {isWideSearch ? t("searchingWiderArea") : t("loadingStations")}
               <span className="w-[15px] h-[15px] shrink-0 invisible" aria-hidden="true" />
             </div>
 
@@ -447,7 +491,7 @@ export default function MapPage() {
               className={`col-start-1 row-start-1 flex items-center gap-2 px-4 py-2 rounded-full state-surface focus-ring transition-opacity duration-150 ${showSearchHere ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
             >
               <span className={`inline-block w-3 h-3 border-2 border-green-600 border-t-transparent rounded-full shrink-0 ${isFetchingStations ? "animate-spin" : "invisible"}`} />
-              Search this area
+              {t("searchThisArea")}
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="shrink-0">
                 <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
               </svg>

@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "Kerékpár-javítóállomás alkalmazás",
+  "back": "Vissza",
+  "goBack": "Visszalépés",
+  "cancel": "Mégse",
+  "dismiss": "Bezárás",
+  "findingLocation": "Helymeghatározás…",
+  "advertisement": "Hirdetés",
+  "findDescription": "Keress nyilvános kerékpár-javítóállomásokat a közeledben."
+}

@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Derma",
+  "heroTitle": "Sokong BicycleRepairStations",
+  "heroText": "Adakah laman web ini membantu anda mencari stesen atau kembali ke jalan raya? Ingin membantu mengekalkannya percuma untuk penunggang basikal lain? Sebarang jumlah membantu menampung kos pengehosan dan pembangunan.",
+  "chooseAmount": "Pilih jumlah",
+  "customAmount": "Atau masukkan jumlah tersuai",
+  "redirecting": "Mengalihkan…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Derma ${{amount}} USD",
+  "donateButton": "Derma",
+  "somethingWentWrong": "Ada yang tidak kena.",
+  "stripeNotice": "Pembayaran selamat melalui Stripe (USD). Tiada butiran kad disimpan oleh apl ini.",
+  "whereItGoes": "Di mana derma anda pergi",
+  "serverCosts": "Kos pelayan dan pengehosan",
+  "apiUsage": "Penggunaan jubin peta dan API",
+  "keepingFree": "Mengekalkan apl percuma dan terjaga",
+  "successTitle": "Derma Selesai",
+  "thankYou": "Terima kasih!",
+  "successMessage": "Derma anda membantu mengekalkan BicycleRepairStations percuma dan terjaga untuk penunggang basikal di mana-mana sahaja.",
+  "backToMap": "Kembali ke peta"
+}

@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Sulje valikko",
+  "findStations": "Etsi asemia",
+  "repairGuides": "Korjausoppaat",
+  "about": "Tietoa",
+  "reportBug": "Ilmoita virheestä",
+  "donate": "Lahjoita",
+  "addMissingStation": "Lisää puuttuva asema",
+  "shareThisApp": "Jaa tämä sovellus",
+  "theme": "Teema",
+  "themeLight": "Vaalea",
+  "themeDark": "Tumma",
+  "themeSystem": "Järjestelmä",
+  "distance": "Etäisyys",
+  "language": "Kieli"
+}

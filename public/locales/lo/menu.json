@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "ປິດເມນູ",
+  "findStations": "ຊອກຫາສະຖານີ",
+  "repairGuides": "ຄູ່ມືການສ້ອມ",
+  "about": "ກ່ຽວກັບ",
+  "reportBug": "ລາຍງານຂໍ້ຜິດພາດ",
+  "donate": "ບໍລິຈາກ",
+  "addMissingStation": "ເພີ່ມສະຖານີທີ່ຂາດຫາຍ",
+  "shareThisApp": "ແບ່ງປັນແອັບນີ້",
+  "theme": "ຮູບແບບ",
+  "themeLight": "ສວ່າງ",
+  "themeDark": "ມືດ",
+  "themeSystem": "ລະບົບ",
+  "distance": "ໄລຍະທາງ",
+  "language": "ພາສາ"
+}

@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "自転車修理ステーションアプリ",
+  "back": "戻る",
+  "goBack": "前のページへ",
+  "cancel": "キャンセル",
+  "dismiss": "閉じる",
+  "findingLocation": "現在地を取得中…",
+  "advertisement": "広告",
+  "findDescription": "近くにある公共の自転車修理ステーションを見つけましょう。"
+}

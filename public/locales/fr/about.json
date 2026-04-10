@@ -1,0 +1,15 @@
+{
+  "pageTitle": "À propos",
+  "tagline": "Trouvez des stations publiques de réparation de vélos près de chez vous.",
+  "dataCredits": "Données et crédits",
+  "osmContributors": "© Contributeurs OpenStreetMap",
+  "leafletMaps": "Leaflet — cartes interactives",
+  "cartoTiles": "CARTO — tuiles cartographiques",
+  "overpassData": "Overpass API — données des stations",
+  "contribute": "Contribuer",
+  "addMissingStation": "Ajouter une station manquante sur OSM",
+  "reportBug": "Signaler un bug",
+  "supportDonation": "Soutenir par un don",
+  "shareThisApp": "Partager cette application",
+  "legal": "Mentions légales"
+}

@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "მენიუს დახურვა",
+  "findStations": "სადგურების პოვნა",
+  "repairGuides": "სარემონტო სახელმძღვანელოები",
+  "about": "შესახებ",
+  "reportBug": "შეცდომის შეტყობინება",
+  "donate": "შემოწირულობა",
+  "addMissingStation": "დამატეთ გამოტოვებული სადგური",
+  "shareThisApp": "გაუზიარეთ ეს აპლიკაცია",
+  "theme": "თემა",
+  "themeLight": "ნათელი",
+  "themeDark": "მუქი",
+  "themeSystem": "სისტემა",
+  "distance": "მანძილი",
+  "language": "ენა"
+}

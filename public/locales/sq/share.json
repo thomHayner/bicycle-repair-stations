@@ -1,0 +1,11 @@
+{
+  "title": "Ndaj këtë aplikacion",
+  "subtitle": "Vetëm ndarje personale: X, Facebook, email, ose kopjo lidhjen.",
+  "nativeShare": "Më shumë aplikacione (Instagram/Nextdoor nëse janë instaluar)",
+  "shareOnX": "Ndaj në X",
+  "shareOnFacebook": "Ndaj në Facebook",
+  "shareByEmail": "Ndaj me Email",
+  "copyLink": "Kopjo lidhjen",
+  "linkCopied": "Lidhja u kopjua në clipboard.",
+  "copyFailed": "Nuk mund të kopjohet lidhja në këtë shfletues."
+}

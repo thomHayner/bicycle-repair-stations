@@ -1,4 +1,5 @@
 import { memo, useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { Map as LeafletMap } from "leaflet";
 import { LAYERS, type LayerId } from "../../lib/layers";
 import { MenuDrawer } from "../Menu/MenuDrawer";
@@ -39,8 +40,8 @@ function writeGeocodeCache(cache: GeocodeCache): void {
   } catch { /* full or unavailable */ }
 }
 
-async function geocode(query: string): Promise<{ lat: number; lng: number } | null> {
-  const key = query.toLowerCase().trim();
+async function geocode(query: string, locale: string): Promise<{ lat: number; lng: number } | null> {
+  const key = `${query.toLowerCase().trim()}|${locale}`;
   const cache = readGeocodeCache();
   const hit = cache[key];
   if (hit && Date.now() - hit.ts < GEOCODE_TTL_MS) {
@@ -48,7 +49,7 @@ async function geocode(query: string): Promise<{ lat: number; lng: number } | nu
   }
 
   const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
-  const res = await fetch(url, { headers: { "Accept-Language": "en" } });
+  const res = await fetch(url, { headers: { "Accept-Language": locale } });
   if (!res.ok) throw new Error(`Geocode HTTP ${res.status}`);
   const results = await res.json();
   if (!results[0]) return null;
@@ -68,7 +69,15 @@ async function geocode(query: string): Promise<{ lat: number; lng: number } | nu
   return result;
 }
 
+/** Layer label translation keys. */
+const LAYER_LABELS: Record<LayerId, string> = {
+  cycling: "layerCycling",
+  satellite: "layerSatellite",
+  standard: "layerStandard",
+};
+
 export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapRef, userPosition, locationDenied, activeLayer, onLayerChange, unit, onUnitChange }: Props) {
+  const { t, i18n } = useTranslation("map");
   const { openShare } = useShare();
   const [query, setQuery] = useState("");
   const [isGeocoding, setIsGeocoding] = useState(false);
@@ -95,7 +104,7 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
     setGeocodeError(null);
     setIsGeocoding(true);
     try {
-      const pos = await geocode(q);
+      const pos = await geocode(q, i18n.language);
       if (pos) {
         onLocationFound(pos);
         inputRef.current?.blur();
@@ -123,8 +132,8 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
-            title="Open menu"
+            aria-label={t("openMenu")}
+            title={t("openMenu")}
             className="w-9 h-9 flex items-center justify-center rounded-full text-[var(--color-text-secondary)] state-surface-strong transition-colors focus-ring shrink-0"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -140,10 +149,10 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
               <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
             </svg>
             <span className="font-bold type-title-small text-slate-900 dark:text-white leading-tight hidden sm:block">
-              BicycleRepairStations.com
+              {t("common:appName")}
             </span>
             <span className="font-bold type-title-small text-slate-900 dark:text-white leading-tight sm:hidden">
-              BRS
+              {t("common:appNameShort")}
             </span>
           </div>
 
@@ -160,8 +169,8 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
                 type="search"
                 value={query}
                 onChange={(e) => { setQuery(e.target.value); setGeocodeError(null); }}
-                placeholder="Search location…"
-                aria-label="Search location"
+                placeholder={t("searchPlaceholder")}
+                aria-label={t("searchLocation")}
                 className="flex-1 bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 px-4 py-2 min-h-[44px] outline-none min-w-0"
               />
 
@@ -173,8 +182,8 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
               ) : (
                 <button
                   type="submit"
-                  aria-label="Search"
-                  title="Search location"
+                  aria-label={t("search")}
+                  title={t("searchLocation")}
                   className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[var(--color-primary)] hover:brightness-90 active:brightness-75 transition-colors focus-ring shrink-0"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -189,19 +198,19 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
 
         {geocodeError === "not-found" && (
           <div className="bg-red-50 dark:bg-red-950/40 border-t border-red-200 dark:border-red-900 px-4 py-1.5 text-xs text-red-700 dark:text-red-400 text-center">
-            Location not found — try a different search term.
+            {t("locationNotFound")}
           </div>
         )}
 
         {geocodeError === "network" && (
           <div className="bg-red-50 dark:bg-red-950/40 border-t border-red-200 dark:border-red-900 px-4 py-1.5 text-xs text-red-700 dark:text-red-400 text-center">
-            Search failed — check your connection and try again.
+            {t("searchFailed")}
           </div>
         )}
 
         {locationDenied && geocodeError === null && (
           <div className="bg-amber-50 dark:bg-amber-950/30 border-t border-amber-200 dark:border-amber-900 px-4 py-1.5 text-xs text-amber-800 dark:text-amber-400 text-center">
-            Location access denied — search above or enable location to find stations near you.
+            {t("locationDenied")}
           </div>
         )}
       </header>
@@ -211,11 +220,11 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
         type="button"
         onClick={handleRecenter}
         disabled={!userPosition}
-        aria-label="Use my location"
-        title={userPosition ? "Use my location" : "Location unavailable"}
+        aria-label={t("useMyLocation")}
+        title={userPosition ? t("useMyLocation") : t("locationUnavailable")}
         style={{ top: fabTop }}
         className={[
-          "fixed right-3 z-[1000] w-11 h-11 rounded-full",
+          "fixed right-3 rtl:right-auto rtl:left-3 z-[1000] w-11 h-11 rounded-full",
           "bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2",
           "flex items-center justify-center transition-colors focus-ring",
           userPosition
@@ -234,11 +243,11 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
       <button
         type="button"
         onClick={() => setLayerPickerOpen((p) => !p)}
-        aria-label="Select map layer"
-        title="Select map layer"
+        aria-label={t("selectMapLayer")}
+        title={t("selectMapLayer")}
         style={{ top: fabTop + 44 + 8 }}
         className={[
-          "fixed right-3 z-[1000] w-11 h-11 rounded-full",
+          "fixed right-3 rtl:right-auto rtl:left-3 z-[1000] w-11 h-11 rounded-full",
           "bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2",
           "flex items-center justify-center transition-colors focus-ring",
           layerPickerOpen
@@ -258,10 +267,10 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
       <button
         type="button"
         onClick={() => openShare("toolbar")}
-        aria-label="Share app"
-        title="Share app"
+        aria-label={t("shareApp")}
+        title={t("shareApp")}
         style={{ top: fabTop + (44 + 8) * 2 }}
-        className="fixed right-3 z-[1000] w-11 h-11 rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 flex items-center justify-center text-[var(--color-text-secondary)] state-surface transition-colors focus-ring"
+        className="fixed right-3 rtl:right-auto rtl:left-3 z-[1000] w-11 h-11 rounded-full bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 flex items-center justify-center text-[var(--color-text-secondary)] state-surface transition-colors focus-ring"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <circle cx="18" cy="5" r="3"/>
@@ -284,7 +293,7 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
       {layerPickerOpen && (
         <div
           style={{ top: fabTop + 44 + 8 }}
-          className="fixed right-[60px] z-[1000] bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 rounded-2xl overflow-hidden min-w-[152px]"
+          className="fixed right-[60px] rtl:right-auto rtl:left-[60px] z-[1000] bg-[var(--color-surface-glass)] backdrop-blur-sm elevation-2 rounded-2xl overflow-hidden min-w-[152px]"
         >
           {LAYERS.map((l) => (
             <button
@@ -300,7 +309,7 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
               ].join(" ")}
             >
               <span className="text-base leading-none">{l.emoji}</span>
-              <span>{l.label}</span>
+              <span>{t(LAYER_LABELS[l.id])}</span>
             </button>
           ))}
         </div>

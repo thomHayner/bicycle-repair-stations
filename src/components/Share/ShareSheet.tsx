@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -47,8 +48,7 @@ export function ShareSheet({
         'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
       )];
 
-    const initial = getFocusable()[0];
-    initial?.focus();
+    panel.focus();
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -84,6 +84,8 @@ export function ShareSheet({
     };
   }, [open, onClose]);
 
+  const { t } = useTranslation("share");
+
   return (
     <>
       <div
@@ -97,41 +99,41 @@ export function ShareSheet({
       <div
         ref={panelRef}
         className={[
-          "fixed left-3 right-3 bottom-3 z-[2700] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-container)] p-3 elevation-3",
+          "fixed left-3 right-3 bottom-3 z-[2700] rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-container)] p-3 elevation-3 outline-none",
           "transition-transform duration-200",
           open ? "translate-y-0" : "translate-y-[120%]",
         ].join(" ")}
         role="dialog"
         aria-modal="true"
-        aria-label="Share this app"
-        aria-hidden={!open}
-        {...(!open ? { inert: true } : {})}
         aria-labelledby="share-sheet-title"
+        aria-hidden={!open}
+        tabIndex={-1}
+        {...(!open ? { inert: true } : {})}
       >
         <div className="mb-3 px-1">
-          <p id="share-sheet-title" className="text-sm font-bold text-slate-900 dark:text-slate-100">Share this app</p>
+          <p id="share-sheet-title" className="text-sm font-bold text-slate-900 dark:text-slate-100">{t("title")}</p>
           <p className="text-xs text-slate-500 dark:text-slate-400">
-            Personal sharing only: X, Facebook, email, or copy link.
+            {t("subtitle")}
           </p>
         </div>
 
         <div className="flex flex-col gap-2">
           {canUseNativeShare && (
             <ShareButton
-              label="More apps (Instagram/Nextdoor if installed)"
+              label={t("nativeShare")}
               onClick={onNativeShare}
             />
           )}
-          <ShareButton label="Share on X" onClick={onShareX} />
-          <ShareButton label="Share on Facebook" onClick={onShareFacebook} />
-          <ShareButton label="Share by Email" onClick={onShareEmail} />
-          <ShareButton label="Copy link" onClick={onCopyLink} />
+          <ShareButton label={t("shareOnX")} onClick={onShareX} />
+          <ShareButton label={t("shareOnFacebook")} onClick={onShareFacebook} />
+          <ShareButton label={t("shareByEmail")} onClick={onShareEmail} />
+          <ShareButton label={t("copyLink")} onClick={onCopyLink} />
           <button
             type="button"
             onClick={onClose}
             className="w-full rounded-xl px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 state-surface-strong focus-ring"
           >
-            Cancel
+            {t("common:cancel")}
           </button>
         </div>
       </div>

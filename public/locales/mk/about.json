@@ -1,0 +1,15 @@
+{
+  "pageTitle": "За нас",
+  "tagline": "Пронајдете јавни станици за поправка на велосипеди во вашата близина.",
+  "dataCredits": "Податоци и признанија",
+  "osmContributors": "© Придонесувачи на OpenStreetMap",
+  "leafletMaps": "Leaflet — интерактивни карти",
+  "cartoTiles": "CARTO — плочки на картата",
+  "overpassData": "Overpass API — податоци за станици",
+  "contribute": "Придонесете",
+  "addMissingStation": "Додајте станица која недостасува на OSM",
+  "reportBug": "Пријавете грешка",
+  "supportDonation": "Поддржете со донација",
+  "shareThisApp": "Споделете ја оваа апликација",
+  "legal": "Правни информации"
+}

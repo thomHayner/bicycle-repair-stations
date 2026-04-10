@@ -1,0 +1,15 @@
+{
+  "pageTitle": "පිළිබඳව",
+  "tagline": "ඔබට ආසන්න පොදු බයිසිකල් අලුත්වැඩියා ස්ථාන සොයන්න.",
+  "dataCredits": "දත්ත සහ ණය",
+  "osmContributors": "© OpenStreetMap දායකයින්",
+  "leafletMaps": "Leaflet — අන්තර්ක්‍රියාකාරී සිතියම්",
+  "cartoTiles": "CARTO — සිතියම් ටයිල්",
+  "overpassData": "Overpass API — ස්ථාන දත්ත",
+  "contribute": "දායක වන්න",
+  "addMissingStation": "OSM හි නැති ස්ථානයක් එකතු කරන්න",
+  "reportBug": "දෝෂයක් වාර්තා කරන්න",
+  "supportDonation": "පරිත්‍යාගයකින් සහාය වන්න",
+  "shareThisApp": "මෙම යෙදුම බෙදාගන්න",
+  "legal": "නෛතික"
+}

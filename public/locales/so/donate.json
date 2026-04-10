@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Ku deeq",
+  "heroTitle": "Taageer BicycleRepairStations.com",
+  "heroText": "Abkan waa bilaash, waxaa taageera xayeysiisyo, wuxuuna yahay il furan. Deeqaha waxay ka caawiyaan kharashka martisadda, taayilasha khariidadda, iyo horumarinta.",
+  "chooseAmount": "Dooro lacag",
+  "donateAmount": "Ku deeq ${{amount}} USD",
+  "customAmount": "Ama geli lacag aad dooratay",
+  "customPlaceholder": "Lacagta",
+  "redirecting": "Waa la dib-u-jiheynayaa…",
+  "donateButton": "Ku deeq",
+  "somethingWentWrong": "Wax baa qalday.",
+  "stripeNotice": "Lacag-bixintu si ammaan ah ayay ugu socotaa Stripe oo USD ah.",
+  "whereItGoes": "Meesha deeqda ay u socoto",
+  "serverCosts": "Kharashka serfarka & martisadda",
+  "apiUsage": "Adeegyada taayilasha khariidadda",
+  "keepingFree": "Horumarinta & dayactirka joogtada ah",
+  "backToMap": "Ku noqo khariidadda",
+  "successTitle": "Deeqda waa la dhammeeyay",
+  "thankYou": "Mahadsanid!",
+  "successMessage": "Deeqdaada deeqsinimada leh waxay ka caawisaa in BicycleRepairStations.com bilaash u ahaado baaskiilleyda meel kasta."
+}

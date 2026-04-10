@@ -1,8 +1,10 @@
 import { memo, useCallback, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { OverpassNode } from "../types/overpass";
 import { haversineDistanceMiles } from "../lib/distance";
 import { getDirectionsUrl } from "../lib/directions";
 import { type Unit, KM_PER_MILE } from "../lib/units";
+import { formatDistance } from "../lib/formatNumber";
 
 /** How many stations to render initially and per scroll batch. */
 const PAGE_SIZE = 20;
@@ -10,12 +12,13 @@ const PAGE_SIZE = 20;
 export type QueryStatus = "idle" | "loading" | "success" | "none" | "error";
 
 interface HeaderState {
-  text: string;
+  key: string;
+  params: Record<string, unknown>;
   pulse: boolean;
-  emptyPanelText: string | null;
+  emptyKey: string | null;
 }
 
-/** Single source of truth for all header / empty-state display text. */
+/** Single source of truth for all header / empty-state translation keys. */
 function getHeaderState(
   queryStatus: QueryStatus,
   total: number,
@@ -26,33 +29,33 @@ function getHeaderState(
 ): HeaderState {
   // Searching — query idle or in-flight with no prior results
   if ((queryStatus === "idle" || queryStatus === "loading") && total === 0)
-    return { text: "Searching nearby\u2026", pulse: true, emptyPanelText: null };
+    return { key: "searchingNearby", params: {}, pulse: true, emptyKey: null };
 
   // Refreshing — re-fetching but we still have previous results on screen.
-  // Show the previous count with a pulse; the FAB already says "Searching…"
   if (queryStatus === "loading" && total > 0)
-    return { text: `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`, pulse: true, emptyPanelText: null };
+    return { key: "stationCount", params: { count: total, distance: selectedDist, unit }, pulse: true, emptyKey: null };
 
   // Query finished with zero results
   if (total === 0)
-    return { text: "No stations found", pulse: false, emptyPanelText: "No stations in this area." };
+    return { key: "noStationsFound", params: {}, pulse: false, emptyKey: "noStationsArea" };
 
   // Has stations, amenity filters active
   if (hasActiveFilters)
     return {
-      text: `${shown} of ${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`,
+      key: "stationCountFiltered",
+      params: { count: total, shown, total, distance: selectedDist, unit },
       pulse: false,
-      emptyPanelText: shown === 0 ? "No stations match the selected filters." : null,
+      emptyKey: shown === 0 ? "noStationsFilter" : null,
     };
 
   // Has stations, no filters
-  return { text: `${total} station${total !== 1 ? "s" : ""} within ${selectedDist} ${unit}`, pulse: false, emptyPanelText: null };
+  return { key: "stationCount", params: { count: total, distance: selectedDist, unit }, pulse: false, emptyKey: null };
 }
 
 const AMENITY_FILTERS = [
-  { key: "pump",   label: "💨 Pump",   tag: "service:bicycle:pump",   active: "bg-[var(--color-secondary)] border-[var(--color-secondary)] text-[var(--color-on-secondary)]",    inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
-  { key: "tools",  label: "🔧 Tools",  tag: "service:bicycle:tools",  active: "bg-[var(--color-primary)] border-[var(--color-primary)] text-[var(--color-on-primary)]",  inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
-  { key: "repair", label: "🛠 Repair", tag: "service:bicycle:repair", active: "bg-amber-700 dark:bg-amber-400 border-amber-700 dark:border-amber-400 text-white dark:text-black",  inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
+  { key: "pump",   tKey: "pump",   tag: "service:bicycle:pump",   active: "bg-[var(--color-secondary)] border-[var(--color-secondary)] text-[var(--color-on-secondary)]",    inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
+  { key: "tools",  tKey: "tools",  tag: "service:bicycle:tools",  active: "bg-[var(--color-primary)] border-[var(--color-primary)] text-[var(--color-on-primary)]",  inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
+  { key: "repair", tKey: "repair", tag: "service:bicycle:repair", active: "bg-amber-700 dark:bg-amber-400 border-amber-700 dark:border-amber-400 text-white dark:text-black",  inactive: "bg-[var(--color-surface-container)] border-[var(--color-border)] text-slate-600 dark:text-slate-300" },
 ] as const;
 
 type FilterKey = (typeof AMENITY_FILTERS)[number]["key"];
@@ -87,6 +90,7 @@ export const StationListView = memo(function StationListView({
   onExpandedChange,
   queryStatus,
 }: Props) {
+  const { t, i18n } = useTranslation("map");
   const [activeFilters, setActiveFilters] = useState<Set<FilterKey>>(new Set());
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -152,9 +156,10 @@ export const StationListView = memo(function StationListView({
   const hasActiveFilters = activeFilters.size > 0;
   const options = distOptions;
 
-  const { text: headerText, pulse: headerPulse, emptyPanelText } = getHeaderState(
-    queryStatus, total, shown, hasActiveFilters, selectedDist, unit,
-  );
+  const headerState = getHeaderState(queryStatus, total, shown, hasActiveFilters, selectedDist, unit);
+  const headerText = t(headerState.key, headerState.params);
+  const headerPulse = headerState.pulse;
+  const emptyPanelText = headerState.emptyKey ? t(headerState.emptyKey) : null;
   const headerKey = headerPulse ? "loading" : headerText;
 
   return (
@@ -168,7 +173,7 @@ export const StationListView = memo(function StationListView({
         onClick={() => onExpandedChange(!expanded)}
         className="w-full flex items-center justify-between px-4 py-3 state-surface transition-colors focus-ring-inset"
         aria-expanded={expanded}
-        aria-label={expanded ? "Collapse station list" : "Expand station list"}
+        aria-label={expanded ? t("collapseStationList") : t("expandStationList")}
       >
         <span className="flex items-center gap-1.5 type-title-small text-slate-800 dark:text-slate-100">
           <span key={headerKey} className={headerPulse ? "animate-pulse" : undefined}>
@@ -230,7 +235,7 @@ export const StationListView = memo(function StationListView({
 
         {/* Amenity filter row */}
         <div className="border-t border-[var(--color-border)] px-4 py-2.5 flex items-center gap-2 flex-wrap">
-          <span className="text-xs text-slate-500 dark:text-slate-400 shrink-0">Filter:</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400 shrink-0">{t("filter")}</span>
           {AMENITY_FILTERS.map((f) => {
             const on = activeFilters.has(f.key);
             return (
@@ -243,7 +248,7 @@ export const StationListView = memo(function StationListView({
                   on ? f.active : f.inactive + " state-surface",
                 ].join(" ")}
               >
-                {f.label}
+                {t(f.tKey)}
               </button>
             );
           })}
@@ -253,7 +258,7 @@ export const StationListView = memo(function StationListView({
               onClick={() => setActiveFilters(new Set())}
               className="text-xs text-slate-500 dark:text-slate-400 underline ml-1 hover:text-slate-700 dark:hover:text-slate-200 focus-ring rounded"
             >
-              Clear
+              {t("clear")}
             </button>
           )}
         </div>
@@ -270,7 +275,7 @@ export const StationListView = memo(function StationListView({
             const distMi = userDistances?.get(station.id) ?? null;
             const distDisplay = distMi == null ? null : unit === "km" ? distMi * KM_PER_MILE : distMi;
 
-            const name = station.tags.name ?? "Bicycle Repair Station";
+            const name = station.tags.name ?? t("defaultStationName");
             const hasPump  = station.tags["service:bicycle:pump"]   === "yes";
             const hasTools = station.tags["service:bicycle:tools"]  === "yes";
             const hasRepair= station.tags["service:bicycle:repair"] === "yes";
@@ -287,16 +292,16 @@ export const StationListView = memo(function StationListView({
                   <p className="text-sm font-medium text-slate-900 dark:text-slate-100 truncate">{name}</p>
                   {(hasPump || hasTools || hasRepair) && (
                     <div className="flex flex-wrap gap-1 mt-1">
-                      {hasPump  && <span className="text-xs bg-sky-50   dark:bg-sky-950/50 text-sky-700  dark:text-sky-400  rounded-full px-2 py-0.5">💨 Pump</span>}
-                      {hasTools && <span className="text-xs bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 rounded-full px-2 py-0.5">🔧 Tools</span>}
-                      {hasRepair&& <span className="text-xs bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 rounded-full px-2 py-0.5">🛠 Repair</span>}
+                      {hasPump  && <span className="text-xs bg-sky-50   dark:bg-sky-950/50 text-sky-700  dark:text-sky-400  rounded-full px-2 py-0.5">{t("pump")}</span>}
+                      {hasTools && <span className="text-xs bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 rounded-full px-2 py-0.5">{t("tools")}</span>}
+                      {hasRepair&& <span className="text-xs bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 rounded-full px-2 py-0.5">{t("repair")}</span>}
                     </div>
                   )}
                 </div>
                 <div className="flex items-center gap-2 ml-3 shrink-0">
                   {distDisplay != null && (
                     <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                      {distDisplay < 0.1 ? "<0.1" : distDisplay.toFixed(1)} {unit}
+                      {formatDistance(distDisplay, i18n.language)} {unit}
                     </span>
                   )}
                   <a
@@ -305,8 +310,8 @@ export const StationListView = memo(function StationListView({
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
                     className="flex items-center justify-center w-8 h-8 rounded-full bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/50 active:bg-green-200 dark:active:bg-green-900/70 transition-colors focus-ring"
-                    aria-label={`Get directions to ${name}`}
-                    title={`Get directions to ${name}`}
+                    aria-label={t("getDirectionsTo", { name })}
+                    title={t("getDirectionsTo", { name })}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M21.71 11.29l-9-9a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l9 9a1 1 0 0 0 1.42 0l9-9a1 1 0 0 0 0-1.42zM13 16.17V13H9v-2h4V7.83l4.17 4.17L13 16.17z"/>
@@ -320,7 +325,7 @@ export const StationListView = memo(function StationListView({
           {hasMore && (
             <div className="px-4 py-3 text-center border-t border-[var(--color-border)]">
               <span className="text-xs text-slate-400 dark:text-slate-500">
-                Showing {visibleCount} of {shown} — scroll for more
+                {t("showingCount", { visible: visibleCount, total: shown })}
               </span>
             </div>
           )}

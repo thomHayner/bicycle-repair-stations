@@ -1,0 +1,17 @@
+{
+  "title": "BicycleRepairStations",
+  "closeMenu": "Менюну жабуу",
+  "findStations": "Станцияларды табуу",
+  "repairGuides": "Оңдоо нускамалары",
+  "about": "Жөнүндө",
+  "reportBug": "Ката жөнүндө кабарлоо",
+  "donate": "Кайрымдуулук кылуу",
+  "addMissingStation": "Жетишпеген станцияны кошуу",
+  "shareThisApp": "Бул колдонмону бөлүшүү",
+  "theme": "Тема",
+  "themeLight": "Жарык",
+  "themeDark": "Караңгы",
+  "themeSystem": "Тутум",
+  "distance": "Аралык",
+  "language": "Тил"
+}

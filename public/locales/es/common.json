@@ -1,0 +1,13 @@
+{
+  "appName": "BicycleRepairStations.com",
+  "appNameShort": "BRS",
+  "appTitle": "BicycleRepairStations",
+  "appAriaLabel": "Aplicación de estaciones de reparación de bicicletas",
+  "back": "Atrás",
+  "goBack": "Volver",
+  "cancel": "Cancelar",
+  "dismiss": "Cerrar",
+  "findingLocation": "Buscando tu ubicación…",
+  "advertisement": "Publicidad",
+  "findDescription": "Encuentra estaciones públicas de reparación de bicicletas cerca de ti."
+}

@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Über uns",
+  "tagline": "Finde öffentliche Fahrrad-Reparaturstationen in deiner Nähe.",
+  "dataCredits": "Daten & Credits",
+  "osmContributors": "© OpenStreetMap Mitwirkende",
+  "leafletMaps": "Leaflet — interaktive Karten",
+  "cartoTiles": "CARTO — Kartenkacheln",
+  "overpassData": "Overpass API — Stationsdaten",
+  "contribute": "Mitwirken",
+  "addMissingStation": "Fehlende Station auf OSM hinzufügen",
+  "reportBug": "Fehler melden",
+  "supportDonation": "Mit einer Spende unterstützen",
+  "shareThisApp": "App teilen",
+  "legal": "Rechtliches"
+}

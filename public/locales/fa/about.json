@@ -1,0 +1,15 @@
+{
+  "pageTitle": "درباره",
+  "tagline": "ایستگاه‌های عمومی تعمیر دوچرخه نزدیک خود را پیدا کنید.",
+  "dataCredits": "داده‌ها و اعتبارها",
+  "osmContributors": "© مشارکت‌کنندگان OpenStreetMap",
+  "leafletMaps": "Leaflet — نقشه‌های تعاملی",
+  "cartoTiles": "CARTO — کاشی‌های نقشه",
+  "overpassData": "Overpass API — داده‌های ایستگاه",
+  "contribute": "مشارکت",
+  "addMissingStation": "اضافه کردن ایستگاه گم‌شده در OSM",
+  "reportBug": "گزارش باگ",
+  "supportDonation": "حمایت با کمک مالی",
+  "shareThisApp": "اشتراک‌گذاری این برنامه",
+  "legal": "قانونی"
+}

@@ -1,0 +1,21 @@
+{
+  "pageTitle": "দান করুন",
+  "heroTitle": "BicycleRepairStations.com-কে সহায়তা করুন",
+  "heroText": "এই অ্যাপটি বিনামূল্যে, বিজ্ঞাপন-সমর্থিত এবং ওপেন সোর্স। দান হোস্টিং, মানচিত্র টাইলস এবং উন্নয়ন খরচ মেটাতে সাহায্য করে।",
+  "chooseAmount": "একটি পরিমাণ নির্বাচন করুন",
+  "donateAmount": "${{amount}} USD দান করুন",
+  "customAmount": "অথবা একটি কাস্টম পরিমাণ লিখুন",
+  "customPlaceholder": "পরিমাণ",
+  "redirecting": "পুনঃনির্দেশ করা হচ্ছে…",
+  "donateButton": "দান করুন",
+  "somethingWentWrong": "কিছু ভুল হয়েছে।",
+  "stripeNotice": "Stripe দ্বারা USD-তে নিরাপদে পেমেন্ট প্রক্রিয়া করা হয়।",
+  "whereItGoes": "আপনার দান কোথায় যায়",
+  "serverCosts": "সার্ভার ও হোস্টিং খরচ",
+  "apiUsage": "মানচিত্র টাইল পরিষেবা",
+  "keepingFree": "চলমান উন্নয়ন ও রক্ষণাবেক্ষণ",
+  "backToMap": "মানচিত্রে ফিরে যান",
+  "successTitle": "দান সম্পন্ন",
+  "thankYou": "ধন্যবাদ!",
+  "successMessage": "আপনার উদার অবদান সর্বত্র সাইক্লিস্টদের জন্য BicycleRepairStations.com বিনামূল্যে রাখতে সাহায্য করে।"
+}

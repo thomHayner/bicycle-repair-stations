@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Rreth",
+  "tagline": "Gjeni stacione publike të riparimit të biçikletave pranë jush.",
+  "dataCredits": "Të dhëna dhe kredite",
+  "osmContributors": "© Kontribuesit e OpenStreetMap",
+  "leafletMaps": "Leaflet — harta interaktive",
+  "cartoTiles": "CARTO — pllakat e hartës",
+  "overpassData": "Overpass API — të dhënat e stacioneve",
+  "contribute": "Kontribuoni",
+  "addMissingStation": "Shtoni një stacion që mungon në OSM",
+  "reportBug": "Raportoni një problem",
+  "supportDonation": "Mbështetni me një donacion",
+  "shareThisApp": "Ndani këtë aplikacion",
+  "legal": "Ligjore"
+}

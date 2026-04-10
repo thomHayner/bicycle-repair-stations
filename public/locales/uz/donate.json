@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Xayriya qilish",
+  "heroTitle": "BicycleRepairStations ni qo'llab-quvvatlash",
+  "heroText": "Sayt sizga stansiya topishga yoki yo'lda davom etishga yordam berdimi? Boshqa velosipedchilar uchun uni bepul saqlashda yordam bermoqchimisiz? Har qanday miqdor hosting va ishlab chiqish xarajatlarini qoplashga yordam beradi.",
+  "chooseAmount": "Miqdorni tanlang",
+  "customAmount": "Yoki maxsus miqdor kiriting",
+  "redirecting": "Yo'naltirilmoqda…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD xayriya qilish",
+  "donateButton": "Xayriya qilish",
+  "somethingWentWrong": "Nimadir noto'g'ri ketdi.",
+  "stripeNotice": "Stripe orqali xavfsiz to'lov (USD). Karta ma'lumotlari bu ilova tomonidan saqlanmaydi.",
+  "whereItGoes": "Xayriyangiz qayerga ketadi",
+  "serverCosts": "Server va hosting xarajatlari",
+  "apiUsage": "Xarita plitkalar va API foydalanish",
+  "keepingFree": "Ilovani bepul va saqlab turishda davom etish",
+  "successTitle": "Xayriya amalga oshirildi",
+  "thankYou": "Rahmat!",
+  "successMessage": "Sizning xayriyangiz BicycleRepairStations ni hamma joyda velosipedchilar uchun bepul va saqlab turishda yordam beradi.",
+  "backToMap": "Xaritaga qaytish"
+}

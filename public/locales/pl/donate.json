@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Przekaż darowiznę",
+  "heroTitle": "Wesprzyj BicycleRepairStations",
+  "heroText": "Czy strona pomogła Ci znaleźć stację lub wrócić na drogę? Chcesz pomóc utrzymać ją bezpłatną dla innych rowerzystów? Każda kwota pomaga pokryć koszty hostingu i rozwoju.",
+  "chooseAmount": "Wybierz kwotę",
+  "customAmount": "Lub wprowadź własną kwotę",
+  "redirecting": "Przekierowywanie…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "Przekaż darowiznę ${{amount}} USD",
+  "donateButton": "Przekaż darowiznę",
+  "somethingWentWrong": "Coś poszło nie tak.",
+  "stripeNotice": "Bezpieczna płatność przez Stripe (USD). Dane karty nie są przechowywane przez tę aplikację.",
+  "whereItGoes": "Na co przeznaczona jest Twoja darowizna",
+  "serverCosts": "Koszty serwera i hostingu",
+  "apiUsage": "Użycie kafelków mapy i API",
+  "keepingFree": "Utrzymanie aplikacji bezpłatnej i aktualnej",
+  "successTitle": "Darowizna zakończona",
+  "thankYou": "Dziękujemy!",
+  "successMessage": "Twoja darowizna pomaga utrzymać BicycleRepairStations bezpłatnym i aktualnym dla rowerzystów na całym świecie.",
+  "backToMap": "Wróć do mapy"
+}

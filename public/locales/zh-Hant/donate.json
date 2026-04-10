@@ -1,0 +1,21 @@
+{
+  "pageTitle": "捐款",
+  "heroTitle": "支持 BicycleRepairStations.com",
+  "heroText": "本應用程式免費、含廣告且開放原始碼。您的捐款將用於支付伺服器、地圖圖磚及開發費用。",
+  "chooseAmount": "選擇金額",
+  "donateAmount": "捐款 ${{amount}} USD",
+  "customAmount": "或輸入自訂金額",
+  "customPlaceholder": "金額",
+  "redirecting": "正在跳轉…",
+  "donateButton": "捐款",
+  "somethingWentWrong": "發生了一些問題。",
+  "stripeNotice": "付款由 Stripe 以 USD 安全處理。",
+  "whereItGoes": "您的捐款用途",
+  "serverCosts": "伺服器與主機費用",
+  "apiUsage": "地圖圖磚服務",
+  "keepingFree": "持續開發與維護",
+  "backToMap": "返回地圖",
+  "successTitle": "捐款完成",
+  "thankYou": "感謝您！",
+  "successMessage": "您的慷慨捐助幫助 BicycleRepairStations.com 持續為各地的單車騎士提供免費服務。"
+}

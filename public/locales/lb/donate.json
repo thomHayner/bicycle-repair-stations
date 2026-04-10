@@ -1,0 +1,21 @@
+{
+  "pageTitle": "Spenden",
+  "heroTitle": "Ënnerstëtzt BicycleRepairStations",
+  "heroText": "Huet d'Säit Iech gehollef eng Statioun ze fannen oder erëm op de Wee ze kommen? Wëllt Dir hëllefen et gratis fir aner Vëlosfuerer ze halen? All Betrag hëlleft Hosting- an Entwécklungskäschten ze decken.",
+  "chooseAmount": "Wielt e Betrag",
+  "customAmount": "Oder gitt en eegene Betrag an",
+  "redirecting": "Viruleeden…",
+  "presetAmount": "${{amount}} USD",
+  "donateAmount": "${{amount}} USD spenden",
+  "donateButton": "Spenden",
+  "somethingWentWrong": "Eppes ass schif gaangen.",
+  "stripeNotice": "Sécher Bezuelung iwwer Stripe (USD). Keng Kaartendaten ginn vun dëser App gespäichert.",
+  "whereItGoes": "Wou Är Spend higeet",
+  "serverCosts": "Server- an Hostingkäschten",
+  "apiUsage": "Kaartekachelen an API-Notzung",
+  "keepingFree": "D'App gratis an ënnerhalen halen",
+  "successTitle": "Spend ofgeschloss",
+  "thankYou": "Villmools Merci!",
+  "successMessage": "Är Spend hëlleft BicycleRepairStations gratis an ënnerhalen ze hale fir Vëlosfuerer iwwerall.",
+  "backToMap": "Zréck op d'Kaart"
+}

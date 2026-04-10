@@ -1,0 +1,11 @@
+{
+  "title": "이 앱 공유",
+  "subtitle": "개인 공유만 가능: X, Facebook, 이메일 또는 링크 복사.",
+  "nativeShare": "더 많은 앱 (설치된 경우 Instagram/Nextdoor)",
+  "shareOnX": "X에서 공유",
+  "shareOnFacebook": "Facebook에서 공유",
+  "shareByEmail": "이메일로 공유",
+  "copyLink": "링크 복사",
+  "linkCopied": "링크가 클립보드에 복사되었습니다.",
+  "copyFailed": "이 브라우저에서 링크를 복사할 수 없습니다."
+}
