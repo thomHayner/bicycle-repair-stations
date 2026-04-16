@@ -37,7 +37,7 @@ npm run dev            # http://localhost:5173
    git checkout -b feat/your-description
    ```
 3. Make your changes. Run `npm run build` locally before pushing — the CI check runs the same command.
-4. Open a pull request against `main`. Fill in the PR template.
+4. Open a pull request against `main`. Fill in the PR template. **The PR title must follow Conventional Commits** (see [Commit messages](#commit-messages)) — it becomes the squash-merge commit on `main`.
 5. A maintainer will review and merge.
 
 ---
@@ -77,14 +77,86 @@ Also perform a quick keyboard check:
 
 ## Commit messages
 
-Use the conventional format:
+All commits **and PR titles** must follow the [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) specification. We squash-merge, so the PR title becomes the single commit on `main` — the PR title is held to the same standard as a commit subject.
+
+This is enforced both locally (via a `husky` `commit-msg` hook running `commitlint`) and in CI (workflows lint every commit in a PR plus the PR title).
+
+### Format
 
 ```
-feat: add cluster markers at low zoom levels
-fix: close popup when map is dragged
-docs: update contributing guide
-chore: bump vite to 6.3
+<type>(<scope>)!: <subject>
+
+<body — optional, why not what, wrapped at 100 chars>
+
+<footer(s) — optional>
 ```
+
+The `(<scope>)` and `!` (breaking-change marker) are both optional. A footer like `BREAKING CHANGE: <description>` is **required** for breaking changes.
+
+### Allowed types (enforced)
+
+| Type       | When to use                                                     |
+|------------|-----------------------------------------------------------------|
+| `feat`     | A new user-visible feature                                      |
+| `fix`      | A user-visible bug fix                                          |
+| `docs`     | Documentation-only change                                       |
+| `style`    | Formatting / whitespace; no behavior change                     |
+| `refactor` | Code change that neither fixes a bug nor adds a feature         |
+| `perf`     | Performance improvement                                         |
+| `test`     | Adding or fixing tests                                          |
+| `build`    | Build system, bundler, or external-dependency changes           |
+| `ci`       | CI configuration (`.github/workflows/`, etc.)                   |
+| `chore`    | Tooling, repo housekeeping that doesn't fit above               |
+| `revert`   | Reverts a previous commit (include `Reverts: <hash>` in footer) |
+
+### Recommended scopes
+
+Pick the narrowest scope that fits. Multi-scope is OK with `+` (e.g. `fix(i18n+e2e):`).
+
+`i18n`, `e2e`, `a11y`, `map`, `menu`, `dialogs`, `share`, `cache`, `overpass`, `lint`, `build`, `deps`, `test`, `docs`, `perf`, `security`, `ci`
+
+Undocumented scopes produce a `commitlint` warning, not an error — extend the list when a scope appears repeatedly.
+
+### Subject rules
+
+- Imperative mood (`add`, not `added` or `adds`)
+- Lowercase first letter
+- No trailing period
+- ≤ 72 characters total header length
+
+### Examples
+
+Good:
+
+```
+feat(i18n): add Tatar (tt) translation files
+fix(menu): prevent spurious focus ring on close button when drawer opens
+test(e2e): add Playwright end-to-end test suite
+chore(deps): bump vite to 8.0
+refactor(map)!: change fetchStations to options-object signature
+
+BREAKING CHANGE: fetchStations now takes a single options object;
+update all call sites to pass { lat, lon, radiusKm, endpoint }.
+```
+
+Bad (rejected by commitlint):
+
+```
+Update e2e/share.spec.ts            # missing type
+Fixed the bug                       # past tense, missing type
+feat: Added new locale.             # past tense, capitalized, trailing period
+feat: very long subject that exceeds the seventy-two character header length limit set by config
+```
+
+### Co-author footers
+
+When an AI agent (Claude Code, Copilot, etc.) authors a commit, include a `Co-Authored-By:` footer per GitHub's format:
+
+```
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+This is automatic for Claude Code's commit workflow.
 
 ---
 

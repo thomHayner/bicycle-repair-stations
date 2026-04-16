@@ -1,3 +1,10 @@
+<!--
+PR title must follow Conventional Commits: <type>(<scope>): <subject>
+We squash-merge, so the title becomes the single commit on `main`.
+Allowed types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert.
+Full spec & recommended scopes: CONTRIBUTING.md#commit-messages
+-->
+
 ## Summary
 <!-- What does this PR do? Why? -->
 
