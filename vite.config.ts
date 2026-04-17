@@ -3,6 +3,12 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
+import { sentryVitePlugin } from "@sentry/vite-plugin";
+
+const sentryAuthToken = process.env.SENTRY_AUTH_TOKEN;
+const sentryOrg = process.env.SENTRY_ORG;
+const sentryProject = process.env.SENTRY_PROJECT;
+const sentryEnabled = Boolean(sentryAuthToken && sentryOrg && sentryProject);
 
 export default defineConfig({
   test: {
@@ -15,6 +21,16 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    ...(sentryEnabled
+      ? [
+          sentryVitePlugin({
+            authToken: sentryAuthToken,
+            org: sentryOrg,
+            project: sentryProject,
+            telemetry: false,
+          }),
+        ]
+      : []),
     VitePWA({
       registerType: "autoUpdate",
       // We manage manifest.json manually in /public
@@ -76,6 +92,7 @@ export default defineConfig({
   ],
   build: {
     target: "es2020",
+    sourcemap: sentryEnabled ? "hidden" : false,
     rollupOptions: {
       output: {
         manualChunks(id) {
