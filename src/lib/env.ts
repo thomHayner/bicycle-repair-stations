@@ -4,5 +4,4 @@ export const ENV = {
   OVERPASS_ENDPOINT: String(
     import.meta.env.VITE_OVERPASS_ENDPOINT ?? "https://overpass-api.de/api/interpreter"
   ),
-  SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN as string | undefined,
 } as const;

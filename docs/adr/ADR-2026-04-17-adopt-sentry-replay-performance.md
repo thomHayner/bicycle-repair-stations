@@ -1,7 +1,7 @@
 ---
 id: ADR-2026-04-17-adopt-sentry-replay-performance
 title: Adopt Sentry with Session Replay and Performance monitoring
-status: proposed
+status: accepted
 date: 2026-04-17
 deciders: ["Thom Hayner"]
 tags: [observability, monitoring, sentry, performance, a11y]
@@ -52,9 +52,14 @@ Adopt Sentry for the client bundle with three integrations enabled:
    guessed at.
 
 Sentry is initialized in `src/main.tsx` before the React tree mounts.
-PII scrubbing is enabled; text and input masking in Replay is left at
-the default (masked) to avoid capturing anything sensitive in the
-share-link or report-bug flows.
+`sendDefaultPii` is off, and Replay is explicitly configured with
+`maskAllText: true`, `maskAllInputs: true`, and `blockAllMedia: true`
+to avoid capturing anything sensitive in the share-link or report-bug
+flows. This is stricter than the SDK defaults and reduces replay
+usefulness somewhat (text on screen becomes unreadable), but it is
+the safer starting point for a public app with 88 locales and no
+established PII-scrubbing pipeline. We can loosen masking selectively
+later if a specific debugging need justifies the privacy trade.
 
 Feature flags are **out of scope** for this decision. If flags are
 introduced later for a separate reason, Sentry's flag-evaluation

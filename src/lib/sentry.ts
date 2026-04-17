@@ -1,12 +1,28 @@
 import * as Sentry from "@sentry/react";
+import { ENV } from "./env";
 
-const OVERPASS_HOSTS = [
-  /^https:\/\/overpass-api\.de\//,
-  /^https:\/\/overpass\.kumi\.systems\//,
-  /^https:\/\/overpass\.private\.coffee\//,
+const DEFAULT_OVERPASS_HOSTS = [
+  "overpass-api.de",
+  "overpass.kumi.systems",
+  "overpass.private.coffee",
 ];
 
-const NOMINATIM_HOST = /^https:\/\/nominatim\.openstreetmap\.org\//;
+const NOMINATIM_HOST = "nominatim.openstreetmap.org";
+
+function safeHostname(url: string): string | null {
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return null;
+  }
+}
+
+function buildTracePropagationTargets(): Array<string | RegExp> {
+  const configuredHost = safeHostname(ENV.OVERPASS_ENDPOINT);
+  const hosts = new Set<string>([...DEFAULT_OVERPASS_HOSTS, NOMINATIM_HOST]);
+  if (configuredHost) hosts.add(configuredHost);
+  return Array.from(hosts);
+}
 
 export function initSentry(): void {
   const dsn = import.meta.env.VITE_SENTRY_DSN;
@@ -27,7 +43,7 @@ export function initSentry(): void {
     tracesSampleRate: 0.1,
     replaysSessionSampleRate: 0.01,
     replaysOnErrorSampleRate: 1.0,
-    tracePropagationTargets: [...OVERPASS_HOSTS, NOMINATIM_HOST],
+    tracePropagationTargets: buildTracePropagationTargets(),
     sendDefaultPii: false,
   });
 }

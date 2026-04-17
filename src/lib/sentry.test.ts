@@ -62,15 +62,42 @@ describe("initSentry", () => {
     });
   });
 
-  it("propagates traces to Overpass and Nominatim only", async () => {
+  it("propagates traces to the default Overpass mirrors and Nominatim", async () => {
     vi.stubEnv("VITE_SENTRY_DSN", "https://example@sentry.io/1");
     const initSentry = await importInitSentry();
     initSentry();
 
     const targets = vi.mocked(Sentry.init).mock.calls[0][0]!
-      .tracePropagationTargets as RegExp[];
-    expect(targets.some((r) => r.test("https://overpass-api.de/api/interpreter"))).toBe(true);
-    expect(targets.some((r) => r.test("https://nominatim.openstreetmap.org/search"))).toBe(true);
-    expect(targets.some((r) => r.test("https://example.com/unrelated"))).toBe(false);
+      .tracePropagationTargets as string[];
+    expect(targets).toEqual(
+      expect.arrayContaining([
+        "overpass-api.de",
+        "overpass.kumi.systems",
+        "overpass.private.coffee",
+        "nominatim.openstreetmap.org",
+      ])
+    );
+  });
+
+  it("includes the configured VITE_OVERPASS_ENDPOINT host in trace targets", async () => {
+    vi.stubEnv("VITE_SENTRY_DSN", "https://example@sentry.io/1");
+    vi.stubEnv("VITE_OVERPASS_ENDPOINT", "https://overpass.example.net/api/interpreter");
+    const initSentry = await importInitSentry();
+    initSentry();
+
+    const targets = vi.mocked(Sentry.init).mock.calls[0][0]!
+      .tracePropagationTargets as string[];
+    expect(targets).toContain("overpass.example.net");
+  });
+
+  it("ignores a malformed VITE_OVERPASS_ENDPOINT without throwing", async () => {
+    vi.stubEnv("VITE_SENTRY_DSN", "https://example@sentry.io/1");
+    vi.stubEnv("VITE_OVERPASS_ENDPOINT", "not-a-url");
+    const initSentry = await importInitSentry();
+    expect(() => initSentry()).not.toThrow();
+
+    const targets = vi.mocked(Sentry.init).mock.calls[0][0]!
+      .tracePropagationTargets as string[];
+    expect(targets).toContain("overpass-api.de");
   });
 });
