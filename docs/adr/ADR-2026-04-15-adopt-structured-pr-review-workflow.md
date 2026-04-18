@@ -71,8 +71,8 @@ output maps directly onto the template checkboxes.
 ## Notes
 
 - Check coverage matrix (Y = runs, skip = not run) by PR type was
-  recorded in the plan file
-  `/Users/elliot/.claude/plans/misty-baking-wombat.md`.
+  recorded in the author's local Claude plan file and was not
+  committed to the repository.
 - Directory was created at
   `.claude/commands/` alongside the pre-existing `dev-start.sh` and
   `launch.json`; those files were not touched.

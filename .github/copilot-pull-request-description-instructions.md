@@ -12,7 +12,7 @@ Treat the PR title like a commit subject — we squash-merge, so the title becom
 
 - **Allowed types**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
 - **Recommended scopes** (warning if undocumented): `i18n`, `e2e`, `a11y`, `map`, `menu`, `dialogs`, `share`, `cache`, `overpass`, `lint`, `build`, `deps`, `test`, `docs`, `perf`, `security`, `ci`. Multi-scope OK with `+`.
-- **Subject**: imperative mood, lowercase first letter, no trailing period, total header ≤ 72 chars.
+- **Subject**: imperative mood, lowercase first letter, no trailing period, total header ≤ 100 chars (commitlint-enforced); aim for ≤ 72 chars for readability/UI truncation.
 - **Breaking change**: `!` after type/scope and a `BREAKING CHANGE:` footer (in the description body, not the title).
 
 A CI workflow rejects PRs whose titles don't conform.

@@ -145,7 +145,7 @@ Bad (rejected by commitlint):
 Update e2e/share.spec.ts            # missing type
 Fixed the bug                       # past tense, missing type
 feat: Added new locale.             # past tense, capitalized, trailing period
-feat: very long subject that exceeds the seventy-two character header length limit set by config
+feat: very long subject that exceeds the one-hundred character header length limit enforced by config
 ```
 
 ### Co-author footers
