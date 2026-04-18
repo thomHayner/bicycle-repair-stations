@@ -48,6 +48,12 @@ export default defineConfig(({ mode }) => {
         manifest: false,
         workbox: {
           globPatterns: ["**/*.{js,css,html,png,svg,ico}"],
+          // Workbox emits sw.js.map and workbox-*.js.map AFTER the Sentry
+          // plugin's filesToDeleteAfterUpload cleanup runs, so those maps
+          // would otherwise ship to the CDN as publicly fetchable assets.
+          // We don't upload the service-worker bundle to Sentry, so we just
+          // suppress the maps here.
+          sourcemap: false,
           runtimeCaching: [
             {
               // CARTO tiles (Voyager, Positron, Dark Matter, labels-only)
