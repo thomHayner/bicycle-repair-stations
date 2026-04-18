@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import handler from "./create-checkout-session";
+import handler from "./create-checkout-session.js";
 
 // Mock the Stripe SDK that is dynamically imported inside the handler.
 // Must use a class (not an arrow function) because the handler calls `new Stripe(...)`.

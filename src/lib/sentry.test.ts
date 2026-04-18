@@ -73,7 +73,6 @@ describe("initSentry", () => {
       expect.arrayContaining([
         "overpass-api.de",
         "overpass.kumi.systems",
-        "overpass.openstreetmap.ru",
         "nominatim.openstreetmap.org",
       ])
     );
@@ -102,7 +101,6 @@ describe("initSentry", () => {
     expect(targets).toEqual(
       expect.arrayContaining([
         "overpass.kumi.systems",
-        "overpass.openstreetmap.ru",
         "nominatim.openstreetmap.org",
       ])
     );

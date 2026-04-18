@@ -1,9 +1,16 @@
 import type { OverpassNode, OverpassResponse } from "../types/overpass";
 
-/** Public Overpass mirrors tried in order when the primary endpoint fails. */
+/**
+ * Public Overpass mirrors tried in order when the primary endpoint fails.
+ *
+ * Browser fallbacks must serve `Access-Control-Allow-Origin: *`; mirrors that
+ * don't (e.g. overpass.openstreetmap.ru) fail every request on CORS regardless
+ * of server health and only add noise to the console. `overpass.kumi.systems`
+ * is currently the only CORS-enabled mirror we trust enough to keep here — add
+ * new entries only after verifying CORS from a browser origin.
+ */
 export const FALLBACK_ENDPOINTS = [
   "https://overpass.kumi.systems/api/interpreter",
-  "https://overpass.openstreetmap.ru/api/interpreter",
 ];
 
 /** HTTP status codes that indicate server overload — worth retrying elsewhere. */
