@@ -8,7 +8,7 @@ tags: [observability, monitoring, sentry, performance, a11y]
 supersedes: []
 superseded_by: []
 related: []
-source: claude-code-session-2026-04-17 sentry-vs-flags-discussion
+source: claude-code-session-2026-04-17
 ---
 
 ## Context
@@ -27,13 +27,6 @@ on three external systems with known variability — Overpass mirrors
 geocoding, and OSM tile providers — and we currently cannot
 distinguish "our bug" from "upstream was slow for this user in this
 region" when a bad session is reported.
-
-We considered whether feature flags (Vercel Flags, LaunchDarkly) would
-help. They would not: flags are a deployment-control tool (kill
-switches, rollouts, A/B tests), not an observability tool. The
-question "why did this specific user have a bad experience" is
-answered by error tracking, performance traces, and session replay —
-not by flag evaluations.
 
 ## Decision
 
@@ -61,20 +54,12 @@ the safer starting point for a public app with 88 locales and no
 established PII-scrubbing pipeline. We can loosen masking selectively
 later if a specific debugging need justifies the privacy trade.
 
-Feature flags are **out of scope** for this decision. If flags are
-introduced later for a separate reason, Sentry's flag-evaluation
-integration can be added then.
-
 ## Alternatives considered
 
 - **Do nothing; rely on Vercel Analytics alone** — rejected: the
   current score-of-26 incident is exactly the kind of question
   Analytics cannot answer. Without replay and stack traces we will
   keep guessing.
-- **Add feature flags and use flag-evaluation telemetry to trace
-  behavior** — rejected: flags are not an observability tool. Adding
-  them to "trace user behavior" conflates rollout control with
-  monitoring and produces neither well.
 - **LogRocket / FullStory / Datadog RUM** — rejected: Sentry covers
   errors + performance + replay in one SDK, has a generous free tier
   suitable for a hobby-scale app, and is the most common pairing
@@ -120,9 +105,3 @@ Motivating session: a user overseas with a UX score of 26 in Vercel
 Analytics. The inability to attribute the score to a cause — our code
 vs. Overpass vs. network vs. geolocation — is the concrete gap this
 ADR closes.
-
-Sentry has a feature-flag integration that attaches flag values to
-error events. It is deliberately not adopted here; it becomes
-relevant only if flags are introduced for an independent reason
-(gradual rollout, kill switch, experiment). Adding flags purely to
-feed Sentry would be cargo-culting.
