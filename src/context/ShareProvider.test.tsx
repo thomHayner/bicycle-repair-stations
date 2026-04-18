@@ -38,9 +38,17 @@ function getShareDialog() {
   // ShareSheet uses aria-labelledby (pointing at the visible title) rather
   // than aria-label; pin the selector to that attribute so the helper fails
   // fast if the labelling changes or another dialog joins the test tree.
+  // aria-labelledby is a space-separated ID list per WAI-ARIA, so treat it
+  // as a token list and check for inclusion — strict equality would break
+  // if a secondary labelling ID is ever added.
   const dialogs = screen
     .getAllByRole("dialog", { hidden: true })
-    .filter((el) => el.getAttribute("aria-labelledby") === "share-sheet-title");
+    .filter((el) =>
+      el
+        .getAttribute("aria-labelledby")
+        ?.split(/\s+/)
+        .includes("share-sheet-title"),
+    );
   expect(dialogs).toHaveLength(1);
   return dialogs[0];
 }

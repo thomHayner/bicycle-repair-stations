@@ -14,6 +14,10 @@ interface Video {
   title: string;
 }
 interface Category {
+  // Stable analytics identifier — must not change when UI copy is renamed.
+  // Keeping it decoupled from `tKey` means longitudinal analytics stay
+  // comparable even if translation keys are reorganized.
+  id: string;
   tKey: string;
   emoji: string;
   videos: Video[];
@@ -21,6 +25,7 @@ interface Category {
 
 const CATEGORIES: Category[] = [
   {
+    id: "flat_tyre",
     tKey: "categoryFlatTyre",
     emoji: "🛞",
     videos: [
@@ -30,6 +35,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "brakes",
     tKey: "categoryBrakes",
     emoji: "🤚",
     videos: [
@@ -39,6 +45,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "gears",
     tKey: "categoryGears",
     emoji: "⚙️",
     videos: [
@@ -48,6 +55,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "chain",
     tKey: "categoryChain",
     emoji: "⛓️",
     videos: [
@@ -57,6 +65,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "wheels",
     tKey: "categoryWheels",
     emoji: "☸️",
     videos: [
@@ -66,6 +75,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "headset",
     tKey: "categoryHeadset",
     emoji: "🔩",
     videos: [
@@ -74,6 +84,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "bottom_bracket",
     tKey: "categoryBottomBracket",
     emoji: "🔧",
     videos: [
@@ -180,7 +191,7 @@ export default function GuidesPage() {
               </h2>
               <div className="flex flex-col gap-2">
                 {cat.videos.map((v) => (
-                  <VideoCard key={v.id} video={v} category={cat.tKey} />
+                  <VideoCard key={v.id} video={v} category={cat.id} />
                 ))}
               </div>
             </section>
