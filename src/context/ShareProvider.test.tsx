@@ -35,7 +35,10 @@ function renderProvider() {
 }
 
 function getShareDialog() {
-  return document.querySelector('[role="dialog"][aria-label]');
+  // ShareSheet uses aria-labelledby (pointing at the visible title) rather
+  // than aria-label — so select by role alone. There is only one dialog in
+  // this test tree.
+  return document.querySelector('[role="dialog"]');
 }
 
 beforeEach(() => {
