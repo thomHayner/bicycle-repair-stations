@@ -1,7 +1,7 @@
 import type { OverpassNode, OverpassResponse } from "../types/overpass";
 
 /** Public Overpass mirrors tried in order when the primary endpoint fails. */
-const FALLBACK_ENDPOINTS = [
+export const FALLBACK_ENDPOINTS = [
   "https://overpass.kumi.systems/api/interpreter",
   "https://overpass.openstreetmap.ru/api/interpreter",
 ];
