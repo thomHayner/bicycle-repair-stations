@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import handler from "./geo";
+import handler from "./geo.js";
 
 function makeRequest(headers: Record<string, string> = {}): Request {
   return new Request("http://localhost/api/geo", { headers });
