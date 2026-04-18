@@ -33,6 +33,12 @@ export default defineConfig(({ mode }) => {
               org: sentryOrg,
               project: sentryProject,
               telemetry: false,
+              // Delete .map files from dist/ after upload to Sentry so
+              // they aren't publicly fetchable on the deployed site.
+              // Sentry retains them on its side for stack-trace mapping.
+              sourcemaps: {
+                filesToDeleteAfterUpload: ["**/*.map"],
+              },
             }),
           ]
         : []),
