@@ -1,11 +1,6 @@
 import * as Sentry from "@sentry/react";
 import { ENV } from "./env";
-
-const DEFAULT_OVERPASS_HOSTS = [
-  "overpass-api.de",
-  "overpass.kumi.systems",
-  "overpass.private.coffee",
-];
+import { FALLBACK_ENDPOINTS } from "./overpass";
 
 const NOMINATIM_HOST = "nominatim.openstreetmap.org";
 
@@ -18,9 +13,11 @@ function safeHostname(url: string): string | null {
 }
 
 function buildTracePropagationTargets(): Array<string | RegExp> {
-  const configuredHost = safeHostname(ENV.OVERPASS_ENDPOINT);
-  const hosts = new Set<string>([...DEFAULT_OVERPASS_HOSTS, NOMINATIM_HOST]);
-  if (configuredHost) hosts.add(configuredHost);
+  const hosts = new Set<string>([NOMINATIM_HOST]);
+  for (const url of [ENV.OVERPASS_ENDPOINT, ...FALLBACK_ENDPOINTS]) {
+    const host = safeHostname(url);
+    if (host) hosts.add(host);
+  }
   return Array.from(hosts);
 }
 

@@ -88,8 +88,9 @@ later if a specific debugging need justifies the privacy trade.
   that must be reviewed against the existing privacy posture before
   enabling in production.
 - **Follow-ups:**
-  - Decide Replay sampling rates (proposed: 1% of normal sessions,
-    100% of sessions with an error).
+  - Confirm or adjust the Replay sampling rates (1% of normal
+    sessions, 100% of sessions with an error) after observing
+    production volume and cost.
   - Confirm PII scrubbing covers the share-link query params and
     the report-bug form fields.
   - Update `docs/` (or create a `docs/observability.md`) describing

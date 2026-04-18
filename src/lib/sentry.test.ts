@@ -62,7 +62,7 @@ describe("initSentry", () => {
     });
   });
 
-  it("propagates traces to the default Overpass mirrors and Nominatim", async () => {
+  it("propagates traces to the default Overpass primary, fallback mirrors, and Nominatim", async () => {
     vi.stubEnv("VITE_SENTRY_DSN", "https://example@sentry.io/1");
     const initSentry = await importInitSentry();
     initSentry();
@@ -73,7 +73,7 @@ describe("initSentry", () => {
       expect.arrayContaining([
         "overpass-api.de",
         "overpass.kumi.systems",
-        "overpass.private.coffee",
+        "overpass.openstreetmap.ru",
         "nominatim.openstreetmap.org",
       ])
     );
@@ -98,6 +98,14 @@ describe("initSentry", () => {
 
     const targets = vi.mocked(Sentry.init).mock.calls[0][0]!
       .tracePropagationTargets as string[];
-    expect(targets).toContain("overpass-api.de");
+    // Malformed primary is dropped silently; fallback mirrors and Nominatim remain.
+    expect(targets).toEqual(
+      expect.arrayContaining([
+        "overpass.kumi.systems",
+        "overpass.openstreetmap.ru",
+        "nominatim.openstreetmap.org",
+      ])
+    );
+    expect(targets).not.toContain("not-a-url");
   });
 });
