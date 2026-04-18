@@ -16,7 +16,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # Allowed types — must match commitlint.config.js `type-enum`.
+          # Allowed types — must match commitlint.config.mjs `type-enum`.
           types: |
             feat
             fix
