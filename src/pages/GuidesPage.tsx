@@ -84,27 +84,19 @@ const CATEGORIES: Category[] = [
 ];
 
 function VideoCard({ video, category }: { video: Video; category: string }) {
+  const trackClick = () =>
+    trackEvent("guide_video_click", {
+      video_id: video.id,
+      category,
+      title: video.title,
+    });
   return (
     <a
       href={`https://www.youtube.com/watch?v=${video.id}`}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() =>
-        trackEvent("guide_video_click", {
-          video_id: video.id,
-          category,
-          title: video.title,
-        })
-      }
-      onAuxClick={(e) => {
-        if (e.button === 1) {
-          trackEvent("guide_video_click", {
-            video_id: video.id,
-            category,
-            title: video.title,
-          });
-        }
-      }}
+      onClick={trackClick}
+      onAuxClick={(e) => { if (e.button === 1) trackClick(); }}
       className="flex gap-3 items-center bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl elevation-1 p-2 state-surface transition-colors focus-ring"
     >
       <div className="relative shrink-0 w-28 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 aspect-video">

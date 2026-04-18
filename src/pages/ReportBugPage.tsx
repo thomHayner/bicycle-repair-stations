@@ -86,9 +86,11 @@ export default function ReportBugPage() {
       setForm(EMPTY_FORM);
     } catch (submitError) {
       if (submitError instanceof TypeError) {
+        trackEvent("report_bug_submit", { result: "network" });
         setError(t("errorNetwork"));
         return;
       }
+      trackEvent("report_bug_submit", { result: "failed" });
       setError(submitError instanceof Error ? submitError.message : t("errorGeneric"));
     } finally {
       setIsSubmitting(false);

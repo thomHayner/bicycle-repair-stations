@@ -45,7 +45,7 @@ function analyticsEnabled(): boolean {
   return import.meta.env.VITE_ANALYTICS_DEBUG === "true";
 }
 
-export function trackEvent(name: EventName | string, props?: AnalyticsProps): void {
+export function trackEvent(name: EventName, props?: AnalyticsProps): void {
   if (!analyticsEnabled()) return;
   try {
     track(name, props);
