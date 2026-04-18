@@ -3,7 +3,7 @@ id: ADR-2026-04-15-eslint-underscore-args-ignore-pattern
 title: Configure ESLint to ignore _-prefixed parameters project-wide
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [tooling, eslint, testing, conventions]
 supersedes: []
 superseded_by: []

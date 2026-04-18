@@ -3,7 +3,7 @@ id: ADR-2026-04-15-distance-display-from-gps-only
 title: Show distance to station only from GPS position, never from search location
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [frontend, ux, location]
 supersedes: []
 superseded_by: []

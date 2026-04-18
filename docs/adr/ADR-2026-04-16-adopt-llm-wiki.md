@@ -3,7 +3,7 @@ id: ADR-2026-04-16-adopt-llm-wiki
 title: Adopt a Karpathy-style LLM-Wiki for repo knowledge synthesis
 status: accepted
 date: 2026-04-16
-deciders: ["Thom Hayner"]
+deciders: [thomHayner]
 tags: [docs, knowledge-base, llm-ops]
 supersedes: []
 superseded_by: []

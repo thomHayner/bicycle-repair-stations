@@ -3,7 +3,7 @@ id: ADR-2026-04-15-programmatic-move-counter-ref
 title: Distinguish user vs programmatic map moves via a ref counter
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [map, leaflet, state]
 supersedes: []
 superseded_by: []

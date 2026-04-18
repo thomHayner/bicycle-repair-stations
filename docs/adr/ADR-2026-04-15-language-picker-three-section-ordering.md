@@ -3,7 +3,7 @@ id: ADR-2026-04-15-language-picker-three-section-ordering
 title: Order the language picker as English → major world languages → alphabetical
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [i18n, ux]
 supersedes: []
 superseded_by: []

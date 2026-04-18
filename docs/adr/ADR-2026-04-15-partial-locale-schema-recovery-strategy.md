@@ -3,7 +3,7 @@ id: ADR-2026-04-15-partial-locale-schema-recovery-strategy
 title: Recover wrong-schema locale files by preserving matching translations and using English for the rest
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [i18n, locales, content]
 supersedes: []
 superseded_by: []

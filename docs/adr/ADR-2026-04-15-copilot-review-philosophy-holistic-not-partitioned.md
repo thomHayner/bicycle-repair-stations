@@ -3,7 +3,7 @@ id: ADR-2026-04-15-copilot-review-philosophy-holistic-not-partitioned
 title: Give CoPilot a complementary review instinct, not a partitioned scope
 status: accepted
 date: 2026-04-15
-deciders: [elliot]
+deciders: [thomHayner]
 tags: [workflow, tooling, pr-review]
 supersedes: []
 superseded_by: []

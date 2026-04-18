@@ -3,7 +3,7 @@ id: ADR-2026-04-15-locale-file-mixed-script-third-party-intentional
 title: Mixed-script content in locale files is intentional when referencing third-party fixed strings
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [i18n, locales, content]
 supersedes: []
 superseded_by: []

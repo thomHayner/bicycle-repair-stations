@@ -3,7 +3,7 @@ id: ADR-2026-04-15-tsconfig-excludes-test-files
 title: Exclude test files from tsconfig.app.json to prevent build-time type errors
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [build, tooling, typescript, testing]
 supersedes: []
 superseded_by: []

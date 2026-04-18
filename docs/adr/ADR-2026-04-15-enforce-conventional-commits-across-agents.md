@@ -3,7 +3,7 @@ id: ADR-2026-04-15-enforce-conventional-commits-across-agents
 title: Enforce Conventional Commits across humans and AI agents
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [tooling, ci, ai-agents, dx]
 supersedes: []
 superseded_by: []

@@ -3,7 +3,7 @@ id: ADR-YYYY-MM-DD-kebab-case-slug
 title: Short imperative title
 status: accepted  # proposed | accepted | superseded | deprecated | rejected
 date: YYYY-MM-DD
-deciders: [tom]
+deciders: [thomHayner]  # GitHub handle(s); see README
 tags: []
 supersedes: []
 superseded_by: []

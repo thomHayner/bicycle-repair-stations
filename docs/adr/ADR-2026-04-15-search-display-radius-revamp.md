@@ -3,7 +3,7 @@ id: ADR-2026-04-15-search-display-radius-revamp
 title: Decouple fetch radius from display radius and remove zoom-driven filter changes
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [frontend, ux, data-fetching, cache]
 supersedes: [ADR-2026-04-15-auto-radius-min-five-stations, ADR-2026-04-15-single-cache-key-for-all-station-data]
 superseded_by: []

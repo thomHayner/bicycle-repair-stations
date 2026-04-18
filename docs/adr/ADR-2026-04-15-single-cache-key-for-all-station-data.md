@@ -3,7 +3,7 @@ id: ADR-2026-04-15-single-cache-key-for-all-station-data
 title: Use a single localStorage key for both primary and wide-area station results
 status: superseded
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [caching, storage, overpass]
 supersedes: []
 superseded_by: [ADR-2026-04-15-scrap-250mi-fallback, ADR-2026-04-15-search-display-radius-revamp]

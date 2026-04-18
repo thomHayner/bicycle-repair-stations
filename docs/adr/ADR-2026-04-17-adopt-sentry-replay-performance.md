@@ -3,7 +3,7 @@ id: ADR-2026-04-17-adopt-sentry-replay-performance
 title: Adopt Sentry with Session Replay and Performance monitoring
 status: accepted
 date: 2026-04-17
-deciders: ["Thom Hayner"]
+deciders: [thomHayner]
 tags: [observability, monitoring, sentry, performance, a11y]
 supersedes: []
 superseded_by: []

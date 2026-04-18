@@ -3,7 +3,7 @@ id: ADR-2026-04-08-adopt-vitest-testing-library
 title: Adopt Vitest + Testing Library as the unit testing stack
 status: accepted
 date: 2026-04-08
-deciders: [tom]
+deciders: [thomHayner]
 tags: [testing, tooling, vite]
 supersedes: []
 superseded_by: []

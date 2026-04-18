@@ -3,7 +3,7 @@ id: ADR-2026-04-15-country-locale-mapping-policy
 title: Map countries to their native official language, not to the most widely spoken second language; leave minority languages unmapped
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [i18n, geolocation]
 supersedes: []
 superseded_by: []

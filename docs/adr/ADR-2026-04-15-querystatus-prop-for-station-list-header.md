@@ -3,7 +3,7 @@ id: ADR-2026-04-15-querystatus-prop-for-station-list-header
 title: Pass queryStatus discriminated union (not boolean) to StationListView; centralize header text in getHeaderState()
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [frontend, data-flow, ux]
 supersedes: []
 superseded_by: []

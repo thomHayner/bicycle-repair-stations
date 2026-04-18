@@ -3,7 +3,7 @@ id: ADR-2026-04-15-adopt-structured-pr-review-workflow
 title: Adopt per-PR-type Claude Code slash commands with a shared review base
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [workflow, tooling, pr-review]
 supersedes: []
 superseded_by: []

@@ -3,7 +3,7 @@ id: ADR-2026-04-15-adopt-react-leaflet-cluster
 title: Adopt react-leaflet-cluster for marker clustering
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [map, leaflet, dependencies, clustering]
 supersedes: []
 superseded_by: []

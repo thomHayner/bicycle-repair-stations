@@ -3,7 +3,7 @@ id: ADR-2026-04-15-popup-opens-after-flyto
 title: Open station popups only after the flyTo animation settles
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [map, popup, ux, leaflet]
 supersedes: []
 superseded_by: []

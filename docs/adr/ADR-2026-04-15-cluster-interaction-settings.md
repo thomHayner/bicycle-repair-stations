@@ -3,7 +3,7 @@ id: ADR-2026-04-15-cluster-interaction-settings
 title: Disable spiderfy; stop clustering at zoom 16
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [map, clustering, mobile, ux]
 supersedes: []
 superseded_by: []

@@ -3,7 +3,7 @@ id: ADR-2026-04-15-loading-overlay-conditional-dialog-role
 title: Use conditional ARIA role (dialog vs status) in LoadingOverlay based on interactive content
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [a11y, dialogs, i18n]
 supersedes: []
 superseded_by: []

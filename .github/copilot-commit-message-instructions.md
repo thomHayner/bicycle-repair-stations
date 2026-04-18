@@ -45,7 +45,7 @@ Multi-scope is OK with `+` (e.g. `fix(i18n+e2e):`). Pick the narrowest scope tha
 - Imperative mood (`add`, not `added` / `adds`)
 - Lowercase first letter
 - No trailing period
-- Total header length ≤ 72 characters
+- Total header length ≤ 100 characters (commitlint-enforced); aim for ≤ 72 when practical
 - Describe *what changed* concisely; use the body for *why*
 
 ## Body rules (only when needed)

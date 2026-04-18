@@ -3,7 +3,7 @@ id: ADR-2026-04-15-static-seo-meta-tags
 title: Use static meta tags in index.html rather than a head-management library
 status: accepted
 date: 2026-04-15
-deciders: [Thom Hayner]
+deciders: [thomHayner]
 tags: [seo, frontend, dependencies]
 supersedes: []
 superseded_by: []

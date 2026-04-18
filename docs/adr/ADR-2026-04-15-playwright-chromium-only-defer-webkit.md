@@ -3,7 +3,7 @@ id: ADR-2026-04-15-playwright-chromium-only-defer-webkit
 title: Playwright E2E suite runs Chromium only — WebKit/Safari testing deferred
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [testing, e2e, playwright, ci]
 supersedes: []
 superseded_by: []

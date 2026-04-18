@@ -3,7 +3,7 @@ id: ADR-2026-04-07-station-list-progressive-pagination
 title: Paginate the station list via progressive scroll loading
 status: accepted
 date: 2026-04-07
-deciders: [tom]
+deciders: [thomHayner]
 tags: [performance, ux, react, station-list]
 supersedes: []
 superseded_by: []

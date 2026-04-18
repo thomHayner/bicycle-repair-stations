@@ -3,7 +3,7 @@ id: ADR-2026-04-15-donate-button-schema-plain-verb
 title: donateButton key is a plain verb; donateAmount carries the {{amount}} interpolation
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [i18n, donate, schema]
 supersedes: []
 superseded_by: []

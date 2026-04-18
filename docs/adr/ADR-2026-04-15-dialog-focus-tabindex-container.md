@@ -3,7 +3,7 @@ id: ADR-2026-04-15-dialog-focus-tabindex-container
 title: Focus tabIndex={-1} container on dialog open, not first interactive child
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [a11y, dialogs, focus-management]
 supersedes: []
 superseded_by: []

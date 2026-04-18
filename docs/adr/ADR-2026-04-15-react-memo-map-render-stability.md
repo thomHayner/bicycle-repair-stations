@@ -3,7 +3,7 @@ id: ADR-2026-04-15-react-memo-map-render-stability
 title: Wrap map components in React.memo with a strict prop-stability contract
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [frontend, map, performance]
 supersedes: []
 superseded_by: []

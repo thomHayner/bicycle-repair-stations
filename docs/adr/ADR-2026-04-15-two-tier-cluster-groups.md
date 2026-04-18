@@ -3,7 +3,7 @@ id: ADR-2026-04-15-two-tier-cluster-groups
 title: Split station markers into two MarkerClusterGroups by radius
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [map, clustering, ux]
 supersedes: []
 superseded_by: []

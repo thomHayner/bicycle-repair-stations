@@ -3,7 +3,7 @@ id: ADR-2026-04-15-scrap-250mi-fallback
 title: Remove the 250-mile wide-area fallback search
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [frontend, ux, data-fetching]
 supersedes: [ADR-2026-04-15-single-cache-key-for-all-station-data]
 superseded_by: []

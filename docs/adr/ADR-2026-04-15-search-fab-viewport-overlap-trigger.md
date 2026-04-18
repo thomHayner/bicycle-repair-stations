@@ -3,7 +3,7 @@ id: ADR-2026-04-15-search-fab-viewport-overlap-trigger
 title: Trigger "Search this area" FAB by viewport overlap, not pan distance
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [map, ux, search]
 supersedes: []
 superseded_by: []

@@ -3,7 +3,7 @@ id: ADR-2026-04-17-analytics-event-taxonomy
 title: Extend Vercel Analytics custom events with a typed taxonomy
 status: accepted
 date: 2026-04-17
-deciders: [tom]
+deciders: [thomHayner]
 tags: [analytics, observability, vercel]
 supersedes: []
 superseded_by: []

@@ -3,7 +3,7 @@ id: ADR-2026-04-15-two-marker-gps-vs-search-visibility
 title: Define explicit visibility rules for UserMarker and SearchLocationMarker
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [frontend, markers, geolocation, ux]
 supersedes: []
 superseded_by: []

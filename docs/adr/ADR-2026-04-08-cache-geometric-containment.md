@@ -3,7 +3,7 @@ id: ADR-2026-04-08-cache-geometric-containment
 title: Use geometric containment for station-cache coverage checks
 status: accepted
 date: 2026-04-08
-deciders: [tom]
+deciders: [thomHayner]
 tags: [caching, overpass, stations]
 supersedes: []
 superseded_by: []

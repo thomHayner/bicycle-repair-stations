@@ -26,6 +26,14 @@ them via the slug.
 2. Fill in the frontmatter and each section.
 3. Commit alongside (or just after) the code change the ADR describes.
 
+### Frontmatter conventions
+
+- **`deciders`** — YAML list of **GitHub handles** (case-sensitive, no
+  `@`), e.g. `deciders: [thomHayner]`. Prefer handles over display names
+  so tooling/grep is reliable across ADRs. Multiple deciders: `[alice,
+  bob]`. If an AI agent co-authored the decision, include a human
+  decider — agents are credited in commit footers, not in `deciders`.
+
 ## Status lifecycle
 
 ```

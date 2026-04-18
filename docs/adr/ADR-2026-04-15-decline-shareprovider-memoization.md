@@ -3,7 +3,7 @@ id: ADR-2026-04-15-decline-shareprovider-memoization
 title: Do not memoize ShareProvider value or isolate it from MapPage
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [frontend, performance, context]
 supersedes: []
 superseded_by: []

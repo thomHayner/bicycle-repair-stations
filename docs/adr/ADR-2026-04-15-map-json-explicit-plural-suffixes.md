@@ -3,7 +3,7 @@ id: ADR-2026-04-15-map-json-explicit-plural-suffixes
 title: All map.json plural keys use explicit _one/_other suffixes — no bare fallback key
 status: accepted
 date: 2026-04-15
-deciders: [thom]
+deciders: [thomHayner]
 tags: [i18n, pluralization, schema, map]
 supersedes: []
 superseded_by: []

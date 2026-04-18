@@ -3,7 +3,7 @@ id: ADR-2026-04-15-adjust-state-during-render-station-query
 title: Use "adjust state during render" in useStationQuery to eliminate stale-frame flash
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [frontend, react, data-flow]
 supersedes: []
 superseded_by: []

@@ -3,7 +3,7 @@ id: ADR-2026-04-15-auto-radius-min-five-stations
 title: Auto-select the distance filter to show at least 5 stations on each new location
 status: superseded
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [frontend, ux, filtering, map]
 supersedes: []
 superseded_by: [ADR-2026-04-15-search-display-radius-revamp]

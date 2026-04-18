@@ -3,7 +3,7 @@ id: ADR-2026-04-15-catch-all-route-falls-through-to-map
 title: Unmatched routes fall through to the always-mounted map
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [frontend, routing]
 supersedes: []
 superseded_by: []

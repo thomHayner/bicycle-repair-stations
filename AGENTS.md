@@ -24,7 +24,7 @@ All commits **and PR titles** must follow [Conventional Commits 1.0.0](https://w
 
 - **Allowed types** (enforced by commitlint): `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
 - **Recommended scopes** (warning if undocumented): `i18n`, `e2e`, `a11y`, `map`, `menu`, `dialogs`, `share`, `cache`, `overpass`, `lint`, `build`, `deps`, `test`, `docs`, `perf`, `security`, `ci`. Multi-scope is fine (`fix(i18n+e2e):`).
-- **Subject**: imperative mood, lowercase first letter, no trailing period, header ≤ 72 chars.
+- **Subject**: imperative mood, lowercase first letter, no trailing period, header ≤ 100 chars (commitlint-enforced); aim for ≤ 72 for readability/UI truncation.
 - **Breaking changes**: `!` after type/scope **and** a `BREAKING CHANGE:` footer.
 - **Co-author footer**: include `Co-Authored-By: <Agent Name> <noreply@…>` when an AI agent authored the commit.
 

@@ -3,7 +3,7 @@ id: ADR-2026-04-15-match-workbox-caching-to-active-tile-providers
 title: Match Workbox runtime tile caching to the tile providers actually used
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [caching, pwa, tiles]
 supersedes: []
 superseded_by: []

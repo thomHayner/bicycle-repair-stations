@@ -3,7 +3,7 @@ id: ADR-2026-04-15-adopt-adr-and-docs-structure
 title: Adopt ADR folder and reserve wiki/ for future LLM-Wiki layer
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [documentation, process, tooling]
 supersedes: []
 superseded_by: []

@@ -3,7 +3,7 @@ id: ADR-2026-04-15-in-radius-vs-zoom-marker-styles
 title: Choose marker icon by in-radius state, not by zoom level
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [map, markers, ux]
 supersedes: []
 superseded_by: []

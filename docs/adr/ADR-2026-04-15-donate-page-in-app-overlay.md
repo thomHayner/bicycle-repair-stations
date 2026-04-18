@@ -3,7 +3,7 @@ id: ADR-2026-04-15-donate-page-in-app-overlay
 title: Build donate page as an in-app overlay with amount-selection UI
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [frontend, routing, ux]
 supersedes: []
 superseded_by: []

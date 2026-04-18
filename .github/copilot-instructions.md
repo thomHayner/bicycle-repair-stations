@@ -14,7 +14,7 @@ When you author a commit or open a pull request:
 
    - **Allowed types** (commitlint enforces): `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
    - **Recommended scopes** (warning if undocumented): `i18n`, `e2e`, `a11y`, `map`, `menu`, `dialogs`, `share`, `cache`, `overpass`, `lint`, `build`, `deps`, `test`, `docs`, `perf`, `security`, `ci`. Multi-scope OK with `+` (`fix(i18n+e2e):`).
-   - **Subject**: imperative mood, lowercase first letter, no trailing period, header ≤ 72 chars.
+   - **Subject**: imperative mood, lowercase first letter, no trailing period, header ≤ 100 chars (commitlint-enforced); aim for ≤ 72 for readability.
    - **Breaking change**: append `!` after type/scope **and** add a `BREAKING CHANGE:` footer.
 
    Full spec, examples, and rejection cases: [`CONTRIBUTING.md#commit-messages`](../CONTRIBUTING.md#commit-messages).

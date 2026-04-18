@@ -3,7 +3,7 @@ id: ADR-2026-04-15-lift-user-distance-to-mappage
 title: Compute GPS-to-station distances once in MapPage, share via Map lookup
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [frontend, performance, data-flow]
 supersedes: []
 superseded_by: []

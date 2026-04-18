@@ -3,7 +3,7 @@ id: ADR-2026-04-15-add-geocoding-result-cache
 title: Cache Nominatim geocoding results in localStorage
 status: accepted
 date: 2026-04-15
-deciders: [tom]
+deciders: [thomHayner]
 tags: [caching, frontend]
 supersedes: []
 superseded_by: []
