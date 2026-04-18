@@ -122,7 +122,7 @@ Undocumented scopes produce a `commitlint` warning, not an error — extend the 
 - Imperative mood (`add`, not `added` or `adds`)
 - Lowercase first letter
 - No trailing period
-- ≤ 72 characters total header length
+- ≤ 100 characters total header length (commitlint config-conventional default; leaves room for GitHub's auto-appended `(#NN)` on squash-merges). Aim for ≤ 72 on the human-authored part so GitHub's PR UI doesn't truncate.
 
 ### Examples
 

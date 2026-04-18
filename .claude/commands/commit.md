@@ -27,7 +27,7 @@ Format: `<type>(<scope>)!: <subject>` followed by optional body and footers.
 - Imperative mood (`add`, not `added`)
 - Lowercase first letter
 - No trailing period
-- Total header length ≤ 72 chars
+- Total header length ≤ 100 chars (commitlint limit; leaves room for GitHub's `(#NN)` squash-merge suffix). Aim for ≤ 72 on the human-authored part.
 
 **Body** (only when *why* isn't obvious from the diff):
 - Wrap at 100 chars

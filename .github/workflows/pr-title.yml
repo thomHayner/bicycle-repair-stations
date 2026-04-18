@@ -38,5 +38,9 @@ jobs:
             See CONTRIBUTING.md#commit-messages.
           # We don't enforce a closed scope list at the PR-title layer (commitlint warns on it).
           requireScope: false
-          # Total title length cap — commitlint enforces 72 on commits; we cap PR titles too.
-          headerPattern: ^(\w+)(?:\(([^)]+)\))?(!)?: (.+)$
+          # `!` is non-capturing so the default headerPatternCorrespondence
+          # ([type, scope, subject]) lines up with capture groups 1/2/3.
+          # Making `!` a capturing group shifts `subject` onto the `!` match
+          # and fails otherwise-valid breaking-change titles. (Caught by
+          # Copilot on PR #27.)
+          headerPattern: ^(\w+)(?:\(([^)]+)\))?(?:!)?: (.+)$
