@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "../lib/analytics";
 
 interface ReportBugResponse {
   issueUrl: string;
@@ -81,12 +82,15 @@ export default function ReportBugPage() {
         issueUrl: payload.issueUrl,
         issueNumber: payload.issueNumber,
       });
+      trackEvent("report_bug_submit", { result: "success" });
       setForm(EMPTY_FORM);
     } catch (submitError) {
       if (submitError instanceof TypeError) {
+        trackEvent("report_bug_submit", { result: "network" });
         setError(t("errorNetwork"));
         return;
       }
+      trackEvent("report_bug_submit", { result: "failed" });
       setError(submitError instanceof Error ? submitError.message : t("errorGeneric"));
     } finally {
       setIsSubmitting(false);

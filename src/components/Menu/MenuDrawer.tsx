@@ -5,6 +5,7 @@ import { useSettings } from "../../context/useSettings";
 import type { Theme } from "../../context/SettingsContext";
 import type { Unit } from "../../lib/units";
 import { SUPPORTED_LOCALES } from "../../i18n/locales";
+import { trackEvent, hostnameOf } from "../../lib/analytics";
 
 interface Props {
   open: boolean;
@@ -104,7 +105,11 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
     };
   }, [open, onClose]);
 
-  const go = (path: string) => { onClose(); navigate(path); };
+  const go = (path: string) => {
+    trackEvent("menu_nav_click", { destination: path });
+    onClose();
+    navigate(path);
+  };
 
   return (
     <>
@@ -184,7 +189,7 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
           <div className="my-2 mx-5 border-t border-[var(--color-border)]" />
 
           {EXTERNAL_ITEMS.map((item) => (
-            <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" onClick={onClose}
+            <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" onClick={() => { trackEvent("external_link_click", { href_host: hostnameOf(item.href) }); onClose(); }}
               className="w-full flex items-center gap-3 px-5 py-3.5 text-sm text-slate-700 dark:text-slate-200 state-surface focus-ring-inset">
               <span className="text-lg leading-none w-6 text-center">{item.emoji}</span>
               <span className="font-medium">{t(item.tKey)}</span>
@@ -203,7 +208,10 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
             <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide shrink-0">{t("theme")}</span>
             <div className="flex rounded-full border border-[var(--color-border)] overflow-hidden">
               {THEME_OPTIONS.map(({ value, tKey }) => (
-                <button key={value} type="button" onClick={() => setTheme(value)}
+                <button key={value} type="button" onClick={() => {
+                  if (value !== theme) trackEvent("theme_change", { from: theme, to: value });
+                  setTheme(value);
+                }}
                   className={[
                     "text-xs font-semibold px-3 py-1.5 transition-colors focus-ring-inset",
                     value === theme
@@ -221,7 +229,10 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
             <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide shrink-0">{t("distance")}</span>
             <div className="flex rounded-full border border-[var(--color-border)] overflow-hidden">
               {(["mi", "km"] as Unit[]).map((u) => (
-                <button key={u} type="button" onClick={() => onUnitChange(u)}
+                <button key={u} type="button" onClick={() => {
+                  if (u !== unit) trackEvent("unit_change", { from: unit, to: u });
+                  onUnitChange(u);
+                }}
                   className={[
                     "text-xs font-semibold px-4 py-1.5 transition-colors focus-ring-inset",
                     u === unit
@@ -240,7 +251,11 @@ export function MenuDrawer({ open, onClose, onShare, unit, onUnitChange }: Props
             <select
               aria-labelledby="language-select-label"
               value={locale}
-              onChange={(e) => setLocale(e.target.value)}
+              onChange={(e) => {
+                const next = e.target.value;
+                if (next !== locale) trackEvent("locale_change", { from: locale, to: next });
+                setLocale(next);
+              }}
               className="text-xs font-semibold px-3 py-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-container)] text-slate-600 dark:text-slate-300 focus-ring-inset transition-colors"
             >
               {SUPPORTED_LOCALES.map((l) => (

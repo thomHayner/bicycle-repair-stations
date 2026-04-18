@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "../lib/analytics";
 
 export default function DonateSuccessPage() {
   const navigate = useNavigate();
   const { t } = useTranslation("donate");
+
+  useEffect(() => {
+    trackEvent("donate_success_view");
+  }, []);
 
   return (
     <div className="fixed inset-0 z-[2000] bg-[var(--color-surface-container)] flex flex-col">
