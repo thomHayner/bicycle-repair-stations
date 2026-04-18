@@ -9,6 +9,11 @@ export default function DonateSuccessPage() {
 
   useEffect(() => {
     trackEvent("donate_success_view");
+    // Empty deps on purpose: trackEvent is a module-level import, not a
+    // component value, so react-hooks/exhaustive-deps does not flag it and
+    // listing it would itself warn ("unnecessary dependency"). Fires once
+    // per mount in prod; StrictMode double-fires in dev, gated by
+    // analyticsEnabled().
   }, []);
 
   return (

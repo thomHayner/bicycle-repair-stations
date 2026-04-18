@@ -6,10 +6,11 @@ import { VitePWA } from "vite-plugin-pwa";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 
 export default defineConfig(({ mode }) => {
-  // loadEnv picks up non-VITE_-prefixed vars from .env* files — without this,
-  // SENTRY_AUTH_TOKEN / SENTRY_ORG / SENTRY_PROJECT are only visible when
-  // exported to the shell (e.g. in CI), not when set in a local .env.
-  const env = loadEnv(mode, process.cwd(), "");
+  // Narrow prefix to "SENTRY_" so we only pull the three build-time Sentry vars
+  // out of `.env*`. An empty prefix would also surface `STRIPE_SECRET_KEY` and
+  // any future server-side secrets in this config scope, which is unnecessary.
+  // (Caught by Copilot on PR #27.)
+  const env = loadEnv(mode, process.cwd(), "SENTRY_");
   const sentryAuthToken = env.SENTRY_AUTH_TOKEN;
   const sentryOrg = env.SENTRY_ORG;
   const sentryProject = env.SENTRY_PROJECT;
