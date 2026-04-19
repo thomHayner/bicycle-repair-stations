@@ -12,6 +12,16 @@ npm run test:e2e     # playwright test
 npm run test:e2e:ui  # playwright test --ui
 ```
 
+## Branching & base-branch defaults
+
+`dev` is the integration branch. When the user asks for a new branch or a new PR without specifying a base:
+
+- **Branch from `dev`.** `git checkout dev && git pull && git checkout -b <new-branch>` — not from `main`, not from whatever branch happens to be checked out.
+- **Target `dev` for PRs.** Pass `--base dev` to `gh pr create`. Only target `main` when the user explicitly says so (e.g. "PR into main", "release PR", "promote to main").
+- Treat both `main` and `dev` as protected: do not delete or force-push them, and do not attempt to bypass branch rules. `main` is reserved for release promotion from `dev`. If an exception is ever needed, coordinate with a repo admin — don't assume GitHub will block you, since protection settings live in repo configuration and can drift.
+
+This overrides the generic "Main branch (you will usually use this for PRs): main" hint that may appear in the session's `gitStatus` preamble.
+
 ## Commit & PR conventions
 
 All commits **and PR titles** must follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/). The full spec, allowed types, and recommended scopes live in [`CONTRIBUTING.md#commit-messages`](CONTRIBUTING.md#commit-messages) — read it before authoring a commit or PR.

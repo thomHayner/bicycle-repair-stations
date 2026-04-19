@@ -31,7 +31,9 @@ jobs:
             revert
           # Subject must not start with an uppercase letter or end with a period —
           # matches commitlint `subject-case` and `subject-full-stop` rules.
-          subjectPattern: ^(?![A-Z])(?!.*\.$).+$
+          # Quoted for consistency with `headerPattern` and to keep the regex
+          # easy to read/debug as a YAML string.
+          subjectPattern: "^(?![A-Z])(?!.*\\.$).+$"
           subjectPatternError: |
             The PR title subject must start with a lowercase letter and must not end with a period.
             Conventional Commits format: <type>(<scope>): <subject>
@@ -43,4 +45,6 @@ jobs:
           # Making `!` a capturing group shifts `subject` onto the `!` match
           # and fails otherwise-valid breaking-change titles. (Caught by
           # Copilot on PR #27.)
-          headerPattern: ^(\w+)(?:\(([^)]+)\))?(?:!)?: (.+)$
+          # Quoted because the unquoted form contains `: ` which YAML would
+          # parse as a mapping separator, breaking the workflow file.
+          headerPattern: "^(\\w+)(?:\\(([^)]+)\\))?(?:!)?: (.+)$"
