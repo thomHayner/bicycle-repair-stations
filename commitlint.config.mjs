@@ -3,6 +3,16 @@
 // PR titles are validated separately by .github/workflows/pr-title.yml.
 export default {
   extends: ['@commitlint/config-conventional'],
+  // Skip commits we don't author directly:
+  // - "Merge …" = git-generated merge commits
+  // - squash-merge bodies that aggregate multiple commits as bulleted
+  //   conventional-commit headers (GitHub's default squash body). These
+  //   routinely fail body/subject rules through no fault of the author
+  //   and caused the PR #37 dev→main release to need an admin override.
+  ignores: [
+    (msg) => msg.startsWith('Merge '),
+    (msg) => /^\* (feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: /m.test(msg),
+  ],
   rules: {
     // Closed allowlist — undocumented types are rejected.
     'type-enum': [

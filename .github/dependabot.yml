@@ -5,6 +5,9 @@ version: 2
 updates:
   - package-ecosystem: npm
     directory: /
+    # Target the integration branch, not main. main is production-only and should
+    # only change via release PRs from dev.
+    target-branch: dev
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
@@ -27,6 +30,7 @@ updates:
 
   - package-ecosystem: github-actions
     directory: /
+    target-branch: dev
     schedule:
       interval: weekly
     commit-message:
