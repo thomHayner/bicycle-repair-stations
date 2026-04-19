@@ -5,6 +5,7 @@ import { LAYERS, type LayerId } from "../../lib/layers";
 import { MenuDrawer } from "../Menu/MenuDrawer";
 import type { Unit } from "../../lib/units";
 import { useShare } from "../../context/useShare";
+import { trackEvent } from "../../lib/analytics";
 
 interface Props {
   onLocationFound: (pos: { lat: number; lng: number }, zoom?: number) => void;
@@ -89,6 +90,7 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
 
   const handleRecenter = () => {
     if (!userPosition) return;
+    trackEvent("locate_me_click");
     onRecenter();
   };
 
@@ -103,6 +105,7 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
     }
     setGeocodeError(null);
     setIsGeocoding(true);
+    trackEvent("search_submit", { query_length: q.length });
     try {
       const pos = await geocode(q, i18n.language);
       if (pos) {
@@ -131,7 +134,7 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
           {/* Hamburger */}
           <button
             type="button"
-            onClick={() => setMenuOpen(true)}
+            onClick={() => { trackEvent("menu_open"); setMenuOpen(true); }}
             aria-label={t("openMenu")}
             title={t("openMenu")}
             className="w-9 h-9 flex items-center justify-center rounded-full text-[var(--color-text-secondary)] state-surface-strong transition-colors focus-ring shrink-0"
@@ -299,7 +302,11 @@ export const Toolbar = memo(function Toolbar({ onLocationFound, onRecenter, mapR
             <button
               key={l.id}
               type="button"
-              onClick={() => { onLayerChange(l.id); setLayerPickerOpen(false); }}
+              onClick={() => {
+                if (l.id !== activeLayer) trackEvent("layer_change", { layer_id: l.id });
+                onLayerChange(l.id);
+                setLayerPickerOpen(false);
+              }}
               className={[
                 "w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors",
                 activeLayer === l.id

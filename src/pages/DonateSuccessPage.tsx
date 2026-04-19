@@ -1,9 +1,20 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "../lib/analytics";
 
 export default function DonateSuccessPage() {
   const navigate = useNavigate();
   const { t } = useTranslation("donate");
+
+  useEffect(() => {
+    trackEvent("donate_success_view");
+    // Empty deps on purpose: trackEvent is a module-level import, not a
+    // component value, so react-hooks/exhaustive-deps does not flag it and
+    // listing it would itself warn ("unnecessary dependency"). Fires once
+    // per mount in prod; StrictMode double-fires in dev, gated by
+    // analyticsEnabled().
+  }, []);
 
   return (
     <div className="fixed inset-0 z-[2000] bg-[var(--color-surface-container)] flex flex-col">

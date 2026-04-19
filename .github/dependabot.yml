@@ -1,0 +1,37 @@
+version: 2
+
+# Conventional Commits prefixes ensure Dependabot's PRs pass commitlint and the PR-title
+# workflow. See CONTRIBUTING.md#commit-messages.
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      prefix-development: chore
+      include: scope
+    labels:
+      - dependencies
+    groups:
+      # Group related deps so we get one PR per ecosystem chunk instead of dozens.
+      react:
+        patterns: ['react', 'react-*', '@types/react*']
+      eslint:
+        patterns: ['eslint', 'eslint-*', '@eslint/*', 'typescript-eslint']
+      vitest:
+        patterns: ['vitest', '@vitest/*', '@testing-library/*', 'jsdom']
+      tailwind:
+        patterns: ['tailwindcss', '@tailwindcss/*']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
+      include: scope
+    labels:
+      - dependencies
+      - ci

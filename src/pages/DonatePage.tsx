@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "../lib/analytics";
 
 async function redirectToCheckout(amountDollars: number) {
   const response = await fetch("/api/create-checkout-session", {
@@ -117,6 +118,7 @@ export default function DonatePage() {
             disabled={effectiveAmount === null || loading}
             onClick={async () => {
               if (effectiveAmount === null) return;
+              trackEvent("donate_cta_click", { amount: effectiveAmount });
               setLoading(true);
               setError(null);
               try {

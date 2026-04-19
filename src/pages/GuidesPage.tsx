@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
+import { trackEvent } from "../lib/analytics";
 
 // ---------------------------------------------------------------------------
 // Park Tool – Bike Repair & Maintenance Video Series
@@ -13,6 +14,10 @@ interface Video {
   title: string;
 }
 interface Category {
+  // Stable analytics identifier — must not change when UI copy is renamed.
+  // Keeping it decoupled from `tKey` means longitudinal analytics stay
+  // comparable even if translation keys are reorganized.
+  id: string;
   tKey: string;
   emoji: string;
   videos: Video[];
@@ -20,6 +25,7 @@ interface Category {
 
 const CATEGORIES: Category[] = [
   {
+    id: "flat_tyre",
     tKey: "categoryFlatTyre",
     emoji: "🛞",
     videos: [
@@ -29,6 +35,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "brakes",
     tKey: "categoryBrakes",
     emoji: "🤚",
     videos: [
@@ -38,6 +45,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "gears",
     tKey: "categoryGears",
     emoji: "⚙️",
     videos: [
@@ -47,6 +55,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "chain",
     tKey: "categoryChain",
     emoji: "⛓️",
     videos: [
@@ -56,6 +65,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "wheels",
     tKey: "categoryWheels",
     emoji: "☸️",
     videos: [
@@ -65,6 +75,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "headset",
     tKey: "categoryHeadset",
     emoji: "🔩",
     videos: [
@@ -73,6 +84,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: "bottom_bracket",
     tKey: "categoryBottomBracket",
     emoji: "🔧",
     videos: [
@@ -82,12 +94,20 @@ const CATEGORIES: Category[] = [
   },
 ];
 
-function VideoCard({ video }: { video: Video }) {
+function VideoCard({ video, category }: { video: Video; category: string }) {
+  const trackClick = () =>
+    trackEvent("guide_video_click", {
+      video_id: video.id,
+      category,
+      title: video.title,
+    });
   return (
     <a
       href={`https://www.youtube.com/watch?v=${video.id}`}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={trackClick}
+      onAuxClick={(e) => { if (e.button === 1) trackClick(); }}
       className="flex gap-3 items-center bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl elevation-1 p-2 state-surface transition-colors focus-ring"
     >
       <div className="relative shrink-0 w-28 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 aspect-video">
@@ -151,6 +171,7 @@ export default function GuidesPage() {
             href="https://www.youtube.com/@ParkTool"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent("guide_series_click")}
             className="shrink-0 flex items-center gap-1.5 bg-white rounded-full px-3 py-1.5 text-[#ff0000] text-xs font-bold hover:bg-red-50 active:bg-red-100 transition-colors focus-ring-contrast"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#ff0000" stroke="none" aria-hidden="true">
@@ -170,7 +191,7 @@ export default function GuidesPage() {
               </h2>
               <div className="flex flex-col gap-2">
                 {cat.videos.map((v) => (
-                  <VideoCard key={v.id} video={v} />
+                  <VideoCard key={v.id} video={v} category={cat.id} />
                 ))}
               </div>
             </section>
@@ -182,7 +203,7 @@ export default function GuidesPage() {
               i18nKey="footerNote"
               ns="guides"
               components={{
-                parkToolLink: <a href="https://www.parktool.com" target="_blank" rel="noopener noreferrer" className="underline" />,
+                parkToolLink: <a href="https://www.parktool.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("guide_footer_link_click")} className="underline" />,
               }}
             />
           </p>

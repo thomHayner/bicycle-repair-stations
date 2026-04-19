@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import handler from "./report-bug";
+import handler from "./report-bug.js";
 
 // ---------------------------------------------------------------------------
 // Helpers

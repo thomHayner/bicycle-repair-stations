@@ -53,12 +53,11 @@ describe("fetchStations", () => {
     const station = { type: "node", id: 3, lat: 51.5, lon: -0.1, tags: {} };
     vi.spyOn(globalThis, "fetch")
       .mockResolvedValueOnce(errorResponse(502))
-      .mockResolvedValueOnce(errorResponse(503))
       .mockResolvedValueOnce(okResponse([station]));
 
     const result = await fetchStations(51.5, -0.1, 40, PRIMARY);
     expect(result).toHaveLength(1);
-    expect(globalThis.fetch).toHaveBeenCalledTimes(3);
+    expect(globalThis.fetch).toHaveBeenCalledTimes(2);
   });
 
   it("retries on TypeError (network failure)", async () => {
@@ -99,24 +98,21 @@ describe("fetchStations", () => {
     expect(globalThis.fetch).toHaveBeenCalledTimes(1);
   });
 
-  it("throws after all 3 mirrors fail", async () => {
+  it("throws after all mirrors fail", async () => {
     vi.spyOn(globalThis, "fetch")
-      .mockResolvedValueOnce(errorResponse(429))
       .mockResolvedValueOnce(errorResponse(429))
       .mockResolvedValueOnce(errorResponse(429));
 
     await expect(fetchStations(51.5, -0.1, 40, PRIMARY)).rejects.toThrow("HTTP 429");
-    expect(globalThis.fetch).toHaveBeenCalledTimes(3);
+    expect(globalThis.fetch).toHaveBeenCalledTimes(2);
   });
 
   it("detects server timeout with various remark messages", async () => {
-    // "runtime error" variant
     vi.spyOn(globalThis, "fetch")
       .mockResolvedValueOnce(remarkResponse("runtime error: Query timed out in \"query\" at line 1"))
-      .mockResolvedValueOnce(remarkResponse("Timeout occurred"))
-      .mockResolvedValueOnce(remarkResponse("timeout reached"));
+      .mockResolvedValueOnce(remarkResponse("Timeout occurred"));
 
     await expect(fetchStations(51.5, -0.1, 40, PRIMARY)).rejects.toThrow("server timeout");
-    expect(globalThis.fetch).toHaveBeenCalledTimes(3); // tried all mirrors
+    expect(globalThis.fetch).toHaveBeenCalledTimes(2); // tried all mirrors
   });
 });

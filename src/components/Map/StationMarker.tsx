@@ -4,6 +4,7 @@ import type { Marker as LeafletMarker } from "leaflet";
 import { stationIcon, stationDotIcon } from "../../lib/leafletConfig";
 import { StationPopup } from "./StationPopup";
 import type { OverpassNode } from "../../types/overpass";
+import { trackEvent } from "../../lib/analytics";
 
 interface Props {
   station: OverpassNode;
@@ -77,7 +78,10 @@ export const StationMarker = memo(function StationMarker({ station, isSelected, 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Leaflet internal: _map is null when marker is clustered
       if ((markerRef.current as any)?._map) onDeselect();
     },
-    click: () => onSelect(station),
+    click: () => {
+      trackEvent("marker_open", { station_id: String(station.id) });
+      onSelect(station);
+    },
   }), [onDeselect, onSelect, station]);
 
   return (

@@ -4,6 +4,7 @@ import { getDirectionsUrl } from "../../lib/directions";
 import { KM_PER_MILE } from "../../lib/units";
 import { useSettings } from "../../context/useSettings";
 import { formatDistance } from "../../lib/formatNumber";
+import { trackEvent } from "../../lib/analytics";
 
 interface Props {
   station: OverpassNode;
@@ -77,6 +78,9 @@ export function StationPopup({ station, distMi }: Props) {
         href={getDirectionsUrl(station.lat, station.lon)}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() =>
+          trackEvent("popup_directions_click", { station_id: String(station.id) })
+        }
         className="flex items-center justify-center gap-1.5 w-full py-2 btn-get-directions bg-[var(--color-primary)] rounded-[10px] text-[13px] font-bold no-underline hover:brightness-95 active:brightness-90 focus-ring transition-colors"
       >
         {/* Turn-by-turn arrow icon */}
