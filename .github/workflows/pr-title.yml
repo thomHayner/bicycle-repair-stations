@@ -31,8 +31,8 @@ jobs:
             revert
           # Subject must not start with an uppercase letter or end with a period —
           # matches commitlint `subject-case` and `subject-full-stop` rules.
-          # Quoted because the unquoted form contains `: ` which YAML would
-          # parse as a mapping separator, breaking the workflow file.
+          # Quoted for consistency with `headerPattern` and to keep the regex
+          # easy to read/debug as a YAML string.
           subjectPattern: "^(?![A-Z])(?!.*\\.$).+$"
           subjectPatternError: |
             The PR title subject must start with a lowercase letter and must not end with a period.
