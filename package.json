@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@sentry/react": "^10.49.0",
-    "@stripe/stripe-js": "^9.0.1",
+    "@stripe/stripe-js": "^9.2.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "i18next": "^26.0.3",
